@@ -1,9 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "../styles/index.scss";
-import { Title, TitleSize } from "@/shared/ui/Title";
-import { Text, TextSize } from "@/shared/ui/Text";
-import { AppLink, AppLinkSize } from "@/shared/ui/AppLink";
-import { Button, ButtonSize } from "@/shared/ui/Button";
 
 export const App = () => {
   return (
