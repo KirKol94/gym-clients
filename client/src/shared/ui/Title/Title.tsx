@@ -1,10 +1,7 @@
 import { ReactNode } from "react";
 import classes from "./Title.module.scss";
 import cx from "classix";
-
-export enum TitleSize {
-  XXL = "xxl",
-}
+import { TitleSize } from "./types";
 
 interface TitleProps {
   size: TitleSize;

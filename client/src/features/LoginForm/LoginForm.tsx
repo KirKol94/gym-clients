@@ -6,9 +6,7 @@ import { Button, ButtonSize } from "@/shared/ui/Button";
 import { AppLink, AppLinkSize } from "@/shared/ui/AppLink";
 import { ROUTER_PATH } from "@/shared/const/path/PATH";
 
-interface LoginFormProps {}
-
-export const LoginForm = ({ className }: LoginFormProps) => (
+export const LoginForm = () => (
   <>
     <Title size={TitleSize.XXL} className={classes.title}>
       Авторизация

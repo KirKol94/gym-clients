@@ -1,1 +1,2 @@
-export { Text, TextSize } from './Text';
+export { Text } from "./Text";
+export { TextSize } from './types'
