@@ -1,10 +1,7 @@
 import { ReactNode } from "react";
 import classes from "./Text.module.scss";
 import cx from "classix";
-
-export enum TextSize {
-  S = "s",
-}
+import { TextSize } from "./types";
 
 interface TextProps {
   size: TextSize;

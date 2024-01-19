@@ -2,10 +2,7 @@ import { ReactNode } from "react";
 import classes from "./AppLink.module.scss";
 import { Link } from "react-router-dom";
 import cx from "classix";
-
-export enum AppLinkSize {
-  S = "s",
-}
+import { AppLinkSize } from "./types";
 
 interface AppLinkProps {
   to: string;

@@ -1,1 +1,2 @@
-export { Title, TitleSize } from './Title';
+export { Title } from './Title';
+export { TitleSize } from './types'
