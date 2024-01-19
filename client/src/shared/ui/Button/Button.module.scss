@@ -1,0 +1,8 @@
+.button {
+   background-color: var(--color-primary-100);
+
+   &__m {
+      padding: 20px 40px;
+      border-radius: 10px;
+   }
+}
