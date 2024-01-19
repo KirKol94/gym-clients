@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import "../styles/index.css";
+import "../styles/index.scss";
 
 export const App = () => {
   return (
