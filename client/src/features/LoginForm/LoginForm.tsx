@@ -4,10 +4,11 @@ import classes from "./LoginForm.module.scss";
 import { Input } from "@/shared/ui/Input";
 import { Button, ButtonSize } from "@/shared/ui/Button";
 import { AppLink, AppLinkSize } from "@/shared/ui/AppLink";
+import { ROUTER_PATH } from "@/shared/const/path/PATH";
 
 interface LoginFormProps {}
 
-export const LoginForm = ({}: LoginFormProps) => (
+export const LoginForm = ({ className }: LoginFormProps) => (
   <>
     <Title size={TitleSize.XXL} className={classes.title}>
       Авторизация
@@ -21,7 +22,7 @@ export const LoginForm = ({}: LoginFormProps) => (
 
         <div>
           <Text size={TextSize.S}>Еще нет аккаунта?</Text>
-          <AppLink to="/register" size={AppLinkSize.S}>
+          <AppLink to={ROUTER_PATH.REGISTER} size={AppLinkSize.S}>
             Регистрация
           </AppLink>
         </div>
