@@ -1,5 +1,15 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "../styles/index.css";
 
 export const App = () => {
-  return <div>app</div>;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route index element={<>home</>} />
+        <Route path="login" element={<>login</>} />
+        <Route path="register" element={<>register</>} />
+        <Route path="*" element={<>page is not found</>} />
+      </Routes>
+    </BrowserRouter>
+  );
 };
