@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import classes from "./Title.module.scss";
+import cx from "classix";
 
 export enum TitleSize {
   XXL = "xxl",
@@ -11,8 +12,13 @@ interface TitleProps {
 }
 
 export const Title = ({ size, children }: TitleProps) => {
+  const className = cx(
+    classes.title,
+    size === TitleSize.XXL && classes.title__xxl
+  );
+
   switch (size) {
     case TitleSize.XXL:
-      return <h1 className={classes.title__xxl}>{children}</h1>;
+      return <h1 className={className}>{children}</h1>;
   }
 };
