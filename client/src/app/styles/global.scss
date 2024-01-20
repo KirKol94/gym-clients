@@ -1,0 +1,10 @@
+body {
+  background: #f4f9fd;
+}
+
+[class*="__container"] {
+  max-width: 1400px;
+  padding: 15px;
+  margin: 0 auto;
+  overflow: hidden;
+}

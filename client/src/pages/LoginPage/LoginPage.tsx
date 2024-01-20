@@ -1,12 +1,16 @@
 import { LoginForm } from "@/features/LoginForm";
 import classes from "./LoginPage.module.scss";
+import cx from "classix";
 
 export const LoginPage = () => {
+  const className = cx("login__container", classes.page);
+
   return (
-    <div className={classes.page}>
-      <header></header>
-      <LoginForm />
-      <footer></footer>
-    </div>
+    <>
+      <div className={className}>
+        <header></header>
+        <LoginForm />
+      </div>
+    </>
   );
 };
