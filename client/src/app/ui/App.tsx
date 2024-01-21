@@ -1,15 +1,16 @@
 import { lazy, Suspense } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "../styles/index.scss";
 import { ROUTER_PATH } from "@/shared/const/path/PATH";
 import { AuthFormType } from "@/features/AuthForm";
+import { RootProvider } from "../providers/RootProvider";
 
 const AuthPage = lazy(() => import("@/pages/AuthPage"));
 const HomePage = lazy(() => import("@/pages/HomePage"));
 
 export const App = () => {
   return (
-    <BrowserRouter>
+    <RootProvider>
       <Routes>
         <Route
           index
@@ -37,6 +38,6 @@ export const App = () => {
         />
         <Route path="*" element={<>page is not found</>} />
       </Routes>
-    </BrowserRouter>
+    </RootProvider>
   );
 };
