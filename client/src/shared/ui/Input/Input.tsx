@@ -7,8 +7,8 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 export const Input = ({ inputName, ...props }: InputProps) => {
   return (
-    <div className={classes.inputWrapper}>
-      <span className={classes.inputName}>{inputName}</span>
+    <div className={classes.wrapper}>
+      <span className={classes.span}>{inputName}</span>
       <input {...props} className={classes.input} />
     </div>
   );

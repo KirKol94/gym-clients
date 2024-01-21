@@ -1,6 +1,5 @@
 :root {
-  --font-family: Rubik;
-
+  --font-family: rubik;
   --color-white: #fff;
   --color-light-bg: #f4f9fd;
   --color-neutral-100: #000;
@@ -9,10 +8,7 @@
   --color-gray2: #939393;
   --color-primary-100: #4db02a;
   --color-primary-90: #3f8cff;
-
-  --transition-delay-fast: 0.3s;
-
+  --transition-delay-fast: 300ms;
   --width-container: 1400px;
   --padding-container: 15px;
 }
-
