@@ -1,10 +1,11 @@
 body {
-  background: #f4f9fd;
+  background: var(--color-white-bg);
+  font-family: var(--font-family);
 }
 
 [class*="__container"] {
-  max-width: 1400px;
-  padding: 15px;
+  max-width: var(--width-container);
+  padding: var(--padding-container);
   margin: 0 auto;
   overflow: hidden;
 }

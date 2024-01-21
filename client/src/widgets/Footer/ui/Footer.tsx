@@ -19,7 +19,7 @@ export const Footer = () => {
       <Text size={TextSize.S}>©2020 Company Name</Text>
       <div className={classes.links}>
         {data.map((el, index) => (
-          <AppLink to={el.link} size={AppLinkSize.S} key={index}>
+          <AppLink to={el.link} size={AppLinkSize.S} key={el.title + index}>
             {el.title}
           </AppLink>
         ))}
