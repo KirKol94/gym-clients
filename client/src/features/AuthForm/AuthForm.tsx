@@ -6,15 +6,23 @@ import { Button, ButtonSize } from "@/shared/ui/Button";
 import { AppLink, AppLinkSize } from "@/shared/ui/AppLink";
 import { ROUTER_PATH } from "@/shared/const/path/PATH";
 import { AuthFormType } from "./types";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 
 interface AuthFormProps {
   type: AuthFormType;
 }
 
+type UserData = {
+  email: string,
+  password: string,
+  name: string,
+  surname: string,
+  patronymic: string
+}
+
 export const AuthForm = ({ type }: AuthFormProps) => {
 
-  const [userData, setUserData] = useState({
+  const [userData, setUserData] = useState<UserData>({
       email: "",
       password: "",
       name: "",
@@ -30,6 +38,12 @@ export const AuthForm = ({ type }: AuthFormProps) => {
       }))
   }
 
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+      event.preventDefault();
+      console.log(userData);
+      
+  }
+
   return (
     <>
       <Title size={TitleSize.XXL} className={classes.title}>
@@ -37,7 +51,7 @@ export const AuthForm = ({ type }: AuthFormProps) => {
         {type === AuthFormType.REGISTER && "Регистрация"}
       </Title>
 
-      <form className={classes.form}>
+      <form className={classes.form} onSubmit={handleSubmit}>
         <Input inputName="Email" name="email" placeholder="Email" onChange={handleInputChange} value={userData.email}/>
         <Input inputName="Пароль" name="password" placeholder="Пароль" onChange={handleInputChange} value={userData.password}/>
 
