@@ -8,15 +8,16 @@
     "dev:client": "vite",
     "dev:server": "json-server-auth --watch db.json --port 3001",
     "build": "tsc && vite build && echo '/* /index.html  200' | cat >dist/_redirects ",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint": "concurrently \"yarn lint:ts\" \"yarn lint:style\"",
+    "lint:ts": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint:style": "stylelint src/**/*.scss --fix",
     "preview": "vite preview"
   },
   "dependencies": {
     "classix": "^2.1.35",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.21.3",
-    "sass": "^1.70.0"
+    "react-router-dom": "^6.21.3"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",
@@ -30,6 +31,13 @@
     "eslint-plugin-react-refresh": "^0.4.5",
     "json-server": "0.17.3",
     "json-server-auth": "2.1.0",
+    "postcss-scss": "^4.0.9",
+    "sass": "^1.70.0",
+    "stylelint": "^16.2.0",
+    "stylelint-config-recess-order": "^4.4.0",
+    "stylelint-config-standard": "^36.0.0",
+    "stylelint-config-standard-scss": "^13.0.0",
+    "stylelint-scss": "^6.1.0",
     "typescript": "^5.2.2",
     "vite": "^5.0.8"
   }
