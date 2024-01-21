@@ -21,13 +21,18 @@
    font-family: Rubik;
    padding: 20px;
    border-radius: 10px;
-   border: 1px solid var(--Neutral-100, #000);
+   border: 1px solid var(--color-neutral-60);
    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.16);
+   transition: all var(--transition-delay-fast) ease;
 
    ::placeholder {
       color: var(--color-neutral-40);
 
       font-size: 14px;
       font-weight: 400;
+   }
+
+   &:focus {
+      border-color: var(--color-neutral-100);
    }
 }
