@@ -4,8 +4,8 @@ import "../styles/index.scss";
 import { ROUTER_PATH } from "@/shared/const/path/PATH";
 import { AuthFormType } from "@/features/AuthForm";
 
-const AuthPage = lazy(() => import("@/pages/AuthPage/AuthPage"));
-const HomePage = lazy(() => import("@/pages/HomePage/HomePage"));
+const AuthPage = lazy(() => import("@/pages/AuthPage"));
+const HomePage = lazy(() => import("@/pages/HomePage"));
 
 export const App = () => {
   return (
