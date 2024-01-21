@@ -1,9 +1,18 @@
 .button {
    background-color: var(--color-primary-90);
    color: var(--color-white);
+   transition: box-shadow 0.4s ease, opacity 0.2s ease;
 
    &__m {
       padding: 20px 40px;
       border-radius: 10px;
+   }
+
+   &:hover {
+      box-shadow: 0 2px 10px rgba(0,0,0,.2);
+   }
+
+   &:active {
+      opacity: 0.9;
    }
 }
