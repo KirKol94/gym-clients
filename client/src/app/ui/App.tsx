@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 import "../styles/index.scss";
 import { AuthPage } from "@/pages/AuthPage";
 import { ROUTER_PATH } from "@/shared/const/path/PATH";
