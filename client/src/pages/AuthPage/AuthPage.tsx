@@ -19,3 +19,5 @@ export const AuthPage = ({ type }: AuthPageProps) => {
     </div>
   );
 };
+
+export default AuthPage;
