@@ -1,3 +1,3 @@
 export enum TextSize {
-   S = "s",
+  S = "s",
 }
