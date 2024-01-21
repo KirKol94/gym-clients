@@ -14,26 +14,20 @@ interface AuthFormProps {
 
 export const AuthForm = ({ type }: AuthFormProps) => {
 
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [name, setName] = useState<string>("");
-  const [surname, setSurname] = useState<string>("");
-  const [patronymic, setPatronymic] = useState<string>("");
+  const [userData, setUserData] = useState({
+      email: "",
+      password: "",
+      name: "",
+      surname: "",
+      patronymic: ""
+  })
 
-  function handleEmailChange(event: ChangeEvent<HTMLInputElement>) {
-    setEmail(event.target.value)
-  }
-  function handlePasswordChange(event: ChangeEvent<HTMLInputElement>) {
-    setPassword(event.target.value)
-  }
-  function handleNameChange(event: ChangeEvent<HTMLInputElement>) {
-    setName(event.target.value)
-  }
-  function handleSurnameChange(event: ChangeEvent<HTMLInputElement>) {
-    setSurname(event.target.value)
-  }
-  function handlePatronymicChange(event: ChangeEvent<HTMLInputElement>) {
-    setPatronymic(event.target.value)
+  function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
+      const {name, value} = event.target;
+      setUserData(prev => ({
+        ...prev, 
+        [name]: value
+      }))
   }
 
   return (
@@ -44,14 +38,14 @@ export const AuthForm = ({ type }: AuthFormProps) => {
       </Title>
 
       <form className={classes.form}>
-        <Input inputName="Email" placeholder="Email" onChange={handleEmailChange} value={email}/>
-        <Input inputName="Пароль" placeholder="Пароль" onChange={handlePasswordChange} value={password}/>
+        <Input inputName="Email" name="email" placeholder="Email" onChange={handleInputChange} value={userData.email}/>
+        <Input inputName="Пароль" name="password" placeholder="Пароль" onChange={handleInputChange} value={userData.password}/>
 
         {type === AuthFormType.REGISTER && (
           <>
-            <Input inputName="Имя" placeholder="Имя" onChange={handleNameChange} value={name}/>
-            <Input inputName="Фамилия" placeholder="Фамилия" onChange={handleSurnameChange} value={surname}/>
-            <Input inputName="Отчество" placeholder="Отчество" onChange={handlePatronymicChange} value={patronymic}/>
+            <Input inputName="Имя" name="name" placeholder="Имя" onChange={handleInputChange} value={userData.name}/>
+            <Input inputName="Фамилия" name="surname" placeholder="Фамилия" onChange={handleInputChange} value={userData.surname}/>
+            <Input inputName="Отчество" name="patronymic" placeholder="Отчество" onChange={handleInputChange} value={userData.patronymic}/>
           </>
         )}
 
