@@ -40,8 +40,7 @@ export const AuthForm = ({ type }: AuthFormProps) => {
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
       event.preventDefault();
-      console.log(userData);
-      
+      console.log(userData); 
   }
 
   return (
@@ -64,7 +63,7 @@ export const AuthForm = ({ type }: AuthFormProps) => {
         )}
 
         <div className={classes.footer}>
-          <Button size={ButtonSize.M}>
+          <Button size={ButtonSize.M} type="submit">
             {type === AuthFormType.LOGIN && "Войти"}
             {type === AuthFormType.REGISTER && "Регистрация"}
           </Button>
