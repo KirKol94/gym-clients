@@ -6,55 +6,88 @@ import { Button, ButtonSize } from "@/shared/ui/Button";
 import { AppLink, AppLinkSize } from "@/shared/ui/AppLink";
 import { ROUTER_PATH } from "@/shared/const/path/PATH";
 import { AuthFormType } from "./types";
+import { ChangeEvent, FormEvent, useState } from "react";
 
 interface AuthFormProps {
   type: AuthFormType;
 }
 
-export const AuthForm = ({ type }: AuthFormProps) => (
-  <>
-    <Title size={TitleSize.XXL} className={classes.title}>
-      {type === AuthFormType.LOGIN && "Авторизация"}
-      {type === AuthFormType.REGISTER && "Регистрация"}
-    </Title>
+type UserData = {
+  email: string,
+  password: string,
+  name: string,
+  surname: string,
+  patronymic: string
+}
 
-    <form className={classes.form}>
-      <Input inputName="Email" placeholder="Email" />
-      <Input inputName="Пароль" placeholder="Пароль" />
+export const AuthForm = ({ type }: AuthFormProps) => {
 
-      {type === AuthFormType.REGISTER && (
-        <>
-          <Input inputName="Имя" placeholder="Имя" />
-          <Input inputName="Фамилия" placeholder="Фамилия" />
-          <Input inputName="Отчество" placeholder="Отчество" />
-        </>
-      )}
+  const [userData, setUserData] = useState<UserData>({
+      email: "",
+      password: "",
+      name: "",
+      surname: "",
+      patronymic: ""
+  })
 
-      <div className={classes.footer}>
-        <Button size={ButtonSize.M}>
-          {type === AuthFormType.LOGIN && "Войти"}
-          {type === AuthFormType.REGISTER && "Регистрация"}
-        </Button>
+  function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
+      const {name, value} = event.target;
+      setUserData(prev => ({
+        ...prev, 
+        [name]: value
+      }))
+  }
 
-        <div>
-          <Text size={TextSize.S}>
-            {type === AuthFormType.LOGIN && "Еще нет аккаунта?"}
-            {type === AuthFormType.REGISTER && "Уже нет аккаунт?"}
-          </Text>
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+      event.preventDefault();
+      console.log(userData); 
+  }
 
-          <AppLink
-            to={
-              type === AuthFormType.LOGIN
-                ? ROUTER_PATH.REGISTER
-                : ROUTER_PATH.LOGIN
-            }
-            size={AppLinkSize.S}
-          >
-            {type === AuthFormType.REGISTER && "Войти"}
-            {type === AuthFormType.LOGIN && "Регистрация"}
-          </AppLink>
+  return (
+    <>
+      <Title size={TitleSize.XXL} className={classes.title}>
+        {type === AuthFormType.LOGIN && "Авторизация"}
+        {type === AuthFormType.REGISTER && "Регистрация"}
+      </Title>
+
+      <form className={classes.form} onSubmit={handleSubmit}>
+        <Input inputName="Email" name="email" placeholder="Email" onChange={handleInputChange} value={userData.email}/>
+        <Input inputName="Пароль" name="password" placeholder="Пароль" onChange={handleInputChange} value={userData.password}/>
+
+        {type === AuthFormType.REGISTER && (
+          <>
+            <Input inputName="Имя" name="name" placeholder="Имя" onChange={handleInputChange} value={userData.name}/>
+            <Input inputName="Фамилия" name="surname" placeholder="Фамилия" onChange={handleInputChange} value={userData.surname}/>
+            <Input inputName="Отчество" name="patronymic" placeholder="Отчество" onChange={handleInputChange} value={userData.patronymic}/>
+          </>
+        )}
+
+        <div className={classes.footer}>
+          <Button size={ButtonSize.M} type="submit">
+            {type === AuthFormType.LOGIN && "Войти"}
+            {type === AuthFormType.REGISTER && "Регистрация"}
+          </Button>
+
+          <div>
+            <Text size={TextSize.S}>
+              {type === AuthFormType.LOGIN && "Еще нет аккаунта?"}
+              {type === AuthFormType.REGISTER && "Уже нет аккаунт?"}
+            </Text>
+
+            <AppLink
+              to={
+                type === AuthFormType.LOGIN
+                  ? ROUTER_PATH.REGISTER
+                  : ROUTER_PATH.LOGIN
+              }
+              size={AppLinkSize.S}
+            >
+              {type === AuthFormType.REGISTER && "Войти"}
+              {type === AuthFormType.LOGIN && "Регистрация"}
+            </AppLink>
+          </div>
         </div>
-      </div>
-    </form>
-  </>
-);
+      </form>
+    </>
+  )
+};
