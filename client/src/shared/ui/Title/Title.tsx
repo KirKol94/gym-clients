@@ -13,11 +13,14 @@ export const Title = ({ size, className, children }: TitleProps) => {
   const cls = cx(
     classes.title,
     size === TitleSize.XXL && classes.title__xxl,
+    size === TitleSize.MAX && classes.title__max,
     className
   );
 
   switch (size) {
     case TitleSize.XXL:
+      return <h1 className={cls}>{children}</h1>;
+    case TitleSize.MAX:
       return <h1 className={cls}>{children}</h1>;
   }
 };

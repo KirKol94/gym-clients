@@ -7,6 +7,7 @@ import { RootProvider } from "../providers/RootProvider";
 
 const AuthPage = lazy(() => import("@/pages/AuthPage"));
 const HomePage = lazy(() => import("@/pages/HomePage"));
+const NotFoundPage = lazy(() => import("@/pages/NotFoundPage"));
 
 export const App = () => {
   return (
@@ -36,7 +37,7 @@ export const App = () => {
             </Suspense>
           }
         />
-        <Route path="*" element={<>page is not found</>} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </RootProvider>
   );
