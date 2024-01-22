@@ -4,13 +4,13 @@ import classes from "./AuthForm.module.scss";
 import { Input } from "@/shared/ui/Input";
 import { Button, ButtonSize } from "@/shared/ui/Button";
 import { AppLink, AppLinkSize } from "@/shared/ui/AppLink";
-import { ROUTER_PATH } from "@/shared/const/path/PATH";
-import { AuthFormType } from "../types/types";
+import { ROUTER_PATH } from "@/shared/const/path/routerPath";
+import { AuthFormType } from "../types/authSchema";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { UserData } from "../types/types";
-import { authFormActions } from "@/features/AuthForm";
-import { useAppDispatch } from "@/shared/hooks";
 import { useNavigate } from "react-router-dom";
+import { User } from "@/entities/User";
+import { useAppDispatch } from "@/shared/hooks";
+import { authByEmail, registerByUserData } from "../services/loginByEmail";
 
 interface AuthFormProps {
   type: AuthFormType;
@@ -20,7 +20,7 @@ export const AuthForm = ({ type }: AuthFormProps) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const [userData, setUserData] = useState<UserData>({
+  const [userData, setUserData] = useState<User>({
     email: "",
     password: "",
     name: "",
@@ -28,7 +28,7 @@ export const AuthForm = ({ type }: AuthFormProps) => {
     patronymic: "",
   });
 
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setUserData((prev) => ({
       ...prev,
@@ -39,42 +39,16 @@ export const AuthForm = ({ type }: AuthFormProps) => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    dispatch(authFormActions.setAuthData(userData));
+    const authLoginData = {
+      email: userData.email,
+      password: userData.password,
+    };
 
-    type === AuthFormType.REGISTER && setUserToDb(userData);
-    type === AuthFormType.LOGIN && checkIsAuth(userData);
+    type === AuthFormType.REGISTER && dispatch(registerByUserData(userData));
+    type === AuthFormType.LOGIN && dispatch(authByEmail(authLoginData));
 
-    type === AuthFormType.REGISTER && navigate("/login");
-    type === AuthFormType.LOGIN && navigate("/");
-  };
-
-  const $api = async <T> (
-    url: string,
-    method: "post" | "put" | "patch" | "delete" | "get",
-    body: T
-  ) => {
-    try {
-      const res = await fetch(url, {
-        method,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-      });
-
-      const json = await res.json();
-      console.log(json);
-    } catch (error) {
-      throw new Error("При отправле данных произошла ошибка: ", error.message);
-    }
-  };
-
-  const setUserToDb = async (user: UserData) => {
-    await $api("http://localhost:3001/register", "post", user);
-  };
-
-  const checkIsAuth = async (user: Pick<UserData, "email" | "password">) => {
-    await $api("http://localhost:3001/login", "post", user);
+    type === AuthFormType.REGISTER && navigate(ROUTER_PATH.LOGIN);
+    type === AuthFormType.LOGIN && navigate(ROUTER_PATH.HOME);
   };
 
   return (
@@ -89,14 +63,14 @@ export const AuthForm = ({ type }: AuthFormProps) => {
           inputName="Email"
           name="email"
           placeholder="Email"
-          onChange={handleInputChange}
+          onChange={handleChange}
           value={userData.email}
         />
         <Input
           inputName="Пароль"
           name="password"
           placeholder="Пароль"
-          onChange={handleInputChange}
+          onChange={handleChange}
           value={userData.password}
         />
 
@@ -106,21 +80,21 @@ export const AuthForm = ({ type }: AuthFormProps) => {
               inputName="Имя"
               name="name"
               placeholder="Имя"
-              onChange={handleInputChange}
+              onChange={handleChange}
               value={userData.name}
             />
             <Input
               inputName="Фамилия"
               name="surname"
               placeholder="Фамилия"
-              onChange={handleInputChange}
+              onChange={handleChange}
               value={userData.surname}
             />
             <Input
               inputName="Отчество"
               name="patronymic"
               placeholder="Отчество"
-              onChange={handleInputChange}
+              onChange={handleChange}
               value={userData.patronymic}
             />
           </>

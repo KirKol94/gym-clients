@@ -1,7 +1,8 @@
 import { ReactNode } from "react";
-import { store } from "@/app/store";
+import { store, persistore } from "@/app/store";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
+import { PersistGate } from "redux-persist/integration/react";
 
 interface Props {
   children: ReactNode;
@@ -10,7 +11,11 @@ interface Props {
 export const RootProvider = ({ children }: Props) => {
   return (
     <BrowserRouter>
-      <Provider store={store}>{children}</Provider>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistore}>
+          {children}
+        </PersistGate>
+      </Provider>
     </BrowserRouter>
   );
 };

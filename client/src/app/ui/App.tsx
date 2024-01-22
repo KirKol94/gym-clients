@@ -1,7 +1,7 @@
 import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import "../styles/index.scss";
-import { ROUTER_PATH } from "@/shared/const/path/PATH";
+import { ROUTER_PATH } from "@/shared/const/path/routerPath";
 import { AuthFormType } from "@/features/AuthForm";
 import { RootProvider } from "../providers/RootProvider";
 
