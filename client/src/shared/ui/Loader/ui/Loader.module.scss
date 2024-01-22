@@ -1,4 +1,4 @@
-.loaderWrapper {
+.wrapper {
     width: 100%;
     height: 100svh;
     display: flex;
@@ -8,15 +8,16 @@
 
 .whiteLoader {
   .loader {
-    div {
+    .circle {
       background: var(--color-white);
     }
   }
 }
 
 .smallLoader {
+  height: 100%;
   .loader {
-    div {
+    .circle {
       width: 7px;
       height: 7px;
 
@@ -37,8 +38,9 @@
 }
 
 .bigLoader {
+  height: 100%;
   .loader {
-    div {
+    .circle {
       width: 20px;
       height: 20px;
 
@@ -65,7 +67,7 @@
     height: 60px;
 }
 
-.component {
+.circle {
   position: absolute;
   width: 13px;
   height: 13px;
