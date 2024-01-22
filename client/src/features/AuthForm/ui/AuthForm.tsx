@@ -1,15 +1,18 @@
-import { Title, TitleSize } from "@/shared/ui/Title";
-import { Text, TextSize } from "@/shared/ui/Text";
-import classes from "./AuthForm.module.scss";
-import { Input } from "@/shared/ui/Input";
-import { Button, ButtonSize } from "@/shared/ui/Button";
-import { AppLink, AppLinkSize } from "@/shared/ui/AppLink";
-import { ROUTER_PATH } from "@/shared/const/path/PATH";
-import { AuthFormType } from "../types/types";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { UserData } from "../types/types";
+
 import { authFormActions } from "@/features/AuthForm";
+import { ROUTER_PATH } from "@/shared/const/path/PATH";
 import { useAppDispatch } from "@/shared/hooks";
+import { AppLink, AppLinkSize } from "@/shared/ui/AppLink";
+import { Button, ButtonSize } from "@/shared/ui/Button";
+import { Input } from "@/shared/ui/Input";
+import { Text, TextSize } from "@/shared/ui/Text";
+import { Title, TitleSize } from "@/shared/ui/Title";
+
+import { AuthFormType } from "../types/types";
+import { UserData } from "../types/types";
+
+import classes from "./AuthForm.module.scss";
 
 interface AuthFormProps {
   type: AuthFormType;
@@ -26,19 +29,19 @@ export const AuthForm = ({ type }: AuthFormProps) => {
     patronymic: "",
   });
 
-  function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setUserData((prev) => ({
       ...prev,
       [name]: value,
     }));
-  }
+  };
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     dispatch(authFormActions.setAuthData(userData));
-  }
+  };
 
   return (
     <>
