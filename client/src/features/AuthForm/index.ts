@@ -1,2 +1,3 @@
-export { AuthForm } from './AuthForm';
-export { AuthFormType } from './types'
+export { AuthForm } from './ui/AuthForm';
+export { AuthFormType } from './types/types'
+export { authFormReducer, authFormActions } from './slice/authFormSlice'
