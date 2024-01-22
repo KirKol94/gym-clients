@@ -57,6 +57,8 @@ export const AuthForm = ({ type }: AuthFormProps) => {
           placeholder="Email"
           onChange={handleInputChange}
           value={userData.email}
+          type="email"
+          required
         />
         <Input
           inputName="Пароль"
@@ -64,6 +66,8 @@ export const AuthForm = ({ type }: AuthFormProps) => {
           placeholder="Пароль"
           onChange={handleInputChange}
           value={userData.password}
+          type="password"
+          required
         />
 
         {type === AuthFormType.REGISTER && (
@@ -74,6 +78,8 @@ export const AuthForm = ({ type }: AuthFormProps) => {
               placeholder="Имя"
               onChange={handleInputChange}
               value={userData.name}
+              maxLength={15}
+              required
             />
             <Input
               inputName="Фамилия"
@@ -81,6 +87,8 @@ export const AuthForm = ({ type }: AuthFormProps) => {
               placeholder="Фамилия"
               onChange={handleInputChange}
               value={userData.surname}
+              maxLength={25}
+              required
             />
             <Input
               inputName="Отчество"
@@ -88,6 +96,8 @@ export const AuthForm = ({ type }: AuthFormProps) => {
               placeholder="Отчество"
               onChange={handleInputChange}
               value={userData.patronymic}
+              maxLength={20}
+              required
             />
           </>
         )}
