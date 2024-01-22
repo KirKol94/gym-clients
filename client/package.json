@@ -9,7 +9,10 @@
     }
   },
   "lint-staged": {
-    "**/*.{js,jsx,ts,tsx,css,scss,md}": ["prettier --check", "eslint --fix"]
+    "**/*.{js,jsx,ts,tsx,css,scss,md}": [
+      "lint:style",
+      "lint:ts"
+    ]
   },
   "scripts": {
     "dev": "concurrently \"yarn dev:client\" \"yarn dev:server\"",
@@ -48,6 +51,7 @@
     "json-server": "0.17.3",
     "json-server-auth": "2.1.0",
     "postcss-scss": "^4.0.9",
+    "prettier": "^3.2.4",
     "sass": "^1.70.0",
     "stylelint": "^16.2.0",
     "stylelint-config-recess-order": "^4.4.0",
