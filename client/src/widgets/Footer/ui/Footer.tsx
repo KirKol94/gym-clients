@@ -1,6 +1,7 @@
 import { AppLink, AppLinkSize } from "@/shared/ui/AppLink";
-import classes from "./Footer.module.scss";
 import { Text, TextSize } from "@/shared/ui/Text";
+
+import classes from "./Footer.module.scss";
 
 export const Footer = () => {
   const data = [
