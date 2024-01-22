@@ -10,6 +10,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { UserData } from "../types/types";
 import { authFormActions } from "@/features/AuthForm";
 import { useAppDispatch } from "@/shared/hooks";
+import { useNavigate } from "react-router-dom";
 
 interface AuthFormProps {
   type: AuthFormType;
@@ -17,6 +18,7 @@ interface AuthFormProps {
 
 export const AuthForm = ({ type }: AuthFormProps) => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const [userData, setUserData] = useState<UserData>({
     email: "",
@@ -26,19 +28,54 @@ export const AuthForm = ({ type }: AuthFormProps) => {
     patronymic: "",
   });
 
-  function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setUserData((prev) => ({
       ...prev,
       [name]: value,
     }));
-  }
+  };
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     dispatch(authFormActions.setAuthData(userData));
-  }
+
+    type === AuthFormType.REGISTER && setUserToDb(userData);
+    type === AuthFormType.LOGIN && checkIsAuth(userData);
+
+    type === AuthFormType.REGISTER && navigate("/login");
+    type === AuthFormType.LOGIN && navigate("/");
+  };
+
+  const $api = async <T> (
+    url: string,
+    method: "post" | "put" | "patch" | "delete" | "get",
+    body: T
+  ) => {
+    try {
+      const res = await fetch(url, {
+        method,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+
+      const json = await res.json();
+      console.log(json);
+    } catch (error) {
+      throw new Error("При отправле данных произошла ошибка: ", error.message);
+    }
+  };
+
+  const setUserToDb = async (user: UserData) => {
+    await $api("http://localhost:3001/register", "post", user);
+  };
+
+  const checkIsAuth = async (user: Pick<UserData, "email" | "password">) => {
+    await $api("http://localhost:3001/login", "post", user);
+  };
 
   return (
     <>

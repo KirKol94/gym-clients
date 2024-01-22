@@ -1,3 +1,28 @@
 {
-  "users": []
+  "users": [
+    {
+      "email": "kirkol94@ya.ru",
+      "password": "$2a$10$/A97c2UntU6IU3JdvhPw3eyCRO9.YRNk5VUqeQinjbAUiW2lFqx3u",
+      "name": "Kirill",
+      "surname": "Kolchanov",
+      "patronymic": "Olegovich",
+      "id": 1
+    },
+    {
+      "email": "kir.kolchanov@gmail.com",
+      "password": "$2a$10$ItlT1h7RzrGjJ.O.DgrLWOL9Fvm6tstteYPVtyekbvKWbgs53qU5y",
+      "name": "Кирилл",
+      "surname": "Колчанов",
+      "patronymic": "Олегович",
+      "id": 2
+    },
+    {
+      "email": "ivan@ivan.ru",
+      "password": "$2a$10$.G9JX4Or9LT1K8hQo6vADe85FUTCCLXtw30/GQHY9EMneW1vhJqwe",
+      "name": "ivan",
+      "surname": "ivanov",
+      "patronymic": "ivanovich",
+      "id": 3
+    }
+  ]
 }
