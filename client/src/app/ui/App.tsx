@@ -1,9 +1,12 @@
 import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-import "../styles/index.scss";
-import { ROUTER_PATH } from "@/shared/const/path/PATH";
+
 import { AuthFormType } from "@/features/AuthForm";
+import { ROUTER_PATH } from "@/shared/const/path/PATH";
+
 import { RootProvider } from "../providers/RootProvider";
+
+import "../styles/index.scss";
 
 const AuthPage = lazy(() => import("@/pages/AuthPage"));
 const HomePage = lazy(() => import("@/pages/HomePage"));

@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
 import { UserData } from "../types/types";
 
 interface InitialState {
