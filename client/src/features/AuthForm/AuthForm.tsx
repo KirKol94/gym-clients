@@ -1,11 +1,13 @@
-import { Title, TitleSize } from "@/shared/ui/Title";
-import { Text, TextSize } from "@/shared/ui/Text";
-import classes from "./AuthForm.module.scss";
-import { Input } from "@/shared/ui/Input";
-import { Button, ButtonSize } from "@/shared/ui/Button";
-import { AppLink, AppLinkSize } from "@/shared/ui/AppLink";
 import { ROUTER_PATH } from "@/shared/const/path/PATH";
+import { AppLink, AppLinkSize } from "@/shared/ui/AppLink";
+import { Button, ButtonSize } from "@/shared/ui/Button";
+import { Input } from "@/shared/ui/Input";
+import { Text, TextSize } from "@/shared/ui/Text";
+import { Title, TitleSize } from "@/shared/ui/Title";
+
 import { AuthFormType } from "./types";
+
+import classes from "./AuthForm.module.scss";
 
 interface AuthFormProps {
   type: AuthFormType;

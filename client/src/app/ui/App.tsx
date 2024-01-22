@@ -1,9 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import "../styles/index.scss";
-import { AuthPage } from "@/pages/AuthPage";
-import { ROUTER_PATH } from "@/shared/const/path/PATH";
+
 import { AuthFormType } from "@/features/AuthForm";
+import { AuthPage } from "@/pages/AuthPage";
 import { HomePage } from "@/pages/HomePage";
+import { ROUTER_PATH } from "@/shared/const/path/PATH";
+
+import "../styles/index.scss";
 
 export const App = () => {
   return (

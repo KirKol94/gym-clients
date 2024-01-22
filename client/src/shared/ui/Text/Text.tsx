@@ -1,7 +1,9 @@
 import { ReactNode } from "react";
-import classes from "./Text.module.scss";
 import cx from "classix";
+
 import { TextSize } from "./types";
+
+import classes from "./Text.module.scss";
 
 interface TextProps {
   size: TextSize;

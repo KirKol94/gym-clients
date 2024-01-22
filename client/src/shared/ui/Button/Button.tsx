@@ -1,7 +1,9 @@
 import { ButtonHTMLAttributes, ReactNode } from "react";
-import classes from "./Button.module.scss";
 import cx from "classix";
+
 import { ButtonSize } from "./types";
+
+import classes from "./Button.module.scss";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size: ButtonSize;
