@@ -17,7 +17,12 @@ export const Loader = ({ size, color }: ComponentProps) => {
 
     return (
         <div className={className}>
-            <span className={classes.loader}><div></div><div></div><div></div><div></div></span>     
+            <span className={classes.loader}>
+                <div className={classes.component}/>
+                <div className={classes.component}/>
+                <div className={classes.component}/>
+                <div className={classes.component}/>
+            </span>     
         </div>
     )
 }
