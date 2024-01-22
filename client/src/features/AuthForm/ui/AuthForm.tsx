@@ -5,42 +5,39 @@ import { Input } from "@/shared/ui/Input";
 import { Button, ButtonSize } from "@/shared/ui/Button";
 import { AppLink, AppLinkSize } from "@/shared/ui/AppLink";
 import { ROUTER_PATH } from "@/shared/const/path/PATH";
-import { AuthFormType } from "./types";
+import { AuthFormType } from "../types/types";
 import { ChangeEvent, FormEvent, useState } from "react";
+import { UserData } from "../types/types";
+import { authFormActions } from "@/features/AuthForm";
+import { useAppDispatch } from "@/shared/hooks";
 
 interface AuthFormProps {
   type: AuthFormType;
 }
 
-type UserData = {
-  email: string,
-  password: string,
-  name: string,
-  surname: string,
-  patronymic: string
-}
-
 export const AuthForm = ({ type }: AuthFormProps) => {
+  const dispatch = useAppDispatch();
 
   const [userData, setUserData] = useState<UserData>({
-      email: "",
-      password: "",
-      name: "",
-      surname: "",
-      patronymic: ""
-  })
+    email: "",
+    password: "",
+    name: "",
+    surname: "",
+    patronymic: "",
+  });
 
   function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
-      const {name, value} = event.target;
-      setUserData(prev => ({
-        ...prev, 
-        [name]: value
-      }))
+    const { name, value } = event.target;
+    setUserData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
-      event.preventDefault();
-      console.log(userData); 
+    event.preventDefault();
+
+    dispatch(authFormActions.setAuthData(userData));
   }
 
   return (
@@ -51,14 +48,44 @@ export const AuthForm = ({ type }: AuthFormProps) => {
       </Title>
 
       <form className={classes.form} onSubmit={handleSubmit}>
-        <Input inputName="Email" name="email" placeholder="Email" onChange={handleInputChange} value={userData.email}/>
-        <Input inputName="Пароль" name="password" placeholder="Пароль" onChange={handleInputChange} value={userData.password}/>
+        <Input
+          inputName="Email"
+          name="email"
+          placeholder="Email"
+          onChange={handleInputChange}
+          value={userData.email}
+        />
+        <Input
+          inputName="Пароль"
+          name="password"
+          placeholder="Пароль"
+          onChange={handleInputChange}
+          value={userData.password}
+        />
 
         {type === AuthFormType.REGISTER && (
           <>
-            <Input inputName="Имя" name="name" placeholder="Имя" onChange={handleInputChange} value={userData.name}/>
-            <Input inputName="Фамилия" name="surname" placeholder="Фамилия" onChange={handleInputChange} value={userData.surname}/>
-            <Input inputName="Отчество" name="patronymic" placeholder="Отчество" onChange={handleInputChange} value={userData.patronymic}/>
+            <Input
+              inputName="Имя"
+              name="name"
+              placeholder="Имя"
+              onChange={handleInputChange}
+              value={userData.name}
+            />
+            <Input
+              inputName="Фамилия"
+              name="surname"
+              placeholder="Фамилия"
+              onChange={handleInputChange}
+              value={userData.surname}
+            />
+            <Input
+              inputName="Отчество"
+              name="patronymic"
+              placeholder="Отчество"
+              onChange={handleInputChange}
+              value={userData.patronymic}
+            />
           </>
         )}
 
@@ -89,5 +116,5 @@ export const AuthForm = ({ type }: AuthFormProps) => {
         </div>
       </form>
     </>
-  )
+  );
 };
