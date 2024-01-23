@@ -1,8 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 
-import { authFormActions } from "@/features/AuthForm";
 import { ROUTER_PATH } from "@/shared/const/path/PATH";
-import { useAppDispatch } from "@/shared/hooks";
 import { AppLink, AppLinkSize } from "@/shared/ui/AppLink";
 import { Button, ButtonSize } from "@/shared/ui/Button";
 import { Input } from "@/shared/ui/Input";
@@ -19,8 +17,6 @@ interface AuthFormProps {
 }
 
 export const AuthForm = ({ type }: AuthFormProps) => {
-  const dispatch = useAppDispatch();
-
   const [userData, setUserData] = useState<UserData>({
     email: "",
     password: "",
@@ -39,8 +35,6 @@ export const AuthForm = ({ type }: AuthFormProps) => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    dispatch(authFormActions.setAuthData(userData));
   };
 
   return (

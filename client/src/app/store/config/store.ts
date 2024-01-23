@@ -1,11 +1,11 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
 import { userReducer } from "@/entities/User";
-import { authFormReducer } from "@/features/AuthForm";
+import { authReducer } from "@/features/AuthForm";
 
 const rootReducer = combineReducers({
    user: userReducer,
-   authForm: authFormReducer,
+   auth: authReducer,
 });
 
 export const store = configureStore({
