@@ -1,3 +1,40 @@
+
+@mixin transfrom-scale($name, $start, $end) {
+
+  @keyframes #{$name}{
+    0% {
+      transform: scale($start);
+    }
+
+    100% {
+      transform: scale($end);
+    }
+  }
+}
+
+@mixin transfrom-translate($name, $start1, $end1, $start2, $end2) {
+
+  @keyframes #{$name}{
+    0% {
+      transform: translate(#{$start1}px, #{$end1}px);
+    }
+
+    100% {
+      transform: translate(#{$start2}px, #{$end2}px);
+    }
+  }
+}
+
+@mixin width-height($width, $height) {
+  width: #{$width}px;
+  height: #{$height}px;
+}
+
+@mixin child-animation($left, $animation) {
+  left: #{$left}px;
+  animation: #{$animation} var(--transition-delay-middle) infinite;
+}
+
 .wrapper {
   display: flex;
   align-items: center;
@@ -9,35 +46,35 @@
 .loader {
   position: relative;
   display: inline-block;
-  width: 80px;
-  height: 60px;
+
+  @include width-height(80, 60)
 }
 
 .circle {
   position: absolute;
-  width: 13px;
-  height: 13px;
   background: var(--color-primary-90);
   border-radius: 50%;
 
+  @include width-height(13, 13);
+
   &:nth-child(1) {
-    left: 8px;
-    animation: lds-ellipsis1 var(--transition-delay-middle) infinite;
+
+    @include child-animation(8, lds-ellipsis1);
   }
 
   &:nth-child(2) {
-    left: 8px;
-    animation: lds-ellipsis2-default var(--transition-delay-middle) infinite;
+
+    @include child-animation(8, lds-ellipsis2-default);
   }
 
   &:nth-child(3) {
-    left: 32px;
-    animation: lds-ellipsis2-default var(--transition-delay-middle) infinite;
+
+    @include child-animation(32, lds-ellipsis2-default);
   }
 
   &:nth-child(4) {
-    left: 56px;
-    animation: lds-ellipsis3 var(--transition-delay-middle) infinite;
+
+    @include child-animation(56, lds-ellipsis3);
   }
 }
 
@@ -50,87 +87,51 @@
 }
 
 .small-loader .loader .circle {
-  width: 7px;
-  height: 7px;
+
+  @include width-height(7, 7);
 }
 
 .big-loader .loader .circle {
-  width: 20px;
-  height: 20px;
+
+  @include width-height(20, 20);
 }
 
 .small-loader .loader .circle:nth-child(2) {
-  animation: lds-ellipsis2-small var(--transition-delay-middle) infinite;
+
+  @include child-animation(8, lds-ellipsis2-small);
 }
 
 .small-loader .loader .circle:nth-child(3) {
-  left: 24px;
-  animation: lds-ellipsis2-small var(--transition-delay-middle) infinite;
+
+  @include child-animation(24, lds-ellipsis2-small);
 }
 
 .small-loader .loader .circle:nth-child(4) {
-  left: 40px;
+
+  @include child-animation(40, lds-ellipsis3);
 }
 
 .big-loader .loader .circle:nth-child(2) {
-  animation: lds-ellipsis2-big var(--transition-delay-middle) infinite;
+
+  @include child-animation(8, lds-ellipsis2-big);
 }
 
 .big-loader .loader .circle:nth-child(3) {
-  left: 38px;
-  animation: lds-ellipsis2-big var(--transition-delay-middle) infinite;
+
+  @include child-animation(38, lds-ellipsis2-big);
 }
 
 .big-loader .loader .circle:nth-child(4) {
-  left: 68px;
+
+  @include child-animation(68, lds-ellipsis3);
 }
 
-@keyframes lds-ellipsis1 {
-  0% {
-    transform: scale(0);
-  }
+@include transfrom-scale(lds-ellipsis1, 0, 1);
 
-  100% {
-    transform: scale(1);
-  }
-}
+@include transfrom-scale(lds-ellipsis3, 1, 0);
 
-@keyframes lds-ellipsis3 {
-  0% {
-    transform: scale(1);
-  }
+@include transfrom-translate(lds-ellipsis2-small, 0, 0, 16, 0);
 
-  100% {
-    transform: scale(0);
-  }
-}
+@include transfrom-translate(lds-ellipsis2-default, 0, 0, 24, 0);
 
-@keyframes lds-ellipsis2-small {
-  0% {
-    transform: translate(0, 0);
-  }
-
-  100% {
-    transform: translate(16px, 0);
-  }
-}
-
-@keyframes lds-ellipsis2-default {
-  0% {
-    transform: translate(0, 0);
-  }
-
-  100% {
-    transform: translate(24px, 0);
-  }
-}
-
-@keyframes lds-ellipsis2-big {
-  0% {
-    transform: translate(0, 0);
-  }
-
-  100% {
-    transform: translate(30px, 0);
-  }
-}
+@include transfrom-translate(lds-ellipsis2-big, 0, 0, 30, 0);
