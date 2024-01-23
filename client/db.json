@@ -1,12 +1,3 @@
 {
-  "users": [
-    {
-      "email": "kirkol94@ya.ru",
-      "password": "$2a$10$aXxkM39KaSrCrYyG/7GKv./diO/keLIajO90wGeuELhzkdShlFqYK",
-      "name": "Кирилл",
-      "surname": "Колчанов",
-      "patronymic": "Олегович",
-      "id": 1
-    }
-  ]
+  "users": []
 }
