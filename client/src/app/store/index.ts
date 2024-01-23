@@ -1,2 +1,2 @@
 export { store } from "./config/store";
-export type { RootState, AppDispatch } from './types/types'
+export type { RootState, AppDispatch } from './types/store'
