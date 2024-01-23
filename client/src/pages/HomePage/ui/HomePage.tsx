@@ -18,7 +18,7 @@ export const HomePage = () => {
     if (!isAuth) {
       navigate(ROUTER_PATH.LOGIN);
     }
-  }, []);
+  }, [isAuth, navigate]);
 
   return (
     <div className={className}>
