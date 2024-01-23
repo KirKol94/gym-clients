@@ -1,5 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+import { USER_LOCAL_STORAGE_KEY } from "@/shared/const/localStorage/userKey";
+
 import { User } from "../..";
 
 interface InitialState {
@@ -16,6 +18,13 @@ const userSlice = createSlice({
   reducers: {
     setUser: (state, action: PayloadAction<User>) => {
       state.user = action.payload;
+    },
+    initAuthData: (state) => {
+      const user = localStorage.getItem(USER_LOCAL_STORAGE_KEY);
+
+      if (user) {
+        state.user = JSON.parse(user);
+      }
     },
   },
 });

@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { User, userActions } from "@/entities/User";
 import { BASE_API_URL } from "@/shared/const/api/baseApiUrl";
+import { USER_LOCAL_STORAGE_KEY } from "@/shared/const/localStorage/userKey";
 
 import { AuthUserData } from "../types/auth";
 
@@ -26,8 +27,18 @@ export const fetchAuthUser = createAsyncThunk<
       });
 
       const resUserData = await res.json();
+
+      if (res.status !== 200) {
+         throw new Error("Произошла ошибка при авторизации");
+      }
+
+      localStorage.setItem(
+         USER_LOCAL_STORAGE_KEY,
+         JSON.stringify(resUserData.user)
+      );
+
       dispatch(userActions.setUser(resUserData.user));
-      return resUserData
+      return resUserData;
    } catch (error: unknown) {
       return rejectWithValue(
          "Авторизация прошла с ошибкой, " + (error as Error).message
