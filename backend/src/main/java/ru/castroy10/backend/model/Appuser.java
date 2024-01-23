@@ -31,7 +31,7 @@ public class Appuser {
     private boolean credentialsNonExpired;
     @Column(name = "is_enabled")
     private boolean isEnabled;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "appuser_role", joinColumns = @JoinColumn(name = "appuser_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 }
