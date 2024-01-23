@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { User, userActions } from "@/entities/User";
 import { BASE_API_URL } from "@/shared/const/api/baseApiUrl";
+import { IS_AUTH_LOCAL_STORAGE_KEY } from "@/shared/const/localStorage/isAuthKey";
 import { USER_LOCAL_STORAGE_KEY } from "@/shared/const/localStorage/userKey";
 
 import { AuthUserData } from "../types/auth";
@@ -35,6 +36,11 @@ export const fetchAuthUser = createAsyncThunk<
       localStorage.setItem(
          USER_LOCAL_STORAGE_KEY,
          JSON.stringify(resUserData.user)
+      );
+
+      localStorage.setItem(
+         IS_AUTH_LOCAL_STORAGE_KEY,
+         JSON.stringify(true)
       );
 
       dispatch(userActions.setUser(resUserData.user));
