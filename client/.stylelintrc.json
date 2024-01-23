@@ -13,7 +13,8 @@
       "scss/selector-no-redundant-nesting-selector": true,
       "declaration-property-unit-allowed-list": {
          "/^border/": [
-            "px"
+            "px",
+            "%"
          ],
          "/^gap/": [
             "rem"
@@ -26,6 +27,7 @@
          "rem",
          "ms",
          "vh",
+         "svh",
          "vw"
       ],
       "selector-max-id": 0,

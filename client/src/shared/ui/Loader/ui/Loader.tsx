@@ -13,9 +13,9 @@ export const Loader = ({ size, color }: LoaderProps) => {
 
     const className = cx(
         classes.wrapper,
-        size === LoaderSize.SMALL && classes.smallLoader,
-        size === LoaderSize.BIG && classes.bigLoader,
-        color === LoaderColor.WHITE && classes.whiteLoader
+        size === LoaderSize.SMALL && classes["small-loader"],
+        size === LoaderSize.BIG && classes["big-loader"],
+        color === LoaderColor.WHITE && classes["white-loader"]
     )
 
     return (
