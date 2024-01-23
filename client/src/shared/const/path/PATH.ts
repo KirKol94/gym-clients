@@ -1,4 +1,5 @@
 export enum ROUTER_PATH {
-   LOGIN = "/login",
-   REGISTER = "/register",
+  HOME = "/",
+  LOGIN = "/login",
+  REGISTER = "/register",
 }
