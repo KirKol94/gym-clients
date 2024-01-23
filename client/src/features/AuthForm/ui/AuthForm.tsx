@@ -1,4 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { User } from "@/entities/User";
 import { ROUTER_PATH } from "@/shared/const/path/PATH";
@@ -23,6 +24,7 @@ type FormData = Omit<User, "id"> & { password: string };
 
 export const AuthForm = ({ type }: AuthFormProps) => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const [userData, setUserData] = useState<FormData>({
     email: "",
@@ -47,13 +49,19 @@ export const AuthForm = ({ type }: AuthFormProps) => {
     type === AuthType.REGISTER && handleRegister();
   };
 
-  const handleRegister = () => {
-    dispatch(fetchRegisterUser(userData));
+  const handleRegister = async () => {
+    const res = await dispatch(fetchRegisterUser(userData));
+    if (res?.payload?.accessToken) {
+      navigate(ROUTER_PATH.LOGIN);
+    }
   };
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     const authData = { email: userData.email, password: userData.password };
-    dispatch(fetchAuthUser(authData));
+    const res = await dispatch(fetchAuthUser(authData));
+    if (res?.payload?.accessToken) {
+      navigate("/");
+    }
   };
 
   return (
