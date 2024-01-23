@@ -9,8 +9,8 @@ import { Input } from "@/shared/ui/Input";
 import { Text, TextSize } from "@/shared/ui/Text";
 import { Title, TitleSize } from "@/shared/ui/Title";
 
-import { AuthType } from "../types/auth";
-import { UserData } from "../types/auth";
+import { AuthType } from "../model/types/auth";
+import { UserData } from "../model/types/auth";
 
 import classes from "./AuthForm.module.scss";
 
