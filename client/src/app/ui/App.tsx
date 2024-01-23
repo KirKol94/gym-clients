@@ -1,10 +1,12 @@
 import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 
-import { AuthFormType } from "@/features/AuthForm";
+import { AuthType } from "@/features/AuthForm";
 import { ROUTER_PATH } from "@/shared/const/path/PATH";
-import { RootProvider } from "../providers/RootProvider";
 import { Loader } from "@/shared/ui/Loader";
+
+import { RootProvider } from "../providers/RootProvider";
+
 import "../styles/index.scss";
 
 
@@ -27,7 +29,7 @@ export const App = () => {
           path={ROUTER_PATH.LOGIN}
           element={
             <Suspense fallback={<Loader />}>
-              <AuthPage type={AuthFormType.LOGIN} />
+              <AuthPage type={AuthType.LOGIN} />
             </Suspense>
           }
         />
@@ -35,7 +37,7 @@ export const App = () => {
           path={ROUTER_PATH.REGISTER}
           element={
             <Suspense fallback={<Loader />}>
-              <AuthPage type={AuthFormType.REGISTER} />
+              <AuthPage type={AuthType.REGISTER} />
             </Suspense>
           }
         />
