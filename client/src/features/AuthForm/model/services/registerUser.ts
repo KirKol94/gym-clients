@@ -1,17 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { User } from "@/entities/User";
 import { BASE_API_URL } from "@/shared/const/api/baseApiUrl";
 
 import { RegisterData } from "../types/auth";
 
-interface ResponseAuthUseData {
-   accessToken: string;
-   user: User;
-}
+type ResponseAuthToken = string;
 
 export const fetchRegisterUser = createAsyncThunk<
-   ResponseAuthUseData,
+   ResponseAuthToken,
    RegisterData
 >("auth/fetchRegisterUser", async (registerData, thunkApi) => {
    const { rejectWithValue } = thunkApi;
@@ -26,7 +22,7 @@ export const fetchRegisterUser = createAsyncThunk<
       });
 
       const resUserData = await res.json();
-      return resUserData;
+      return resUserData.accessToken;
    } catch (error: unknown) {
       return rejectWithValue(
          "При регистрации возникла ошибка, " + (error as Error).message

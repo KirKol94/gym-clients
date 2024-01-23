@@ -50,16 +50,16 @@ export const AuthForm = ({ type }: AuthFormProps) => {
   };
 
   const handleRegister = async () => {
-    const res = await dispatch(fetchRegisterUser(userData));
-    if (res?.payload?.accessToken) {
+    const accessToken = await dispatch(fetchRegisterUser(userData));
+    if (accessToken) {
       navigate(ROUTER_PATH.LOGIN);
     }
   };
 
   const handleLogin = async () => {
     const authData = { email: userData.email, password: userData.password };
-    const res = await dispatch(fetchAuthUser(authData));
-    if (res?.payload?.accessToken) {
+    const accessToken = await dispatch(fetchAuthUser(authData));
+    if (accessToken) {
       navigate("/");
     }
   };

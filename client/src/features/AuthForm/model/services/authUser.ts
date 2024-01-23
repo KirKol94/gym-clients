@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { User, userActions } from "@/entities/User";
+import { userActions } from "@/entities/User";
 import { BASE_API_URL } from "@/shared/const/api/baseApiUrl";
 import { ACCESS_TOKEN_LOCAL_STORAGE_KEY } from "@/shared/const/localStorage/accessTokenKey";
 import { IS_AUTH_LOCAL_STORAGE_KEY } from "@/shared/const/localStorage/isAuthKey";
@@ -8,13 +8,10 @@ import { USER_LOCAL_STORAGE_KEY } from "@/shared/const/localStorage/userKey";
 
 import { AuthUserData } from "../types/auth";
 
-interface ResponseAuthUseData {
-   accessToken: string;
-   user: User;
-}
+type ResponseAuthToken = string;
 
 export const fetchAuthUser = createAsyncThunk<
-   ResponseAuthUseData,
+   ResponseAuthToken,
    AuthUserData
 >("auth/fetchAuthUser", async (authData, thunkApi) => {
    const { dispatch, rejectWithValue } = thunkApi;
@@ -39,12 +36,16 @@ export const fetchAuthUser = createAsyncThunk<
          JSON.stringify(resUserData.user)
       );
 
-      localStorage.setItem(ACCESS_TOKEN_LOCAL_STORAGE_KEY, JSON.stringify(resUserData.accessToken));
+      localStorage.setItem(
+         ACCESS_TOKEN_LOCAL_STORAGE_KEY,
+         JSON.stringify(resUserData.accessToken)
+      );
 
       localStorage.setItem(IS_AUTH_LOCAL_STORAGE_KEY, JSON.stringify(true));
 
       dispatch(userActions.setUser(resUserData.user));
-      return resUserData;
+
+      return resUserData.accessToken;
    } catch (error: unknown) {
       return rejectWithValue(
          "Авторизация прошла с ошибкой, " + (error as Error).message
