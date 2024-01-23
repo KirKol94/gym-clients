@@ -1,3 +1,4 @@
 export enum TitleSize {
-   XXL = "xxl",
+  XL = "XL",
+  XXL = "XXL",
 }
