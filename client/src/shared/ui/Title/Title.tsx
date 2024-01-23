@@ -12,15 +12,15 @@ interface TitleProps {
 export const Title = ({ size, className, children }: TitleProps) => {
   const cls = cx(
     classes.title,
+    size === TitleSize.XL && classes.title__xl,
     size === TitleSize.XXL && classes.title__xxl,
-    size === TitleSize.MAX && classes.title__max,
     className
   );
 
   switch (size) {
-    case TitleSize.XXL:
+    case TitleSize.XL:
       return <h1 className={cls}>{children}</h1>;
-    case TitleSize.MAX:
+    case TitleSize.XXL:
       return <h1 className={cls}>{children}</h1>;
   }
 };

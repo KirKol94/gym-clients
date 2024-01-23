@@ -42,7 +42,7 @@ export const AuthForm = ({ type }: AuthFormProps) => {
 
   return (
     <>
-      <Title size={TitleSize.XXL} className={classes.title}>
+      <Title size={TitleSize.XL} className={classes.title}>
         {type === AuthFormType.LOGIN && "Авторизация"}
         {type === AuthFormType.REGISTER && "Регистрация"}
       </Title>
