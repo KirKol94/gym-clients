@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import cx from "classix";
 
-import { TextSize } from "./types";
+import { TextSize } from "../model/types/text";
 
 import classes from "./Text.module.scss";
 
