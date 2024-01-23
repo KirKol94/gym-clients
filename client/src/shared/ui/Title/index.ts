@@ -1,2 +1,2 @@
-export { Title } from './Title';
-export { TitleSize } from './types'
+export { Title } from './ui/Title';
+export { TitleSize } from './model/types/title'

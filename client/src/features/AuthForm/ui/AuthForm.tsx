@@ -9,13 +9,13 @@ import { Input } from "@/shared/ui/Input";
 import { Text, TextSize } from "@/shared/ui/Text";
 import { Title, TitleSize } from "@/shared/ui/Title";
 
-import { AuthFormType } from "../types/types";
-import { UserData } from "../types/types";
+import { AuthType } from "../model/types/auth";
+import { UserData } from "../model/types/auth";
 
 import classes from "./AuthForm.module.scss";
 
 interface AuthFormProps {
-  type: AuthFormType;
+  type: AuthType;
 }
 
 export const AuthForm = ({ type }: AuthFormProps) => {
@@ -46,8 +46,8 @@ export const AuthForm = ({ type }: AuthFormProps) => {
   return (
     <>
       <Title size={TitleSize.XXL} className={classes.title}>
-        {type === AuthFormType.LOGIN && "Авторизация"}
-        {type === AuthFormType.REGISTER && "Регистрация"}
+        {type === AuthType.LOGIN && "Авторизация"}
+        {type === AuthType.REGISTER && "Регистрация"}
       </Title>
 
       <form className={classes.form} onSubmit={handleSubmit}>
@@ -66,7 +66,7 @@ export const AuthForm = ({ type }: AuthFormProps) => {
           value={userData.password}
         />
 
-        {type === AuthFormType.REGISTER && (
+        {type === AuthType.REGISTER && (
           <>
             <Input
               inputName="Имя"
@@ -94,26 +94,26 @@ export const AuthForm = ({ type }: AuthFormProps) => {
 
         <div className={classes.footer}>
           <Button size={ButtonSize.M} type="submit">
-            {type === AuthFormType.LOGIN && "Войти"}
-            {type === AuthFormType.REGISTER && "Регистрация"}
+            {type === AuthType.LOGIN && "Войти"}
+            {type === AuthType.REGISTER && "Регистрация"}
           </Button>
 
           <div>
             <Text size={TextSize.S}>
-              {type === AuthFormType.LOGIN && "Еще нет аккаунта?"}
-              {type === AuthFormType.REGISTER && "Уже нет аккаунт?"}
+              {type === AuthType.LOGIN && "Еще нет аккаунта?"}
+              {type === AuthType.REGISTER && "Уже нет аккаунт?"}
             </Text>
 
             <AppLink
               to={
-                type === AuthFormType.LOGIN
+                type === AuthType.LOGIN
                   ? ROUTER_PATH.REGISTER
                   : ROUTER_PATH.LOGIN
               }
               size={AppLinkSize.S}
             >
-              {type === AuthFormType.REGISTER && "Войти"}
-              {type === AuthFormType.LOGIN && "Регистрация"}
+              {type === AuthType.REGISTER && "Войти"}
+              {type === AuthType.LOGIN && "Регистрация"}
             </AppLink>
           </div>
         </div>
