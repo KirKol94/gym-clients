@@ -1,6 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-import { authFormActions } from "@/features/AuthForm";
+import { User } from "@/entities/User";
 import { ROUTER_PATH } from "@/shared/const/path/PATH";
 import { useAppDispatch } from "@/shared/hooks";
 import { AppLink, AppLinkSize } from "@/shared/ui/AppLink";
@@ -9,8 +10,9 @@ import { Input } from "@/shared/ui/Input";
 import { Text, TextSize } from "@/shared/ui/Text";
 import { Title, TitleSize } from "@/shared/ui/Title";
 
+import { fetchAuthUser } from "../model/services/authUser";
+import { fetchRegisterUser } from "../model/services/registerUser";
 import { AuthType } from "../model/types/auth";
-import { UserData } from "../model/types/auth";
 
 import classes from "./AuthForm.module.scss";
 
@@ -18,10 +20,13 @@ interface AuthFormProps {
   type: AuthType;
 }
 
+type FormData = Omit<User, "id"> & { password: string };
+
 export const AuthForm = ({ type }: AuthFormProps) => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
-  const [userData, setUserData] = useState<UserData>({
+  const [userData, setUserData] = useState<FormData>({
     email: "",
     password: "",
     name: "",
@@ -40,7 +45,23 @@ export const AuthForm = ({ type }: AuthFormProps) => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    dispatch(authFormActions.setAuthData(userData));
+    type === AuthType.LOGIN && handleLogin();
+    type === AuthType.REGISTER && handleRegister();
+  };
+
+  const handleRegister = async () => {
+    const accessToken = await dispatch(fetchRegisterUser(userData));
+    if (accessToken) {
+      navigate(ROUTER_PATH.LOGIN);
+    }
+  };
+
+  const handleLogin = async () => {
+    const authData = { email: userData.email, password: userData.password };
+    const accessToken = await dispatch(fetchAuthUser(authData));
+    if (accessToken) {
+      navigate("/");
+    }
   };
 
   return (

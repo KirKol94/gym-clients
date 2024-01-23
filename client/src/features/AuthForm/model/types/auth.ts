@@ -1,12 +1,13 @@
+import { User } from "@/entities/User";
+
 export enum AuthType {
    LOGIN = "login",
    REGISTER = "register",
 }
 
-export interface UserData {
+export interface AuthUserData {
    email: string;
    password: string;
-   name: string;
-   surname: string;
-   patronymic: string;
 }
+
+export type RegisterData = AuthUserData & Omit<User, "id">;
