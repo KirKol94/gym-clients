@@ -1,5 +1,6 @@
-import { Footer } from "@/widgets/Footer";
 import cx from "classix";
+
+import { Footer } from "@/widgets/Footer";
 
 export const HomePage = () => {
   const className = cx("home__container");

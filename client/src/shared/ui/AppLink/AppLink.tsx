@@ -1,8 +1,10 @@
 import { ReactNode } from "react";
-import classes from "./AppLink.module.scss";
 import { Link } from "react-router-dom";
 import cx from "classix";
+
 import { AppLinkSize } from "./types";
+
+import classes from "./AppLink.module.scss";
 
 interface AppLinkProps {
   to: string;

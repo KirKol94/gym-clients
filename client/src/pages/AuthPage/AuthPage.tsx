@@ -1,4 +1,5 @@
 import { AuthForm, AuthFormType } from "@/features/AuthForm";
+
 import classes from "./AuthPage.module.scss";
 
 interface AuthPageProps {

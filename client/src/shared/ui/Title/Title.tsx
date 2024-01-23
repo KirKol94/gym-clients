@@ -1,7 +1,9 @@
 import { ReactNode } from "react";
-import classes from "./Title.module.scss";
 import cx from "classix";
+
 import { TitleSize } from "./types";
+
+import classes from "./Title.module.scss";
 
 interface TitleProps {
   size: TitleSize;
