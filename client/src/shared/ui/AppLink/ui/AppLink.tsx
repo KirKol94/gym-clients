@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import cx from "classix";
 
-import { AppLinkSize } from "./types";
+import { AppLinkSize } from "../model/types/appLink";
 
 import classes from "./AppLink.module.scss";
 

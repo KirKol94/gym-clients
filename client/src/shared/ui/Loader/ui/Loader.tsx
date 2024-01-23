@@ -1,6 +1,8 @@
 import cx from "classix";
+
+import { LoaderColor, LoaderSize } from "../model/types/loader";
+
 import classes from "./Loader.module.scss";
-import { LoaderColor, LoaderSize } from "../types";
 
 type LoaderProps = {
     size?: LoaderSize,
