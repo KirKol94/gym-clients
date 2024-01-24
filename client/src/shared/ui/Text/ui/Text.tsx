@@ -6,7 +6,7 @@ import { TextSize } from "../model/types/text";
 import classes from "./Text.module.scss";
 
 interface TextProps {
-  size: TextSize;
+  size?: TextSize;
   children: ReactNode;
   className?: string;
 }

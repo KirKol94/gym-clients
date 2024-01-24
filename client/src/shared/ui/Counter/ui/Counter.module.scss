@@ -1,0 +1,20 @@
+
+.counter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-counter-bg);
+    border-radius: 50%;
+
+    &__s {
+        width: 20px;
+        height: 20px;
+        font-size: 12px;
+    }
+
+    &__m {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
+}
