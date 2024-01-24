@@ -1,3 +1,2 @@
 export { Loader } from "./ui/Loader"
-export { LoaderSize } from "./model/types/loader"
-export { LoaderColor } from "./model/types/loader"
+export { LoaderSize, LoaderColor } from "./model/types/loader"
