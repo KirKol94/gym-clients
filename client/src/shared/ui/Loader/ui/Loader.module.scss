@@ -13,6 +13,7 @@
     0% {
       transform: $from;
     }
+
     100% {
       transform: $to;
     }
@@ -22,6 +23,7 @@
 @mixin circle-styles {
   position: absolute;
   border-radius: 50%;
+
   @include width-height(13, 13);
 }
 
@@ -56,12 +58,14 @@
 .loader {
   position: relative;
   display: inline-block;
+
   @include width-height(80, 60);
 }
 
 .circle {
   position: absolute;
   background: var(--color-primary-90);
+
   @include circle-styles;
 
   &:nth-child(1) {
