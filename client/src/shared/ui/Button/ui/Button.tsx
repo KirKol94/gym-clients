@@ -13,7 +13,8 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 export const Button = ({ size, children, ...props }: ButtonProps) => {
   const className = cx(
     classes.button,
-    size === ButtonSize.M && classes.button__m
+    size === ButtonSize.M && classes.button__m,
+    size === ButtonSize.S && classes.button__s,
   );
 
   return (

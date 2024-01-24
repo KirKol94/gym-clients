@@ -8,7 +8,7 @@ import classes from "./Title.module.scss";
 interface TitleProps {
   size: TitleSize;
   children: ReactNode;
-  className: string;
+  className?: string;
 }
 
 export const Title = ({ size, className, children }: TitleProps) => {
@@ -16,13 +16,9 @@ export const Title = ({ size, className, children }: TitleProps) => {
     classes.title,
     size === TitleSize.XL && classes.title__xl,
     size === TitleSize.XXL && classes.title__xxl,
+    size === TitleSize.XL && classes.title__xl,
     className
   );
 
-  switch (size) {
-    case TitleSize.XL:
-      return <h1 className={cls}>{children}</h1>;
-    case TitleSize.XXL:
-      return <h1 className={cls}>{children}</h1>;
-  }
+  return <h1 className={cls}>{children}</h1>;
 };
