@@ -2,7 +2,7 @@ import { Button, ButtonSize } from "@/shared/ui/Button";
 import { Text, TextSize } from "@/shared/ui/Text";
 import { Title, TitleSize } from "@/shared/ui/Title";
 
-import classes from "./Alert.module.scss";
+import classes from "./AlertCard.module.scss";
 
 interface AlertInfo {
     count: number,
