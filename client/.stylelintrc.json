@@ -13,9 +13,11 @@
       "scss/selector-no-redundant-nesting-selector": true,
       "declaration-property-unit-allowed-list": {
          "/^border/": [
-            "px"
+            "px",
+            "%"
          ],
          "/^gap/": [
+            "px",
             "rem"
          ]
       },
@@ -26,12 +28,12 @@
          "rem",
          "ms",
          "vh",
+         "svh",
          "vw"
       ],
       "selector-max-id": 0,
       "block-no-empty": true,
       "color-no-invalid-hex": true,
-      "at-rule-empty-line-before": "always",
       "comment-empty-line-before": "always",
       "alpha-value-notation": "number",
       "annotation-no-unknown": true

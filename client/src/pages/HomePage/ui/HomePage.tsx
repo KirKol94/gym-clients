@@ -1,10 +1,25 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import cx from "classix";
 
 import { Alert } from "@/widgets/Alert";
+import { getIsAuth } from "@/entities/User";
+import { ROUTER_PATH } from "@/shared/const/path/PATH";
+import { useAppSelector } from "@/shared/hooks";
 import { Footer } from "@/widgets/Footer";
 
 export const HomePage = () => {
+  const navigate = useNavigate();
+
+  const isAuth = useAppSelector(getIsAuth);
+
   const className = cx("home__container");
+
+  useEffect(() => {
+    if (!isAuth) {
+      navigate(ROUTER_PATH.LOGIN);
+    }
+  }, [isAuth, navigate]);
 
   return (
     <div className={className}>
