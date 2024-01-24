@@ -1,18 +1,24 @@
+import cx from "classix";
 import classes from "./SidebarItem.module.scss";
 
 interface SidebarItemProps {
-  title: string;
-  link: string;
-  onClick: () => string;
-  className: string;
+  data: { title: string; link: string };
+  active: string;
+  setActive: (title: string) => any;
 }
 
-const SidebarItem = ({ title, link, onClick, className }: SidebarItemProps) => {
+const SidebarItem = ({ data, active, setActive }: SidebarItemProps) => {
+  const { title, link } = data;
+  const className = cx(active === title ? classes.active : classes.card);
+
+  const handeleClick = () => {
+    setActive(title);
+  };
+
   return (
-    <li className={className} onClick={onClick}>
+    <li className={className} onClick={handeleClick}>
       <img src={link} alt={title} />
       <p>{title}</p>
-      <div className={classes.stick}></div>
     </li>
   );
 };

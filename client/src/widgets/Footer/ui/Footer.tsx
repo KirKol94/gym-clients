@@ -16,7 +16,7 @@ export const Footer = () => {
   ];
 
   return (
-    <div className={classes.footer}>
+    <footer className={classes.footer}>
       <Text size={TextSize.S}>©2020 Company Name</Text>
       <div className={classes.links}>
         {data.map((el, index) => (
@@ -25,7 +25,7 @@ export const Footer = () => {
           </AppLink>
         ))}
       </div>
-    </div>
+    </footer>
   );
 };
 

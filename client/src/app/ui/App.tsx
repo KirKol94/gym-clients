@@ -7,8 +7,8 @@ import { RootProvider } from "../providers/RootProvider";
 import { Loader } from "@/shared/ui/Loader";
 import "../styles/index.scss";
 
-
 const AuthPage = lazy(() => import("@/pages/AuthPage"));
+const Layout = lazy(() => import("@/pages/Layout"));
 const HomePage = lazy(() => import("@/pages/HomePage"));
 
 export const App = () => {
@@ -19,7 +19,9 @@ export const App = () => {
           index
           element={
             <Suspense fallback={<Loader />}>
-              <HomePage />
+              <Layout>
+                <HomePage />
+              </Layout>
             </Suspense>
           }
         />
