@@ -1,9 +1,0 @@
-spring.datasource.url=jdbc:postgresql://localhost/crm
-spring.datasource.username=
-spring.datasource.password=
-spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
-server.address=127.0.0.1
-server.port=8080
-spring.jpa.open-in-view=false
-
-secret=
