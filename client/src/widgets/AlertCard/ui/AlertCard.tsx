@@ -13,11 +13,11 @@ interface AlertInfo {
 export const AlertCard = ({ count, title, alert }: AlertInfo) => {
     return ( 
         <div className={classes.wrapper}>
-            <div className={classes["title-wrapper"]}>
+            <div className={classes.header}>
                 <Text size={TextSize.M} className={classes.counter}>{count}</Text>
                 <Title size={TitleSize.XL}>{title}</Title>
             </div>
-            <div className={classes["alert-wrapper"]}>
+            <div className={classes.footer}>
                 <Button size={ButtonSize.S}>Обработать</Button>
                 <Text size={TextSize.S}>{alert}</Text>
             </div>
