@@ -14,12 +14,11 @@ interface TitleProps {
 export const Title = ({ size, className, children }: TitleProps) => {
   const cls = cx(
     classes.title,
+    size === TitleSize.XL && classes.title__xl,
     size === TitleSize.XXL && classes.title__xxl,
     size === TitleSize.XL && classes.title__xl,
     className
   );
 
-  
   return <h1 className={cls}>{children}</h1>;
- 
 };
