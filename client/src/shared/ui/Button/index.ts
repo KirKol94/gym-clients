@@ -1,2 +1,2 @@
-export { Button } from "./Button";
-export { ButtonSize } from './types'
+export { Button } from "./ui/Button";
+export { ButtonSize } from './mode/types/button'

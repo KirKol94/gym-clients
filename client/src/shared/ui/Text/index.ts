@@ -1,2 +1,2 @@
-export { Text } from "./Text";
-export { TextSize } from './types'
+export { Text } from "./ui/Text";
+export { TextSize } from './model/types/text'

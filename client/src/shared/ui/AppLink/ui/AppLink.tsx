@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import cx from "classix";
 
-import { AppLinkSize } from "./types";
+import { AppLinkSize } from "../model/types/appLink";
 
 import classes from "./AppLink.module.scss";
 
@@ -15,7 +15,8 @@ interface AppLinkProps {
 export const AppLink = ({ to, size, children }: AppLinkProps) => {
   const className = cx(
     classes.applink,
-    size === AppLinkSize.S && classes.applink__s
+    size === AppLinkSize.S && classes.applink__s,
+    size === AppLinkSize.M && classes.applink__m
   );
 
   return (

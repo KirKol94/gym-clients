@@ -1,9 +1,9 @@
-import { AuthForm, AuthFormType } from "@/features/AuthForm";
+import { AuthForm, AuthType } from "@/features/AuthForm";
 
 import classes from "./AuthPage.module.scss";
 
 interface AuthPageProps {
-  type: AuthFormType;
+  type: AuthType;
 }
 
 export const AuthPage = ({ type }: AuthPageProps) => {
@@ -11,9 +11,9 @@ export const AuthPage = ({ type }: AuthPageProps) => {
     <div className={classes.page}>
       <header></header>
 
-      {type === AuthFormType.LOGIN && <AuthForm type={AuthFormType.LOGIN} />}
-      {type === AuthFormType.REGISTER && (
-        <AuthForm type={AuthFormType.REGISTER} />
+      {type === AuthType.LOGIN && <AuthForm type={AuthType.LOGIN} />}
+      {type === AuthType.REGISTER && (
+        <AuthForm type={AuthType.REGISTER} />
       )}
 
       <footer></footer>

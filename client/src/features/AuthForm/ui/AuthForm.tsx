@@ -1,6 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-import { authFormActions } from "@/features/AuthForm";
+import { User } from "@/entities/User";
 import { ROUTER_PATH } from "@/shared/const/path/PATH";
 import { useAppDispatch } from "@/shared/hooks";
 import { AppLink, AppLinkSize } from "@/shared/ui/AppLink";
@@ -9,19 +10,23 @@ import { Input } from "@/shared/ui/Input";
 import { Text, TextSize } from "@/shared/ui/Text";
 import { Title, TitleSize } from "@/shared/ui/Title";
 
-import { AuthFormType } from "../types/types";
-import { UserData } from "../types/types";
+import { fetchAuthUser } from "../model/services/authUser";
+import { fetchRegisterUser } from "../model/services/registerUser";
+import { AuthType } from "../model/types/auth";
 
 import classes from "./AuthForm.module.scss";
 
 interface AuthFormProps {
-  type: AuthFormType;
+  type: AuthType;
 }
+
+type FormData = Omit<User, "id"> & { password: string };
 
 export const AuthForm = ({ type }: AuthFormProps) => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
-  const [userData, setUserData] = useState<UserData>({
+  const [userData, setUserData] = useState<FormData>({
     email: "",
     password: "",
     name: "",
@@ -40,14 +45,30 @@ export const AuthForm = ({ type }: AuthFormProps) => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    dispatch(authFormActions.setAuthData(userData));
+    type === AuthType.LOGIN && handleLogin();
+    type === AuthType.REGISTER && handleRegister();
+  };
+
+  const handleRegister = async () => {
+    const accessToken = await dispatch(fetchRegisterUser(userData));
+    if (accessToken) {
+      navigate(ROUTER_PATH.LOGIN);
+    }
+  };
+
+  const handleLogin = async () => {
+    const authData = { email: userData.email, password: userData.password };
+    const accessToken = await dispatch(fetchAuthUser(authData));
+    if (accessToken) {
+      navigate("/");
+    }
   };
 
   return (
     <>
       <Title size={TitleSize.XXL} className={classes.title}>
-        {type === AuthFormType.LOGIN && "Авторизация"}
-        {type === AuthFormType.REGISTER && "Регистрация"}
+        {type === AuthType.LOGIN && "Авторизация"}
+        {type === AuthType.REGISTER && "Регистрация"}
       </Title>
 
       <form className={classes.form} onSubmit={handleSubmit}>
@@ -66,7 +87,7 @@ export const AuthForm = ({ type }: AuthFormProps) => {
           value={userData.password}
         />
 
-        {type === AuthFormType.REGISTER && (
+        {type === AuthType.REGISTER && (
           <>
             <Input
               inputName="Имя"
@@ -94,26 +115,26 @@ export const AuthForm = ({ type }: AuthFormProps) => {
 
         <div className={classes.footer}>
           <Button size={ButtonSize.M} type="submit">
-            {type === AuthFormType.LOGIN && "Войти"}
-            {type === AuthFormType.REGISTER && "Регистрация"}
+            {type === AuthType.LOGIN && "Войти"}
+            {type === AuthType.REGISTER && "Регистрация"}
           </Button>
 
           <div>
             <Text size={TextSize.S}>
-              {type === AuthFormType.LOGIN && "Еще нет аккаунта?"}
-              {type === AuthFormType.REGISTER && "Уже нет аккаунт?"}
+              {type === AuthType.LOGIN && "Еще нет аккаунта?"}
+              {type === AuthType.REGISTER && "Уже нет аккаунт?"}
             </Text>
 
             <AppLink
               to={
-                type === AuthFormType.LOGIN
+                type === AuthType.LOGIN
                   ? ROUTER_PATH.REGISTER
                   : ROUTER_PATH.LOGIN
               }
               size={AppLinkSize.S}
             >
-              {type === AuthFormType.REGISTER && "Войти"}
-              {type === AuthFormType.LOGIN && "Регистрация"}
+              {type === AuthType.REGISTER && "Войти"}
+              {type === AuthType.LOGIN && "Регистрация"}
             </AppLink>
           </div>
         </div>
