@@ -10,6 +10,7 @@
     "build": "tsc && vite build && echo '/* /index.html  200' | cat >dist/_redirects ",
     "lint": "concurrently \"yarn lint:ts\" \"yarn lint:style\"",
     "lint:ts": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix",
+    "lint:prettier": "prettier --write ./src",
     "lint:style": "stylelint src/**/*.scss --fix",
     "preview": "vite preview"
   },
