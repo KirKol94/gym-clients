@@ -1,4 +1,10 @@
 
+@mixin size($width, $height, $font) {
+    width: #{$width}px;
+    height: #{$height}px;
+    font-size: #{$font}px;
+}
+
 .counter {
     display: flex;
     align-items: center;
@@ -7,14 +13,10 @@
     border-radius: 50%;
 
     &__s {
-        width: 20px;
-        height: 20px;
-        font-size: 12px;
+        @include size(20, 20, 12);
     }
 
     &__m {
-        width: 40px;
-        height: 40px;
-        font-size: 20px;
+        @include size(40, 40, 20);
     }
 }

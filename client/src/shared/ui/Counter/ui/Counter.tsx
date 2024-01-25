@@ -1,6 +1,5 @@
 import cx from "classix";
 
-import { Text } from "../../Text";
 import { CounterSize } from "../model/types/counter";
 
 import classes from "./Counter.module.scss";
@@ -18,6 +17,6 @@ export const Counter = ({ count, size }: CounterProps) => {
         size === CounterSize.M && classes.counter__m
     )
 
-    return <Text className={cls}>{count}</Text>
+    return <span className={cls}>{count}</span>
 }
  
