@@ -1,0 +1,28 @@
+import { Button, ButtonSize } from "@/shared/ui/Button";
+import { Counter, CounterSize } from "@/shared/ui/Counter";
+import { Text, TextSize } from "@/shared/ui/Text";
+import { Title, TitleSize } from "@/shared/ui/Title";
+
+import classes from "./AlertCard.module.scss";
+
+interface AlertInfo {
+    count: number,
+    title: string,
+    alert: string
+}
+
+export const AlertCard = ({ count, title, alert }: AlertInfo) => {
+    return ( 
+        <div className={classes.wrapper}>
+            <div className={classes.header}>
+                <Counter size={CounterSize.M} count={count} />
+                <Title size={TitleSize.XL}>{title}</Title>
+            </div>
+            <div className={classes.footer}>
+                <Button size={ButtonSize.S}>Обработать</Button>
+                <Text size={TextSize.S}>{alert}</Text>
+            </div>
+        </div>
+     );
+}
+ 
