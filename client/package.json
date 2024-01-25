@@ -24,6 +24,7 @@
     "react-router-dom": "^6.21.3"
   },
   "devDependencies": {
+    "@storybook/addon-backgrounds": "^7.6.10",
     "@storybook/addon-essentials": "^7.6.10",
     "@storybook/addon-interactions": "^7.6.10",
     "@storybook/addon-links": "^7.6.10",

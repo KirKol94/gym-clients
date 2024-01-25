@@ -4,12 +4,11 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from './Button.tsx';
 
 const meta = {
-  title: 'Example/Button',
+  title: 'Shared/Button',
   component: Button,
   parameters: {
     layout: 'centered',
   },
-  tags: ['autodocs'],
   argTypes: {
   },
 } satisfies Meta<typeof Button>;
