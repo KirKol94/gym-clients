@@ -1,5 +1,5 @@
 
-.right-arrow-button {
+.arrow {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -7,7 +7,7 @@
     height: 40px;
     border: 2px solid var(--color-primary-90);
     border-radius: 50%;
-    transition: background-color 0.2s ease;
+    transition: background-color var(-transition-delay-fast) ease;
     
     &:hover {
         background-color: rgba(#3f8cff, 0.1);
@@ -15,5 +15,17 @@
 
     &:active {
         background-color: transparent;
+    }
+
+    &__u {
+        transform: rotate(-90deg);
+    }
+
+    &__b {
+        transform: rotate(90deg);
+    }
+
+    &__l {
+        transform: rotate(-180deg);
     }
 }
