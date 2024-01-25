@@ -1,0 +1,19 @@
+
+.right-arrow-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--color-primary-90);
+    border-radius: 50%;
+    transition: background-color 0.2s ease;
+    
+    &:hover {
+        background-color: rgba(#3f8cff, 0.1);
+    }
+
+    &:active {
+        background-color: transparent;
+    }
+}
