@@ -1,22 +1,24 @@
 package ru.castroy10.backend.model;
 
+
 import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Table(name="role",
+@Data
+@Table(name = "abonement_type",
         uniqueConstraints = {
                 @UniqueConstraint(
-                        name = "role_role_name_key",
-                        columnNames = "role_name"
+                        name = "abonement_type_type_key",
+                        columnNames = "type"
                 )
         })
-@Data
-public class Role {
+public class AbonementType {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "role_name")
-    private String roleName;
+    @Column(name = "type")
+    private String type;
 }

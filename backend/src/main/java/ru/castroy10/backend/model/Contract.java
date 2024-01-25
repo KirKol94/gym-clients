@@ -19,4 +19,7 @@ public class Contract {
     @ManyToOne
     @JoinColumn(name = "abonement_id")
     private Abonement abonement;
+    @ManyToOne
+    @JoinColumn(name = "status_id")
+    private ContractStatus contractStatus;
 }

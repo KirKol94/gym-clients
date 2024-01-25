@@ -4,19 +4,19 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Table(name="role",
+@Data
+@Table(name ="contract_status",
         uniqueConstraints = {
                 @UniqueConstraint(
-                        name = "role_role_name_key",
-                        columnNames = "role_name"
+                        name = "contract_status_status_key",
+                        columnNames = "status"
                 )
         })
-@Data
-public class Role {
+public class ContractStatus {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "role_name")
-    private String roleName;
+    @Column(name = "status")
+    private String status;
 }

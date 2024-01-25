@@ -4,19 +4,21 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Table(name="role",
+@Data
+@Table(name = "other_product",
         uniqueConstraints = {
                 @UniqueConstraint(
-                        name = "role_role_name_key",
-                        columnNames = "role_name"
+                        name = "other_product_name_key",
+                        columnNames = "name"
                 )
         })
-@Data
-public class Role {
+public class OtherProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "role_name")
-    private String roleName;
+    @Column(name = "name")
+    private String name;
+    @Column(name = "price")
+    private int price;
 }

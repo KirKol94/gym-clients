@@ -7,8 +7,8 @@ import java.time.LocalDate;
 
 @Entity
 @Data
-@Table(name="client")
-public class Client {
+@Table(name = "trainee")
+public class Trainee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -19,12 +19,8 @@ public class Client {
     private String firstName;
     @Column(name = "middle_name")
     private String middleName;
-    @Column(name = "birthday")
-    private LocalDate birthday;
     @Column(name = "sex")
     private int sex;
-    @Column(name = "personal_training_count")
-    private int personalTrainingCount;
     @Column(name = "email")
     private String email;
     @Column(name = "mobile_phone")

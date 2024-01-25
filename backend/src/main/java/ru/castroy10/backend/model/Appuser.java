@@ -6,7 +6,13 @@ import lombok.Data;
 import java.util.Set;
 
 @Entity
-@Table(name="appuser")
+@Table(name="appuser",
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "appuser_username_key",
+                        columnNames = "username"
+                )
+        })
 @Data
 public class Appuser {
     @Id
@@ -23,6 +29,8 @@ public class Appuser {
     private String username;
     @Column(name = "password")
     private String password;
+    @Column(name = "email")
+    private String email;
     @Column(name = "account_nonexpired")
     private boolean accountNonExpired;
     @Column(name = "account_nonlocked")

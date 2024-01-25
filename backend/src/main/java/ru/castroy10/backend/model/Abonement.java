@@ -1,23 +1,35 @@
 package ru.castroy10.backend.model;
 
+
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
-@Table(name="abonement")
 @Data
+@Table(name="abonement")
 public class Abonement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
     @Column(name = "date_created")
-    private LocalDateTime dateCreated;
+    private LocalDate dateCreated;
     @Column(name = "date_experied")
-    private LocalDateTime dateExperied;
+    private LocalDate dateExpired;
+    @Column(name = "price")
+    private int price;
+    @Column(name = "is_active")
+    private boolean isActive;
+    @Column(name = "is_frozen")
+    private boolean isFrozen;
+    @Column(name = "date_frozen")
+    private LocalDate dateFrozen;
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;
+    @ManyToOne
+    @JoinColumn (name = "type_id")
+    private AbonementType abonementType;
 }
