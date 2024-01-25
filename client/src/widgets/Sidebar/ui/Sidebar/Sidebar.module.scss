@@ -1,20 +1,18 @@
 .sidebar {
   display: flex;
-  grid-area: "sidebar";
-
   flex-direction: column;
   align-items: center;
   width: 230px;
-  background: var(--color-white);
-  padding: 20px 0;
-  border-radius: 24px;
   min-height: 100%;
+  padding: 20px 0;
+  background: var(--color-white);
+  border-radius: 24px;
 
   .logo__wrapper {
-    display: flex;
     position: relative;
-    justify-content: center;
+    display: flex;
     align-items: center;
+    justify-content: center;
     width: 100%;
 
     .back {
@@ -25,8 +23,10 @@
       justify-content: center;
       width: 25px;
       height: 25px;
+      cursor: pointer;
       background: #3f8cff;
       border-radius: 50%;
+
       img {
         margin-right: 2px;
       }
@@ -37,8 +37,9 @@
     display: flex;
     flex-direction: column;
     row-gap: 20px;
-    margin-top: 40px;
+    align-items: center;
     width: 100%;
+    margin-top: 40px;
 
     .cards__wrapper {
       display: flex;

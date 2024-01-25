@@ -1,32 +1,33 @@
 .card {
   display: flex;
-  align-items: center;
-  height: 45px;
   column-gap: 10px;
+  align-items: center;
+  width: 200px;
+  height: 45px;
   padding: 0 5px;
-  user-select: none;
   cursor: pointer;
+  user-select: none;
 }
 
 .active {
   display: flex;
-  align-items: center;
-  height: 45px;
   column-gap: 10px;
-  padding: 0 5px;
+  align-items: center;
   width: 200px;
-  border-radius: 10px;
-  background: #3f8cff26;
+  height: 45px;
+  padding: 0 5px;
   cursor: pointer;
   user-select: none;
+  background: var(--color-light-blue);
+  border-radius: 10px;
 }
 
-// .stick {
-//   display: block;
-//   position: absolute;
-//   right: 0;
-//   width: 4px;
-//   height: 45px;
-//   background: #3f8cff;
-//   border-radius: 10px;
+// .stick {positionposition
+//   right: 0;rightrightrightrightright
+//   width: 4px;widthwidthwidthdisplaydisplay
+//   position: absolute;positionpositionpositionwidthwidth
+//   height: 45px;heightheightheightheightheight
+//   background: #3f8cff;backgroundbackgroundbackgroundbackgroundbackground
+//   border-radius: 10px;border-radiusborder-radiusborder-radius
+//   display: block;displaydisplaydisplayborder-radiusborder-radius
 // }

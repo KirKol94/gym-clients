@@ -1,0 +1,9 @@
+.content {
+  display: grid;
+  grid-template-columns: 230px 1fr;
+  gap: 0 35px;
+
+  .main {
+    width: 100%;
+  }
+}

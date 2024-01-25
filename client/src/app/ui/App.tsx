@@ -11,8 +11,9 @@ import "../styles/index.scss";
 
 const AuthPage = lazy(() => import("@/pages/AuthPage"));
 const Layout = lazy(() => import("@/pages/Layout"));
-const HomePage = lazy(() => import("@/pages/HomePage"));
+
 const NotFoundPage = lazy(() => import("@/pages/NotFoundPage"));
+const ProfilePage = lazy(() => import("@/pages/ProfilePage"));
 
 export const App = () => {
   const dispatch = useAppDispatch();
@@ -24,15 +25,25 @@ export const App = () => {
   return (
     <Routes>
       <Route
-        index
+        path={ROUTER_PATH.HOME}
         element={
           <Suspense fallback={<Loader />}>
-            <Layout>
-              <HomePage />
-            </Layout>
+            <Layout />
           </Suspense>
         }
-      />
+      >
+        <Route
+          index
+          path={ROUTER_PATH.PROFILE}
+          element={<Suspense fallback={<Loader />}>{<ProfilePage />}</Suspense>}
+        />
+        <Route
+          index
+          path={ROUTER_PATH.USERS}
+          element={<Suspense fallback={<Loader />}>{<>userpage</>}</Suspense>}
+        />
+      </Route>
+
       <Route
         path={ROUTER_PATH.LOGIN}
         element={
