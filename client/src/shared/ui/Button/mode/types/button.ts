@@ -1,4 +1,4 @@
 export enum ButtonSize {
-   S = "s",
-   M = "m"
+  S = 's',
+  M = 'm',
 }

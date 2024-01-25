@@ -1,24 +1,24 @@
-import { lazy, Suspense, useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
+import { lazy, Suspense, useEffect } from 'react'
+import { Route, Routes } from 'react-router-dom'
 
-import { userActions } from "@/entities/User";
-import { AuthType } from "@/features/AuthForm";
-import { ROUTER_PATH } from "@/shared/const/path/PATH";
-import { useAppDispatch } from "@/shared/hooks";
-import { Loader } from "@/shared/ui/Loader";
+import { userActions } from '@/entities/User'
+import { AuthType } from '@/features/AuthForm'
+import { ROUTER_PATH } from '@/shared/const/path/PATH'
+import { useAppDispatch } from '@/shared/hooks'
+import { Loader } from '@/shared/ui/Loader'
 
-import "../styles/index.scss";
+import '../styles/index.scss'
 
-const AuthPage = lazy(() => import("@/pages/AuthPage"));
-const HomePage = lazy(() => import("@/pages/HomePage"));
-const NotFoundPage = lazy(() => import("@/pages/NotFoundPage"));
+const AuthPage = lazy(() => import('@/pages/AuthPage'))
+const HomePage = lazy(() => import('@/pages/HomePage'))
+const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'))
 
 export const App = () => {
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(userActions.initAuthData());
-  }, [dispatch]);
+    dispatch(userActions.initAuthData())
+  }, [dispatch])
 
   return (
     <Routes>
@@ -48,5 +48,5 @@ export const App = () => {
       />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
-  );
-};
+  )
+}

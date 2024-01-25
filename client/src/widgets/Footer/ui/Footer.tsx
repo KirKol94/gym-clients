@@ -1,19 +1,19 @@
-import { AppLink, AppLinkSize } from "@/shared/ui/AppLink";
-import { Text, TextSize } from "@/shared/ui/Text";
+import { AppLink, AppLinkSize } from '@/shared/ui/AppLink'
+import { Text, TextSize } from '@/shared/ui/Text'
 
-import classes from "./Footer.module.scss";
+import classes from './Footer.module.scss'
 
 export const Footer = () => {
   const data = [
     {
-      title: "Техподдержка",
-      link: "#",
+      title: 'Техподдержка',
+      link: '#',
     },
     {
-      title: "Построено на OpenCRM",
-      link: "#",
+      title: 'Построено на OpenCRM',
+      link: '#',
     },
-  ];
+  ]
 
   return (
     <div className={classes.footer}>
@@ -26,7 +26,7 @@ export const Footer = () => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

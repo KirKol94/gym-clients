@@ -1,15 +1,15 @@
-import cx from "classix";
+import cx from 'classix'
 
-import { ROUTER_PATH } from "@/shared/const/path/PATH";
-import { AppLink, AppLinkSize } from "@/shared/ui/AppLink";
-import { Title, TitleSize } from "@/shared/ui/Title";
+import { ROUTER_PATH } from '@/shared/const/path/PATH'
+import { AppLink, AppLinkSize } from '@/shared/ui/AppLink'
+import { Title, TitleSize } from '@/shared/ui/Title'
 
-import NotFoundImg from "../assets/image/notfound.svg?react";
+import NotFoundImg from '../assets/image/notfound.svg?react'
 
-import classes from "./NotFoundPage.module.scss";
+import classes from './NotFoundPage.module.scss'
 
 export const NotFoundPage = () => {
-  const className = cx("notfound__container", classes.page);
+  const className = cx('notfound__container', classes.page)
 
   return (
     <div className={className}>
@@ -23,5 +23,5 @@ export const NotFoundPage = () => {
         </AppLink>
       </div>
     </div>
-  );
-};
+  )
+}
