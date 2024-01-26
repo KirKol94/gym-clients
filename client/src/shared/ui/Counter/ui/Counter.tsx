@@ -1,6 +1,6 @@
 import cx from 'classix'
 
-import { CounterColor, CounterSize } from '..'
+import { CounterColor, CounterSize } from '../model/types/counter'
 
 import classes from './Counter.module.scss'
 
