@@ -10,7 +10,7 @@ interface SettingsButtonProps {
 
 export const SettingsButton = ({ icon, title }: SettingsButtonProps) => {
   return (
-    <button className={classes.wrapper}>
+    <button className={classes['settings-button']}>
       <IconWithTitle icon={icon} title={title} size={IconWithTitleSize.S} />
     </button>
   )
