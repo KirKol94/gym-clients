@@ -1,2 +1,2 @@
 export { Counter } from './ui/Counter'
-export { CounterSize } from './model/types/counter'
+export { CounterSize, CounterColor } from './model/types/counter'
