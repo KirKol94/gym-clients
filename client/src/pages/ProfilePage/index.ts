@@ -1,2 +1,2 @@
-import { ProfilePage } from "./ui/ProfilePage";
-export default ProfilePage;
+import { ProfilePage } from './ui/ProfilePage'
+export default ProfilePage
