@@ -1,35 +1,36 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import cx from "classix";
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import cx from 'classix'
 
-import { getIsAuth } from "@/entities/User";
-import { ROUTER_PATH } from "@/shared/const/path/PATH";
-import { useAppSelector } from "@/shared/hooks";
-import { AlertCard } from "@/widgets/AlertCard";
-import { Footer } from "@/widgets/Footer";
+import { getIsAuth } from '@/entities/User'
+import { ROUTER_PATH } from '@/shared/const/path/PATH'
+import { useAppSelector } from '@/shared/hooks'
+import { AlertCard } from '@/widgets/AlertCard'
+import { Footer } from '@/widgets/Footer'
 
 export const HomePage = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  const isAuth = useAppSelector(getIsAuth);
+  const isAuth = useAppSelector(getIsAuth)
 
-  const className = cx("home__container");
+  const className = cx('home__container')
 
   useEffect(() => {
     if (!isAuth) {
-      navigate(ROUTER_PATH.LOGIN);
+      navigate(ROUTER_PATH.LOGIN)
     }
-  }, [isAuth, navigate]);
+  }, [isAuth, navigate])
 
   return (
     <div className={className}>
-      <AlertCard count={0} 
-            title="Контрагента ожидают в стадии “Подписание контракта”"
-            alert="Подпишите контракты с контрагентами или переведите их в архивные"
-            />
+      <AlertCard
+        count={0}
+        title="Контрагента ожидают в стадии “Подписание контракта”"
+        alert="Подпишите контракты с контрагентами или переведите их в архивные"
+      />
       <Footer />
     </div>
-  );
-};
+  )
+}
 
-export default HomePage;
+export default HomePage

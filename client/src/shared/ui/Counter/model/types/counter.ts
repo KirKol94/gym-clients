@@ -1,4 +1,4 @@
 export enum CounterSize {
-    S = "s",
-    M = "m"
+  S = 's',
+  M = 'm',
 }
