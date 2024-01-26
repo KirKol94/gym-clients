@@ -15,14 +15,7 @@ import SidebarItem from '../SidebarItem/SidebarItem'
 
 import classes from './Sidebar.module.scss'
 
-// для будующих пропсов?
-interface UserProps {
-  title: string
-  link: string
-  to: string
-}
-
-const user: UserProps = { title: 'Иван Иванов', link: Avatar, to: '/' }
+const user = { title: 'Иван Иванов', link: Avatar, to: '/' }
 
 const sidebarItems = [
   {

@@ -1,14 +1,10 @@
-.card {
+.wrapper {
   display: flex;
-  column-gap: 10px;
-  align-items: center;
-  width: 200px;
-  height: 45px;
-  padding: 0 5px;
-  cursor: pointer;
-  user-select: none;
+  position: relative;
+  width: 100%;
+  justify-content: center;
 
-  &__active {
+  .card {
     display: flex;
     column-gap: 10px;
     align-items: center;
@@ -17,7 +13,27 @@
     padding: 0 5px;
     cursor: pointer;
     user-select: none;
-    background: var(--color-light-blue);
-    border-radius: 10px;
+
+    &__active {
+      display: flex;
+      column-gap: 10px;
+      align-items: center;
+      width: 200px;
+      height: 45px;
+      padding: 0 5px;
+      cursor: pointer;
+      user-select: none;
+      background: var(--color-light-blue);
+      border-radius: 10px;
+    }
+  }
+
+  .background {
+    position: absolute;
+    right: 0;
+    width: 4px;
+    height: 100%;
+    border-radius: 15px;
+    background: var(--color-primary-90);
   }
 }

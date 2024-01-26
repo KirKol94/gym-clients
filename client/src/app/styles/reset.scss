@@ -14,6 +14,7 @@
 /* Links */
 
 a {
+  color: inherit;
   text-decoration: none;
 }
 
@@ -75,7 +76,7 @@ input::-ms-clear {
 }
 
 button,
-input[type="submit"] {
+input[type='submit'] {
   display: inline-block;
   cursor: pointer;
   background: none;

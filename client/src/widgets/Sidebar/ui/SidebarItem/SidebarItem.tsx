@@ -11,9 +11,10 @@ interface SidebarItemProps {
 
 const SidebarItem = ({ data, active, setActive }: SidebarItemProps) => {
   const navigate = useNavigate()
-
   const { title, link, to } = data
-  const className = cx(active === title ? classes.card__active : classes.card)
+
+  const cardClass = cx(active === title ? classes.card__active : classes.card)
+  const bgClass = cx(active === title && classes.background)
 
   const handeleClick = () => {
     setActive(title)
@@ -21,10 +22,13 @@ const SidebarItem = ({ data, active, setActive }: SidebarItemProps) => {
   }
 
   return (
-    <li className={className} onClick={handeleClick}>
-      <img src={link} alt={title} />
-      <p>{title}</p>
-    </li>
+    <div className={classes.wrapper}>
+      <li className={cardClass} onClick={handeleClick}>
+        <img src={link} alt={title} />
+        <p>{title}</p>
+      </li>
+      <div className={bgClass} />
+    </div>
   )
 }
 
