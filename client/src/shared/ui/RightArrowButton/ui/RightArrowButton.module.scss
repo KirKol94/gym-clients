@@ -17,15 +17,15 @@
         background-color: transparent;
     }
 
-    &__u {
+    &__up {
         transform: rotate(-90deg);
     }
 
-    &__b {
+    &__down {
         transform: rotate(90deg);
     }
 
-    &__l {
+    &__left {
         transform: rotate(-180deg);
     }
 }

@@ -12,9 +12,9 @@ interface RightArrowButtonInfo {
 export const RightArrowButton = ({ direction }: RightArrowButtonInfo) => {
   const cls = cx(
     classes.arrow,
-    direction === RightArrowButtonDirection.U && classes.arrow__u,
-    direction === RightArrowButtonDirection.B && classes.arrow__b,
-    direction === RightArrowButtonDirection.L && classes.arrow__l,
+    direction === RightArrowButtonDirection.UP && classes.arrow__up,
+    direction === RightArrowButtonDirection.DOWN && classes.arrow__down,
+    direction === RightArrowButtonDirection.LEFT && classes.arrow__left,
   )
 
   return (

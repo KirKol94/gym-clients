@@ -1,5 +1,5 @@
 export enum RightArrowButtonDirection {
-  U = 'u',
-  B = 'b',
-  L = 'l',
+  UP = 'up',
+  DOWN = 'down',
+  LEFT = 'left',
 }

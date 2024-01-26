@@ -9,7 +9,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--color-counter-bg);
     border-radius: 50%;
 
     &__s {
@@ -18,5 +17,13 @@
 
     &__m {
         @include size(40, 40, 20);
+    }
+
+    &__white {
+        background: var(--color-counter-bg);
+    }
+    
+    &__yellow {
+        background: var(--color-counter-yellow-bg);
     }
 }
