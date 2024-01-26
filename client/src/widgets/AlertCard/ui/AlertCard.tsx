@@ -1,5 +1,6 @@
 import { Button, ButtonSize } from '@/shared/ui/Button'
 import { Counter, CounterSize } from '@/shared/ui/Counter'
+import { CounterColor } from '@/shared/ui/Counter/model/types/counter'
 import { Text, TextSize } from '@/shared/ui/Text'
 import { Title, TitleSize } from '@/shared/ui/Title'
 
@@ -15,7 +16,7 @@ export const AlertCard = ({ count, title, alert }: AlertInfo) => {
   return (
     <div className={classes.wrapper}>
       <div className={classes.header}>
-        <Counter size={CounterSize.M} count={count} />
+        <Counter size={CounterSize.M} count={count} color={CounterColor.WHITE} />
         <Title size={TitleSize.XL}>{title}</Title>
       </div>
       <div className={classes.footer}>
