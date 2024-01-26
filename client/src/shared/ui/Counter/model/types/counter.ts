@@ -7,3 +7,4 @@ export enum CounterColor {
   WHITE = 'white',
   YELLOW = 'yellow',
 }
+
