@@ -7,27 +7,17 @@
   padding: 0 5px;
   cursor: pointer;
   user-select: none;
-}
 
-.active {
-  display: flex;
-  column-gap: 10px;
-  align-items: center;
-  width: 200px;
-  height: 45px;
-  padding: 0 5px;
-  cursor: pointer;
-  user-select: none;
-  background: var(--color-light-blue);
-  border-radius: 10px;
+  &__active {
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
+    width: 200px;
+    height: 45px;
+    padding: 0 5px;
+    cursor: pointer;
+    user-select: none;
+    background: var(--color-light-blue);
+    border-radius: 10px;
+  }
 }
-
-// .stick {positionposition
-//   right: 0;rightrightrightrightright
-//   width: 4px;widthwidthwidthdisplaydisplay
-//   position: absolute;positionpositionpositionwidthwidth
-//   height: 45px;heightheightheightheightheight
-//   background: #3f8cff;backgroundbackgroundbackgroundbackgroundbackground
-//   border-radius: 10px;border-radiusborder-radiusborder-radius
-//   display: block;displaydisplaydisplayborder-radiusborder-radius
-// }

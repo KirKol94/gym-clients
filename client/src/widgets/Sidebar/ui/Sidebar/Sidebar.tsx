@@ -1,68 +1,69 @@
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 
-import Agent from "../../assets/image/Agent.svg";
-import Avatar from "../../assets/image/Avatar.svg";
-import BackArrow from "../../assets/image/Back.svg";
-import Contract from "../../assets/image/Contract.svg";
-import Deals from "../../assets/image/Deals.svg";
-import Group from "../../assets/image/Group.svg";
-import Logo from "../../assets/image/Logo.svg";
-import Setting from "../../assets/image/Settings.svg";
-import Users from "../../assets/image/Users.svg";
-import SidebarItem from "../SidebarItem/SidebarItem";
+import Agent from '@/shared/assets/icons/Agent.svg'
+import Avatar from '@/shared/assets/icons/Avatar.svg'
+import BackArrow from '@/shared/assets/icons/Back.svg'
+import Contract from '@/shared/assets/icons/Contract.svg'
+import Deals from '@/shared/assets/icons/Deals.svg'
+import Group from '@/shared/assets/icons/Group.svg'
+import Setting from '@/shared/assets/icons/Settings.svg'
+import Users from '@/shared/assets/icons/Users.svg'
+import Logo from '@/shared/assets/Logo.svg'
 
-import classes from "./Sidebar.module.scss";
+import SidebarItem from '../SidebarItem/SidebarItem'
+
+import classes from './Sidebar.module.scss'
 
 // для будующих пропсов?
 interface UserProps {
-  title: string;
-  link: string;
-  to: string;
+  title: string
+  link: string
+  to: string
 }
 
-const user: UserProps = { title: "Иван Иванов", link: Avatar, to: "/profile" };
+const user: UserProps = { title: 'Иван Иванов', link: Avatar, to: '/' }
 
-const sidebarArr = [
+const sidebarItems = [
   {
-    title: "Пользователи",
+    title: 'Пользователи',
     link: Users,
-    to: "/users",
+    to: '/users',
   },
   {
-    title: "Группы компаний",
+    title: 'Группы компаний',
     link: Group,
-    to: "/group",
+    to: '/group',
   },
   {
-    title: "Контрагенты",
+    title: 'Контрагенты',
     link: Agent,
-    to: "/agent",
+    to: '/agent',
   },
   {
-    title: "Контракты",
+    title: 'Контракты',
     link: Contract,
-    to: "/contract",
+    to: '/contract',
   },
   {
-    title: "Сделки",
+    title: 'Сделки',
     link: Deals,
-    to: "/deals",
+    to: '/deals',
   },
   {
-    title: "Настройки",
+    title: 'Настройки',
     link: Setting,
-    to: "/setting",
+    to: '/setting',
   },
-];
+]
 
 export const Sidebar = () => {
-  const location = useLocation();
-  const [active, setActive] = useState<string>("");
+  const location = useLocation()
+  const [active, setActive] = useState<string>('')
 
   useEffect(() => {
-    location.pathname === "/profile" && setActive(user.title);
-  }, [location.pathname]);
+    location.pathname === '/' && setActive(user.title)
+  }, [location.pathname])
 
   return (
     <aside className={classes.sidebar}>
@@ -76,16 +77,11 @@ export const Sidebar = () => {
       <nav className={classes.links__wrapper}>
         <SidebarItem data={user} setActive={setActive} active={active} />
         <ul className={classes.cards__wrapper}>
-          {sidebarArr.map((el, index) => (
-            <SidebarItem
-              data={el}
-              setActive={setActive}
-              active={active}
-              key={el.title + index}
-            />
+          {sidebarItems.map((el, index) => (
+            <SidebarItem data={el} setActive={setActive} active={active} key={el.title + index} />
           ))}
         </ul>
       </nav>
     </aside>
-  );
-};
+  )
+}
