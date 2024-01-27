@@ -49,4 +49,13 @@
     background: var(--color-primary-90);
     border-radius: 15px;
   }
+
+  .text {
+    color: var(--color-light-gray);
+
+    &__active {
+      font-weight: 500;
+      color: var(--color-light-gray);
+    }
+  }
 }
