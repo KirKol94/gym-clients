@@ -1,7 +1,10 @@
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { User } from '@/entities/User'
+import { ACCESS_TOKEN_LOCAL_STORAGE_KEY } from '@/shared/const/localStorage/accessTokenKey'
+import { IS_AUTH_LOCAL_STORAGE_KEY } from '@/shared/const/localStorage/isAuthKey'
+import { USER_LOCAL_STORAGE_KEY } from '@/shared/const/localStorage/userKey'
 import { ROUTER_PATH } from '@/shared/const/path/PATH'
 import { useAppDispatch } from '@/shared/hooks'
 import { AppLink, AppLinkSize } from '@/shared/ui/AppLink'
@@ -10,7 +13,7 @@ import { Input } from '@/shared/ui/Input'
 import { Text, TextSize } from '@/shared/ui/Text'
 import { Title, TitleSize } from '@/shared/ui/Title'
 
-import { fetchAuthUser } from '../model/services/authUser'
+import { useSendAuthData } from '../api/login.api'
 import { fetchRegisterUser } from '../model/services/registerUser'
 import { AuthType } from '../model/types/auth'
 
@@ -25,6 +28,7 @@ type FormData = Omit<User, 'id'> & { password: string }
 export const AuthForm = ({ type }: AuthFormProps) => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  const [sendAuthData, { data: resAuthData, status, isError: isAuthError }] = useSendAuthData()
 
   const [userData, setUserData] = useState<FormData>({
     email: '',
@@ -58,10 +62,26 @@ export const AuthForm = ({ type }: AuthFormProps) => {
 
   const handleLogin = async () => {
     const authData = { email: userData.email, password: userData.password }
-    const accessToken = await dispatch(fetchAuthUser(authData))
-    if (accessToken) {
-      navigate('/')
+    await sendAuthData(authData)
+  }
+
+  useEffect(() => {
+    if (status === 'fulfilled' && resAuthData.accessToken) {
+      localStorage.setItem(USER_LOCAL_STORAGE_KEY, JSON.stringify(resAuthData.user))
+      localStorage.setItem(ACCESS_TOKEN_LOCAL_STORAGE_KEY, JSON.stringify(resAuthData.accessToken))
+      localStorage.setItem(IS_AUTH_LOCAL_STORAGE_KEY, JSON.stringify(true))
+
+      navigate(ROUTER_PATH.HOME)
     }
+  }, [isAuthError, navigate, resAuthData, status])
+
+  if (isAuthError) {
+    return (
+      <>
+        <Title size={TitleSize.XL}>Проблема авторизации</Title>
+        <Text size={TextSize.M}>Обновите страниу и повторите снова</Text>
+      </>
+    )
   }
 
   return (

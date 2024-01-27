@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import { fetchAuthUser } from '../services/authUser'
 import { fetchRegisterUser } from '../services/registerUser'
 
 interface InitialState {
@@ -19,18 +18,6 @@ const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchAuthUser.pending, (state) => {
-        state.error = ''
-        state.isLoading = true
-      })
-      .addCase(fetchAuthUser.fulfilled, (state) => {
-        state.error = ''
-        state.isLoading = false
-      })
-      .addCase(fetchAuthUser.rejected, (state, action) => {
-        state.error = action.payload as string
-        state.isLoading = false
-      })
       .addCase(fetchRegisterUser.pending, (state) => {
         state.error = ''
         state.isLoading = true
