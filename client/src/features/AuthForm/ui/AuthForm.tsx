@@ -78,19 +78,10 @@ export const AuthForm = ({ type }: AuthFormProps) => {
     }
   }, [navigate, registerStatus, resRegisterData])
 
-  if (isRegisterError) {
+  if (isRegisterError || isAuthError) {
     return (
       <>
-        <Title size={TitleSize.XL}>Ошибка регистрации</Title>
-        <Text size={TextSize.M}>Обновите страниу и повторите снова</Text>
-      </>
-    )
-  }
-
-  if (isAuthError) {
-    return (
-      <>
-        <Title size={TitleSize.XL}>Проблема авторизации</Title>
+        <Title size={TitleSize.XL}>Ошибка {isAuthError ? 'авторизации' : 'регистрации'}</Title>
         <Text size={TextSize.M}>Обновите страниу и повторите снова</Text>
       </>
     )
