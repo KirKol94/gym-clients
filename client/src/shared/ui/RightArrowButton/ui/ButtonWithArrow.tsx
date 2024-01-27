@@ -1,7 +1,7 @@
 import cx from 'classix'
 
 import RightArrow from '../../../assets/icons/arrow.svg?react'
-import { ButtonWithArrowDirection } from '../model/types/rightArrowButton'
+import { ButtonWithArrowDirection } from '../model/types/buttonWithArrow'
 
 import classes from './RightArrowButton.module.scss'
 

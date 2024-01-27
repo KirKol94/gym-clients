@@ -1,2 +1,2 @@
 export { ButtonWithArrow } from './ui/ButtonWithArrow'
-export { ButtonWithArrowDirection } from './model/types/rightArrowButton'
+export { ButtonWithArrowDirection } from './model/types/buttonWithArrow'
