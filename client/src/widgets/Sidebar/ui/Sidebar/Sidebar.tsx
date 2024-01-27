@@ -10,6 +10,7 @@ import Group from '@/shared/assets/icons/Group.svg'
 import Setting from '@/shared/assets/icons/Settings.svg'
 import Users from '@/shared/assets/icons/Users.svg'
 import Logo from '@/shared/assets/Logo.svg'
+import LogoMini from '@/shared/assets/LogoMini.svg'
 
 import SidebarItem from '../SidebarItem/SidebarItem'
 
@@ -53,25 +54,29 @@ const sidebarItems = [
 export const Sidebar = () => {
   const location = useLocation()
   const [active, setActive] = useState<string>('')
+  const [open, setOpen] = useState(true)
 
   useEffect(() => {
     location.pathname === '/' && setActive(user.title)
   }, [location.pathname])
 
+  const handleClick = () => {
+    setOpen(!open)
+  }
   return (
-    <aside className={classes.sidebar}>
-      <div className={classes.logo__wrapper}>
-        <img src={Logo} alt="Логотип" />
+    <aside className={open ? classes.sidebar : classes.sidebar__active}>
+      <div onClick={handleClick} className={classes.logo__wrapper}>
+        <img src={open ? Logo : LogoMini} alt="Логотип" />
         <div className={classes.back}>
-          <img src={BackArrow} />
+          <img className={open ? classes.img : classes.img__active} src={BackArrow} />
         </div>
       </div>
 
       <nav className={classes.links__wrapper}>
-        <SidebarItem data={user} setActive={setActive} active={active} />
+        <SidebarItem data={user} setActive={setActive} active={active} open={open} />
         <ul className={classes.cards__wrapper}>
           {sidebarItems.map((el, index) => (
-            <SidebarItem data={el} setActive={setActive} active={active} key={el.title + index} />
+            <SidebarItem data={el} setActive={setActive} active={active} open={open} key={el.title + index} />
           ))}
         </ul>
       </nav>

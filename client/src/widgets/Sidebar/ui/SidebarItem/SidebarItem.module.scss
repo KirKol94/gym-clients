@@ -1,3 +1,14 @@
+@mixin card {
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
+  width: 200px;
+  height: 45px;
+  padding: 0 10px;
+  cursor: pointer;
+  user-select: none;
+}
+
 .wrapper {
   display: flex;
   position: relative;
@@ -5,24 +16,25 @@
   justify-content: center;
 
   .card {
-    display: flex;
-    column-gap: 10px;
-    align-items: center;
-    width: 200px;
-    height: 45px;
-    padding: 0 5px;
-    cursor: pointer;
-    user-select: none;
+    @include card;
 
     &__active {
-      display: flex;
-      column-gap: 10px;
-      align-items: center;
-      width: 200px;
-      height: 45px;
-      padding: 0 5px;
-      cursor: pointer;
-      user-select: none;
+      @include card;
+
+      background: var(--color-light-blue);
+      border-radius: 10px;
+    }
+  }
+
+  .card__close {
+    @include card;
+    width: 80px;
+    justify-content: center;
+
+    &__active {
+      @include card;
+      width: 50px;
+
       background: var(--color-light-blue);
       border-radius: 10px;
     }
