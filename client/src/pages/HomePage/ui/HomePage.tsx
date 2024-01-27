@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import cx from 'classix'
 
 import { getIsAuth } from '@/entities/User'
 import { ROUTER_PATH } from '@/shared/const/path/PATH'
@@ -14,8 +13,6 @@ export const HomePage = () => {
 
   const isAuth = useAppSelector(getIsAuth)
 
-  const className = cx('home__container')
-
   useEffect(() => {
     if (!isAuth) {
       navigate(ROUTER_PATH.LOGIN)
@@ -23,7 +20,7 @@ export const HomePage = () => {
   }, [isAuth, navigate])
 
   return (
-    <div className={className}>
+    <div>
       <AlertCard
         count={0}
         title="Контрагента ожидают в стадии “Подписание контракта”"
@@ -34,5 +31,3 @@ export const HomePage = () => {
     </div>
   )
 }
-
-export default HomePage
