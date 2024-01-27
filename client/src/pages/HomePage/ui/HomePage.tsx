@@ -5,6 +5,7 @@ import cx from 'classix'
 import { getIsAuth } from '@/entities/User'
 import { ROUTER_PATH } from '@/shared/const/path/PATH'
 import { useAppSelector } from '@/shared/hooks'
+import { ButtonWithArrow } from '@/shared/ui/ButtonWithArrow'
 import { AlertCard } from '@/widgets/AlertCard'
 import { Footer } from '@/widgets/Footer'
 
@@ -28,6 +29,7 @@ export const HomePage = () => {
         title="Контрагента ожидают в стадии “Подписание контракта”"
         alert="Подпишите контракты с контрагентами или переведите их в архивные"
       />
+      <ButtonWithArrow />
       <Footer />
     </div>
   )
