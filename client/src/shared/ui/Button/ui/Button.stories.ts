@@ -1,5 +1,6 @@
-import {ButtonSize} from "../mode/types/button.ts";
 import type { Meta, StoryObj } from '@storybook/react';
+
+import {ButtonSize} from "../mode/types/button.ts";
 
 import { Button } from './Button.tsx';
 

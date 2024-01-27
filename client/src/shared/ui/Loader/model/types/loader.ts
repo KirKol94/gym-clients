@@ -4,5 +4,6 @@ export enum LoaderSize {
 }
 
 export enum LoaderColor {
-    WHITE = "White"
+    WHITE = "White",
+    BLUE = "Blue"
 }
