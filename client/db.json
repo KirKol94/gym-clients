@@ -1,12 +1,3 @@
 {
-  "users": [
-    {
-      "email": "kokos@mail.ru",
-      "password": "$2a$10$gG653uoNQvM.l3A3p3/Qv.e/HPpzjqd9OLV.ZjsW3hyAvagdZCmy.",
-      "name": "sss",
-      "surname": "aboba",
-      "patronymic": "sss",
-      "id": 1
-    }
-  ]
+  "users": []
 }
