@@ -1,5 +1,4 @@
-import { IconWithTitleSize } from '../../IconWithTitle/models/types/iconWithTitle'
-import { IconWithTitle } from '../../IconWithTitle/ui/IconWithTitle'
+import { IconWithTitle, IconWithTitleSize } from '../../IconWithTitle'
 
 import classes from './SettingsButton.module.scss'
 
