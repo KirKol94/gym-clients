@@ -12,7 +12,7 @@ import Users from '@/shared/assets/icons/Users.svg'
 import Logo from '@/shared/assets/Logo.svg'
 import LogoMini from '@/shared/assets/LogoMini.svg'
 
-import SidebarItem from '../SidebarItem/SidebarItem'
+import { SidebarItem } from '../../SidebarItem'
 
 import classes from './Sidebar.module.scss'
 

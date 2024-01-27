@@ -1,4 +1,4 @@
-@mixin backBlock {
+@mixin back {
   position: absolute;
   right: -11px;
   display: flex;
@@ -11,7 +11,7 @@
   border-radius: 50%;
 }
 
-@mixin sidebarBlock {
+@mixin sidebar {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -23,9 +23,11 @@
 }
 
 .sidebar {
-  @include sidebarBlock;
+  @include sidebar;
+
   &__active {
-    @include sidebarBlock;
+    @include sidebar;
+
     width: 75px;
   }
 }
@@ -38,13 +40,14 @@
   width: 100%;
 
   .back {
-    @include backBlock;
+    @include back;
+
     .img {
       margin-right: 2px;
 
       &__active {
-        transform: scaleX(-1);
         margin-left: 2px;
+        transform: scaleX(-1);
       }
     }
   }
@@ -60,8 +63,8 @@
 
   .cards__wrapper {
     display: flex;
-    width: 100%;
     flex-direction: column;
     row-gap: 6px;
+    width: 100%;
   }
 }

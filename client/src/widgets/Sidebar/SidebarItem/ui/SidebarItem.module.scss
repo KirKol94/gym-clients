@@ -10,10 +10,10 @@
 }
 
 .wrapper {
-  display: flex;
   position: relative;
-  width: 100%;
+  display: flex;
   justify-content: center;
+  width: 100%;
 
   .card {
     @include card;
@@ -28,13 +28,14 @@
 
   .card__close {
     @include card;
-    width: 80px;
+
     justify-content: center;
+    width: 80px;
 
     &__active {
       @include card;
-      width: 50px;
 
+      width: 50px;
       background: var(--color-light-blue);
       border-radius: 10px;
     }
@@ -45,7 +46,7 @@
     right: 0;
     width: 4px;
     height: 100%;
-    border-radius: 15px;
     background: var(--color-primary-90);
+    border-radius: 15px;
   }
 }

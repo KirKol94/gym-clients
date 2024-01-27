@@ -10,7 +10,7 @@ import { Loader } from '@/shared/ui/Loader'
 import '../styles/index.scss'
 
 const AuthPage = lazy(() => import('@/pages/AuthPage'))
-const Layout = lazy(() => import('@/app/layout'))
+const Layout = lazy(() => import('@/widgets/Layout'))
 
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'))
 const ProfilePage = lazy(() => import('@/pages/ProfilePage'))

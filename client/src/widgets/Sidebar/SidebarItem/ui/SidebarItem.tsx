@@ -10,7 +10,7 @@ interface SidebarItemProps {
   open: boolean
 }
 
-const SidebarItem = ({ data, active, setActive, open }: SidebarItemProps) => {
+export const SidebarItem = ({ data, active, setActive, open }: SidebarItemProps) => {
   const navigate = useNavigate()
   const { title, link, to } = data
 
@@ -35,5 +35,3 @@ const SidebarItem = ({ data, active, setActive, open }: SidebarItemProps) => {
     </div>
   )
 }
-
-export default SidebarItem
