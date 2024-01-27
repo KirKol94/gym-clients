@@ -2,7 +2,7 @@ import { ButtonWithArrow } from '@/shared/ui/ButtonWithArrow'
 import { CounterColor } from '@/shared/ui/Counter'
 import { IconWithTitle, IconWithTitleSize } from '@/shared/ui/IconWithTitle'
 
-import { CounterRow } from '..'
+import { CounterRow } from './CounterRow'
 
 import classes from './EntityCard.module.scss'
 

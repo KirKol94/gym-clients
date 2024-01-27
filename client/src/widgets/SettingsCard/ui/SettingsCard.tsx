@@ -1,10 +1,10 @@
 import { IconWithTitle, IconWithTitleSize } from '@/shared/ui/IconWithTitle'
 import { SettingsButton } from '@/shared/ui/SettingsButton'
 
-import additionalFields from '../../../shared/assets/icons/additionalFields.svg'
-import rightsAndRoles from '../../../shared/assets/icons/rightsAndRoles.svg'
-import settings from '../../../shared/assets/icons/settings.svg'
-import transactionStatuses from '../../../shared/assets/icons/transactionStatuses.svg'
+import additionalFields from '../../../shared/assets/icons/additionalFields.svg?react'
+import rightsAndRoles from '../../../shared/assets/icons/rightsAndRoles.svg?react'
+import settings from '../../../shared/assets/icons/settings.svg?react'
+import transactionStatuses from '../../../shared/assets/icons/transactionStatuses.svg?react'
 
 import classes from './SettingsCard.module.scss'
 
