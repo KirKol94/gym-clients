@@ -1,0 +1,26 @@
+
+@mixin sizes($gap, $font-s, $font-w, $height, $width) {
+    gap: #{$gap}px;
+        font-size: #{$font-s}px;
+        font-weight: $font-w;
+
+        img {
+            width: #{$width}px;
+            height: #{$height}px;
+        }
+}
+
+.icon-with-title {
+    display: flex;
+    align-items: center;
+
+    &__s {
+        @include sizes(5, 12, 400, 16, 16);
+    }
+
+    &__m {
+        text-transform: uppercase;
+
+        @include sizes(10, 18, 500, 40, 40);
+    }
+}
