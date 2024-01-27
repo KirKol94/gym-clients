@@ -1,7 +1,7 @@
 import { Counter, CounterColor, CounterSize } from '@/shared/ui/Counter'
 import { IconWithTitleSize } from '@/shared/ui/IconWithTitle/models/types/iconWithTitle'
 import { IconWithTitle } from '@/shared/ui/IconWithTitle/ui/IconWithTitle'
-import { RightArrowButton } from '@/shared/ui/RightArrowButton'
+import { ButtonWithArrow } from '@/shared/ui/RightArrowButton'
 import { Text, TextSize } from '@/shared/ui/Text'
 
 import classes from './EntityCard.module.scss'
@@ -34,7 +34,7 @@ export const EntityCard = ({ icon, title, requireAttention, total, thisMonth }: 
     <div className={classes['entity-card']}>
       <div className={classes.header}>
         <IconWithTitle icon={icon} title={title} size={IconWithTitleSize.M} />
-        <RightArrowButton />
+        <ButtonWithArrow />
       </div>
       <div className={classes.footer}>
         {requireAttention &&
