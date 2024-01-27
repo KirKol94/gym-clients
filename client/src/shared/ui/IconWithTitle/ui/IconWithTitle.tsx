@@ -13,8 +13,8 @@ interface IconWithTitleProps {
 export const IconWithTitle = ({ icon, title, size }: IconWithTitleProps) => {
   const cls = cx(
     classes['icon-with-title'],
-    size === IconWithTitleSize.S && classes.iconWithTitle__s,
-    size === IconWithTitleSize.M && classes.iconWithTitle__m,
+    size === IconWithTitleSize.S && classes['icon-with-title__s'],
+    size === IconWithTitleSize.M && classes['icon-with-title__m'],
   )
 
   return (
