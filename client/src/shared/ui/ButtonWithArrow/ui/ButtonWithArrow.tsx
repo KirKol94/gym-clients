@@ -3,13 +3,13 @@ import cx from 'classix'
 import RightArrow from '../../../assets/icons/arrow.svg?react'
 import { ButtonWithArrowDirection } from '../model/types/buttonWithArrow'
 
-import classes from './RightArrowButton.module.scss'
+import classes from './ButtonWithArrow.module.scss'
 
-interface RightArrowButtonInfo {
+interface ButonWithArrowInfo {
   direction?: ButtonWithArrowDirection
 }
 
-export const ButtonWithArrow = ({ direction }: RightArrowButtonInfo) => {
+export const ButtonWithArrow = ({ direction }: ButonWithArrowInfo) => {
   const cls = cx(
     classes.arrow,
     direction === ButtonWithArrowDirection.UP && classes.arrow__up,
