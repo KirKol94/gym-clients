@@ -1,11 +1,11 @@
-import { ReactNode } from "react";
-import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
+import { ReactNode } from 'react'
+import { Provider } from 'react-redux'
+import { BrowserRouter } from 'react-router-dom'
 
-import { store } from "@/app/store";
+import { store } from '@/app/store'
 
 interface Props {
-  children: ReactNode;
+  children: ReactNode
 }
 
 export const RootProvider = ({ children }: Props) => {
@@ -13,5 +13,5 @@ export const RootProvider = ({ children }: Props) => {
     <BrowserRouter>
       <Provider store={store}>{children}</Provider>
     </BrowserRouter>
-  );
-};
+  )
+}

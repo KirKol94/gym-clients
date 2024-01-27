@@ -1,4 +1,4 @@
 export enum AppLinkSize {
-  S = "s",
-  M = "m",
+  S = 's',
+  M = 'm',
 }

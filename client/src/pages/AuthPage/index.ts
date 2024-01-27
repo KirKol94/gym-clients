@@ -1,2 +1,2 @@
-import { AuthPage } from "./ui/AuthPage";
-export default AuthPage;
+import { AuthPage } from './ui/AuthPage'
+export default AuthPage
