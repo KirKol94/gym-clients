@@ -14,7 +14,9 @@ const HomePage = lazy(() => import("@/pages/HomePage"));
 const NotFoundPage = lazy(() => import("@/pages/NotFoundPage"));
 
 export const App = () => {
+  console.log("hello conflict1");
   const dispatch = useAppDispatch();
+  console.log("hello conflict1");
 
   useEffect(() => {
     dispatch(userActions.initAuthData());
@@ -47,6 +49,7 @@ export const App = () => {
         }
       />
       <Route path="*" element={<NotFoundPage />} />
+      <span>hello conflict</span>
     </Routes>
   );
 };
