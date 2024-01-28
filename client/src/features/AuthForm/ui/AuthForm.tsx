@@ -17,7 +17,7 @@ import { AuthType } from '../model/types/auth'
 import classes from './AuthForm.module.scss'
 
 interface AuthFormProps {
-  type: AuthType
+  type?: AuthType
 }
 
 type FormData = Omit<User, 'id'> & { password: string }

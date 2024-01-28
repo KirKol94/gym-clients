@@ -1,9 +1,10 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { Route, Routes } from 'react-router-dom'
 
-import { routesData } from '@/app/routes/config/data.routes'
-import { PrivateRoute } from '@/app/routes/ui/PrivateRoute'
-import RouteSuspenseLayout from '@/app/routes/ui/RouteSuspenseLayout'
+import { routesData } from '../config/data.routes'
+
+import { PrivateRoute } from './PrivateRoute'
+import RouteSuspenseLayout from './RouteSuspenseLayout'
 
 export const Router: FC = () => {
   return (
@@ -12,26 +13,18 @@ export const Router: FC = () => {
         route.isAuth ? (
           <Route key={`${route.path} - ${route.component}`} element={<PrivateRoute />}>
             <Route
-              index={route.index ? true : false}
+              index={route.index}
               key={`${route.path} - ${route.component}`}
               path={route.path}
-              element={
-                <RouteSuspenseLayout type={route.type}>
-                  {route.component && React.createElement(route.component)}
-                </RouteSuspenseLayout>
-              }
+              element={<RouteSuspenseLayout route={route} />}
             />
           </Route>
         ) : (
           <Route
-            index={route.index ? true : false}
+            index={route.index}
             key={`${route.path} - ${route.component}`}
             path={route.path}
-            element={
-              <RouteSuspenseLayout type={route.type}>
-                {route.component && React.createElement(route.component)}
-              </RouteSuspenseLayout>
-            }
+            element={<RouteSuspenseLayout route={route} />}
           />
         ),
       )}

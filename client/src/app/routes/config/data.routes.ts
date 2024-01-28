@@ -1,8 +1,9 @@
 import { lazy } from 'react'
 
-import { IRoutesData } from '@/app/routes/types/routes.interface'
 import { AuthType } from '@/features/AuthForm'
 import { ROUTER_PATH } from '@/shared/const/path/PATH'
+
+import { IRoutesData } from '../types/routes.interface'
 
 const AuthPage = lazy(() => import('@/pages/AuthPage'))
 const HomePage = lazy(() => import('@/pages/HomePage'))
@@ -28,7 +29,7 @@ export const routesData: IRoutesData[] = [
   },
   {
     component: NotFoundPage,
-    path: '*',
+    path: ROUTER_PATH.NOTFOUNDPAGE,
     isAuth: false,
   },
 ]

@@ -1,15 +1,15 @@
-import React, { FC, ReactNode, Suspense } from 'react'
+import { FC, Suspense } from 'react'
 
-import { AuthType } from '@/features/AuthForm'
 import { Loader } from '@/shared/ui/Loader'
 
+import { IRoutesData } from '../types/routes.interface'
+
 interface IRouteSuspenseLayoutProps {
-  children: ReactNode
-  type?: AuthType
+  route: IRoutesData
 }
 
-const RouteSuspenseLayout: FC<IRouteSuspenseLayoutProps> = ({ children, type }) => {
-  return <Suspense fallback={<Loader />}>{React.cloneElement(children as React.ReactElement, { type })}</Suspense>
+const RouteSuspenseLayout: FC<IRouteSuspenseLayoutProps> = ({ route }) => {
+  return <Suspense fallback={<Loader />}>{<route.component type={route.type} />}</Suspense>
 }
 
 export default RouteSuspenseLayout
