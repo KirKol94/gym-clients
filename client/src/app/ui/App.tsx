@@ -31,7 +31,7 @@ export const App = () => {
       <Route
         index
         element={
-          <Suspense fallback={<Loader z />}>
+          <Suspense fallback={<Loader />}>
             <HomePage />
           </Suspense>
         }
