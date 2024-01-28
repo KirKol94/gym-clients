@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom'
 
 import { Footer } from '../../Footer'
-import { Sidebar } from '../../Sidebar'
+import { Sidebar } from '../../Sidebar/Sidebar'
 
 import classes from './Layout.module.scss'
 
