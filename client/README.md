@@ -1,30 +1,94 @@
-# React + TypeScript + Vite
+# Клиентская часть приложения CRM системы
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## В проекте использутся такие технологии: как:
 
-Currently, two official plugins are available:
+- React
+- react-router-dom
+- TypeScript
+- ReduxToolKit
+- RTKQuery
+- Storybook
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## За чистотой кода следят:
 
-## Expanding the ESLint configuration
+- EsLint
+- StyleLint
+- Prettier
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## В проекте используется архитектура FSD
 
-- Configure the top-level `parserOptions` property like this:
+- Всё разбито по слоям
+- нижележащий слой не может обращаться к вышестоящему
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+## Сборка проекта
+
+- в качестве сборщика проекта используется Vite
+- поддерживаются алиасы абсолютных путей через `@/`
+
+например:
+
+```ts
+import { Button } from '@/shared/ui/Button'
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Запуск проекта
+
+для запуска проекта необходимо:
+
+склонировать репозиторий
+
+```
+git clone https://github.com/KirKol94/crm.git
+```
+
+перейти в папку fe-dev (основная ветка для разработки клиентской части на данный момент)
+
+```
+git checkout fe-dev
+```
+
+запустить проект в режиме разработчика
+
+```node
+npm run dev
+```
+
+таким образом запустится client на порту `5173` и фейковый бэк `json-server` на порту `3002`
+
+## дополнительные скрипты на проекте
+
+```json
+  "scripts": {
+    "dev": "concurrently \"yarn dev:client\" \"yarn dev:server\"",
+    "dev:client": "vite",
+    "dev:server": "[ -f db.json ] && echo '{\"users\":[{\"email\":\"admin@admin.ru\",\"password\":\"$2a$10$5Ne37HXDhSLVZA.iggAGG.KhaMbBF3lrsKm9dTxjRFSCe5Nshs4o2\",\"name\":\"admin\",\"surname\":\"adminov\",\"patronymic\":\"adminovich\",\"id\":1}]}' > db.json || echo '{\"users\":[{\"email\":\"admin@admin.ru\",\"password\":\"$2a$10$5Ne37HXDhSLVZA.iggAGG.KhaMbBF3lrsKm9dTxjRFSCe5Nshs4o2\",\"name\":\"admin\",\"surname\":\"adminov\",\"patronymic\":\"adminovich\",\"id\":1}]}' > db.json && json-server-auth --watch db.json --port 3001",
+    "build": "tsc && vite build && echo '/* /index.html  200' | cat >dist/_redirects ",
+    "lint": "concurrently \"yarn lint:ts\" \"yarn lint:style\"",
+    "lint:ts": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix",
+    "lint:prettier": "prettier --write ./src",
+    "lint:style": "stylelint src/**/*.scss --fix",
+    "preview": "vite preview"
+  },
+```
+
+`dev` запускает и фронт и бэк
+`dev:client` запускает клиент
+`dev:server` запускает бэк и создаёт файл `db.json` cо стандартными данными для авторизации
+
+```json
+{ "email": "admin@admin.ru", "password": "12341234" }
+```
+
+`build` собирает проект в папке `dist` (html / css / js)
+
+`lint` объединяет в себе команды:
+
+- `lint:ts` запуск stylelint
+- `lint:prettier` запуск prettier
+- `lint:style` запуск stylelint
+
+`preview` похожа на `build` за исключением того, что не создаётся папка `dist` и запускается сервер, который будет выглядеть так же, как будто бы запущены файлы из папки `dist`
+
+## точка входа в приложение
+
+всё начинается с файла`src/main.tsx`
