@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import cx from 'classix'
 
 import { getIsAuth, userActions } from '@/entities/User'
 import { ACCESS_TOKEN_LOCAL_STORAGE_KEY } from '@/shared/const/localStorage/accessTokenKey'
@@ -36,7 +35,7 @@ export const HomePage = () => {
   }, [isAuth, navigate])
 
   return (
-    <div className={className}>
+    <div>
       <AlertCard
         count={0}
         title="Контрагента ожидают в стадии “Подписание контракта”"
@@ -47,5 +46,3 @@ export const HomePage = () => {
     </div>
   )
 }
-
-export default HomePage

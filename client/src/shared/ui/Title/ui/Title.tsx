@@ -16,7 +16,6 @@ export const Title = ({ size, className, children }: TitleProps) => {
     classes.title,
     size === TitleSize.XL && classes.title__xl,
     size === TitleSize.XXL && classes.title__xxl,
-    size === TitleSize.XL && classes.title__xl,
     className,
   )
 
