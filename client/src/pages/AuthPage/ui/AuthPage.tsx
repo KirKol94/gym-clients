@@ -3,7 +3,7 @@ import { AuthForm, AuthType } from '@/features/AuthForm'
 import classes from './AuthPage.module.scss'
 
 export interface AuthPageProps {
-  type?: AuthType | AuthType.REGISTER
+  type?: AuthType | AuthType.LOGIN
 }
 
 export const AuthPage = ({ type }: AuthPageProps) => {
