@@ -11,61 +11,62 @@ import Setting from '@/shared/assets/icons/SettingsWhite.svg'
 import Users from '@/shared/assets/icons/UsersWhite.svg'
 import Logo from '@/shared/assets/Logo.svg'
 import LogoMini from '@/shared/assets/LogoMini.svg'
+import { ROUTER_PATH } from '@/shared/const/path/PATH'
 
-import { SidebarItem } from '../../SidebarItem'
+import { SidebarItem } from '../../SidebarItem/ui/SidebarItem'
 
 import classes from './Sidebar.module.scss'
 
-const user = { title: 'Иван Иванов', link: Avatar, to: '/' }
+const user = { title: 'Иван Иванов', link: Avatar, to: ROUTER_PATH.HOME }
 
 const sidebarItems = [
   {
     title: 'Пользователи',
     link: Users,
-    to: '/users',
+    to: ROUTER_PATH.USERS,
   },
   {
     title: 'Группы компаний',
     link: Group,
-    to: '/group',
+    to: ROUTER_PATH.GROUP,
   },
   {
     title: 'Контрагенты',
     link: Agent,
-    to: '/agent',
+    to: ROUTER_PATH.AGENT,
   },
   {
     title: 'Контракты',
     link: Contract,
-    to: '/contract',
+    to: ROUTER_PATH.CONTRACT,
   },
   {
     title: 'Сделки',
     link: Deals,
-    to: '/deals',
+    to: ROUTER_PATH.DEALS,
   },
   {
     title: 'Настройки',
     link: Setting,
-    to: '/setting',
+    to: ROUTER_PATH.SETTINGS,
   },
 ]
 
 export const Sidebar = () => {
-  const location = useLocation()
-  const [active, setActive] = useState<string>('')
+  const { pathname } = useLocation()
+  const [active, setActive] = useState('')
   const [open, setOpen] = useState(true)
 
   useEffect(() => {
-    location.pathname === '/' && setActive(user.title)
-  }, [location.pathname])
+    pathname === ROUTER_PATH.HOME && setActive(user.title)
+  }, [pathname])
 
-  const handleClick = () => {
+  const onSidebarVisibleToggle = () => {
     setOpen(!open)
   }
   return (
-    <aside className={open ? classes.sidebar : classes.sidebar__active}>
-      <div onClick={handleClick} className={classes.logo__wrapper}>
+    <aside className={open ? classes.sidebar : classes.sidebar__hiden}>
+      <div onClick={onSidebarVisibleToggle} className={classes.logo__wrapper}>
         <img src={open ? Logo : LogoMini} alt="Логотип" />
         <div className={classes.back}>
           <img className={open ? classes.img : classes.img__active} src={BackArrow} />

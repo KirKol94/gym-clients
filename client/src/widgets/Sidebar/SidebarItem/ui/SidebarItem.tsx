@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import cx from 'classix'
 
 import { Text, TextSize } from '@/shared/ui/Text'
@@ -13,7 +13,6 @@ interface SidebarItemProps {
 }
 
 export const SidebarItem = ({ data, active, setActive, open }: SidebarItemProps) => {
-  const navigate = useNavigate()
   const { title, link, to } = data
 
   const cardOpen = cx(active === title ? classes.card__active : classes.card)
@@ -23,21 +22,20 @@ export const SidebarItem = ({ data, active, setActive, open }: SidebarItemProps)
   const cardClass = cx(open ? cardOpen : cardClose)
   const bgClass = cx(active === title && classes.background)
 
-  const handeleClick = () => {
+  const handleClick = () => {
     setActive(title)
-    navigate(to)
   }
 
   return (
     <div className={classes.wrapper}>
-      <li className={cardClass} onClick={handeleClick}>
+      <NavLink className={cardClass} to={to} onClick={handleClick}>
         <img src={link} alt={title} />
         {open && (
           <Text className={textClass} size={TextSize.S}>
             {title}
           </Text>
         )}
-      </li>
+      </NavLink>
       <div className={bgClass} />
     </div>
   )
