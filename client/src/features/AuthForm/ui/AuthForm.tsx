@@ -64,11 +64,11 @@ export const AuthForm = ({ type }: AuthFormProps) => {
 
   useEffect(() => {
     if (authStatus === 'fulfilled' && resAuthData.accessToken) {
+      navigate(ROUTER_PATH.HOME)
+
       localStorage.setItem(USER_LOCAL_STORAGE_KEY, JSON.stringify(resAuthData.user))
       localStorage.setItem(ACCESS_TOKEN_LOCAL_STORAGE_KEY, JSON.stringify(resAuthData.accessToken))
       localStorage.setItem(IS_AUTH_LOCAL_STORAGE_KEY, JSON.stringify(true))
-
-      navigate(ROUTER_PATH.HOME)
     }
   }, [isAuthError, navigate, resAuthData, authStatus])
 
