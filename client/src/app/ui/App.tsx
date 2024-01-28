@@ -5,7 +5,7 @@ import { userActions } from '@/entities/User'
 import { AuthType } from '@/features/AuthForm'
 import { ROUTER_PATH } from '@/shared/const/path/PATH'
 import { useAppDispatch } from '@/shared/hooks'
-import { Loader } from '@/shared/ui/Loader'
+import { Loader, LoaderColor } from '@/shared/ui/Loader'
 
 import '../styles/index.scss'
 
@@ -25,7 +25,7 @@ export const App = () => {
       <Route
         index
         element={
-          <Suspense fallback={<Loader />}>
+          <Suspense fallback={<Loader color={LoaderColor.WHITE} />}>
             <HomePage />
           </Suspense>
         }
@@ -33,7 +33,7 @@ export const App = () => {
       <Route
         path={ROUTER_PATH.LOGIN}
         element={
-          <Suspense fallback={<Loader />}>
+          <Suspense fallback={<Loader color={LoaderColor.WHITE} />}>
             <AuthPage type={AuthType.LOGIN} />
           </Suspense>
         }
@@ -41,7 +41,7 @@ export const App = () => {
       <Route
         path={ROUTER_PATH.REGISTER}
         element={
-          <Suspense fallback={<Loader />}>
+          <Suspense fallback={<Loader color={LoaderColor.WHITE} />}>
             <AuthPage type={AuthType.REGISTER} />
           </Suspense>
         }
