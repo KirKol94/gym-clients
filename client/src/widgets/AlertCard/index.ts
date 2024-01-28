@@ -1,1 +1,1 @@
-export { AlertCard } from "./ui/AlertCard";
+export { AlertCard } from './ui/AlertCard'

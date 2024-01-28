@@ -1,9 +1,9 @@
-import { InputHTMLAttributes } from "react";
+import { InputHTMLAttributes } from 'react'
 
-import classes from "./Input.module.scss";
+import classes from './Input.module.scss'
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  inputName: string;
+  inputName: string
 }
 
 export const Input = ({ inputName, ...props }: InputProps) => {
@@ -12,5 +12,5 @@ export const Input = ({ inputName, ...props }: InputProps) => {
       <span className={classes.span}>{inputName}</span>
       <input {...props} className={classes.input} />
     </div>
-  );
-};
+  )
+}

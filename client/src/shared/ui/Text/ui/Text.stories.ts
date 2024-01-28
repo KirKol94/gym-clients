@@ -1,33 +1,30 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from '@storybook/react'
 
-import { TextSize } from "../model/types/text.ts";
+import { TextSize } from '../model/types/text.ts'
 
-import { Text } from "./Text.tsx";
-
-
+import { Text } from './Text.tsx'
 
 const meta = {
-    title: "Shared/Text",
-    component: Text,
-    parameters: {
-        layout: "centered"
-    },
-    argTypes: {
-    }
+  title: 'Shared/Text',
+  component: Text,
+  parameters: {
+    layout: 'centered',
+  },
+  argTypes: {},
 } satisfies Meta<typeof Text>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Primary: Story = {
-    args: {
-        size: TextSize.S,
-        children: "Text"
-    }
+  args: {
+    size: TextSize.S,
+    children: 'Text',
+  },
 }
 export const BigSize: Story = {
-    args: {
-        size: TextSize.M,
-        children: "Text"
-    }
+  args: {
+    size: TextSize.M,
+    children: 'Text',
+  },
 }
