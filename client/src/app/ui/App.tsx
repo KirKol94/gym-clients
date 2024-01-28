@@ -1,10 +1,10 @@
 import { lazy, Suspense, useEffect } from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useNavigate } from 'react-router-dom'
 
-import { userActions } from '@/entities/User'
+import { getIsAuth, userActions } from '@/entities/User'
 import { AuthType } from '@/features/AuthForm'
 import { ROUTER_PATH } from '@/shared/const/path/PATH'
-import { useAppDispatch } from '@/shared/hooks'
+import { useAppDispatch, useAppSelector } from '@/shared/hooks'
 import { Loader } from '@/shared/ui/Loader'
 
 import '../styles/index.scss'
@@ -15,10 +15,16 @@ const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'))
 
 export const App = () => {
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+  const isAuth = useAppSelector(getIsAuth)
 
   useEffect(() => {
     dispatch(userActions.initAuthData())
-  }, [dispatch])
+
+    if (isAuth) {
+      navigate(ROUTER_PATH.HOME)
+    }
+  }, [dispatch, isAuth, navigate])
 
   return (
     <Routes>
