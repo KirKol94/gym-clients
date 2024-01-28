@@ -17,8 +17,6 @@ export const HomePage = () => {
 
   const isAuth = useAppSelector(getIsAuth)
 
-  const className = cx('home__container')
-
   // TODO это должно быть в итоге в feature Logout, но пока такого компонента нет
   const handleLogout = () => {
     dispatch(userActions.clearUserData())
