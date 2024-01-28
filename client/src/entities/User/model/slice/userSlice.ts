@@ -23,6 +23,10 @@ const userSlice = createSlice({
       state.user = action.payload
       state.isAuth = true
     },
+    clearUserData: (state) => {
+      state.isAuth = false
+      state.user = null
+    },
     initAuthData: (state) => {
       const isAuth = localStorage.getItem(IS_AUTH_LOCAL_STORAGE_KEY)
       const user = localStorage.getItem(USER_LOCAL_STORAGE_KEY)
