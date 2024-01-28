@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import cx from 'classix'
 
 import { Text, TextSize } from '@/shared/ui/Text'
@@ -28,14 +28,14 @@ export const SidebarItem = ({ data, active, setActive, open }: SidebarItemProps)
 
   return (
     <div className={classes.wrapper}>
-      <NavLink className={cardClass} to={to} onClick={handleClick}>
+      <Link className={cardClass} to={to} onClick={handleClick}>
         <img src={link} alt={title} />
         {open && (
           <Text className={textClass} size={TextSize.S}>
             {title}
           </Text>
         )}
-      </NavLink>
+      </Link>
       <div className={bgClass} />
     </div>
   )

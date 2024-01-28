@@ -13,7 +13,7 @@ import Logo from '@/shared/assets/Logo.svg'
 import LogoMini from '@/shared/assets/LogoMini.svg'
 import { ROUTER_PATH } from '@/shared/const/path/PATH'
 
-import { SidebarItem } from '../../SidebarItem/ui/SidebarItem'
+import { SidebarItem } from '../../SidebarItem'
 
 import classes from './Sidebar.module.scss'
 
