@@ -10,8 +10,10 @@ import { Loader } from '@/shared/ui/Loader'
 import '../styles/index.scss'
 
 const AuthPage = lazy(() => import('@/pages/AuthPage'))
-const HomePage = lazy(() => import('@/pages/HomePage'))
+const Layout = lazy(() => import('@/widgets/Layout'))
+
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'))
+const ProfilePage = lazy(() => import('@/pages/ProfilePage'))
 
 export const App = () => {
   const dispatch = useAppDispatch()
@@ -23,13 +25,17 @@ export const App = () => {
   return (
     <Routes>
       <Route
-        index
+        path={ROUTER_PATH.HOME}
         element={
           <Suspense fallback={<Loader />}>
-            <HomePage />
+            <Layout />
           </Suspense>
         }
-      />
+      >
+        <Route index path={ROUTER_PATH.HOME} element={<Suspense fallback={<Loader />}>{<ProfilePage />}</Suspense>} />
+        <Route path={ROUTER_PATH.USERS} element={<Suspense fallback={<Loader />}>{<>userpage</>}</Suspense>} />
+      </Route>
+
       <Route
         path={ROUTER_PATH.LOGIN}
         element={
