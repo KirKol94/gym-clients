@@ -24,7 +24,6 @@ export const routesData: IRoutesData[] = [
   {
     component: AuthPage,
     path: ROUTER_PATH.LOGIN,
-    type: AuthType.LOGIN,
     isAuth: false,
   },
   {
