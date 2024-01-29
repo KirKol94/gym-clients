@@ -1,6 +1,8 @@
+// TODO Необходимо как то нормально настроить этот файл что бы работал scss
 import type {StorybookConfig} from "@storybook/react-vite";
 
 const config: StorybookConfig = {
+
 	stories: [
 		'../../src/**/*.stories.@(js|jsx|ts|tsx)',
 	],
@@ -10,6 +12,8 @@ const config: StorybookConfig = {
 		"@storybook/addon-onboarding",
 		"@storybook/addon-interactions",
 		'@storybook/addon-backgrounds',
+		'@storybook/preset-scss',
+		"@storybook/addon-a11y"
 	],
 	framework: {
 		name: "@storybook/react-vite",
@@ -18,5 +22,6 @@ const config: StorybookConfig = {
 	docs: {
 		autodocs: "tag",
 	},
+
 };
 export default config;

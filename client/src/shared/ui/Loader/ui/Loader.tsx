@@ -15,6 +15,7 @@ export const Loader = ({ size, color }: LoaderProps) => {
     size === LoaderSize.SMALL && classes['small-loader'],
     size === LoaderSize.BIG && classes['big-loader'],
     color === LoaderColor.WHITE && classes['white-loader'],
+    color === LoaderColor.BLUE && classes['blue-loader'],
   )
 
   return (

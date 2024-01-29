@@ -20,10 +20,12 @@
     }
 
     &__white {
-        background: var(--color-counter-bg);
+        background-color: var(--color-counter-bg);
     }
     
     &__yellow {
-        background: var(--color-counter-yellow-bg);
+        background-color: var(--color-counter-yellow-bg);
+
+        // background-color: yellow;
     }
 }

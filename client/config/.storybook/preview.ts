@@ -1,4 +1,10 @@
 import type { Preview } from "@storybook/react";
+import "../../src/app/styles/variables.scss"
+import "../../src/app/styles/fonts.scss"
+import "../../src/app/styles/index.scss"
+import "../../src/app/styles/reset.scss"
+import "../../src/app/styles/global.scss"
+import "../../src/app/types/global.d.ts"
 
 const preview: Preview = {
   parameters: {
@@ -10,10 +16,11 @@ const preview: Preview = {
       },
     },
     backgrounds: {
-      default: 'white',
+      default: 'primary-light-bg',
       values: [
-        { name: 'white', value: '#fff' },
-        { name: 'dark', value: '#000' },
+        { name: 'primary-light-bg', value: '#f4f9fd' },
+        { name: 'primary-blue-bg', value: '#3f8cff' },
+        { name: 'primary-dark-bg', value: '#111111' },
       ],
     },
   },

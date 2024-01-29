@@ -28,4 +28,10 @@
     &__left {
         transform: rotate(-180deg);
     }
+
+    img {
+        svg {
+            stroke: #0000;
+        }
+    }
 }
