@@ -9,23 +9,13 @@ import RouteSuspenseLayout from './RouteSuspenseLayout'
 export const Router: FC = () => {
   return (
     <Routes>
-      {routesData.map((route) =>
+      {routesData.map((route, index) =>
         route.isAuth ? (
-          <Route key={`${route.path} - ${route.component}`} element={<PrivateRoute />}>
-            <Route
-              index={route.index}
-              key={`${route.path} - ${route.component}`}
-              path={route.path}
-              element={<RouteSuspenseLayout route={route} />}
-            />
+          <Route key={index} element={<PrivateRoute />}>
+            <Route index={route.index} key={index} path={route.path} element={<RouteSuspenseLayout route={route} />} />
           </Route>
         ) : (
-          <Route
-            index={route.index}
-            key={`${route.path} - ${route.component}`}
-            path={route.path}
-            element={<RouteSuspenseLayout route={route} />}
-          />
+          <Route index={route.index} key={index} path={route.path} element={<RouteSuspenseLayout route={route} />} />
         ),
       )}
     </Routes>
