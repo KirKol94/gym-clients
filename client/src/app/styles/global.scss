@@ -1,0 +1,11 @@
+body {
+  font-family: var(--font-family);
+  background: var(--color-light-bg);
+}
+
+[class*='__container'] {
+  max-width: var(--width-container);
+  padding: var(--padding-container);
+  margin: 0 auto;
+  overflow: hidden;
+}
