@@ -1,41 +1,22 @@
 {
-   "plugins": [
-      "stylelint-scss"
-   ],
-   "extends": [
-      "stylelint-config-standard-scss",
-      "stylelint-config-recess-order"
-   ],
-   "rules": {
-      "at-rule-no-unknown": null,
-      "scss/at-rule-no-unknown": true,
-      "scss/dollar-variable-pattern": "^foo",
-      "scss/selector-no-redundant-nesting-selector": true,
-      "declaration-property-unit-allowed-list": {
-         "/^border/": [
-            "px",
-            "%"
-         ],
-         "/^gap/": [
-            "px",
-            "rem"
-         ]
-      },
-      "unit-allowed-list": [
-         "%",
-         "deg",
-         "px",
-         "rem",
-         "ms",
-         "vh",
-         "svh",
-         "vw"
-      ],
-      "selector-max-id": 0,
-      "block-no-empty": true,
-      "color-no-invalid-hex": true,
-      "comment-empty-line-before": "always",
-      "alpha-value-notation": "number",
-      "annotation-no-unknown": true
-   }
+  "plugins": ["stylelint-scss"],
+  "extends": ["stylelint-config-standard-scss", "stylelint-config-recess-order", "stylelint-selector-bem-pattern"],
+  "rules": {
+    "at-rule-no-unknown": null,
+    "scss/at-rule-no-unknown": true,
+    "scss/dollar-variable-pattern": "^foo",
+    "scss/selector-no-redundant-nesting-selector": true,
+    "declaration-property-unit-allowed-list": {
+      "/^border/": ["px", "%"],
+      "/^gap/": ["px", "rem"]
+    },
+    "unit-allowed-list": ["%", "deg", "px", "rem", "ms", "vh", "svh", "vw", "fr"],
+    "selector-max-id": 0,
+    "block-no-empty": true,
+    "color-no-invalid-hex": true,
+    "comment-empty-line-before": "always",
+    "alpha-value-notation": "number",
+    "annotation-no-unknown": true,
+    "selector-class-pattern": "^(?:(?:o|c|u|t|s|is|has|_|js|qa)-)?[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*(?:__[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*)?(?:--[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*)?(?:\\[.+\\])?$"
+  }
 }

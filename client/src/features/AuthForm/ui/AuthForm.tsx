@@ -1,11 +1,12 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { User } from '@/entities/User'
+import { User, userActions } from '@/entities/User'
 import { ACCESS_TOKEN_LOCAL_STORAGE_KEY } from '@/shared/const/localStorage/accessTokenKey'
 import { IS_AUTH_LOCAL_STORAGE_KEY } from '@/shared/const/localStorage/isAuthKey'
 import { USER_LOCAL_STORAGE_KEY } from '@/shared/const/localStorage/userKey'
 import { ROUTER_PATH } from '@/shared/const/path/PATH'
+import { useAppDispatch } from '@/shared/hooks'
 import { AppLink, AppLinkSize } from '@/shared/ui/AppLink'
 import { Button, ButtonSize } from '@/shared/ui/Button'
 import { Input } from '@/shared/ui/Input'
@@ -19,16 +20,16 @@ import { AuthType } from '../model/types/auth'
 import classes from './AuthForm.module.scss'
 
 interface AuthFormProps {
-  type: AuthType
+  type?: AuthType | AuthType.LOGIN
 }
 
 type FormData = Omit<User, 'id'> & { password: string }
 
 export const AuthForm = ({ type }: AuthFormProps) => {
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const [sendAuthData, { data: resAuthData, status: authStatus, isError: isAuthError }] = useSendAuthData()
-  const [sendRegisterData, { data: resRegisterData, status: registerStatus, isError: isRegisterError }] =
-    useSendRegisterDataMutation()
+  const [sendRegisterData, { status: registerStatus, isError: isRegisterError }] = useSendRegisterDataMutation()
 
   const [userData, setUserData] = useState<FormData>({
     email: '',
@@ -63,20 +64,20 @@ export const AuthForm = ({ type }: AuthFormProps) => {
   }
 
   useEffect(() => {
-    if (authStatus === 'fulfilled' && resAuthData.accessToken) {
+    if (registerStatus === 'fulfilled') navigate(ROUTER_PATH.LOGIN)
+  }, [navigate, registerStatus])
+
+  useEffect(() => {
+    if (authStatus === 'fulfilled') {
+      dispatch(userActions.setUser(resAuthData.user))
+
       localStorage.setItem(USER_LOCAL_STORAGE_KEY, JSON.stringify(resAuthData.user))
       localStorage.setItem(ACCESS_TOKEN_LOCAL_STORAGE_KEY, JSON.stringify(resAuthData.accessToken))
       localStorage.setItem(IS_AUTH_LOCAL_STORAGE_KEY, JSON.stringify(true))
 
       navigate(ROUTER_PATH.HOME)
     }
-  }, [isAuthError, navigate, resAuthData, authStatus])
-
-  useEffect(() => {
-    if (registerStatus === 'fulfilled' && resRegisterData.accessToken) {
-      navigate(ROUTER_PATH.LOGIN)
-    }
-  }, [navigate, registerStatus, resRegisterData])
+  }, [authStatus, dispatch, navigate, resAuthData])
 
   if (isRegisterError || isAuthError) {
     return (

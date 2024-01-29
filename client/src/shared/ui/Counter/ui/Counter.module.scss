@@ -1,8 +1,7 @@
-
 @mixin size($width, $height, $font) {
-    width: #{$width}px;
-    height: #{$height}px;
-    font-size: #{$font}px;
+  width: #{$width}px;
+  height: #{$height}px;
+  font-size: #{$font}px;
 }
 
 .counter {
@@ -11,9 +10,9 @@
     justify-content: center;
     border-radius: 50%;
 
-    &__s {
-        @include size(20, 20, 12);
-    }
+  &__s {
+    @include size(20, 20, 12);
+  }
 
     &__m {
         @include size(40, 40, 20);
