@@ -8,6 +8,7 @@ import { IRoutesData } from '../types/routes.interface'
 const AuthPage = lazy(() => import('@/pages/AuthPage'))
 const ProfilePage = lazy(() => import('@/pages/ProfilePage'))
 const UsersPage = lazy(() => import('@/pages/UsersPage'))
+const Group = lazy(() => import('@/pages/Group'))
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'))
 
 export const routesData: IRoutesData[] = [
@@ -20,6 +21,11 @@ export const routesData: IRoutesData[] = [
     component: UsersPage,
     isAuth: true,
     path: ROUTER_PATH.USERS,
+  },
+  {
+    component: Group,
+    isAuth: true,
+    path: ROUTER_PATH.GROUP,
   },
   {
     component: AuthPage,
