@@ -1,6 +1,5 @@
 export enum ROUTER_PATH {
   HOME = '/',
-  PROFILE = '/profile',
   USERS = '/users',
   GROUP = '/group',
   AGENT = '/agent',
@@ -9,4 +8,5 @@ export enum ROUTER_PATH {
   SETTINGS = '/setting',
   LOGIN = '/login',
   REGISTER = '/register',
+  NOTFOUNDPAGE = '*',
 }

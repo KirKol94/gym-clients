@@ -3,7 +3,7 @@ body {
   background: var(--color-light-bg);
 }
 
-[class*="__container"] {
+[class*='__container'] {
   max-width: var(--width-container);
   padding: var(--padding-container);
   margin: 0 auto;

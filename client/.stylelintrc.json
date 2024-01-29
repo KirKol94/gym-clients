@@ -1,10 +1,6 @@
 {
   "plugins": ["stylelint-scss"],
-  "extends": [
-    "stylelint-config-standard-scss",
-    "stylelint-config-recess-order",
-    "stylelint-selector-bem-pattern"
-  ],
+  "extends": ["stylelint-config-standard-scss", "stylelint-config-recess-order", "stylelint-selector-bem-pattern"],
   "rules": {
     "at-rule-no-unknown": null,
     "scss/at-rule-no-unknown": true,
@@ -14,17 +10,7 @@
       "/^border/": ["px", "%"],
       "/^gap/": ["px", "rem"]
     },
-    "unit-allowed-list": [
-      "%",
-      "deg",
-      "px",
-      "rem",
-      "ms",
-      "vh",
-      "svh",
-      "vw",
-      "fr"
-    ],
+    "unit-allowed-list": ["%", "deg", "px", "rem", "ms", "vh", "svh", "vw", "fr"],
     "selector-max-id": 0,
     "block-no-empty": true,
     "color-no-invalid-hex": true,
