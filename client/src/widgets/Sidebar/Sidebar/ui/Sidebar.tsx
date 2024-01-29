@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useState } from 'react'
 
 import Agent from '@/shared/assets/icons/Agent.svg'
 import Avatar from '@/shared/assets/icons/Avatar.svg'
@@ -17,67 +16,62 @@ import { SidebarItem } from '../../SidebarItem'
 
 import classes from './Sidebar.module.scss'
 
-const user = { title: 'Иван Иванов', link: Avatar, to: ROUTER_PATH.HOME }
-
-const sidebarItems = [
-  {
-    title: 'Пользователи',
-    link: Users,
-    to: ROUTER_PATH.USERS,
-  },
-  {
-    title: 'Группы компаний',
-    link: Group,
-    to: ROUTER_PATH.GROUP,
-  },
-  {
-    title: 'Контрагенты',
-    link: Agent,
-    to: ROUTER_PATH.AGENT,
-  },
-  {
-    title: 'Контракты',
-    link: Contract,
-    to: ROUTER_PATH.CONTRACT,
-  },
-  {
-    title: 'Сделки',
-    link: Deals,
-    to: ROUTER_PATH.DEALS,
-  },
-  {
-    title: 'Настройки',
-    link: Setting,
-    to: ROUTER_PATH.SETTINGS,
-  },
-]
-
 export const Sidebar = () => {
-  const { pathname } = useLocation()
-  const [active, setActive] = useState('')
-  const [open, setOpen] = useState(true)
+  const [isOpen, setIsOpen] = useState(true)
 
-  useEffect(() => {
-    pathname === ROUTER_PATH.HOME && setActive(user.title)
-  }, [pathname])
+  const user = { title: 'Иван Иванов', icon: Avatar, to: ROUTER_PATH.HOME }
+
+  const sidebarItems = [
+    {
+      title: 'Пользователи',
+      icon: Users,
+      to: ROUTER_PATH.USERS,
+    },
+    {
+      title: 'Группы компаний',
+      icon: Group,
+      to: ROUTER_PATH.GROUP,
+    },
+    {
+      title: 'Контрагенты',
+      icon: Agent,
+      to: ROUTER_PATH.AGENT,
+    },
+    {
+      title: 'Контракты',
+      icon: Contract,
+      to: ROUTER_PATH.CONTRACT,
+    },
+    {
+      title: 'Сделки',
+      icon: Deals,
+      to: ROUTER_PATH.DEALS,
+    },
+    {
+      title: 'Настройки',
+      icon: Setting,
+      to: ROUTER_PATH.SETTINGS,
+    },
+  ]
 
   const onSidebarVisibleToggle = () => {
-    setOpen(!open)
+    setIsOpen(!isOpen)
   }
+
   return (
-    <aside className={open ? classes.sidebar : classes.sidebar__hiden}>
+    <aside className={isOpen ? classes.sidebar : classes.sidebar__hiden}>
       <div onClick={onSidebarVisibleToggle} className={classes.logo__wrapper}>
-        <img src={open ? Logo : LogoMini} alt="Логотип" />
+        <img src={isOpen ? Logo : LogoMini} alt="Логотип" />
         <div className={classes.back}>
-          <img className={open ? classes.img : classes.img__active} src={BackArrow} />
+          <img className={isOpen ? classes.img : classes.img__active} src={BackArrow} />
         </div>
       </div>
 
       <nav className={classes.links__wrapper}>
-        <SidebarItem data={user} setActive={setActive} active={active} open={open} />
+        <SidebarItem data={user} isOpen={isOpen} />
         <ul className={classes.cards__wrapper}>
           {sidebarItems.map((el, index) => (
-            <SidebarItem data={el} setActive={setActive} active={active} open={open} key={el.title + index} />
+            <SidebarItem data={el} isOpen={isOpen} key={el.title + index} />
           ))}
         </ul>
       </nav>
