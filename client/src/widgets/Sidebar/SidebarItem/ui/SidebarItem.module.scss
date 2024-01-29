@@ -1,0 +1,61 @@
+@mixin card {
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
+  width: 200px;
+  height: 45px;
+  padding: 0 10px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  .card {
+    @include card;
+
+    &__active {
+      @include card;
+
+      background: var(--color-light-blue);
+      border-radius: 10px;
+    }
+  }
+
+  .card__close {
+    @include card;
+
+    justify-content: center;
+    width: 80px;
+
+    &__active {
+      @include card;
+
+      width: 50px;
+      background: var(--color-light-blue);
+      border-radius: 10px;
+    }
+  }
+
+  .background {
+    position: absolute;
+    right: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--color-primary-90);
+    border-radius: 15px;
+  }
+
+  .text {
+    color: var(--color-light-gray);
+
+    &__active {
+      font-weight: 500;
+      color: var(--color-light-gray);
+    }
+  }
+}

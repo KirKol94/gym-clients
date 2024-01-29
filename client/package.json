@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "concurrently \"yarn dev:client\" \"yarn dev:server\"",
     "dev:client": "vite",
-    "dev:server": "json-server-auth --watch db.json --port 3001",
+    "dev:server": "[ -f db.json ] && echo '{\"users\":[{\"email\":\"admin@admin.ru\",\"password\":\"$2a$10$5Ne37HXDhSLVZA.iggAGG.KhaMbBF3lrsKm9dTxjRFSCe5Nshs4o2\",\"name\":\"admin\",\"surname\":\"adminov\",\"patronymic\":\"adminovich\",\"id\":1}]}' > db.json || echo '{\"users\":[{\"email\":\"admin@admin.ru\",\"password\":\"$2a$10$5Ne37HXDhSLVZA.iggAGG.KhaMbBF3lrsKm9dTxjRFSCe5Nshs4o2\",\"name\":\"admin\",\"surname\":\"adminov\",\"patronymic\":\"adminovich\",\"id\":1}]}' > db.json && json-server-auth --watch db.json --port 3002",
     "build": "tsc && vite build && echo '/* /index.html  200' | cat >dist/_redirects ",
     "lint": "concurrently \"yarn lint:ts\" \"yarn lint:style\"",
     "lint:ts": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix",
@@ -49,6 +49,7 @@
     "stylelint-config-standard": "^36.0.0",
     "stylelint-config-standard-scss": "^13.0.0",
     "stylelint-scss": "^6.1.0",
+    "stylelint-selector-bem-pattern": "^3.0.1",
     "typescript": "^5.2.2",
     "vite": "^5.0.8",
     "vite-plugin-svgr": "^4.2.0"

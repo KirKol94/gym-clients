@@ -1,17 +1,19 @@
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { User } from '@/entities/User'
+import { ACCESS_TOKEN_LOCAL_STORAGE_KEY } from '@/shared/const/localStorage/accessTokenKey'
+import { IS_AUTH_LOCAL_STORAGE_KEY } from '@/shared/const/localStorage/isAuthKey'
+import { USER_LOCAL_STORAGE_KEY } from '@/shared/const/localStorage/userKey'
 import { ROUTER_PATH } from '@/shared/const/path/PATH'
-import { useAppDispatch } from '@/shared/hooks'
 import { AppLink, AppLinkSize } from '@/shared/ui/AppLink'
 import { Button, ButtonSize } from '@/shared/ui/Button'
 import { Input } from '@/shared/ui/Input'
 import { Text, TextSize } from '@/shared/ui/Text'
 import { Title, TitleSize } from '@/shared/ui/Title'
 
-import { fetchAuthUser } from '../model/services/authUser'
-import { fetchRegisterUser } from '../model/services/registerUser'
+import { useSendAuthData } from '../api/login.api'
+import { useSendRegisterDataMutation } from '../api/register.api'
 import { AuthType } from '../model/types/auth'
 
 import classes from './AuthForm.module.scss'
@@ -23,8 +25,10 @@ interface AuthFormProps {
 type FormData = Omit<User, 'id'> & { password: string }
 
 export const AuthForm = ({ type }: AuthFormProps) => {
-  const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  const [sendAuthData, { data: resAuthData, status: authStatus, isError: isAuthError }] = useSendAuthData()
+  const [sendRegisterData, { data: resRegisterData, status: registerStatus, isError: isRegisterError }] =
+    useSendRegisterDataMutation()
 
   const [userData, setUserData] = useState<FormData>({
     email: '',
@@ -50,18 +54,37 @@ export const AuthForm = ({ type }: AuthFormProps) => {
   }
 
   const handleRegister = async () => {
-    const accessToken = await dispatch(fetchRegisterUser(userData))
-    if (accessToken) {
-      navigate(ROUTER_PATH.LOGIN)
-    }
+    await sendRegisterData(userData)
   }
 
   const handleLogin = async () => {
     const authData = { email: userData.email, password: userData.password }
-    const accessToken = await dispatch(fetchAuthUser(authData))
-    if (accessToken) {
-      navigate('/')
+    await sendAuthData(authData)
+  }
+
+  useEffect(() => {
+    if (authStatus === 'fulfilled' && resAuthData.accessToken) {
+      localStorage.setItem(USER_LOCAL_STORAGE_KEY, JSON.stringify(resAuthData.user))
+      localStorage.setItem(ACCESS_TOKEN_LOCAL_STORAGE_KEY, JSON.stringify(resAuthData.accessToken))
+      localStorage.setItem(IS_AUTH_LOCAL_STORAGE_KEY, JSON.stringify(true))
+
+      navigate(ROUTER_PATH.HOME)
     }
+  }, [isAuthError, navigate, resAuthData, authStatus])
+
+  useEffect(() => {
+    if (registerStatus === 'fulfilled' && resRegisterData.accessToken) {
+      navigate(ROUTER_PATH.LOGIN)
+    }
+  }, [navigate, registerStatus, resRegisterData])
+
+  if (isRegisterError || isAuthError) {
+    return (
+      <>
+        <Title size={TitleSize.XL}>Ошибка {isAuthError ? 'авторизации' : 'регистрации'}</Title>
+        <Text size={TextSize.M}>Обновите страниу и повторите снова</Text>
+      </>
+    )
   }
 
   return (
