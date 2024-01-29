@@ -16,7 +16,7 @@ public class PersonalTraining {
     @Column(name = "date")
     private LocalDate date;
     @Column(name = "price")
-    private int price;
+    private Integer price;
     @ManyToOne
     @JoinColumn (name = "client_id")
     private Client client;

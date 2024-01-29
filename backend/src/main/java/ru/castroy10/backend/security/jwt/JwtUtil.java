@@ -21,7 +21,7 @@ public class JwtUtil {
     private String secret;
 
     public String generateToken(String username) {
-        Date expiriesDate = Date.from(ZonedDateTime.now().plusMinutes(60).toInstant());
+        Date expiriesDate = Date.from(ZonedDateTime.now().plusMinutes(600).toInstant());
         Map<String, Object> claims = new HashMap<>();
         claims.put("username", username);
         return Jwts.builder()

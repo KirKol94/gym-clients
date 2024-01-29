@@ -22,9 +22,9 @@ public class Client {
     @Column(name = "birthday")
     private LocalDate birthday;
     @Column(name = "sex")
-    private int sex;
+    private Integer sex;
     @Column(name = "personal_training_count")
-    private int personalTrainingCount;
+    private Integer personalTrainingCount;
     @Column(name = "email")
     private String email;
     @Column(name = "mobile_phone")

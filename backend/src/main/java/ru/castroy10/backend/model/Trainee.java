@@ -20,7 +20,7 @@ public class Trainee {
     @Column(name = "middle_name")
     private String middleName;
     @Column(name = "sex")
-    private int sex;
+    private Integer sex;
     @Column(name = "email")
     private String email;
     @Column(name = "mobile_phone")

@@ -19,7 +19,7 @@ public class Abonement {
     @Column(name = "date_experied")
     private LocalDate dateExpired;
     @Column(name = "price")
-    private int price;
+    private Integer price;
     @Column(name = "is_active")
     private boolean isActive;
     @Column(name = "is_frozen")
