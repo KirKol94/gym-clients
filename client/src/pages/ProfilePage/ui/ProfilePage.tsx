@@ -5,6 +5,7 @@ import { getIsAuth } from '@/entities/User'
 import { ROUTER_PATH } from '@/shared/const/path/PATH'
 import { useAppSelector } from '@/shared/hooks'
 import { AlertCard } from '@/widgets/AlertCard'
+import Page from '@/widgets/Page'
 
 export const ProfilePage = () => {
   const navigate = useNavigate()
@@ -18,12 +19,12 @@ export const ProfilePage = () => {
   }, [isAuth, navigate])
 
   return (
-    <div>
+    <Page>
       <AlertCard
         count={0}
         title="Контрагента ожидают в стадии “Подписание контракта”"
         alert="Подпишите контракты с контрагентами или переведите их в архивные"
       />
-    </div>
+    </Page>
   )
 }
