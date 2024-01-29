@@ -6,14 +6,20 @@ import { ROUTER_PATH } from '@/shared/const/path/PATH'
 import { IRoutesData } from '../types/routes.interface'
 
 const AuthPage = lazy(() => import('@/pages/AuthPage'))
-const HomePage = lazy(() => import('@/pages/HomePage'))
+const ProfilePage = lazy(() => import('@/pages/ProfilePage'))
+const UsersPage = lazy(() => import('@/pages/UsersPage'))
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'))
 
 export const routesData: IRoutesData[] = [
   {
-    component: HomePage,
     index: true,
+    component: ProfilePage,
     isAuth: true,
+  },
+  {
+    component: UsersPage,
+    isAuth: true,
+    path: ROUTER_PATH.USERS,
   },
   {
     component: AuthPage,
