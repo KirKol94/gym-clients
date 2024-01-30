@@ -30,7 +30,8 @@ public class ClientController {
         return clientService.save(clientDto);
     }
 
-    @PostMapping("/update")
+
+    @PutMapping("/update")
     public ResponseEntity<?> update(@RequestBody @Valid ClientDtoUpdate clientDtoUpdate) {
         return clientService.update(clientDtoUpdate);
     }
@@ -41,11 +42,11 @@ public class ClientController {
     }
 
     @GetMapping("/find/all")
-    public ResponseEntity<?> findById() {
+    public ResponseEntity<?> findAll() {
         return clientService.findAll();
     }
 
-    @GetMapping("/find/name")
+    @GetMapping("/find")
     public ResponseEntity<?> findByName(String name) {
         return clientService.findByName(name);
     }

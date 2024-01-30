@@ -35,7 +35,7 @@ public class ClientService {
     public ResponseEntity<?> save(ClientDto clientDto) {
         try {
             Client client = modelMapper.map(clientDto, Client.class);
-//            clientRepository.save(client);
+            clientRepository.save(client);
             log.info("Клиент {} {} {} записан в базу данных, id={}", client.getLastName(), client.getFirstName(), client.getMiddleName(), client.getId());
             return ResponseEntity.ok(modelMapper.map(client, ClientSaveDto.class));
         } catch (Exception e) {
@@ -49,7 +49,7 @@ public class ClientService {
         try {
             Client client = clientRepository.findById(clientDtoUpdate.getId()).orElseThrow(() -> new UsernameNotFoundException("Пользователь не найден"));
             modelMapper.map(clientDtoUpdate, client);
-//            clientRepository.save(client);
+            clientRepository.save(client);
             log.info("Клиент {} {} {} обновлен, id={}", client.getLastName(), client.getFirstName(), client.getMiddleName(), client.getId());
             return ResponseEntity.ok(modelMapper.map(client, ClientSaveDto.class));
         } catch (UsernameNotFoundException e) {
@@ -67,6 +67,9 @@ public class ClientService {
             return ResponseEntity.ok(modelMapper.map(client, ClientFullDto.class));
         } catch (UsernameNotFoundException e) {
             log.error("Пользователь с id={} не найден", id);
+            return ResponseEntity.badRequest().body(Map.of("Ошибка", e.getMessage()));
+        } catch (Exception e) {
+            log.error("Ошибка записи клиента в базу данных, {}", e.getMessage());
             return ResponseEntity.badRequest().body(Map.of("Ошибка", e.getMessage()));
         }
     }
