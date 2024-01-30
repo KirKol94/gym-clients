@@ -59,7 +59,7 @@ export const Sidebar = () => {
   }
 
   return (
-    <aside className={isOpen ? classes.sidebar : classes.sidebar__hiden}>
+    <aside className={isOpen ? classes.sidebar : classes.sidebar__hidden}>
       <div onClick={onSidebarVisibleToggle} className={classes.logo__wrapper}>
         <img src={isOpen ? Logo : LogoMini} alt="Логотип" />
         <div className={classes.back}>

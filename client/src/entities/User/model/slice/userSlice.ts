@@ -24,8 +24,8 @@ const userSlice = createSlice({
       state.isAuth = true
     },
     initAuthData: (state) => {
-      const isAuth = localStorage.getItem(IS_AUTH_LOCAL_STORAGE_KEY)
-      const user = localStorage.getItem(USER_LOCAL_STORAGE_KEY)
+      const isAuth = localStorage.getItem(IS_AUTH_LOCAL_STORAGE_KEY())
+      const user = localStorage.getItem(USER_LOCAL_STORAGE_KEY())
 
       if (isAuth && user) {
         state.isAuth = JSON.parse(isAuth)

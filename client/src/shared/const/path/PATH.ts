@@ -1,4 +1,4 @@
-export enum ROUTER_PATH {
+export const enum ROUTER_PATH {
   HOME = '/',
   USERS = '/users',
   GROUP = '/group',

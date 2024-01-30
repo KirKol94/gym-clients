@@ -71,9 +71,9 @@ export const AuthForm = ({ type }: AuthFormProps) => {
     if (authStatus === 'fulfilled') {
       dispatch(userActions.setUser(resAuthData.user))
 
-      localStorage.setItem(USER_LOCAL_STORAGE_KEY, JSON.stringify(resAuthData.user))
-      localStorage.setItem(ACCESS_TOKEN_LOCAL_STORAGE_KEY, JSON.stringify(resAuthData.accessToken))
-      localStorage.setItem(IS_AUTH_LOCAL_STORAGE_KEY, JSON.stringify(true))
+      localStorage.setItem(USER_LOCAL_STORAGE_KEY(), JSON.stringify(resAuthData.user))
+      localStorage.setItem(ACCESS_TOKEN_LOCAL_STORAGE_KEY(), JSON.stringify(resAuthData.accessToken))
+      localStorage.setItem(IS_AUTH_LOCAL_STORAGE_KEY(), JSON.stringify(true))
 
       navigate(ROUTER_PATH.HOME)
     }
@@ -83,7 +83,7 @@ export const AuthForm = ({ type }: AuthFormProps) => {
     return (
       <>
         <Title size={TitleSize.XL}>Ошибка {isAuthError ? 'авторизации' : 'регистрации'}</Title>
-        <Text size={TextSize.M}>Обновите страниу и повторите снова</Text>
+        <Text size={TextSize.M}>Обновите страницу и повторите снова</Text>
       </>
     )
   }

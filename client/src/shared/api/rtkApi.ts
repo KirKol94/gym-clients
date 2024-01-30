@@ -6,9 +6,9 @@ import { ACCESS_TOKEN_LOCAL_STORAGE_KEY } from '../const/localStorage/accessToke
 export const rtkApi = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({
-    baseUrl: BASE_API_URL,
+    baseUrl: BASE_API_URL(),
     prepareHeaders: (Headers) => {
-      const token = localStorage.getItem(ACCESS_TOKEN_LOCAL_STORAGE_KEY)
+      const token = localStorage.getItem(ACCESS_TOKEN_LOCAL_STORAGE_KEY())
       if (token && token !== null) {
         Headers.set('Authorization', token)
       }
