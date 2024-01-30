@@ -1,3 +1,3 @@
-import { Group } from './ui/GroupPage'
+import { GroupPage } from './ui/GroupPage'
 
-export default Group
+export default GroupPage

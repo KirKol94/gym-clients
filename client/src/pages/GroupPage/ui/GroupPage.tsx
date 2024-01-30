@@ -1,7 +1,7 @@
 import { Title, TitleSize } from '@/shared/ui/Title'
 import Page from '@/widgets/Page'
 
-export const Group = () => {
+export const GroupPage = () => {
   return (
     <Page>
       <Title size={TitleSize.XXL}>CompanyGroups</Title>
