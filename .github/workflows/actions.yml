@@ -13,8 +13,15 @@ jobs:
     - uses: actions/checkout@v3
       with:
         clean: true
-    - name: Test
+    - name: Build Frontend
       run: |
         ls
-        cd client && docker build -t build:test .
+        cd client && docker build -t cheblan/crm-frontend:latest .
+        docker push cheblan/crm-frontend:latest
+        echo "Nice"
+    - name: Build Backend
+      run: |
+        ls
+        cd backend && docker build -t cheblan/crm-backend:latest .
+        docker push cheblan/crm-backend:latest
         echo "Nice"
