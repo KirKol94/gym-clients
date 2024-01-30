@@ -1,3 +1,4 @@
+import { ReactNode } from 'react'
 import cx from 'classix'
 
 import { IconWithTitleSize } from '../models/types/iconWithTitle'
@@ -5,12 +6,12 @@ import { IconWithTitleSize } from '../models/types/iconWithTitle'
 import classes from './IconWithTitle.module.scss'
 
 interface IconWithTitleProps {
-  icon: string
   title: string
+  children: ReactNode
   size: IconWithTitleSize
 }
 
-export const IconWithTitle = ({ icon, title, size }: IconWithTitleProps) => {
+export const IconWithTitle = ({ title, children, size }: IconWithTitleProps) => {
   const cls = cx(
     classes['icon-with-title'],
     size === IconWithTitleSize.S && classes['icon-with-title__s'],
@@ -19,7 +20,7 @@ export const IconWithTitle = ({ icon, title, size }: IconWithTitleProps) => {
 
   return (
     <div className={cls}>
-      <img src={icon} alt="icon" />
+      {children}
       <h2>{title}</h2>
     </div>
   )
