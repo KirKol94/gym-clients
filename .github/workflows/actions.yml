@@ -1,0 +1,20 @@
+name: test
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        clean: true
+    - name: Test
+      run: |
+        ls
+        cd client && docker build -t build:test .
+        echo "Nice"

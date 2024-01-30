@@ -1,0 +1,12 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  row-gap: 80px;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+
+  .title {
+    font-style: italic;
+  }
+}

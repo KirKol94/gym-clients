@@ -68,7 +68,7 @@ public class ClientService {
         } catch (UsernameNotFoundException e) {
             log.error("Пользователь с id={} не найден", id);
             return ResponseEntity.badRequest().body(Map.of("Ошибка", e.getMessage()));
-        }catch (Exception e) {
+        } catch (Exception e) {
             log.error("Ошибка записи клиента в базу данных, {}", e.getMessage());
             return ResponseEntity.badRequest().body(Map.of("Ошибка", e.getMessage()));
         }
