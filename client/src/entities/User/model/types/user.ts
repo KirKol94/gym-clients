@@ -1,5 +1,5 @@
 export interface User {
-  email: string
+  username: string
   name: string
   surname: string
   patronymic: string
