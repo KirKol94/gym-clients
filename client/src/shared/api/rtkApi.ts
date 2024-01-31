@@ -12,6 +12,7 @@ export const rtkApi = createApi({
       if (token && token !== null) {
         Headers.set('Authorization', token)
       }
+      Headers.set('Accept', '*/*')
       return Headers
     },
   }),

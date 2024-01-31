@@ -5,9 +5,11 @@ export enum AuthType {
   REGISTER = 'register',
 }
 
-export interface AuthUserData {
-  email: string
+export interface ReqAuthData {
+  username: string
   password: string
 }
 
-export type RegisterData = AuthUserData & Omit<User, 'id'>
+export type ResAuthData = { Token: string }
+
+export type RegisterData = ReqAuthData & Omit<User, 'id'>
