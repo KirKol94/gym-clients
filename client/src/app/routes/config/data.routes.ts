@@ -10,6 +10,7 @@ const ProfilePage = lazy(() => import('@/pages/ProfilePage'))
 const UsersPage = lazy(() => import('@/pages/UsersPage'))
 const GroupPage = lazy(() => import('@/pages/GroupPage'))
 const AgentPage = lazy(() => import('@/pages/AgentPage'))
+const HomePage = lazy(() => import('@/pages/HomePage'))
 const ContractPage = lazy(() => import('@/pages/ContractPage'))
 const DealsPage = lazy(() => import('@/pages/DealsPage'))
 const SettingsPage = lazy(() => import('@/pages/SettingsPage'))
@@ -18,6 +19,11 @@ const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'))
 export const routesData: IRoutesData[] = [
   {
     index: true,
+    component: HomePage,
+    isAuth: true,
+  },
+  {
+    path: ROUTER_PATH.PROFILE,
     component: ProfilePage,
     isAuth: true,
   },

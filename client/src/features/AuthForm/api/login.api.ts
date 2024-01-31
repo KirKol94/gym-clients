@@ -1,12 +1,12 @@
 import { rtkApi } from '@/shared/api/rtkApi'
 
-import { AuthUserData } from '../model/types/auth'
+import { ReqAuthData, ResAuthData } from '../model/types/auth'
 
 const authApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({
-    sendAuthData: build.mutation({
-      query: (body: AuthUserData) => ({
-        url: 'login',
+    sendAuthData: build.mutation<ResAuthData, ReqAuthData>({
+      query: (body) => ({
+        url: 'gettoken',
         method: 'post',
         body,
       }),
