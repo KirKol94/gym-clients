@@ -1,8 +1,9 @@
 import cx from 'classix'
 
-import RightArrow from '../../../assets/icons/arrow.svg?react'
-import Chevron from '../../../assets/icons/Back.svg?react'
-import Edit from '../../../assets/icons/edit.svg?react'
+import RightArrow from '@/shared/assets/icons/arrow.svg?react'
+import Chevron from '@/shared/assets/icons/Back.svg?react'
+import Edit from '@/shared/assets/icons/edit.svg?react'
+
 import {
   RoundButtonBackground,
   RoundButtonColor,
@@ -16,7 +17,7 @@ interface RoundButtonProps {
   size: RoundButtonSize
   direction?: RoundButtonDirection
   color: RoundButtonColor
-  background: RoundButtonBackground
+  background?: RoundButtonBackground
   chevron?: boolean
   arrowRight?: boolean
   edit?: boolean

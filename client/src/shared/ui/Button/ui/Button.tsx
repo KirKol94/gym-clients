@@ -11,10 +11,9 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: ReactNode
   primaryButton?: boolean
   settingsButton?: boolean
-  icon?: string
-  text: string
+  text?: string
   color: ButtonTextColor
-  background: string
+  background: ButtonBackground
 }
 
 export const Button = ({
@@ -29,35 +28,25 @@ export const Button = ({
 }: ButtonProps) => {
   const buttonClass = cx(
     classes.button,
-    size === ButtonSize.M && classes.button__m,
-    size === ButtonSize.S && classes.button__s,
-    size === ButtonSize.XS && classes.button__xs,
-    color === ButtonTextColor.WHITE && classes.button__white,
-    color === ButtonTextColor.BLUE && classes.button__blue,
-    color === ButtonTextColor.BLACK && classes.button__black,
-    background === ButtonBackground.WHITE && classes.button__bgwhite,
-    background === ButtonBackground.BLUE && classes.button__bgblue,
+    size && classes[`button__${size.toLowerCase()}`],
+    color && classes[`button__${color.toLowerCase()}`],
+    background && classes[`button__bg${background.toLowerCase()}`],
   )
   const settingsClass = cx(
     classes.settings,
-    size === ButtonSize.M && classes.settings__m,
-    size === ButtonSize.S && classes.settings__s,
-    size === ButtonSize.XS && classes.settings__xs,
-    color === ButtonTextColor.WHITE && classes.settings__white,
-    color === ButtonTextColor.BLUE && classes.settings__blue,
-    color === ButtonTextColor.BLACK && classes.settings__black,
-    background === ButtonBackground.WHITE && classes.settings__bgwhite,
-    background === ButtonBackground.BLUE && classes.settings__bgblue,
+    size && classes[`settings__${size.toLowerCase()}`],
+    color && classes[`settings__${color.toLowerCase()}`],
+    background && classes[`settings__bg${background.toLowerCase()}`],
   )
 
   return primaryButton ? (
     <button className={buttonClass} {...props}>
-      {text}
+      {children}
     </button>
   ) : (
     settingsButton && (
       <button className={settingsClass} {...props}>
-        <IconWithTitle size={IconWithTitleSize.S} title={text}>
+        <IconWithTitle size={IconWithTitleSize.S} title={text ? text : 'Text'}>
           {children}
         </IconWithTitle>
       </button>

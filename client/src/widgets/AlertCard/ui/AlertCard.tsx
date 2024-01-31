@@ -26,7 +26,9 @@ export const AlertCard = ({ count, title, alert }: AlertInfo) => {
           color={ButtonTextColor.WHITE}
           text="Обработать"
           background={ButtonBackground.BLUE}
-        />
+        >
+          Обработать
+        </Button>
         <Text size={TextSize.S}>{alert}</Text>
       </div>
     </div>

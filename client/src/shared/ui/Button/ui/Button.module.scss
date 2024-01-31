@@ -19,7 +19,6 @@
   }
 }
 
-
 .button {
   background-color: var(--color-primary-90);
   border: 1px solid transparent;
@@ -27,47 +26,25 @@
     box-shadow var(--transition-delay-fast) ease,
     opacity var(--transition-delay-fast) ease;
 
-  &__m {
-    @include size(20, 40, 10);
-  }
-
-  &__s {
-    @include size(10, 20, 10);
-  }
-
+  &__m { @include size(20, 40, 10) }
+  &__s { @include size(10, 20, 10) }
   &__xs {
     @include size(5, 10, 5);
     font-size: 12px;
   }
 
-  &__white {
-    @include buttonColor(var(--color-white))
-  }
-
-  &__blue {
-    @include buttonColor(var(--color-primary-90))
-  }
-
-  &__black {
-    @include buttonColor(var(--color-neutral-100))
-  }
+  &__white { @include buttonColor(var(--color-white)) }
+  &__blue { @include buttonColor(var(--color-primary-90)) }
+  &__black { @include buttonColor(var(--color-neutral-100)) }
   
   &__bgblue  {
     background-color: var(--color-primary-90);
     border: none;
   }
+  &__bgwhite { background-color: var(--color-white) }
 
-  &__bgwhite {
-    background-color: var(--color-white);
-  }
-
-  &:hover {
-    box-shadow: 0 2px 10px rgb(0 0 0 / 0.2);
-  }
-
-  &:active {
-    opacity: 0.9;
-  }
+  &:hover { box-shadow: 0 2px 10px rgb(0 0 0 / 0.2) }
+  &:active { opacity: 0.9 }
 }
 
 .settings {
@@ -81,45 +58,20 @@
     }
   }
 
-  &__m {
-    @include size(20, 40, 10);
-  }
+  &__m { @include size(20, 40, 10) }
+  &__s { @include size(10, 20, 10) }
+  &__xs { @include size(5, 10, 5) }
 
-  &__s {
-    @include size(10, 20, 10);
-  }
-
-  &__xs {
-    @include size(5, 10, 5);
-  }
-
-  &__white {
-    @include settingsColor(var(--color-white))
-  }
-
-  &__blue {
-    @include settingsColor(var(--color-primary-90))
-  }
-
-  &__black {
-    @include settingsColor(var(--color-neutral-100))
-  }
+  &__white { @include settingsColor(var(--color-white)) }
+  &__blue { @include settingsColor(var(--color-primary-90)) }
+  &__black { @include settingsColor(var(--color-neutral-100)) }
 
   &__bgblue {
     background-color: var(--color-primary-90);
     border: none;
   }
-
-  &__bgwhite {
-    background-color: var(--color-white);
-  }
+  &__bgwhite { background-color: var(--color-white) }
   
-  &:hover {
-    box-shadow: 0 2px 6px rgb(0 0 0 / 0.2);
-  }
-
-  &:active {
-    box-shadow: none;
-  }
-
+  &:hover { box-shadow: 0 2px 6px rgb(0 0 0 / 0.2) }
+  &:active { box-shadow: none }
 }

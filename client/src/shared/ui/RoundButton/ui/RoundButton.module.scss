@@ -1,0 +1,61 @@
+@mixin svgColor($color) {
+    svg { path { stroke: $color } }
+    border-color: $color
+}
+
+@mixin bgColor($color) {
+    background: $color;
+    border-color: $color;
+
+    &:hover { background-color: $color }
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--color-primary-90);
+    border-radius: 50%;
+    transition: background-color var(--transition-delay-fast) ease;
+    
+    &:hover { background-color: rgba(#3f8cff, 0.1) }
+    &:active { background-color: transparent }
+
+    &__s {
+        width: 26px;
+        height: 26px;
+
+        svg {
+            margin-right: 2px;
+            margin-left: 2px;
+        }
+    }
+    &__m {
+        width: 40px;
+        height: 40px;
+
+        svg { width: 20px }
+    }
+
+    &__up { transform: rotate(-90deg) }
+    &__right { transform: rotate(0deg) }
+    &__down { transform: rotate(90deg) }
+    &__left { transform: rotate(-180deg) }
+
+    &__white { @include svgColor(var(--color-white)) }
+    &__blue { @include svgColor(var(--color-primary-90)) }
+    &__black { @include svgColor(var(--color-neutral-100)) }
+
+    &__bgwhite { background: transparent }    
+    &__bgblue { @include bgColor(var(--color-primary-90)) }
+    &__bgblack { @include bgColor(var(--color-neutral-100)) }
+
+    &__chevron {
+        svg {
+            transform: rotate(180deg);
+            margin-left: 3px;
+        }
+    }
+}

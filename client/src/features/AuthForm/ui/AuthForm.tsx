@@ -7,6 +7,7 @@ import { ROUTER_PATH } from '@/shared/const/path/PATH'
 import { useAppDispatch } from '@/shared/hooks'
 import { AppLink, AppLinkSize } from '@/shared/ui/AppLink'
 import { Button, ButtonSize } from '@/shared/ui/Button'
+import { ButtonBackground, ButtonTextColor } from '@/shared/ui/Button/mode/types/button'
 import { Input } from '@/shared/ui/Input'
 import { Text, TextSize } from '@/shared/ui/Text'
 import { Title, TitleSize } from '@/shared/ui/Title'
@@ -116,7 +117,13 @@ export const AuthForm = ({ type = AuthType.LOGIN }: AuthFormProps) => {
         )}
 
         <div className={classes.footer}>
-          <Button size={ButtonSize.M} type="submit">
+          <Button
+            size={ButtonSize.M}
+            type="submit"
+            color={ButtonTextColor.WHITE}
+            background={ButtonBackground.BLUE}
+            primaryButton={true}
+          >
             {type === AuthType.LOGIN && 'Войти'}
             {type === AuthType.REGISTER && 'Регистрация'}
           </Button>
