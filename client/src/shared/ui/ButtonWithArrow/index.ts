@@ -1,2 +1,2 @@
-export { ButtonWithArrow } from './ui/ButtonWithArrow'
-export { ButtonWithArrowDirection } from './model/types/buttonWithArrow'
+export { RoundButton } from './ui/RoundButton'
+export { RoundButtonDirection } from './model/types/roundButton'
