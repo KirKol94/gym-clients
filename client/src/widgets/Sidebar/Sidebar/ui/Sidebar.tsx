@@ -19,7 +19,7 @@ import classes from './Sidebar.module.scss'
 export const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true)
 
-  const user = { title: 'Иван Иванов', icon: Avatar, to: ROUTER_PATH.HOME }
+  const user = { title: 'Иван Иванов', icon: Avatar, to: ROUTER_PATH.PROFILE }
 
   const sidebarItems = [
     {
