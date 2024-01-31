@@ -82,7 +82,7 @@ export const AuthForm = ({ type = AuthType.LOGIN }: AuthFormProps) => {
       <form className={classes.form} onSubmit={handleSubmit}>
         <Input
           inputName="Email"
-          name="email"
+          name="username"
           placeholder="Email"
           onChange={handleInputChange}
           value={userData.username}
