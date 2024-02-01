@@ -68,7 +68,6 @@ export const AuthForm = ({ type = AuthType.LOGIN }: AuthFormProps) => {
     if (authStatus === 'fulfilled' && resAuthData?.Token) {
       dispatch(userActions.setIsAuth())
       localStorage.setItem(ACCESS_TOKEN_LOCAL_STORAGE_KEY, resAuthData?.Token)
-      navigate(ROUTER_PATH.PROFILE)
     }
   }, [authStatus, dispatch, navigate, resAuthData?.Token])
 
