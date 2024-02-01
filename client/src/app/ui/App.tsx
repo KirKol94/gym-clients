@@ -13,6 +13,8 @@ export const App = () => {
   const navigate = useNavigate()
   const isAuth = useAppSelector(getIsAuth)
 
+  const hello = 'world'
+
   useEffect(() => {
     dispatch(userActions.initAuthData())
   }, [dispatch])
