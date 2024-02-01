@@ -13,6 +13,7 @@
 
 @mixin sidebar {
   display: flex;
+  height: calc(100vh - (var(--padding-container) * 3) - 55px);
   flex-direction: column;
   align-items: center;
   width: 230px;
