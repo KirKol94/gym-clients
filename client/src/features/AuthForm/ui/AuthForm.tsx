@@ -3,6 +3,7 @@ import { Navigate, useNavigate } from 'react-router-dom'
 
 import { getIsAuth, User, userActions } from '@/entities/User'
 import { ACCESS_TOKEN_LOCAL_STORAGE_KEY } from '@/shared/const/localStorage/accessTokenKey'
+import { CURRENT_PATHNAME_KEY } from '@/shared/const/localStorage/currentLocationKey'
 import { ROUTER_PATH } from '@/shared/const/path/PATH'
 import { useAppDispatch, useAppSelector } from '@/shared/hooks'
 import { AppLink, AppLinkSize } from '@/shared/ui/AppLink'
@@ -72,7 +73,8 @@ export const AuthForm = ({ type = AuthType.LOGIN }: AuthFormProps) => {
     }
   }, [authStatus, dispatch, navigate, resAuthData?.Token])
 
-  if (isAuth) return <Navigate to={ROUTER_PATH.PROFILE} />
+  const currentLocationPath = localStorage.getItem(CURRENT_PATHNAME_KEY)
+  if (isAuth) return <Navigate to={currentLocationPath ? currentLocationPath : ROUTER_PATH.PROFILE} />
 
   return (
     <>
