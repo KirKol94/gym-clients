@@ -41,27 +41,31 @@ import { Button } from '@/shared/ui/Button'
 git clone https://github.com/KirKol94/crm.git
 ```
 
-перейти в папку fe-dev (основная ветка для разработки клиентской части на данный момент)
-
-```
-git checkout fe-dev
-```
-
 запустить проект в режиме разработчика
 
 ```node
 npm run dev
 ```
 
-таким образом запустится client на порту `5173` и фейковый бэк `json-server` на порту `3002`
+таким образом запустится client на порту `5173`
+
+чтобы запустить бэк локально, необходимо перейти из `client` в папку `backend`
+
+```
+cd ../backend
+```
+
+и в этой папке выполнить команду
+
+```
+docker compose up -d
+```
 
 ## дополнительные скрипты на проекте
 
 ```json
   "scripts": {
-    "dev": "concurrently \"yarn dev:client\" \"yarn dev:server\"",
-    "dev:client": "vite",
-    "dev:server": "[ -f db.json ] && echo '{\"users\":[{\"email\":\"admin@admin.ru\",\"password\":\"$2a$10$5Ne37HXDhSLVZA.iggAGG.KhaMbBF3lrsKm9dTxjRFSCe5Nshs4o2\",\"name\":\"admin\",\"surname\":\"adminov\",\"patronymic\":\"adminovich\",\"id\":1}]}' > db.json || echo '{\"users\":[{\"email\":\"admin@admin.ru\",\"password\":\"$2a$10$5Ne37HXDhSLVZA.iggAGG.KhaMbBF3lrsKm9dTxjRFSCe5Nshs4o2\",\"name\":\"admin\",\"surname\":\"adminov\",\"patronymic\":\"adminovich\",\"id\":1}]}' > db.json && json-server-auth --watch db.json --port 3001",
+    "dev": "vite",
     "build": "tsc && vite build && echo '/* /index.html  200' | cat >dist/_redirects ",
     "lint": "concurrently \"yarn lint:ts\" \"yarn lint:style\"",
     "lint:ts": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix",
@@ -71,13 +75,7 @@ npm run dev
   },
 ```
 
-`dev` запускает и фронт и бэк
-`dev:client` запускает клиент
-`dev:server` запускает бэк и создаёт файл `db.json` cо стандартными данными для авторизации
-
-```json
-{ "email": "admin@admin.ru", "password": "12341234" }
-```
+`dev` запускает клиент
 
 `build` собирает проект в папке `dist` (html / css / js)
 
