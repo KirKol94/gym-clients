@@ -1,10 +1,10 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 
-import { User, userActions } from '@/entities/User'
+import { getIsAuth, User, userActions } from '@/entities/User'
 import { ACCESS_TOKEN_LOCAL_STORAGE_KEY } from '@/shared/const/localStorage/accessTokenKey'
 import { ROUTER_PATH } from '@/shared/const/path/PATH'
-import { useAppDispatch } from '@/shared/hooks'
+import { useAppDispatch, useAppSelector } from '@/shared/hooks'
 import { AppLink, AppLinkSize } from '@/shared/ui/AppLink'
 import { Button, ButtonSize } from '@/shared/ui/Button'
 import { Input } from '@/shared/ui/Input'
@@ -28,6 +28,7 @@ export const AuthForm = ({ type = AuthType.LOGIN }: AuthFormProps) => {
   const navigate = useNavigate()
   const [sendAuthData, { data: resAuthData, status: authStatus }] = useSendAuthData()
   const [sendRegisterData] = useSendRegisterDataMutation()
+  const isAuth = useAppSelector(getIsAuth)
 
   const [userData, setUserData] = useState<FormData>({
     username: '',
@@ -68,9 +69,10 @@ export const AuthForm = ({ type = AuthType.LOGIN }: AuthFormProps) => {
     if (authStatus === 'fulfilled' && resAuthData?.Token) {
       dispatch(userActions.setIsAuth())
       localStorage.setItem(ACCESS_TOKEN_LOCAL_STORAGE_KEY, resAuthData?.Token)
-      navigate(ROUTER_PATH.PROFILE)
     }
   }, [authStatus, dispatch, navigate, resAuthData?.Token])
+
+  if (isAuth) return <Navigate to={ROUTER_PATH.PROFILE} />
 
   return (
     <>
