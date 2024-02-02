@@ -1,5 +1,6 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 
 import { User, userActions } from '@/entities/User'
 import { ACCESS_TOKEN_LOCAL_STORAGE_KEY } from '@/shared/const/localStorage/accessTokenKey'
@@ -27,7 +28,7 @@ export const AuthForm = ({ type = AuthType.LOGIN }: AuthFormProps) => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const [sendAuthData, { data: resAuthData, status: authStatus }] = useSendAuthData()
-  const [sendRegisterData, { status: registerStatus }] = useSendRegisterData()
+  const [sendRegisterData, { status: registerStatus, error: registerError }] = useSendRegisterData()
 
   const [userData, setUserData] = useState<FormData>({
     firstName: '',
@@ -71,6 +72,9 @@ export const AuthForm = ({ type = AuthType.LOGIN }: AuthFormProps) => {
       localStorage.setItem(ACCESS_TOKEN_LOCAL_STORAGE_KEY, resAuthData?.Token)
     }
   }, [authStatus, dispatch, navigate, resAuthData?.Token])
+
+  // TODO убрать
+  if (registerStatus === 'rejected') alert(`Ошибка при регистрации (${(registerError as FetchBaseQueryError).data})`)
 
   if (registerStatus === 'fulfilled') return <Navigate to={ROUTER_PATH.LOGIN} />
 
