@@ -1,6 +1,5 @@
 package ru.castroy10.backend.config;
 
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -32,7 +31,7 @@ public class SecurityConfig implements WebMvcConfigurer {
                 csrf((csrf) -> csrf.disable())
                 .authorizeHttpRequests((authorize) ->
                         authorize
-                                .requestMatchers("/api/v1/login").permitAll()
+                                .requestMatchers("/api/v1/user/login","/api/v1/user/register").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .formLogin(
