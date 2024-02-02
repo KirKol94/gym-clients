@@ -7,7 +7,7 @@ const registerApi = rtkApi.injectEndpoints({
     sendRegisterData: build.mutation<ResRegisterData, ReqRegisterData>({
       query: (body) => ({
         method: 'post',
-        url: 'register',
+        url: 'user/register',
         body,
       }),
     }),
