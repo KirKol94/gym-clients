@@ -14,6 +14,7 @@ import ru.castroy10.backend.service.ClientService;
 import java.util.HashMap;
 import java.util.Map;
 
+@ControllerAdvice
 @RestController
 @RequestMapping("/api/v1/client")
 public class ClientController {
