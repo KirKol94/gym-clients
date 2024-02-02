@@ -14,7 +14,7 @@ services:
       - postgres-volume:/var/lib/postgresql/data
 
   backend:
-    image: cheblan/crm-backend:master
+    image: cheblan/crm-backend:latest
     container_name: backend
     restart: always
     env_file:
@@ -28,7 +28,7 @@ services:
       - postgres
 
   frontend:
-    image: cheblan/crm-frontend:master
+    image: cheblan/crm-frontend:latest
     container_name: frontend
     restart: always
     env_file:
