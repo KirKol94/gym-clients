@@ -4,10 +4,15 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import ru.castroy10.backend.model.Role;
+
+import java.util.Set;
 
 @Data
-public class AppUserRegisterDto implements AppUserDto{
+public class AppUserUpdateDto implements AppUserDto{
 
+    @NotNull
+    private Long id;
     @NotNull
     @NotBlank
     private String lastName;
@@ -17,14 +22,11 @@ public class AppUserRegisterDto implements AppUserDto{
     @NotNull
     @NotBlank
     private String middleName;
-    @NotNull
-    @NotBlank
     private String username;
-    @NotNull
-    @NotBlank
     private String password;
     @Email
     private String email;
     private String avatarFileName;
     private String avatarFileData;
+    private Set<Role> roles;
 }
