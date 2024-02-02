@@ -1,5 +1,5 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 
 import { User, userActions } from '@/entities/User'
 import { ACCESS_TOKEN_LOCAL_STORAGE_KEY } from '@/shared/const/localStorage/accessTokenKey'
@@ -12,7 +12,7 @@ import { Text, TextSize } from '@/shared/ui/Text'
 import { Title, TitleSize } from '@/shared/ui/Title'
 
 import { useSendAuthData } from '../api/login.api'
-import { useSendRegisterDataMutation } from '../api/register.api'
+import { useSendRegisterData } from '../api/register.api'
 import { AuthType } from '../model/types/auth'
 
 import classes from './AuthForm.module.scss'
@@ -27,14 +27,15 @@ export const AuthForm = ({ type = AuthType.LOGIN }: AuthFormProps) => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const [sendAuthData, { data: resAuthData, status: authStatus }] = useSendAuthData()
-  const [sendRegisterData] = useSendRegisterDataMutation()
+  const [sendRegisterData, { status: registerStatus }] = useSendRegisterData()
 
   const [userData, setUserData] = useState<FormData>({
+    firstName: '',
+    middleName: '',
+    lastName: '',
     username: '',
+    email: '',
     password: '',
-    name: '',
-    surname: '',
-    patronymic: '',
   })
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -71,6 +72,8 @@ export const AuthForm = ({ type = AuthType.LOGIN }: AuthFormProps) => {
     }
   }, [authStatus, dispatch, navigate, resAuthData?.Token])
 
+  if (registerStatus === 'fulfilled') return <Navigate to={ROUTER_PATH.LOGIN} />
+
   return (
     <>
       <Title size={TitleSize.XXL} className={classes.title}>
@@ -80,14 +83,14 @@ export const AuthForm = ({ type = AuthType.LOGIN }: AuthFormProps) => {
 
       <form className={classes.form} onSubmit={handleSubmit}>
         <Input
-          inputName="Email"
+          inputName="Имя пользователя*"
           name="username"
-          placeholder="Email"
+          placeholder="Имя пользователя"
           onChange={handleInputChange}
           value={userData.username}
         />
         <Input
-          inputName="Пароль"
+          inputName="Пароль*"
           name="password"
           placeholder="Пароль"
           onChange={handleInputChange}
@@ -96,20 +99,33 @@ export const AuthForm = ({ type = AuthType.LOGIN }: AuthFormProps) => {
 
         {type === AuthType.REGISTER && (
           <>
-            <Input inputName="Имя" name="name" placeholder="Имя" onChange={handleInputChange} value={userData.name} />
             <Input
-              inputName="Фамилия"
-              name="surname"
-              placeholder="Фамилия"
+              inputName="Email"
+              name="email"
+              placeholder="Email"
               onChange={handleInputChange}
-              value={userData.surname}
+              value={userData.email}
             />
             <Input
-              inputName="Отчество"
-              name="patronymic"
+              inputName="Имя*"
+              name="firstName"
+              placeholder="Имя"
+              onChange={handleInputChange}
+              value={userData.firstName}
+            />
+            <Input
+              inputName="Фамилия*"
+              name="middleName"
+              placeholder="Фамилия"
+              onChange={handleInputChange}
+              value={userData.middleName}
+            />
+            <Input
+              inputName="Отчество*"
+              name="lastName"
               placeholder="Отчество"
               onChange={handleInputChange}
-              value={userData.patronymic}
+              value={userData.lastName}
             />
           </>
         )}
