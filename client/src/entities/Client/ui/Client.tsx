@@ -10,7 +10,7 @@ interface ClientProps {
 
 export const Client = ({ client }: ClientProps) => {
   const { firstName, middleName, lastName, email, birthday, sex, mobilePhone, personalTrainingCount } = client
-  const clientClass = cx(clx.button)
+  const clientClass = cx(clx.client)
 
   return (
     <li className={clientClass}>
