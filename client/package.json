@@ -10,7 +10,8 @@
     "lint:ts": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix",
     "lint:prettier": "prettier --write ./src",
     "lint:style": "stylelint src/**/*.scss --fix",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "new": "node ./scripts/createSlice/index.js"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.0.1",
