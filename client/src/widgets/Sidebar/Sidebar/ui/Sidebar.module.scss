@@ -28,7 +28,6 @@
 
   &__hiden {
     @include sidebar;
-
     width: 75px;
   }
 }
@@ -40,16 +39,24 @@
   justify-content: center;
   width: 100%;
 
-  .back {
-    @include back;
+  &__hiden {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 75px;
+  }
+}
 
-    .img {
-      margin-right: 2px;
+.back {
+  @include back;
 
-      &__active {
-        margin-left: 2px;
-        transform: scaleX(-1);
-      }
+  .img {
+    margin-right: 2px;
+
+    &__active {
+      margin-left: 2px;
+      transform: scaleX(-1);
     }
   }
 }

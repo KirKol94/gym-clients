@@ -11,8 +11,15 @@ export const Router: FC = () => {
     <Routes>
       {routesData.map((route, index) =>
         route.isAuth ? (
-          <Route key={index} element={<PrivateRoute />}>
-            <Route index={route.index} key={index} path={route.path} element={<RouteSuspenseLayout route={route} />} />
+          <Route>
+            <Route key={index} element={<PrivateRoute />}>
+              <Route
+                index={route.index}
+                key={index}
+                path={route.path}
+                element={<RouteSuspenseLayout route={route} />}
+              />
+            </Route>
           </Route>
         ) : (
           <Route index={route.index} key={index} path={route.path} element={<RouteSuspenseLayout route={route} />} />

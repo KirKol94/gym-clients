@@ -60,9 +60,9 @@ export const Sidebar = () => {
 
   return (
     <aside className={isOpen ? classes.sidebar : classes.sidebar__hiden}>
-      <div onClick={onSidebarVisibleToggle} className={classes.logo__wrapper}>
+      <div className={isOpen ? classes.logo__wrapper : classes.logo__wrapper__hiden}>
         <img src={isOpen ? Logo : LogoMini} alt="Логотип" />
-        <div className={classes.back}>
+        <div onClick={onSidebarVisibleToggle} className={classes.back}>
           <img className={isOpen ? classes.img : classes.img__active} src={BackArrow} />
         </div>
       </div>
