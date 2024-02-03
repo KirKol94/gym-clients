@@ -6,7 +6,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,24 +36,17 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<?> getToken(@RequestBody AppUserLoginDto appUserLoginDto) {
         UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(appUserLoginDto.getUsername(), appUserLoginDto.getPassword());
-        try {
-            authenticationManager.authenticate(auth);
-        } catch (AuthenticationException e) {
-            return ResponseEntity.badRequest().contentType(MediaType.APPLICATION_JSON).body(Map.of("Login or password incorrect", e.toString()));
-        }
+        authenticationManager.authenticate(auth);
         return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(Map.of("Token", jwtUtil.generateToken(appUserLoginDto.getUsername())));
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody @Valid AppUserRegisterDto appUserRegisterDto) {
-        try {
+    public ResponseEntity<?> register(@RequestBody @Valid AppUserRegisterDto appUserRegisterDto) throws RollbackException {
             return appUserService.register(appUserRegisterDto);
-        } catch (RollbackException e) {
-            return ResponseEntity.badRequest().body(Map.of("Ошибка", e.getMessage()));
-        }
     }
+
     @PostMapping("/update")
-    public ResponseEntity<?> update(@RequestBody @Valid AppUserUpdateDto appUserUpdateDto){
+    public ResponseEntity<?> update(@RequestBody @Valid AppUserUpdateDto appUserUpdateDto) {
         return appUserService.update(appUserUpdateDto);
     }
 

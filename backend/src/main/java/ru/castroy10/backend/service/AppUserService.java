@@ -3,7 +3,6 @@ package ru.castroy10.backend.service;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -17,11 +16,9 @@ import ru.castroy10.backend.model.Appuser;
 import ru.castroy10.backend.model.Role;
 import ru.castroy10.backend.repository.AppUserRepository;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
-import java.util.*;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -32,15 +29,16 @@ public class AppUserService {
     private final ModelMapper modelMapper;
     private final RoleService roleService;
     private final PasswordEncoder passwordEncoder;
-    @Value("${pathForAvatars}")
-    private String pathForAvatars;
+    private final AppUserAvatarService appUserAvatarService;
+
 
     @Autowired
-    public AppUserService(AppUserRepository appUserRepository, ModelMapper modelMapper, RoleService roleService, PasswordEncoder passwordEncoder) {
+    public AppUserService(AppUserRepository appUserRepository, ModelMapper modelMapper, RoleService roleService, PasswordEncoder passwordEncoder, AppUserAvatarService appUserAvatarService) {
         this.appUserRepository = appUserRepository;
         this.roleService = roleService;
         this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
+        this.appUserAvatarService = appUserAvatarService;
     }
 
     @Transactional
@@ -57,12 +55,11 @@ public class AppUserService {
     @Transactional(rollbackFor = RollbackException.class)
     public ResponseEntity<?> register(AppUserRegisterDto appUserRegisterDto) throws RollbackException {
         try {
-            String avatarFile = null;
             if (checkUserExist(appUserRegisterDto.getUsername()))
                 throw new UserDuplicateException("Такой пользователь уже существует");
-            if (checkAvatarExist(appUserRegisterDto)) avatarFile = saveAvatarFile(appUserRegisterDto);
             Appuser appuser = modelMapper.map(appUserRegisterDto, Appuser.class);
-            setUserAttributes(appuser, appUserRegisterDto, avatarFile);
+            appUserAvatarService.saveAvatar(appuser, appUserRegisterDto);
+            setUserAttributes(appuser, appUserRegisterDto);
             save(appuser);
             return ResponseEntity.ok().body(Map.of("Пользователь сохранен с id", appuser.getId().intValue()));
         } catch (UserDuplicateException e) {
@@ -77,13 +74,11 @@ public class AppUserService {
     @Transactional
     public ResponseEntity<?> update(AppUserUpdateDto appUserUpdateDto) {
         try {
-            String avatarFile = null;
             if (!checkUserExist(appUserUpdateDto.getId()))
                 throw new UserDuplicateException("Пользователя с таким id не существует");
-            if (checkAvatarExist(appUserUpdateDto)) avatarFile = saveAvatarFile(appUserUpdateDto);
             Appuser appuser = appUserRepository.findAppuserById(appUserUpdateDto.getId()).orElse(new Appuser());
             modelMapper.map(appUserUpdateDto, appuser);
-            setUserAttributes(appuser, appUserUpdateDto, avatarFile);
+            setUserAttributes(appuser, appUserUpdateDto);
             if (appUserUpdateDto.getRoles() != null) {
                 appuser.setRoles(null);
                 appuser.setRoles(getRolesFromDB(appUserUpdateDto));
@@ -107,25 +102,14 @@ public class AppUserService {
         return appuser.isPresent();
     }
 
-    private boolean checkAvatarExist(AppUserDto appUserDto) {
-        if (appUserDto.getAvatarFileName() == null
-                || appUserDto.getAvatarFileData() == null
-                || appUserDto.getAvatarFileName().isBlank()
-                || appUserDto.getAvatarFileData().isBlank()) {
-            return false;
-        } else return true;
-    }
-
     private Set<Role> getRolesFromDB(AppUserUpdateDto appUserUpdateDto) {
-        Set<Role> roles = appUserUpdateDto.getRoles().stream()
+        return appUserUpdateDto.getRoles().stream()
                 .map(role -> roleService.findByRoleName(role.getRoleName()))
                 .collect(Collectors.toSet());
-        return roles;
     }
 
-    private void setUserAttributes(Appuser appuser, AppUserDto appUserDto, String avatarFile) {
+    private void setUserAttributes(Appuser appuser, AppUserDto appUserDto) {
         appuser.setPassword(passwordEncoder.encode(appUserDto.getPassword()));
-        appuser.setAvatar(avatarFile);
         appuser.setAccountNonLocked(true);
         appuser.setAccountNonExpired(true);
         appuser.setCredentialsNonExpired(true);
@@ -134,16 +118,6 @@ public class AppUserService {
             Role role = roleService.findByRoleName("ROLE_USER");
             appuser.setRoles(Set.of(role));
         }
-    }
-
-    private String saveAvatarFile(AppUserDto appUserDto) throws IOException {
-        String filename = UUID.randomUUID() + "." + appUserDto.getAvatarFileName().substring(appUserDto.getAvatarFileName().lastIndexOf(".") + 1);
-        String base64Data = appUserDto.getAvatarFileData();
-        byte[] binaryBytes = Base64.getDecoder().decode(base64Data);
-        Path avatarFile = Path.of(pathForAvatars + filename);
-        if (!Files.exists(avatarFile)) Files.createFile(avatarFile);
-        Files.write(avatarFile, binaryBytes, StandardOpenOption.WRITE);
-        return avatarFile.toString();
     }
 }
 
