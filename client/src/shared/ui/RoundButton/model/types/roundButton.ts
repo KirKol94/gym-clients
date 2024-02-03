@@ -10,14 +10,7 @@ export enum RoundButtonDirection {
   LEFT = 'left',
 }
 
-export enum RoundButtonColor {
-  WHITE = 'white',
-  BLUE = 'blue',
-  BLACK = 'black',
-}
-
-export enum RoundButtonBackground {
-  WHITE = 'white',
-  BLUE = 'blue',
-  BLACK = 'black',
+export enum RoundButtonTheme {
+  PRIMARY = 'primary',
+  SECONDARY = 'secondary',
 }

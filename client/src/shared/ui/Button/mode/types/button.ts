@@ -4,13 +4,9 @@ export enum ButtonSize {
   M = 'm',
 }
 
-export enum ButtonTextColor {
-  WHITE = 'White',
-  BLUE = 'Blue',
-  BLACK = 'Black',
-}
-
-export enum ButtonBackground {
-  WHITE = 'White',
-  BLUE = 'Blue',
+export enum ButtonTheme {
+  PRIMARY = 'primary',
+  SECONDARY = 'secondary',
+  SECONDARY_WHITE = 'secondary__white',
+  SECONDARY_BLUE = 'secondary__blue',
 }

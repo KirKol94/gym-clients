@@ -3,12 +3,7 @@
   border-radius: #{$radius}px;
 }
 
-@mixin buttonColor($color) {
-  color: $color;
-  border-color: $color;
-}
-
-@mixin settingsColor($color) {
+@mixin color($color) {
   color: $color;
   border-color: $color;
 
@@ -19,59 +14,85 @@
   }
 }
 
-.button {
-  background-color: var(--color-primary-90);
-  border: 1px solid transparent;
+.primary {
+  color: var(--color-white);
+  background: var(--color-primary-90);
   transition:
     box-shadow var(--transition-delay-fast) ease,
     opacity var(--transition-delay-fast) ease;
 
-  &__m { @include size(20, 40, 10) }
-  &__s { @include size(10, 20, 10) }
-  &__xs {
-    @include size(5, 10, 5);
-    font-size: 12px;
-  }
-
-  &__white { @include buttonColor(var(--color-white)) }
-  &__blue { @include buttonColor(var(--color-primary-90)) }
-  &__black { @include buttonColor(var(--color-neutral-100)) }
-  
-  &__bgblue  {
-    background-color: var(--color-primary-90);
-    border: none;
-  }
-  &__bgwhite { background-color: var(--color-white) }
-
-  &:hover { box-shadow: 0 2px 10px rgb(0 0 0 / 0.2) }
-  &:active { opacity: 0.9 }
-}
-
-.settings {
-  border: 1px solid var(--color-neutral-100);
-  transition: box-shadow var(--transition-delay-fast) ease;
-
   svg {
     width: 20px;
+
     path {
-      stroke: var(--color-neutral-100)
+      stroke: var(--color-white);
     }
   }
 
-  &__m { @include size(20, 40, 10) }
-  &__s { @include size(10, 20, 10) }
-  &__xs { @include size(5, 10, 5) }
-
-  &__white { @include settingsColor(var(--color-white)) }
-  &__blue { @include settingsColor(var(--color-primary-90)) }
-  &__black { @include settingsColor(var(--color-neutral-100)) }
-
-  &__bgblue {
-    background-color: var(--color-primary-90);
-    border: none;
+  &:hover {
+    box-shadow: 0 2px 10px rgb(0 0 0 / 0.2);
   }
-  &__bgwhite { background-color: var(--color-white) }
-  
-  &:hover { box-shadow: 0 2px 6px rgb(0 0 0 / 0.2) }
-  &:active { box-shadow: none }
+
+  &:active {
+    opacity: 0.9;
+  }
+
+  &_m {
+    @include size(20, 40, 10);
+  }
+
+  &_s {
+    @include size(10, 20, 10);
+  }
+
+  &_xs {
+    @include size(5, 10, 5);
+  }
+}
+
+.secondary__white {
+  @include color(var(--color-white));
+}
+
+.secondary__blue {
+  @include color(var(--color-primary-90));
+}
+
+.secondary,
+.secondary__white,
+.secondary__blue {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--color-neutral-100);
+  transition:
+    box-shadow var(--transition-delay-fast) ease,
+    opacity var(--transition-delay-fast) ease;
+
+  svg {
+    width: 20px;
+
+    path {
+      stroke: var(--color-neutral-100);
+    }
+  }
+
+  &:hover {
+    box-shadow: 0 2px 6px rgb(0 0 0 / 0.2);
+  }
+
+  &:active {
+    box-shadow: none;
+  }
+
+  &_m {
+    @include size(20, 40, 10);
+  }
+
+  &_s {
+    @include size(10, 20, 10);
+  }
+
+  &_xs {
+    @include size(5, 10, 5);
+  }
 }

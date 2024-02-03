@@ -1,2 +1,2 @@
 export { RoundButton } from './ui/RoundButton'
-export { RoundButtonDirection } from './model/types/roundButton'
+export { RoundButtonDirection, RoundButtonTheme, RoundButtonSize } from './model/types/roundButton'
