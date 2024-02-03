@@ -6,17 +6,16 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.castroy10.backend.dto.appuser.AppUserLoginDto;
 import ru.castroy10.backend.dto.appuser.AppUserRegisterDto;
 import ru.castroy10.backend.dto.appuser.AppUserUpdateDto;
 import ru.castroy10.backend.exception.RollbackException;
+import ru.castroy10.backend.exception.UserDuplicateException;
 import ru.castroy10.backend.security.jwt.JwtUtil;
 import ru.castroy10.backend.service.AppUserService;
 
+import java.io.IOException;
 import java.util.Map;
 
 @RestController
@@ -45,8 +44,8 @@ public class UserController {
             return appUserService.register(appUserRegisterDto);
     }
 
-    @PostMapping("/update")
-    public ResponseEntity<?> update(@RequestBody @Valid AppUserUpdateDto appUserUpdateDto) {
+    @PutMapping("/update")
+    public ResponseEntity<?> update(@RequestBody @Valid AppUserUpdateDto appUserUpdateDto) throws UserDuplicateException, IOException {
         return appUserService.update(appUserUpdateDto);
     }
 

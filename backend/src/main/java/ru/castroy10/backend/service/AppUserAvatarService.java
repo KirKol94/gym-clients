@@ -23,12 +23,10 @@ public class AppUserAvatarService {
     }
 
     private boolean avatarExist(AppUserDto appUserDto) {
-        if (appUserDto.getAvatarFileName() == null
-                || appUserDto.getAvatarFileData() == null
-                || appUserDto.getAvatarFileName().isBlank()
-                || appUserDto.getAvatarFileData().isBlank()) {
-            return false;
-        } else return true;
+        return appUserDto.getAvatarFileName() != null
+                && appUserDto.getAvatarFileData() != null
+                && !appUserDto.getAvatarFileName().isBlank()
+                && !appUserDto.getAvatarFileData().isBlank();
     }
 
     private String saveAvatarFile(AppUserDto appUserDto) throws IOException {

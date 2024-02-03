@@ -16,6 +16,7 @@ import ru.castroy10.backend.model.Appuser;
 import ru.castroy10.backend.model.Role;
 import ru.castroy10.backend.repository.AppUserRepository;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -43,13 +44,8 @@ public class AppUserService {
 
     @Transactional
     public void save(Appuser appuser) {
-        try {
-            appUserRepository.save(appuser);
-            log.info("Пользователь {} {} {} записан в базу данных, id={}", appuser.getLastName(), appuser.getFirstName(), appuser.getMiddleName(), appuser.getId());
-        } catch (Exception e) {
-            log.error("Ошибка записи пользователя в базу данных, {}", e.getMessage());
-            throw new RuntimeException(e);
-        }
+        appUserRepository.save(appuser);
+        log.info("Пользователь {} {} {} записан в базу данных, id={}", appuser.getLastName(), appuser.getFirstName(), appuser.getMiddleName(), appuser.getId());
     }
 
     @Transactional(rollbackFor = RollbackException.class)
@@ -62,9 +58,6 @@ public class AppUserService {
             setUserAttributes(appuser, appUserRegisterDto);
             save(appuser);
             return ResponseEntity.ok().body(Map.of("Пользователь сохранен с id", appuser.getId().intValue()));
-        } catch (UserDuplicateException e) {
-            log.error("Ошибка регистрации клиента {}, {}", appUserRegisterDto.getUsername(), e.getMessage());
-            return ResponseEntity.badRequest().body(Map.of("Ошибка", e.getMessage()));
         } catch (Exception e) {
             log.error("Ошибка регистрации клиента {}, {}", appUserRegisterDto.getUsername(), e.getMessage());
             throw new RollbackException(e.getMessage());
@@ -72,24 +65,16 @@ public class AppUserService {
     }
 
     @Transactional
-    public ResponseEntity<?> update(AppUserUpdateDto appUserUpdateDto) {
-        try {
-            if (!checkUserExist(appUserUpdateDto.getId()))
-                throw new UserDuplicateException("Пользователя с таким id не существует");
-            Appuser appuser = appUserRepository.findAppuserById(appUserUpdateDto.getId()).orElse(new Appuser());
-            modelMapper.map(appUserUpdateDto, appuser);
-            setUserAttributes(appuser, appUserUpdateDto);
-            if (appUserUpdateDto.getRoles() != null) {
-                appuser.setRoles(null);
-                appuser.setRoles(getRolesFromDB(appUserUpdateDto));
-            }
-            log.info("Пользователь {} {} {} обновлен в базу данных, id={}", appuser.getLastName(), appuser.getFirstName(), appuser.getMiddleName(), appuser.getId());
-            System.out.println(appuser);
-            return ResponseEntity.ok().body(Map.of("Пользователь обновлен с id", appuser.getId().intValue()));
-        } catch (Exception e) {
-            log.error("Ошибка обновления клиента id {}, {}", appUserUpdateDto.getId(), e.getMessage());
-            return ResponseEntity.badRequest().body(Map.of("Ошибка", e.getMessage()));
-        }
+    public ResponseEntity<?> update(AppUserUpdateDto appUserUpdateDto) throws UserDuplicateException, IOException {
+        if (!checkUserExist(appUserUpdateDto.getId()))
+            throw new UserDuplicateException("Пользователя с таким id не существует");
+        Appuser appuser = appUserRepository.findAppuserById(appUserUpdateDto.getId()).orElse(new Appuser());
+        modelMapper.map(appUserUpdateDto, appuser);
+        appUserAvatarService.saveAvatar(appuser, appUserUpdateDto);
+        setUserAttributes(appuser, appUserUpdateDto);
+        setUserRoles(appuser, appUserUpdateDto);
+        log.info("Пользователь {} {} {} обновлен в базу данных, id={}", appuser.getLastName(), appuser.getFirstName(), appuser.getMiddleName(), appuser.getId());
+        return ResponseEntity.ok().body(Map.of("Пользователь обновлен с id", appuser.getId().intValue()));
     }
 
     private boolean checkUserExist(String username) {
@@ -102,6 +87,16 @@ public class AppUserService {
         return appuser.isPresent();
     }
 
+    private void setUserRoles(Appuser appuser, AppUserUpdateDto appUserUpdateDto) {
+        if (!getRolesFromDB(appUserUpdateDto).stream()
+                .filter(e -> e.getId() != null)
+                .collect(Collectors.toSet())
+                .isEmpty()) {
+            appuser.setRoles(null);
+            appuser.setRoles(getRolesFromDB(appUserUpdateDto));
+        }
+    }
+
     private Set<Role> getRolesFromDB(AppUserUpdateDto appUserUpdateDto) {
         return appUserUpdateDto.getRoles().stream()
                 .map(role -> roleService.findByRoleName(role.getRoleName()))
@@ -109,7 +104,7 @@ public class AppUserService {
     }
 
     private void setUserAttributes(Appuser appuser, AppUserDto appUserDto) {
-        appuser.setPassword(passwordEncoder.encode(appUserDto.getPassword()));
+        if (appUserDto.getPassword() != null) appuser.setPassword(passwordEncoder.encode(appUserDto.getPassword()));
         appuser.setAccountNonLocked(true);
         appuser.setAccountNonExpired(true);
         appuser.setCredentialsNonExpired(true);
@@ -120,5 +115,4 @@ public class AppUserService {
         }
     }
 }
-
 

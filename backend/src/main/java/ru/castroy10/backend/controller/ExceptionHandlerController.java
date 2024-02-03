@@ -5,13 +5,17 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 import ru.castroy10.backend.exception.RollbackException;
+import ru.castroy10.backend.exception.UserDuplicateException;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,6 +47,30 @@ public class ExceptionHandlerController {
 
     @ExceptionHandler(RollbackException.class)
     public ResponseEntity<?> rollbackException(RollbackException exception) {
+        return ResponseEntity.badRequest().body(Map.of("Ошибка", exception.getMessage()));
+    }
+
+    @ExceptionHandler(UserDuplicateException.class)
+    public ResponseEntity<?> userDuplicateException(UserDuplicateException exception) {
+        log.error("Ошибка регистрации клиента {}", exception.getMessage());
+        return ResponseEntity.badRequest().body(Map.of("Ошибка", exception.getMessage()));
+    }
+
+    @ExceptionHandler(SQLException.class)
+    public ResponseEntity<?> sqlException(SQLException exception) {
+        log.error("Ошибка {}", exception.getMessage());
+        return ResponseEntity.badRequest().body(Map.of("Ошибка", exception.getMessage()));
+    }
+
+    @ExceptionHandler(IOException.class)
+    public ResponseEntity<?> IOException(IOException exception) {
+        log.error("Ошибка {}", exception.getMessage());
+        return ResponseEntity.badRequest().body(Map.of("Ошибка", exception.getMessage()));
+    }
+
+    @ExceptionHandler(UsernameNotFoundException.class)
+    public ResponseEntity<?> UsernameNotFoundException(UsernameNotFoundException exception) {
+        log.error("Ошибка {}", exception.getMessage());
         return ResponseEntity.badRequest().body(Map.of("Ошибка", exception.getMessage()));
     }
 
