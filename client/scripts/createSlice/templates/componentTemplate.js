@@ -10,6 +10,6 @@ interface ${firstCharUpperCase(componentName)}Props {}
 export const ${firstCharUpperCase(componentName)} = ({}: ${firstCharUpperCase(componentName)}Props) => {
   const ${firstCharLowerCase(componentName)}Class = cx(clx.button)
 
-  return <button className={${firstCharLowerCase(componentName)}Class}>${componentName}</button>
+  return <div className={${firstCharLowerCase(componentName)}Class}>${componentName}</div>
 }
 `
