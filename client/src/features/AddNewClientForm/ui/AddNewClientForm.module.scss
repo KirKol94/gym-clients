@@ -1,0 +1,10 @@
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.input {
+  flex: 0 1 calc(50% - 2rem);
+}
