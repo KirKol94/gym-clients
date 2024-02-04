@@ -43,7 +43,10 @@
     @include back;
 
     .img {
+      margin-right: 2px;
+
       &__active {
+        margin-left: 2px;
         transform: scaleX(-1);
       }
     }

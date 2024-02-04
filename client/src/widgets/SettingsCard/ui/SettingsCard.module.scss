@@ -9,15 +9,6 @@
     border-radius: 20px;
 }
 
-.header {
-    svg {
-        width: 40px;
-        height: 40px;
-    
-        path { stroke: var(--color-neutral-100) }
-    }
-}
-
 .footer {
     display: flex;
     flex-wrap: wrap;

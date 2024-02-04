@@ -1,21 +1,24 @@
 import { ButtonHTMLAttributes, ReactNode } from 'react'
 import cx from 'classix'
 
-import { ButtonSize, ButtonTheme } from '../mode/types/button'
+import { ButtonSize } from '../mode/types/button'
 
 import classes from './Button.module.scss'
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size: ButtonSize
   children: ReactNode
-  theme?: ButtonTheme
 }
 
-export const Button = ({ size, children, theme = ButtonTheme.PRIMARY, ...props }: ButtonProps) => {
-  const cls = cx(classes[`${theme}`], classes[`${theme}_${size}`])
+export const Button = ({ size, children, ...props }: ButtonProps) => {
+  const className = cx(
+    classes.button,
+    size === ButtonSize.M && classes.button__m,
+    size === ButtonSize.S && classes.button__s,
+  )
 
   return (
-    <button className={cls} {...props}>
+    <button className={className} {...props}>
       {children}
     </button>
   )
