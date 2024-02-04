@@ -1,18 +1,32 @@
-.button {
+@mixin size($paddingVer, $paddingHor, $radius) {
+  padding: #{$paddingVer}px #{$paddingHor}px;
+  border-radius: #{$radius}px;
+}
+
+@mixin color($color) {
+  color: $color;
+  border-color: $color;
+
+  svg {
+    path {
+      stroke: $color;
+    }
+  }
+}
+
+.primary {
   color: var(--color-white);
-  background-color: var(--color-primary-90);
+  background: var(--color-primary-90);
   transition:
     box-shadow var(--transition-delay-fast) ease,
     opacity var(--transition-delay-fast) ease;
 
-  &__m {
-    padding: 20px 40px;
-    border-radius: 10px;
-  }
+  svg {
+    width: 20px;
 
-  &__s {
-    padding: 10px 20px;
-    border-radius: 10px;
+    path {
+      stroke: var(--color-white);
+    }
   }
 
   &:hover {
@@ -21,5 +35,64 @@
 
   &:active {
     opacity: 0.9;
+  }
+
+  &_m {
+    @include size(20, 40, 10);
+  }
+
+  &_s {
+    @include size(10, 20, 10);
+  }
+
+  &_xs {
+    @include size(5, 10, 5);
+  }
+}
+
+.secondary__white {
+  @include color(var(--color-white));
+}
+
+.secondary__blue {
+  @include color(var(--color-primary-90));
+}
+
+.secondary,
+.secondary__white,
+.secondary__blue {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--color-neutral-100);
+  transition:
+    box-shadow var(--transition-delay-fast) ease,
+    opacity var(--transition-delay-fast) ease;
+
+  svg {
+    width: 20px;
+
+    path {
+      stroke: var(--color-neutral-100);
+    }
+  }
+
+  &:hover {
+    box-shadow: 0 2px 6px rgb(0 0 0 / 0.2);
+  }
+
+  &:active {
+    box-shadow: none;
+  }
+
+  &_m {
+    @include size(20, 40, 10);
+  }
+
+  &_s {
+    @include size(10, 20, 10);
+  }
+
+  &_xs {
+    @include size(5, 10, 5);
   }
 }
