@@ -12,4 +12,7 @@ public interface AppUserRepository extends JpaRepository<Appuser, Long> {
 
     @EntityGraph(attributePaths = {"roles"})
     Optional<Appuser> findAppuserByUsername(String username);
+
+    @EntityGraph(attributePaths = {"roles"})
+    Optional<Appuser> findAppuserById(Long id);
 }

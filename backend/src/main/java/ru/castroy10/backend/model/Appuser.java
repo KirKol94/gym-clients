@@ -31,6 +31,8 @@ public class Appuser {
     private String password;
     @Column(name = "email")
     private String email;
+    @Column(name = "avatar")
+    private String avatar;
     @Column(name = "account_nonexpired")
     private boolean accountNonExpired;
     @Column(name = "account_nonlocked")

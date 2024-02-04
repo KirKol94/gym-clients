@@ -1,6 +1,8 @@
+import { useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import cx from 'classix'
 
+import { CURRENT_PATHNAME_KEY } from '@/shared/const/localStorage/currentLocationKey'
 import { Text, TextSize } from '@/shared/ui/Text'
 
 import classes from './SidebarItem.module.scss'
@@ -19,6 +21,10 @@ export const SidebarItem = ({ data, isOpen }: SidebarItemProps) => {
   const textClass = cx(pathname === to ? classes.text__active : classes.text)
   const bgClass = cx(pathname === to && classes.background)
   const cardClass = cx(isOpen ? cardOpen : cardClose)
+
+  useEffect(() => {
+    localStorage.setItem(CURRENT_PATHNAME_KEY, pathname)
+  }, [pathname])
 
   return (
     <div className={classes.wrapper}>

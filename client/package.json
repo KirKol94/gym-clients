@@ -4,15 +4,14 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"yarn dev:client\" \"yarn dev:server\"",
-    "dev:client": "vite",
-    "dev:server": "[ -f db.json ] && echo '{\"users\":[{\"email\":\"admin@admin.ru\",\"password\":\"$2a$10$5Ne37HXDhSLVZA.iggAGG.KhaMbBF3lrsKm9dTxjRFSCe5Nshs4o2\",\"name\":\"admin\",\"surname\":\"adminov\",\"patronymic\":\"adminovich\",\"id\":1}]}' > db.json || echo '{\"users\":[{\"email\":\"admin@admin.ru\",\"password\":\"$2a$10$5Ne37HXDhSLVZA.iggAGG.KhaMbBF3lrsKm9dTxjRFSCe5Nshs4o2\",\"name\":\"admin\",\"surname\":\"adminov\",\"patronymic\":\"adminovich\",\"id\":1}]}' > db.json && json-server-auth --watch db.json --port 3002",
+    "dev": "vite",
     "build": "tsc && vite build && echo '/* /index.html  200' | cat >dist/_redirects ",
     "lint": "concurrently \"yarn lint:ts\" \"yarn lint:style\"",
     "lint:ts": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix",
     "lint:prettier": "prettier --write ./src",
     "lint:style": "stylelint src/**/*.scss --fix",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "new": "node ./scripts/createSlice/index.js"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.0.1",
@@ -39,8 +38,6 @@
     "eslint-plugin-react-refresh": "^0.4.5",
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "eslint-plugin-unused-imports": "^3.0.0",
-    "json-server": "0.17.3",
-    "json-server-auth": "2.1.0",
     "postcss-scss": "^4.0.9",
     "prettier": "^3.2.4",
     "sass": "^1.70.0",

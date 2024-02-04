@@ -1,9 +1,9 @@
-package ru.castroy10.backend.dto;
+package ru.castroy10.backend.dto.appuser;
 
 import lombok.Data;
 
 @Data
-public class AppUserDto {
+public class AppUserLoginDto {
     private String username;
     private String password;
 }
