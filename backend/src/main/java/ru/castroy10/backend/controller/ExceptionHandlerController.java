@@ -74,4 +74,9 @@ public class ExceptionHandlerController {
         return ResponseEntity.badRequest().body(Map.of("Ошибка", exception.getMessage()));
     }
 
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<?> exception(Exception exception) {
+        log.error("Ошибка {}", exception.getMessage());
+        return ResponseEntity.badRequest().body(Map.of("Ошибка", exception.getMessage()));
+    }
 }

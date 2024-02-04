@@ -3,15 +3,17 @@ package ru.castroy10.backend.service;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.web.context.WebApplicationContext;
 import ru.castroy10.backend.controller.ClientController;
 import ru.castroy10.backend.dto.client.ClientDto;
 import ru.castroy10.backend.dto.client.ClientDtoUpdate;
@@ -22,8 +24,11 @@ import ru.castroy10.backend.repository.ClientRepository;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 @SpringBootTest
 class ClientServiceTest {
@@ -33,23 +38,25 @@ class ClientServiceTest {
 
     private final ClientService clientService;
     private final ModelMapper modelMapper;
-
-    @InjectMocks
     private final ClientController clientController;
+    private final WebApplicationContext webApplicationContext;
 
+    MockMvc mockMvc;
     private final Client client = new Client();
 
     @Autowired
-    ClientServiceTest(ClientRepository clientRepository, ClientService clientService, ModelMapper modelMapper, ClientController clientController) {
+    ClientServiceTest(ClientRepository clientRepository, ClientService clientService, ModelMapper modelMapper, ClientController clientController, WebApplicationContext webApplicationContext) {
         this.clientRepository = clientRepository;
         this.clientService = clientService;
         this.modelMapper = modelMapper;
         this.clientController = clientController;
+        this.webApplicationContext = webApplicationContext;
     }
 
     @BeforeEach
     public void init() {
         client.setId(1L);
+        mockMvc = webAppContextSetup(webApplicationContext).build();
     }
 
     @Test
@@ -62,12 +69,17 @@ class ClientServiceTest {
     }
 
     @Test
-    void testFindByNameException() {
-        Mockito.when(clientRepository.findByName(Mockito.anyString())).thenThrow(new RuntimeException(new SQLException()));
-        ResponseEntity<?> response = clientController.findByName("name");
+    void testFindByNameException() throws Exception {
+        Mockito.doAnswer((invocation) -> {
+            throw new SQLException("this test is valid");
+        }).when(clientRepository).findByName(Mockito.anyString());
 
-        Assertions.assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
-        Assertions.assertEquals(Map.of("Ошибка", "java.sql.SQLException"), response.getBody());
+        mockMvc.perform(get("/api/v1/client/find?name=a"))
+                .andExpect(status().is(400))
+                .andExpect(result -> {
+                    String errorMessage = result.getResponse().getContentAsString();
+                    Assertions.assertTrue(errorMessage.contains("this test is valid"));
+                });
     }
 
     @Test
@@ -80,12 +92,17 @@ class ClientServiceTest {
     }
 
     @Test
-    public void testFindAllException() {
-        Mockito.when(clientRepository.findAll()).thenThrow(new RuntimeException(new SQLException()));
-        ResponseEntity<?> response = clientController.findAll();
+    public void testFindAllException() throws Exception {
+        Mockito.doAnswer((invocation) -> {
+            throw new SQLException("this test is valid");
+        }).when(clientRepository).findAll();
 
-        Assertions.assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
-        Assertions.assertEquals(Map.of("Ошибка", "java.sql.SQLException"), response.getBody());
+        mockMvc.perform(get("/api/v1/client/find/all"))
+                .andExpect(status().is(400))
+                .andExpect(result -> {
+                    String errorMessage = result.getResponse().getContentAsString();
+                    Assertions.assertTrue(errorMessage.contains("this test is valid"));
+                });
     }
 
     @Test
@@ -98,21 +115,31 @@ class ClientServiceTest {
     }
 
     @Test
-    void testFindByIdException() {
-        Mockito.when(clientRepository.findById(1L)).thenThrow(new RuntimeException(new SQLException()));
-        ResponseEntity<?> response = clientService.findById(1L);
+    void testFindByIdException() throws Exception {
+        Mockito.doAnswer((invocation) -> {
+            throw new SQLException("this test is valid, sql exception");
+        }).when(clientRepository).findById(1L);
 
-        Assertions.assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
-        Assertions.assertEquals(Map.of("Ошибка", "java.sql.SQLException"), response.getBody());
+        mockMvc.perform(get("/api/v1/client/find/1"))
+                .andExpect(status().is(400))
+                .andExpect(result -> {
+                    String errorMessage = result.getResponse().getContentAsString();
+                    Assertions.assertTrue(errorMessage.contains("this test is valid, sql exception"));
+                });
     }
 
     @Test
-    void testFindByIdExceptionUserNotFound() {
-        Mockito.when(clientRepository.findById(1L)).thenThrow(new RuntimeException(new UsernameNotFoundException("Пользователь не найден")));
-        ResponseEntity<?> response = clientService.findById(1L);
+    void testFindByIdExceptionUserNotFound() throws Exception {
+        Mockito.doAnswer((invocation) -> {
+            throw new UsernameNotFoundException("this test is valid");
+        }).when(clientRepository).findById(1L);
 
-        Assertions.assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
-        Assertions.assertEquals(Map.of("Ошибка", "org.springframework.security.core.userdetails.UsernameNotFoundException: Пользователь не найден"), response.getBody());
+        mockMvc.perform(get("/api/v1/client/find/1"))
+                .andExpect(status().is(400))
+                .andExpect(result -> {
+                    String errorMessage = result.getResponse().getContentAsString();
+                    Assertions.assertTrue(errorMessage.contains("this test is valid"));
+                });
     }
 
     @Test
@@ -131,27 +158,33 @@ class ClientServiceTest {
     }
 
     @Test
-    public void testUpdateNotSuccess() {
-        ClientDtoUpdate clientDtoUpdate = new ClientDtoUpdate();
-        clientDtoUpdate.setId(2L);
+    public void testUpdateNotSuccess() throws Exception {
+        Mockito.doAnswer((invocation) -> {
+            throw new UsernameNotFoundException("this test is valid, username not found");
+        }).when(clientRepository).findById(2L);
 
-        Mockito.when(clientRepository.findById(2L)).thenReturn(Optional.empty());
-        ResponseEntity<?> response = clientController.update(clientDtoUpdate);
-
-        Assertions.assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
-        Assertions.assertEquals(Map.of("Ошибка", "Пользователь не найден"), response.getBody());
+        mockMvc.perform(put("/api/v1/client/update")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"id\": 2}"))
+                .andExpect(status().is(400))
+                .andExpect(result -> {
+                    String errorMessage = result.getResponse().getContentAsString();
+                    Assertions.assertTrue(errorMessage.contains("this test is valid, username not found"));
+                });
     }
 
     @Test
-    public void testUpdateException() {
-        ClientDtoUpdate clientDtoUpdate = new ClientDtoUpdate();
-        clientDtoUpdate.setId(2L);
-
-        Mockito.when(clientRepository.findById(2L)).thenThrow(new RuntimeException(new SQLException()));
-        ResponseEntity<?> response = clientController.update(clientDtoUpdate);
-
-        Assertions.assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
-        Assertions.assertEquals(Map.of("Ошибка", "java.sql.SQLException"), response.getBody());
+    public void testUpdateException() throws Exception {
+        Mockito.when(clientRepository.findById(2L)).thenThrow(new RuntimeException(new SQLException("this test is valid, sql exception with runtime exception")));
+        mockMvc.perform(put("/api/v1/client/update")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"id\": 2}"))
+                .andExpect(status().is(400))
+                .andExpect(result -> {
+                    String errorMessage = result.getResponse().getContentAsString();
+                    Assertions.assertTrue(errorMessage.contains("this test is valid, sql exception with runtime exception"));
+                    System.out.println(errorMessage);
+                });
     }
 
     @Test
@@ -169,13 +202,15 @@ class ClientServiceTest {
     }
 
     @Test
-    public void testSaveException() {
-        ClientDto clientDto = new ClientDto();
-
-        Mockito.when(clientRepository.save(Mockito.any(Client.class))).thenThrow(new RuntimeException(new SQLException()));
-        ResponseEntity<?> response = clientController.save(clientDto);
-
-        Assertions.assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
-        Assertions.assertEquals(Map.of("Ошибка", "java.sql.SQLException"), response.getBody());
+    public void testSaveException() throws Exception {
+        Mockito.when(clientRepository.save(Mockito.any(Client.class))).thenThrow(new RuntimeException(new SQLException("this test is valid, sql exception with runtime exception")));
+        mockMvc.perform(post("/api/v1/client/save")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"lastName\": \"A\",\"firstName\": \"A\",\"middleName\": \"A\"}"))
+                .andExpect(status().is(400))
+                .andExpect(result -> {
+                    String errorMessage = result.getResponse().getContentAsString();
+                    Assertions.assertTrue(errorMessage.contains("this test is valid, sql exception with runtime exception"));
+                });
     }
 }
