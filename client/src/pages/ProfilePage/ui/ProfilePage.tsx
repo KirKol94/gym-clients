@@ -9,11 +9,16 @@ export const ProfilePage = () => {
     <Page>
       <AlertCard
         count={0}
-        title="Контрагента ожидают в стадии “Подписание контракта”"
+        title="Контрагента ожидают в стадии “Подписание Контракты”"
         alert="Подпишите контракты с контрагентами или переведите их в архивные"
       />
       <SettingsCard />
-      <EntityCard requireAttention={2} total={2} thisMonth={2}>
+      <EntityCard
+        requireAttention={2}
+        total={2}
+        thisMonth={2}
+        onArrowClick={() => console.log('arrow button from entity card click')}
+      >
         <Contract />
         Контракты
       </EntityCard>
