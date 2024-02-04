@@ -25,7 +25,12 @@ export const SettingsCard = () => {
       </div>
       <div className={classes.footer}>
         {buttonsData.map((data, index) => (
-          <Button key={index} size={ButtonSize.XS} theme={ButtonTheme.SECONDARY}>
+          <Button
+            key={index}
+            size={ButtonSize.XS}
+            theme={ButtonTheme.SECONDARY}
+            onClick={() => console.log('click on ', data.text)}
+          >
             <IconWithTitle size={IconWithTitleSize.S}>
               {data.icon}
               {data.text}
