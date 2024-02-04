@@ -1,4 +1,5 @@
 import { ReactNode } from 'react'
+import cx from 'classix'
 
 import Arrow from '@/shared/assets/icons/arrow.svg?react'
 import { CounterColor } from '@/shared/ui/Counter'
@@ -14,16 +15,25 @@ interface EntityCardProps {
   requireAttention?: number
   total?: number
   thisMonth?: number
+  onArrowClick: () => void
+  className?: string
 }
 
-export const EntityCard = ({ children, requireAttention, total, thisMonth }: EntityCardProps) => {
+export const EntityCard = ({
+  children,
+  requireAttention,
+  total,
+  thisMonth,
+  onArrowClick,
+  className,
+}: EntityCardProps) => {
   return (
-    <div className={classes['entity-card']}>
+    <div className={cx(classes['entity-card'], className)}>
       <div className={classes.header}>
         <div className={classes.icon}>
           <IconWithTitle size={IconWithTitleSize.M}>{children}</IconWithTitle>
         </div>
-        <RoundButton>
+        <RoundButton onClick={onArrowClick}>
           <Arrow />
         </RoundButton>
       </div>
