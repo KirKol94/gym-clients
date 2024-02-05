@@ -8,3 +8,20 @@
 .input {
   flex: 0 1 calc(50% - 2rem);
 }
+
+.gender {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+
+  &__row {
+    display: flex;
+    gap: 1rem;
+
+    input {
+      accent-color: var(--color-primary-90);
+    }
+  }
+}
+

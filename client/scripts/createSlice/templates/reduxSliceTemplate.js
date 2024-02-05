@@ -12,7 +12,7 @@ export default (sliceName) => {
   }
   
   const ${firstCharLowerCase(sliceName)}Slice = createSlice({
-    name: '${firstCharLowerCase(sliceName)}'',
+    name: '${firstCharLowerCase(sliceName)}',
     initialState,
     reducers: {
       
