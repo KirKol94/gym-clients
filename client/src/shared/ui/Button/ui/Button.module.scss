@@ -22,4 +22,9 @@
   &:active {
     opacity: 0.9;
   }
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: var(--color-neutral-60);
+  }
 }
