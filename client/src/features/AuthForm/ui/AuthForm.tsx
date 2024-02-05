@@ -1,4 +1,5 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 
@@ -27,41 +28,29 @@ type FormData = Omit<User, 'id'> & { password: string }
 export const AuthForm = ({ type = AuthType.LOGIN }: AuthFormProps) => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const [sendAuthData, { data: resAuthData, status: authStatus }] = useSendAuthData()
+  const [sendAuthData, { data: resAuthData, status: authStatus, error: authError }] = useSendAuthData()
   const [sendRegisterData, { status: registerStatus, error: registerError }] = useSendRegisterData()
+  const {
+    handleSubmit,
+    reset,
+    register,
+    formState: { errors, isValid },
+  } = useForm<FormData>({ mode: 'onChange' })
 
-  const [userData, setUserData] = useState<FormData>({
-    firstName: '',
-    middleName: '',
-    lastName: '',
-    username: '',
-    email: '',
-    password: '',
-  })
-
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target
-    setUserData((prev) => ({
-      ...prev,
-      [name]: value,
-    }))
+  const onSubmit: SubmitHandler<FormData> = (data) => {
+    type === AuthType.LOGIN && handleLogin(data)
+    type === AuthType.REGISTER && handleRegister(data)
+    reset()
   }
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-
-    type === AuthType.LOGIN && handleLogin()
-    type === AuthType.REGISTER && handleRegister()
+  const handleRegister = async (data: FormData) => {
+    await sendRegisterData(data)
   }
 
-  const handleRegister = async () => {
-    await sendRegisterData(userData)
-  }
-
-  const handleLogin = async () => {
+  const handleLogin = async (data: FormData) => {
     const authData = {
-      username: userData.username,
-      password: userData.password,
+      username: data.username,
+      password: data.password,
     }
     await sendAuthData(authData)
   }
@@ -73,10 +62,17 @@ export const AuthForm = ({ type = AuthType.LOGIN }: AuthFormProps) => {
     }
   }, [authStatus, dispatch, navigate, resAuthData?.Token])
 
-  // TODO убрать
-  if (registerStatus === 'rejected') alert(`Ошибка при регистрации (${(registerError as FetchBaseQueryError).data})`)
-
   if (registerStatus === 'fulfilled') return <Navigate to={ROUTER_PATH.LOGIN} />
+
+  if (registerStatus === 'rejected') {
+    alert('ошибка регистрации (см. консоль)')
+    console.log((registerError as FetchBaseQueryError).data)
+  }
+
+  if (authStatus === 'rejected') {
+    alert('ошибка авторизации (см. консоль)')
+    console.log((authError as FetchBaseQueryError).data)
+  }
 
   return (
     <>
@@ -85,57 +81,119 @@ export const AuthForm = ({ type = AuthType.LOGIN }: AuthFormProps) => {
         {type === AuthType.REGISTER && 'Регистрация'}
       </Title>
 
-      <form className={classes.form} onSubmit={handleSubmit}>
+      <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
         <Input
-          inputName="Email"
-          name="username"
-          placeholder="Email"
-          onChange={handleInputChange}
-          value={userData.username}
+          {...register('username', {
+            required: 'Это поле обязательное',
+            minLength: {
+              value: 5,
+              message: 'Не менее 5 символов',
+            },
+          })}
+          error={errors?.username?.message}
+          inputName="Имя пользователя"
+          placeholder="Имя пользователя"
         />
+
         <Input
+          type="password"
+          {...register('password', {
+            required: 'Это поле обязательное',
+            pattern: {
+              value: /^[a-zA-Z0-9!@#$%^&*()_+{}[\]:;<>,.?~\\/-]+$/,
+              message: 'Латинские буквы, цифра и символы, кроме пробела',
+            },
+            minLength: {
+              value: 6,
+              message: 'Не менее 6 символов',
+            },
+          })}
+          error={errors?.password?.message}
           inputName="Пароль*"
-          name="password"
           placeholder="Пароль"
-          onChange={handleInputChange}
-          value={userData.password}
         />
 
         {type === AuthType.REGISTER && (
           <>
             <Input
+              {...register('email', {
+                required: 'Обязательное поле',
+                pattern: {
+                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                  message: 'Введите валидный email',
+                },
+              })}
+              error={errors?.email?.message}
               inputName="Email"
-              name="email"
               placeholder="Email"
-              onChange={handleInputChange}
-              value={userData.email}
             />
+
             <Input
-              inputName="Имя*"
-              name="firstName"
+              {...register('firstName', {
+                required: 'Обязательное поле',
+                minLength: {
+                  value: 2,
+                  message: 'Не менее 2 символов',
+                },
+                maxLength: {
+                  value: 15,
+                  message: 'Не более 15 символов',
+                },
+                pattern: {
+                  value: /^[а-яА-ЯёЁ-]*$/,
+                  message: 'Только русские буквы и «-»',
+                },
+              })}
+              error={errors?.firstName?.message}
+              inputName="Имя"
               placeholder="Имя"
-              onChange={handleInputChange}
-              value={userData.firstName}
             />
+
             <Input
-              inputName="Фамилия*"
-              name="middleName"
+              {...register('middleName', {
+                required: 'Обязательное поле',
+                minLength: {
+                  value: 2,
+                  message: 'Не менее 2 символов',
+                },
+                maxLength: {
+                  value: 24,
+                  message: 'Не более 24 символов',
+                },
+                pattern: {
+                  value: /^[а-яА-ЯёЁ-]*$/,
+                  message: 'Только русские буквы и «-»',
+                },
+              })}
+              error={errors?.middleName?.message}
+              inputName="Фамилия"
               placeholder="Фамилия"
-              onChange={handleInputChange}
-              value={userData.middleName}
             />
+
             <Input
-              inputName="Отчество*"
-              name="lastName"
+              {...register('lastName', {
+                minLength: {
+                  value: 6,
+                  message: 'Не менее 6 символов',
+                },
+                maxLength: {
+                  value: 20,
+                  message: 'Не более 20 символов',
+                },
+                pattern: {
+                  value: /^[а-яА-ЯёЁ]*$/,
+                  message: 'Только русские буквы',
+                },
+              })}
+              error={errors?.lastName?.message}
+              inputName="Отчество"
               placeholder="Отчество"
-              onChange={handleInputChange}
-              value={userData.lastName}
             />
           </>
         )}
 
         <div className={classes.footer}>
-          <Button size={ButtonSize.M} type="submit" theme={ButtonTheme.PRIMARY}>
+          <Button size={ButtonSize.M} type="submit" theme={ButtonTheme.PRIMARY} disabled={!isValid}>
             {type === AuthType.LOGIN && 'Войти'}
             {type === AuthType.REGISTER && 'Регистрация'}
           </Button>
