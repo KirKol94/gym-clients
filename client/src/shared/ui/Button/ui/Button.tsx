@@ -12,7 +12,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export const Button = ({ size, children, theme = ButtonTheme.PRIMARY, ...props }: ButtonProps) => {
-  const cls = cx(classes[`${theme}`], classes[`${theme}_${size}`])
+  const cls = cx(classes[`${theme}`], classes[`${theme}_${size}`], classes.button)
 
   return (
     <button className={cls} {...props}>
