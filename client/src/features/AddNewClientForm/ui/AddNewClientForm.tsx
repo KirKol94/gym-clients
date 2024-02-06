@@ -2,6 +2,7 @@ import { FormProvider, type SubmitHandler, useForm } from 'react-hook-form'
 import cx from 'classix'
 
 import { IClient } from '@/entities/Client'
+import { useGetAllClients } from '@/features/ClientList/model/api/clientsApi'
 import { BaseMaskInput } from '@/shared/ui/BaseMaskInput'
 import { Button, ButtonSize } from '@/shared/ui/Button'
 import { Input } from '@/shared/ui/Input'
@@ -17,6 +18,7 @@ export const AddNewClientForm = () => {
   const methods = useForm<ClientDataType>({
     mode: 'onChange',
   })
+  const { refetch } = useGetAllClients()
 
   const {
     register,
@@ -30,6 +32,7 @@ export const AddNewClientForm = () => {
   const onSubmit: SubmitHandler<ClientDataType> = (data) => {
     addClient(data)
     reset()
+    refetch()
   }
 
   if (status === 'fulfilled') {
