@@ -178,7 +178,6 @@ export const AddNewClientForm = () => {
         className={cls.input}
         inputName="Количество персональных тренировок"
       />
-
       <Button type="submit" size={ButtonSize.M} disabled={!isDirty || !isValid}>
         Добавить
       </Button>
