@@ -12,6 +12,7 @@ export const ClientList = () => {
 
   return (
     <ul className={clientListClass}>
+      <h2>Список пользователей</h2>
       {clients && clients.map((client) => <Client key={client.id} client={client} />)}
     </ul>
   )
