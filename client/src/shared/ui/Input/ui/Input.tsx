@@ -1,4 +1,3 @@
-import { InputHTMLAttributes } from 'react'
 import { forwardRef, InputHTMLAttributes } from 'react'
 
 import cx from 'classix'
