@@ -17,13 +17,13 @@
 }
 
 @mixin size($width1, $height1, $width2, $height2) {
-    width: #{$width1}px;
-    height: #{$height1}px;
-    
-    svg {
-        width: #{$width2}px;
-        height: #{$height2}px;
-    }
+  width: #{$width1}px;
+  height: #{$height1}px;
+
+  svg {
+    width: #{$width2}px;
+    height: #{$height2}px;
+  }
 }
 
 .primary,
@@ -34,11 +34,11 @@
   border-radius: 50%;
 
   &_s {
-      @include size(26, 26, 16, 16)
+    @include size(26, 26, 16, 16);
   }
 
   &_m {
-    @include size(40, 40, 20, 20)
+    @include size(40, 40, 20, 20);
   }
 }
 

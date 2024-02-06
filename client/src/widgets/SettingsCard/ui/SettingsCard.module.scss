@@ -1,25 +1,26 @@
-
 .settings-card {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 20px;
-    background: var(--color-white);
-    border: 2px solid var(--color-light-border);
-    border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  background: var(--color-white);
+  border: 2px solid var(--color-light-border);
+  border-radius: 20px;
 }
 
 .header {
-    svg {
-        width: 40px;
-        height: 40px;
-    
-        path { stroke: var(--color-neutral-100) }
+  svg {
+    width: 40px;
+    height: 40px;
+
+    path {
+      stroke: var(--color-neutral-100);
     }
+  }
 }
 
 .footer {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }

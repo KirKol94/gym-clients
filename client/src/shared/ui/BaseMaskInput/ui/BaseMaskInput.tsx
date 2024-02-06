@@ -2,9 +2,14 @@ import { useState } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 import { PatternFormat } from 'react-number-format'
 
-import { Input } from '@/shared/ui/Input'
+import { Input } from '../../Input/ui/Input'
 
-import type { BaseMaskInputProps } from '../model/types/baseinputmask.ts'
+type BaseMaskInputProps = {
+  label: string
+  format: string
+  mask?: string
+  type?: 'text' | 'tel' | 'password'
+} & HTMLInputElement
 
 export const BaseMaskInput = ({
   label,
