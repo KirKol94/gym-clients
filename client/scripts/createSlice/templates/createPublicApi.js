@@ -10,6 +10,7 @@ export default async (layer, sliceName) => {
     await writeFile(
       resolveRoot('src', layer, sliceName, 'index.ts'),
       `export { ${componentName} } from './ui/${componentName}'
+export type { I${componentName} } from './model/types'
 `,
     )
   } catch (e) {

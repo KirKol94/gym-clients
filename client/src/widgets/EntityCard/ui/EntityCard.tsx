@@ -1,25 +1,41 @@
-import { ButtonWithArrow } from '@/shared/ui/ButtonWithArrow'
+import { ReactNode } from 'react'
+import cx from 'classix'
+
+import Arrow from '@/shared/assets/icons/arrow.svg?react'
 import { CounterColor } from '@/shared/ui/Counter'
 import { IconWithTitle, IconWithTitleSize } from '@/shared/ui/IconWithTitle'
+import { RoundButton } from '@/shared/ui/RoundButton'
 
 import { CounterRow } from './CounterRow'
 
 import classes from './EntityCard.module.scss'
 
 interface EntityCardProps {
-  icon: string
-  title: string
+  children: ReactNode
   requireAttention?: number
   total?: number
   thisMonth?: number
+  onArrowClick: () => void
+  className?: string
 }
 
-export const EntityCard = ({ icon, title, requireAttention, total, thisMonth }: EntityCardProps) => {
+export const EntityCard = ({
+  children,
+  requireAttention,
+  total,
+  thisMonth,
+  onArrowClick,
+  className,
+}: EntityCardProps) => {
   return (
-    <div className={classes['entity-card']}>
+    <div className={cx(classes['entity-card'], className)}>
       <div className={classes.header}>
-        <IconWithTitle icon={icon} title={title} size={IconWithTitleSize.M} />
-        <ButtonWithArrow />
+        <div className={classes.icon}>
+          <IconWithTitle size={IconWithTitleSize.M}>{children}</IconWithTitle>
+        </div>
+        <RoundButton onClick={onArrowClick}>
+          <Arrow />
+        </RoundButton>
       </div>
       <div className={classes.footer}>
         {requireAttention && (
