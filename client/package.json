@@ -14,8 +14,10 @@
     "new": "node ./scripts/createSlice/index.js"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.3.4",
     "@reduxjs/toolkit": "^2.0.1",
     "classix": "^2.1.35",
+    "joi": "^17.12.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.50.0",
