@@ -2,7 +2,7 @@
   display: $display;
   flex-direction: $flexdir;
   gap: #{$gap}rem;
-
+}
 .client {
   @include display(flex, 0.8, row);
 
@@ -54,5 +54,4 @@
       color: var(--color-primary-90);
     }
   }
-}
 }
