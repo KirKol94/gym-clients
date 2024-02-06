@@ -7,9 +7,10 @@ import { Input } from '../../Input/ui/Input'
 type BaseMaskInputProps = {
   label: string
   format: string
+  name: string
   mask?: string
   type?: 'text' | 'tel' | 'password'
-} & HTMLInputElement
+} & Partial<HTMLInputElement>
 
 export const BaseMaskInput = ({
   label,

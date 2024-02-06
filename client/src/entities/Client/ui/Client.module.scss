@@ -1,6 +1,53 @@
-.client {
+@mixin display($gap, $flexdir) {
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  padding: 1rem;
+  flex-direction: $flexdir;
+  gap: #{$gap}rem;
+}
+
+.client {
+  @include display(0.8, row);
+
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2rem;
+  color: var(--color-neutral-80);
+  border: 2px solid var(--color-neutral-60);
+  border-radius: 20px;
+
+  .value {
+    font-weight: 500;
+
+    .valueTitle {
+      color: var(--color-neutral-60);
+    }
+  }
+}
+
+.info {
+  @include display(1, column);
+
+  .name {
+    @include display(0.5, row);
+
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  .addInfo {
+    @include display(1, row);
+  }
+}
+
+.contacts {
+  @include display(1, column);
+
+  .email,
+  .modilePhone {
+    font-weight: 500;
+    transition: color var(--transition-delay-extrafast);
+
+    &:hover {
+      color: var(--color-primary-90);
+    }
+  }
 }
