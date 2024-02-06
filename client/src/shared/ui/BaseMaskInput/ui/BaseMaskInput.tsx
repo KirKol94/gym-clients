@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 import { PatternFormat } from 'react-number-format'
 
-import { Input } from '../../Input/ui/Input'
+import { Input } from '../../Input'
 
 type BaseMaskInputProps = {
   label: string
