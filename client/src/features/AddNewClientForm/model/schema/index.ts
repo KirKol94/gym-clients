@@ -7,7 +7,7 @@ const customMessages = {
   'string.max': 'должно быть не более {{#limit}} символов',
   'number.min': 'должно быть не менее {{#limit}}',
   'number.max': 'должно быть не более {{#limit}}',
-  'number.base': 'должно быть целым числом',
+  'number.base': 'должно быть числом',
   'any.required': 'поле обязательно для заполнения',
   'string.empty': ' ',
 }
@@ -18,7 +18,8 @@ export const schema = joi
     middleName: joi.string().min(2).max(24).custom(validateFio).messages(customMessages).required(),
     lastName: joi.string().min(6).max(20).custom(validateFio).messages(customMessages).required(),
     email: joi.string().custom(validateEmail).messages(customMessages).allow(null),
+    birthday: joi.allow(null),
     mobilePhone: joi.string().custom(validatePhoneNumber).messages(customMessages).allow(null),
-    personalTrainingCount: joi.number().min(1).max(100).custom(validateCount).messages(customMessages).required(),
+    personalTrainingCount: joi.number().min(0).max(100).custom(validateCount).messages(customMessages).required(),
   })
   .required()

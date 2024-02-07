@@ -114,7 +114,7 @@ export const AddNewClientForm = () => {
           {...register('personalTrainingCount')}
           error={errors?.personalTrainingCount?.message}
           placeholder="0"
-          defaultValue={1}
+          defaultValue={0}
           className={cls.input}
           inputName="Количество персональных тренировок"
         />
