@@ -24,6 +24,9 @@ const userSlice = createSlice({
         state.isAuth = true
       }
     },
+    logOut: (state) => {
+      state.isAuth = false
+    },
   },
 })
 
