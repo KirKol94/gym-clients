@@ -1,4 +1,5 @@
 import { FormProvider, type SubmitHandler, useForm } from 'react-hook-form'
+import { joiResolver } from '@hookform/resolvers/joi'
 import cx from 'classix'
 
 import { IClient } from '@/entities/Client'
@@ -9,6 +10,7 @@ import { Input } from '@/shared/ui/Input'
 import { Text, TextSize } from '@/shared/ui/Text'
 
 import { useAddNewClient } from '../model/api/addClientApi'
+import { schema } from '../model/schema'
 
 import cls from './AddNewClientForm.module.scss'
 
@@ -17,6 +19,7 @@ type ClientDataType = Omit<IClient, 'id'>
 export const AddNewClientForm = () => {
   const methods = useForm<ClientDataType>({
     mode: 'onChange',
+    resolver: joiResolver(schema),
   })
   const { refetch } = useGetAllClients()
 
@@ -26,7 +29,6 @@ export const AddNewClientForm = () => {
     reset,
     formState: { errors, isValid, isDirty },
   } = methods
-
   const [addClient, { data: resClient, status }] = useAddNewClient()
 
   const onSubmit: SubmitHandler<ClientDataType> = (data) => {
@@ -43,21 +45,7 @@ export const AddNewClientForm = () => {
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)} className={cx(cls.form)}>
         <Input
-          {...register('firstName', {
-            required: 'Обязательное поле',
-            minLength: {
-              value: 2,
-              message: 'Не менее 2 символов',
-            },
-            maxLength: {
-              value: 15,
-              message: 'Не более 15 символов',
-            },
-            pattern: {
-              value: /^[а-яА-ЯёЁ-]*$/,
-              message: 'Только русские буквы и «-»',
-            },
-          })}
+          {...register('firstName')}
           error={errors?.firstName?.message}
           placeholder="Иван"
           className={cls.input}
@@ -65,47 +53,19 @@ export const AddNewClientForm = () => {
         />
 
         <Input
-          {...register('middleName', {
-            required: 'Обязательное поле',
-            minLength: {
-              value: 2,
-              message: 'Не менее 2 символов',
-            },
-            maxLength: {
-              value: 24,
-              message: 'Не более 24 символов',
-            },
-            pattern: {
-              value: /^[а-яА-ЯёЁ-]*$/,
-              message: 'Только русские буквы и «-»',
-            },
-          })}
+          {...register('middleName')}
           error={errors?.middleName?.message}
-          placeholder="Иванов"
-          className={cls.input}
-          inputName="Фамилия"
-        />
-
-        <Input
-          {...register('lastName', {
-            required: 'Обязательное поле',
-            minLength: {
-              value: 6,
-              message: 'Не менее 6 символов',
-            },
-            maxLength: {
-              value: 20,
-              message: 'Не более 20 символов',
-            },
-            pattern: {
-              value: /^[а-яА-ЯёЁ]*$/,
-              message: 'Только русские буквы',
-            },
-          })}
-          error={errors?.lastName?.message}
           placeholder="Иванович"
           className={cls.input}
           inputName="Отчество"
+        />
+
+        <Input
+          {...register('lastName')}
+          error={errors?.lastName?.message}
+          placeholder="Иванов"
+          className={cls.input}
+          inputName="Фамилия"
         />
 
         <fieldset className={cls.gender}>
@@ -133,12 +93,7 @@ export const AddNewClientForm = () => {
         />
 
         <Input
-          {...register('email', {
-            pattern: {
-              value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-              message: 'Введите валидный email',
-            },
-          })}
+          {...register('email')}
           error={errors?.email?.message}
           placeholder="ivan.ivanov@mail.ru"
           className={cls.input}
@@ -156,26 +111,10 @@ export const AddNewClientForm = () => {
 
         <Input
           type="tel"
-          {...register('personalTrainingCount', {
-            maxLength: {
-              value: 3,
-              message: 'Не длиннее 3 символов',
-            },
-            min: {
-              value: 1,
-              message: 'Минимум 1',
-            },
-            max: {
-              value: 100,
-              message: 'Значение не должно превышать 100',
-            },
-            pattern: {
-              value: /^[0-9]*$/,
-              message: 'Только цифры от 0 до 9',
-            },
-          })}
+          {...register('personalTrainingCount')}
           error={errors?.personalTrainingCount?.message}
           placeholder="0"
+          defaultValue={1}
           className={cls.input}
           inputName="Количество персональных тренировок"
         />
