@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import cx from 'classix'
 
 import Agent from '@/shared/assets/icons/Agent.svg'
@@ -11,6 +11,7 @@ import Logo from '@/shared/assets/icons/Logo.svg?react'
 import LogoMini from '@/shared/assets/icons/LogoMini.svg?react'
 import Setting from '@/shared/assets/icons/SettingsWhite.svg'
 import Users from '@/shared/assets/icons/UsersWhite.svg'
+import { IS_SIDEBAR_VISIBLE } from '@/shared/const/localStorage/sideBarVisible'
 import { ROUTER_PATH } from '@/shared/const/path/PATH'
 
 import { SidebarItem } from '../../SidebarItem'
@@ -61,6 +62,16 @@ export const Sidebar = () => {
   const onSidebarVisibleToggle = () => {
     setIsOpen(!isOpen)
   }
+
+  // сохраняем состояние отображения сайдбара в локал стораж
+  useEffect(() => {
+    localStorage.setItem(IS_SIDEBAR_VISIBLE, JSON.stringify(isOpen))
+  }, [isOpen])
+  // достаём из локал стораж состояние сайдбара
+  useEffect(() => {
+    const sidebarIsVisible = JSON.parse(localStorage.getItem(IS_SIDEBAR_VISIBLE))
+    setIsOpen(sidebarIsVisible)
+  }, [])
 
   return (
     <aside className={cx(classes.sidebar, !isOpen && classes.sidebar_hidden)}>
