@@ -1,0 +1,20 @@
+.clientList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  background-color: var(--color-white);
+  border-radius: 20px;
+
+  .title {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--color-neutral-80);
+  }
+
+  .isEmpty {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--color-light-gray);
+  }
+}

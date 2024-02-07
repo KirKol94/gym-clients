@@ -16,7 +16,7 @@ jobs:
     - name: Build Frontend
       run: |
         ls
-        cd client && docker build -t cheblan/crm-frontend:latest .
+        cd client && rm .env && mv deploy.env .env && docker build -t cheblan/crm-frontend:latest .
         docker push cheblan/crm-frontend:latest
         echo "Nice"
     - name: Build Backend
@@ -25,3 +25,14 @@ jobs:
         cd backend && docker build -t cheblan/crm-backend:latest .
         docker push cheblan/crm-backend:latest
         echo "Nice"
+
+  deploy:
+    needs: ["build"]
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        clean: true
+    - name: Deploy to VPS
+      run: |
+        docker compose -f deploy/docker-compose.yaml up -d

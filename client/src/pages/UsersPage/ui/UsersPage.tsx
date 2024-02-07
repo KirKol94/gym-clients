@@ -1,13 +1,15 @@
-import { useLocation } from 'react-router-dom'
-
+import { AddNewClientForm } from '@/features/AddNewClientForm'
+import { ClientList } from '@/features/ClientList'
 import { Title, TitleSize } from '@/shared/ui/Title'
 
 export const UsersPage = () => {
-  const { pathname } = useLocation()
-  console.log(pathname)
   return (
     <div>
       <Title size={TitleSize.XXL}>Users page</Title>
+
+      <AddNewClientForm />
+
+      <ClientList />
     </div>
   )
 }
