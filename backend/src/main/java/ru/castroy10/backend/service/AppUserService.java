@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.castroy10.backend.dto.appuser.AppUserDto;
 import ru.castroy10.backend.dto.appuser.AppUserRegisterDto;
+import ru.castroy10.backend.dto.appuser.AppUserResponseFullDto;
 import ru.castroy10.backend.dto.appuser.AppUserUpdateDto;
 import ru.castroy10.backend.exception.RollbackException;
 import ru.castroy10.backend.exception.UserDuplicateException;
@@ -43,9 +44,10 @@ public class AppUserService {
     }
 
     @Transactional
-    public void save(Appuser appuser) {
-        appUserRepository.save(appuser);
+    public Appuser save(Appuser appuser) {
+        Appuser savedUser = appUserRepository.save(appuser);
         log.info("Пользователь {} {} {} записан в базу данных, id={}", appuser.getLastName(), appuser.getFirstName(), appuser.getMiddleName(), appuser.getId());
+        return savedUser;
     }
 
     @Transactional(rollbackFor = RollbackException.class)
@@ -56,7 +58,7 @@ public class AppUserService {
             Appuser appuser = modelMapper.map(appUserRegisterDto, Appuser.class);
             appUserAvatarService.saveAvatar(appuser, appUserRegisterDto);
             setUserAttributes(appuser, appUserRegisterDto);
-            save(appuser);
+            appuser = save(appuser);
             return ResponseEntity.ok().body(Map.of("Пользователь сохранен с id", appuser.getId().intValue()));
         } catch (Exception e) {
             log.error("Ошибка регистрации клиента {}, {}", appUserRegisterDto.getUsername(), e.getMessage());
@@ -77,6 +79,20 @@ public class AppUserService {
         return ResponseEntity.ok().body(Map.of("Пользователь обновлен с id", appuser.getId().intValue()));
     }
 
+    public ResponseEntity<?> findById(Long id) throws UserDuplicateException {
+        if (!checkUserExist(id))
+            throw new UserDuplicateException("Пользователя с таким id не существует");
+        Appuser appuser = appUserRepository.findAppuserById(id).orElse(new Appuser());
+        return ResponseEntity.ok().body(modelMapper.map(appuser, AppUserResponseFullDto.class));
+    }
+
+    public ResponseEntity<?> findByUserName(String username) throws UserDuplicateException {
+        if (!checkUserExist(username))
+            throw new UserDuplicateException("Пользователя с таким username не существует");
+        Appuser appuser = appUserRepository.findAppuserByUsername(username).orElse(new Appuser());
+        return ResponseEntity.ok().body(modelMapper.map(appuser, AppUserResponseFullDto.class));
+    }
+
     private boolean checkUserExist(String username) {
         Optional<Appuser> appuser = appUserRepository.findAppuserByUsername(username);
         return appuser.isPresent();
@@ -88,10 +104,7 @@ public class AppUserService {
     }
 
     private void setUserRoles(Appuser appuser, AppUserUpdateDto appUserUpdateDto) {
-        if (!getRolesFromDB(appUserUpdateDto).stream()
-                .filter(e -> e.getId() != null)
-                .collect(Collectors.toSet())
-                .isEmpty()) {
+        if (appUserUpdateDto.getRoles() != null && !getRolesFromDB(appUserUpdateDto).isEmpty()) {
             appuser.setRoles(null);
             appuser.setRoles(getRolesFromDB(appUserUpdateDto));
         }

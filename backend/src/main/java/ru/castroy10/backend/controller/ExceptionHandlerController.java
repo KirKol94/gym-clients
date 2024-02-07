@@ -42,7 +42,7 @@ public class ExceptionHandlerController {
 
     @ExceptionHandler(AuthenticationException.class)
     public ResponseEntity<?> authenticationException(AuthenticationException exception) {
-        return ResponseEntity.badRequest().contentType(MediaType.APPLICATION_JSON).body(Map.of("Login or password incorrect", exception.toString()));
+        return ResponseEntity.badRequest().contentType(MediaType.APPLICATION_JSON).body(Map.of("Login or password incorrect", exception.getMessage()));
     }
 
     @ExceptionHandler(RollbackException.class)
@@ -52,7 +52,7 @@ public class ExceptionHandlerController {
 
     @ExceptionHandler(UserDuplicateException.class)
     public ResponseEntity<?> userDuplicateException(UserDuplicateException exception) {
-        log.error("Ошибка регистрации клиента {}", exception.getMessage());
+        log.error("Ошибка {}", exception.getMessage());
         return ResponseEntity.badRequest().body(Map.of("Ошибка", exception.getMessage()));
     }
 

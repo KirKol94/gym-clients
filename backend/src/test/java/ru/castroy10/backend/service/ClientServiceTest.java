@@ -41,7 +41,7 @@ class ClientServiceTest {
     private final ClientController clientController;
     private final WebApplicationContext webApplicationContext;
 
-    MockMvc mockMvc;
+    private MockMvc mockMvc;
     private final Client client = new Client();
 
     @Autowired
@@ -183,7 +183,6 @@ class ClientServiceTest {
                 .andExpect(result -> {
                     String errorMessage = result.getResponse().getContentAsString();
                     Assertions.assertTrue(errorMessage.contains("this test is valid, sql exception with runtime exception"));
-                    System.out.println(errorMessage);
                 });
     }
 

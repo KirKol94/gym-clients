@@ -39,14 +39,14 @@ public class ClientService {
 
     @Transactional
     public ResponseEntity<?> update(ClientDtoUpdate clientDtoUpdate) {
-        Client client = clientRepository.findById(clientDtoUpdate.getId()).orElseThrow(() -> new UsernameNotFoundException("Пользователь не найден"));
+        Client client = clientRepository.findById(clientDtoUpdate.getId()).orElseThrow(() -> new UsernameNotFoundException("Клиент не найден"));
         modelMapper.map(clientDtoUpdate, client);
         log.info("Клиент {} {} {} обновлен, id={}", client.getLastName(), client.getFirstName(), client.getMiddleName(), client.getId());
         return ResponseEntity.ok(modelMapper.map(client, ClientSaveDto.class));
     }
 
     public ResponseEntity<?> findById(Long id) {
-        Client client = clientRepository.findById(id).orElseThrow(() -> new UsernameNotFoundException("Пользователь не найден"));
+        Client client = clientRepository.findById(id).orElseThrow(() -> new UsernameNotFoundException("Клиент не найден"));
         return ResponseEntity.ok(modelMapper.map(client, ClientFullDto.class));
     }
 

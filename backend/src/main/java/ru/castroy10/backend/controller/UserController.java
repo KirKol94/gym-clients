@@ -41,7 +41,7 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody @Valid AppUserRegisterDto appUserRegisterDto) throws RollbackException {
-            return appUserService.register(appUserRegisterDto);
+        return appUserService.register(appUserRegisterDto);
     }
 
     @PutMapping("/update")
@@ -52,5 +52,14 @@ public class UserController {
     @PostMapping("/refresh")
     public ResponseEntity<?> refresh(HttpServletRequest httpServletRequest) {
         return ResponseEntity.ok().body(Map.of("Refresh token", jwtUtil.refreshToken(httpServletRequest)));
+    }
+
+    @GetMapping ("/find/{id}")
+    public ResponseEntity<?> findById(@PathVariable("id") Long id) throws UserDuplicateException {
+        return appUserService.findById(id);
+    }
+    @GetMapping("/find")
+    public ResponseEntity<?> findByUserName(String username) throws UserDuplicateException {
+        return appUserService.findByUserName(username);
     }
 }
