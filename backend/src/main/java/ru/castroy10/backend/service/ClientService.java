@@ -15,8 +15,6 @@ import ru.castroy10.backend.model.Client;
 import ru.castroy10.backend.repository.ClientRepository;
 
 import java.util.List;
-import java.util.Map;
-
 
 @Slf4j
 @Service
@@ -33,64 +31,32 @@ public class ClientService {
 
     @Transactional
     public ResponseEntity<?> save(ClientDto clientDto) {
-        try {
-            Client client = modelMapper.map(clientDto, Client.class);
-            clientRepository.save(client);
-            log.info("Клиент {} {} {} записан в базу данных, id={}", client.getLastName(), client.getFirstName(), client.getMiddleName(), client.getId());
-            return ResponseEntity.ok(modelMapper.map(client, ClientSaveDto.class));
-        } catch (Exception e) {
-            log.error("Ошибка записи клиента в базу данных, {}", e.getMessage());
-            return ResponseEntity.badRequest().body(Map.of("Ошибка", e.getMessage()));
-        }
+        Client client = modelMapper.map(clientDto, Client.class);
+        clientRepository.save(client);
+        log.info("Клиент {} {} {} записан в базу данных, id={}", client.getLastName(), client.getFirstName(), client.getMiddleName(), client.getId());
+        return ResponseEntity.ok(modelMapper.map(client, ClientSaveDto.class));
     }
 
     @Transactional
     public ResponseEntity<?> update(ClientDtoUpdate clientDtoUpdate) {
-        try {
-            Client client = clientRepository.findById(clientDtoUpdate.getId()).orElseThrow(() -> new UsernameNotFoundException("Пользователь не найден"));
-            modelMapper.map(clientDtoUpdate, client);
-            clientRepository.save(client);
-            log.info("Клиент {} {} {} обновлен, id={}", client.getLastName(), client.getFirstName(), client.getMiddleName(), client.getId());
-            return ResponseEntity.ok(modelMapper.map(client, ClientSaveDto.class));
-        } catch (UsernameNotFoundException e) {
-            log.error("Пользователь с id={} не найден", clientDtoUpdate.getId());
-            return ResponseEntity.badRequest().body(Map.of("Ошибка", e.getMessage()));
-        } catch (Exception e) {
-            log.error("Ошибка записи клиента в базу данных, {}", e.getMessage());
-            return ResponseEntity.badRequest().body(Map.of("Ошибка", e.getMessage()));
-        }
+        Client client = clientRepository.findById(clientDtoUpdate.getId()).orElseThrow(() -> new UsernameNotFoundException("Клиент не найден"));
+        modelMapper.map(clientDtoUpdate, client);
+        log.info("Клиент {} {} {} обновлен, id={}", client.getLastName(), client.getFirstName(), client.getMiddleName(), client.getId());
+        return ResponseEntity.ok(modelMapper.map(client, ClientSaveDto.class));
     }
 
     public ResponseEntity<?> findById(Long id) {
-        try {
-            Client client = clientRepository.findById(id).orElseThrow(() -> new UsernameNotFoundException("Пользователь не найден"));
-            return ResponseEntity.ok(modelMapper.map(client, ClientFullDto.class));
-        } catch (UsernameNotFoundException e) {
-            log.error("Пользователь с id={} не найден", id);
-            return ResponseEntity.badRequest().body(Map.of("Ошибка", e.getMessage()));
-        } catch (Exception e) {
-            log.error("Ошибка записи клиента в базу данных, {}", e.getMessage());
-            return ResponseEntity.badRequest().body(Map.of("Ошибка", e.getMessage()));
-        }
+        Client client = clientRepository.findById(id).orElseThrow(() -> new UsernameNotFoundException("Клиент не найден"));
+        return ResponseEntity.ok(modelMapper.map(client, ClientFullDto.class));
     }
 
     public ResponseEntity<?> findAll() {
-        try {
-            List<Client> clientList = clientRepository.findAll();
-            return ResponseEntity.ok(clientList);
-        } catch (Exception e) {
-            log.error("Ошибка доступа к базе данных, {}", e.getMessage());
-            return ResponseEntity.badRequest().body(Map.of("Ошибка", e.getMessage()));
-        }
+        List<Client> clientList = clientRepository.findAll();
+        return ResponseEntity.ok(clientList);
     }
 
     public ResponseEntity<?> findByName(String name) {
-        try {
-            List<Client> clientList = clientRepository.findByName(name);
-            return ResponseEntity.ok(clientList);
-        } catch (Exception e) {
-            log.error("Ошибка доступа к базе данных, {}", e.getMessage());
-            return ResponseEntity.badRequest().body(Map.of("Ошибка", e.getMessage()));
-        }
+        List<Client> clientList = clientRepository.findByName(name);
+        return ResponseEntity.ok(clientList);
     }
 }

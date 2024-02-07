@@ -1,12 +1,11 @@
 import Contract from '@/shared/assets/icons/Contract.svg?react'
 import { AlertCard } from '@/widgets/AlertCard'
 import { EntityCard } from '@/widgets/EntityCard'
-import Page from '@/widgets/Page'
 import { SettingsCard } from '@/widgets/SettingsCard'
 
 export const ProfilePage = () => {
   return (
-    <Page>
+    <div>
       <AlertCard
         count={0}
         title="Контрагента ожидают в стадии “Подписание Контракты”"
@@ -22,6 +21,6 @@ export const ProfilePage = () => {
         <Contract />
         Контракты
       </EntityCard>
-    </Page>
+    </div>
   )
 }
