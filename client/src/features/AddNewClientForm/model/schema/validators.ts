@@ -18,6 +18,9 @@ const getUnmaskPhone = (value: string | null) => {
   return null
 }
 
+/**
+ * Валидация ФИО.
+ */
 export const validateFio: CustomValidator<string> = (value, helpers) => {
   const isLastName = helpers.state.path?.[0] === 'lastName'
   const matchPattern = isLastName ? /^[а-яА-ЯёЁ]*$/ : /^[а-яА-ЯёЁ-]*$/
@@ -31,6 +34,9 @@ export const validateFio: CustomValidator<string> = (value, helpers) => {
   return value
 }
 
+/**
+ * Валидация электронной почты.
+ */
 export const validateEmail: CustomValidator<string> = (value, helpers) => {
   const matchPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
   if (!value?.match(matchPattern)) {
@@ -41,6 +47,9 @@ export const validateEmail: CustomValidator<string> = (value, helpers) => {
   return value
 }
 
+/**
+ * Валидация количества занятий.
+ */
 export const validateCount: CustomValidator<string> = (value, helpers) => {
   const matchPattern = /^\d+$/
   if (!String(value)?.match(matchPattern)) {
@@ -51,10 +60,13 @@ export const validateCount: CustomValidator<string> = (value, helpers) => {
   return value
 }
 
+/**
+ * Валидация номера телефона.
+ */
 export const validatePhoneNumber: CustomValidator<string> = (value, helpers) => {
-  const clearedValue = getUnmaskPhone(value)
-  const isFormatValid = `${clearedValue}`.match(PHONE_LENGTH_REGEX)
-  const isPhoneStartValid = `${clearedValue}`.match(PHONE_STARTING_NUMBERS_REGEX)
+  const clearedValue = getUnmaskPhone(value) // номер без пробелов и +7
+  const isFormatValid = `${clearedValue}`.match(PHONE_LENGTH_REGEX) // проверка длины введенного номера
+  const isPhoneStartValid = `${clearedValue}`.match(PHONE_STARTING_NUMBERS_REGEX) // проверка начала введенного номера
 
   if (!isFormatValid)
     return helpers.message({

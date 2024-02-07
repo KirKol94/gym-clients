@@ -3,13 +3,13 @@ import { joiResolver } from '@hookform/resolvers/joi'
 import cx from 'classix'
 
 import { IClient } from '@/entities/Client'
-import { schema } from '@/features/AddNewClientForm/model/schema'
 import { BaseMaskInput } from '@/shared/ui/BaseMaskInput'
 import { Button, ButtonSize } from '@/shared/ui/Button'
 import { Input } from '@/shared/ui/Input'
 import { Text, TextSize } from '@/shared/ui/Text'
 
 import { useAddNewClient } from '../model/api/addClientApi'
+import { schema } from '../model/schema'
 
 import cls from './AddNewClientForm.module.scss'
 

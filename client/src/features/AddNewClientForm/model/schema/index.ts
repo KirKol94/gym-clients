@@ -1,11 +1,6 @@
 import joi from 'joi'
 
-import {
-  validateCount,
-  validateEmail,
-  validateFio,
-  validatePhoneNumber,
-} from '@/features/AddNewClientForm/model/schema/validators.ts'
+import { validateCount, validateEmail, validateFio, validatePhoneNumber } from './validators.ts'
 
 const customMessages = {
   'string.min': 'должно быть не менее {{#limit}} символов',
