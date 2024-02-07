@@ -1,15 +1,16 @@
 import { useState } from 'react'
+import cx from 'classix'
 
-import Agent from '@/shared/assets/icons/Agent.svg'
-import Avatar from '@/shared/assets/icons/Avatar.svg'
-import BackArrow from '@/shared/assets/icons/Back.svg'
-import Contract from '@/shared/assets/icons/Contract.svg'
-import Deals from '@/shared/assets/icons/Deals.svg'
-import Group from '@/shared/assets/icons/Group.svg'
-import Logo from '@/shared/assets/icons/Logo.svg'
-import LogoMini from '@/shared/assets/icons/LogoMini.svg'
-import Setting from '@/shared/assets/icons/SettingsWhite.svg'
-import Users from '@/shared/assets/icons/UsersWhite.svg'
+import Agent from '@/shared/assets/icons/Agent.svg?react'
+import Avatar from '@/shared/assets/icons/Avatar.svg?react'
+import BackArrow from '@/shared/assets/icons/Back.svg?react'
+import Contract from '@/shared/assets/icons/Contract.svg?react'
+import Deals from '@/shared/assets/icons/Deals.svg?react'
+import Group from '@/shared/assets/icons/Group.svg?react'
+import Logo from '@/shared/assets/icons/Logo.svg?react'
+import LogoMini from '@/shared/assets/icons/LogoMini.svg?react'
+import Setting from '@/shared/assets/icons/SettingsWhite.svg?react'
+import Users from '@/shared/assets/icons/UsersWhite.svg?react'
 import { ROUTER_PATH } from '@/shared/const/path/PATH'
 
 import { SidebarItem } from '../../SidebarItem'
@@ -19,57 +20,59 @@ import classes from './Sidebar.module.scss'
 export const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true)
 
-  const user = { title: 'Иван Иванов', icon: Avatar, to: ROUTER_PATH.PROFILE }
-
   const sidebarItems = [
     {
+      title: 'Иван Иванов',
+      Icon: <Avatar />,
+      to: ROUTER_PATH.PROFILE,
+    },
+    {
       title: 'Пользователи',
-      icon: Users,
+      Icon: <Users />,
       to: ROUTER_PATH.USERS,
     },
     {
       title: 'Группы компаний',
-      icon: Group,
+      Icon: <Group />,
       to: ROUTER_PATH.GROUP,
     },
     {
       title: 'Контрагенты',
-      icon: Agent,
+      Icon: <Agent />,
       to: ROUTER_PATH.AGENT,
     },
     {
       title: 'Контракты',
-      icon: Contract,
+      Icon: <Contract />,
       to: ROUTER_PATH.CONTRACT,
     },
     {
       title: 'Сделки',
-      icon: Deals,
+      Icon: <Deals />,
       to: ROUTER_PATH.DEALS,
     },
     {
       title: 'Настройки',
-      icon: Setting,
+      Icon: <Setting />,
       to: ROUTER_PATH.SETTINGS,
     },
   ]
 
   const onSidebarVisibleToggle = () => {
-    setIsOpen(!isOpen)
+    setIsOpen((prev) => !prev)
   }
 
   return (
-    <aside className={isOpen ? classes.sidebar : classes.sidebar__hiden}>
-      <div onClick={onSidebarVisibleToggle} className={classes.logo__wrapper}>
-        <img src={isOpen ? Logo : LogoMini} alt="Логотип" />
-        <div className={classes.back}>
-          <img className={isOpen ? classes.img : classes.img__active} src={BackArrow} />
-        </div>
+    <aside className={cx(classes.sidebar, !isOpen && classes.sidebar_hidden)}>
+      <div className={classes.logo__wrapper}>
+        {isOpen ? <Logo /> : <LogoMini />}
+        <button onClick={onSidebarVisibleToggle} className={cx(classes.back, !isOpen && classes.back_hidden)}>
+          <BackArrow />
+        </button>
       </div>
 
-      <nav className={classes.links__wrapper}>
-        <SidebarItem data={user} isOpen={isOpen} />
-        <ul className={classes.cards__wrapper}>
+      <nav className={classes.nav}>
+        <ul className={classes.list}>
           {sidebarItems.map((el, index) => (
             <SidebarItem data={el} isOpen={isOpen} key={el.title + index} />
           ))}

@@ -8,19 +8,20 @@ import { Text, TextSize } from '@/shared/ui/Text'
 import classes from './SidebarItem.module.scss'
 
 interface SidebarItemProps {
-  data: { title: string; icon: string; to: string }
+  data: {
+    title: string
+    Icon: JSX.Element
+    to: string
+  }
   isOpen: boolean
 }
 
 export const SidebarItem = ({ data, isOpen }: SidebarItemProps) => {
   const { pathname } = useLocation()
-  const { title, icon, to } = data
+  const { title, Icon, to } = data
 
-  const cardOpen = cx(pathname === to ? classes.card__active : classes.card)
-  const cardClose = cx(pathname === to ? classes.card__close__active : classes.card__close)
-  const textClass = cx(pathname === to ? classes.text__active : classes.text)
-  const bgClass = cx(pathname === to && classes.background)
-  const cardClass = cx(isOpen ? cardOpen : cardClose)
+  const textClass = cx(classes.text, pathname === to && classes.text_active)
+  const cardClass = cx(classes.card, !isOpen && classes.card__close, pathname === to && classes.card_active)
 
   useEffect(() => {
     localStorage.setItem(CURRENT_PATHNAME_KEY, pathname)
@@ -29,14 +30,13 @@ export const SidebarItem = ({ data, isOpen }: SidebarItemProps) => {
   return (
     <div className={classes.wrapper}>
       <Link className={cardClass} to={to}>
-        <img src={icon} alt={title} />
-        {isOpen && (
-          <Text className={textClass} size={TextSize.S}>
-            {title}
-          </Text>
-        )}
+        {Icon}
+        <Text className={textClass} size={TextSize.S}>
+          {title}
+        </Text>
       </Link>
-      <div className={bgClass} />
+
+      <div className={cx(pathname === to && classes.background)} />
     </div>
   )
 }
