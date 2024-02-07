@@ -67,10 +67,13 @@ export const Sidebar = () => {
   useEffect(() => {
     localStorage.setItem(IS_SIDEBAR_VISIBLE, JSON.stringify(isOpen))
   }, [isOpen])
+
   // достаём из локал стораж состояние сайдбара
   useEffect(() => {
-    const sidebarIsVisible = JSON.parse(localStorage.getItem(IS_SIDEBAR_VISIBLE))
-    setIsOpen(sidebarIsVisible)
+    const sidebarIsVisible = localStorage.getItem(IS_SIDEBAR_VISIBLE)
+    if (sidebarIsVisible && sidebarIsVisible !== null) {
+      setIsOpen(JSON.parse(sidebarIsVisible))
+    }
   }, [])
 
   return (
