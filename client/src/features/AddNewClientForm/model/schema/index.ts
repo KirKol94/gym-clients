@@ -18,6 +18,7 @@ export const schema = joi
     middleName: joi.string().min(2).max(24).custom(validateFio).messages(customMessages).required(),
     lastName: joi.string().min(6).max(20).custom(validateFio).messages(customMessages).required(),
     email: joi.string().custom(validateEmail).messages(customMessages).allow(null),
+    sex: joi.number().valid(0, 1),
     birthday: joi.allow(null),
     mobilePhone: joi.string().custom(validatePhoneNumber).messages(customMessages).allow(null),
     personalTrainingCount: joi.number().min(0).max(100).custom(validateCount).messages(customMessages).required(),
