@@ -7,5 +7,7 @@ import { RootProvider } from './app/providers/RootProvider'
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <RootProvider>
     <App />
-  </RootProvider>,
+  </RootProvider>
+  <Main />
 )
+
