@@ -4,6 +4,7 @@
 
 - React
 - react-router-dom
+- react-hook-form
 - TypeScript
 - ReduxToolKit
 - RTKQuery
@@ -71,7 +72,8 @@ docker compose up -d
     "lint:ts": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix",
     "lint:prettier": "prettier --write ./src",
     "lint:style": "stylelint src/**/*.scss --fix",
-    "preview": "vite preview"
+    "preview": "vite preview",
+        "new": "node ./scripts/createSlice/index.js"
   },
 ```
 
@@ -86,6 +88,12 @@ docker compose up -d
 - `lint:style` запуск stylelint
 
 `preview` похожа на `build` за исключением того, что не создаётся папка `dist` и запускается сервер, который будет выглядеть так же, как будто бы запущены файлы из папки `dist`
+
+`new` команда для автогенерации FSD слайсов Например:
+
+`yarn new pages AboutPage`
+
+эта команда создаст структуру файлов и папок для начала работы над страницей AboutPage
 
 ## точка входа в приложение
 

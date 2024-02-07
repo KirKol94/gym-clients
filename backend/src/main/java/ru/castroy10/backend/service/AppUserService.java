@@ -3,6 +3,7 @@ package ru.castroy10.backend.service;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -32,7 +33,6 @@ public class AppUserService {
     private final RoleService roleService;
     private final PasswordEncoder passwordEncoder;
     private final AppUserAvatarService appUserAvatarService;
-
 
     @Autowired
     public AppUserService(AppUserRepository appUserRepository, ModelMapper modelMapper, RoleService roleService, PasswordEncoder passwordEncoder, AppUserAvatarService appUserAvatarService) {
@@ -128,4 +128,5 @@ public class AppUserService {
         }
     }
 }
+
 
