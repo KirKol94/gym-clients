@@ -17,36 +17,38 @@ export const Client = ({ client }: ClientProps) => {
   return (
     <li className={cls.client}>
       <div className={cls.info}>
-        <div className={cls.name}>
+        <div className={cls.info__name}>
           <div>{middleName}</div>
           <div>{firstName}</div>
           <div>{lastName}</div>
         </div>
-        <div className={cls.addInfo}>
-          <div className={cls.value}>
-            <span className={cls.valueTitle}>Пол:</span> {sex === 1 ? 'Мужской' : 'Женский'}
+        <div className={cls.additional}>
+          <div className={cls.additional__item}>
+            <span className={cls.additional__title}>Пол:</span> {sex === 1 ? 'Мужской' : 'Женский'}
           </div>
-          <div className={cls.value}>
-            <span className={cls.valueTitle}>День рождения:</span> {birthday}
+          <div className={cls.additional__item}>
+            <span className={cls.additional__title}>День рождения:</span> {birthday}
           </div>
-          <div className={cls.value}>
-            <span className={cls.valueTitle}>Кол-во персональных:</span> {personalTrainingCount}
+          <div className={cls.additional__item}>
+            <span className={cls.additional__title}>Кол-во персональных:</span> {personalTrainingCount}
           </div>
         </div>
       </div>
       <div className={cls.contacts}>
-        <a className={cls.email} href={`https://mail.google.com/mail/?view=cm&fs=1&to=${email}`} target="_blank">
+        <a
+          className={cls.contacts__email}
+          href={`https://mail.google.com/mail/?view=cm&fs=1&to=${email}`}
+          target="_blank"
+        >
           {email}
         </a>
-        <a className={cls.modilePhone} href={`tel:${mobilePhone}`}>
+        <a className={cls.contacts_mobile} href={`tel:${mobilePhone}`}>
           {mobilePhone}
         </a>
       </div>
-      <div className={cls.moreInfo}>
-        <Link to={`${ROUTER_PATH.USERS}/${id}`}>
-          <Button size={ButtonSize.S}>Подробнее &#62;</Button>
-        </Link>
-      </div>
+      <Link to={`${ROUTER_PATH.USERS}/${id}`}>
+        <Button size={ButtonSize.S}>Подробнее &#62;</Button>
+      </Link>
     </li>
   )
 }
