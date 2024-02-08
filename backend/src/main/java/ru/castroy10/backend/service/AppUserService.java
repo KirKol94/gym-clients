@@ -1,9 +1,9 @@
 package ru.castroy10.backend.service;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -17,6 +17,7 @@ import ru.castroy10.backend.exception.UserDuplicateException;
 import ru.castroy10.backend.model.Appuser;
 import ru.castroy10.backend.model.Role;
 import ru.castroy10.backend.repository.AppUserRepository;
+import ru.castroy10.backend.security.jwt.JwtUtil;
 
 import java.io.IOException;
 import java.util.Map;
@@ -33,14 +34,16 @@ public class AppUserService {
     private final RoleService roleService;
     private final PasswordEncoder passwordEncoder;
     private final AppUserAvatarService appUserAvatarService;
+    private final JwtUtil jwtUtil;
 
     @Autowired
-    public AppUserService(AppUserRepository appUserRepository, ModelMapper modelMapper, RoleService roleService, PasswordEncoder passwordEncoder, AppUserAvatarService appUserAvatarService) {
+    public AppUserService(AppUserRepository appUserRepository, ModelMapper modelMapper, RoleService roleService, PasswordEncoder passwordEncoder, AppUserAvatarService appUserAvatarService, JwtUtil jwtUtil) {
         this.appUserRepository = appUserRepository;
         this.roleService = roleService;
         this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
         this.appUserAvatarService = appUserAvatarService;
+        this.jwtUtil = jwtUtil;
     }
 
     @Transactional
@@ -91,6 +94,11 @@ public class AppUserService {
             throw new UserDuplicateException("Пользователя с таким username не существует");
         Appuser appuser = appUserRepository.findAppuserByUsername(username).orElse(new Appuser());
         return ResponseEntity.ok().body(modelMapper.map(appuser, AppUserResponseFullDto.class));
+    }
+
+    public ResponseEntity<?> getProfile(HttpServletRequest httpServletRequest) throws UserDuplicateException {
+        String username = jwtUtil.verifyToken(httpServletRequest.getHeader("Authorization").substring(7));
+        return findByUserName(username);
     }
 
     private boolean checkUserExist(String username) {
