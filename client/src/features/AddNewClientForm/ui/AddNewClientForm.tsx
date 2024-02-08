@@ -80,12 +80,7 @@ export const AddNewClientForm = () => {
         </fieldset>
 
         <Input
-          {...register('birthday', {
-            pattern: {
-              value: /\d{2}\.\d{2}\.\d{4}/,
-              message: 'Дата должна быть в формате ДД.ММ.ГГГГ',
-            },
-          })}
+          {...register('birthday')}
           error={errors?.birthday?.message}
           placeholder="дд.мм.гггг"
           className={cls.input}
