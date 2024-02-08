@@ -44,11 +44,11 @@ export const Client = ({ client }: ClientProps) => {
           {mobilePhone}
         </a>
       </div>
-      <div className={clx.moreInfo}>
-        <Link to={`${ROUTER_PATH.USERS} + ":" + ${id}`}>
-          <Button size={ButtonSize.S}>Подробнее &#62;</Button>
-        </Link>
-      </div>
+      {/* <div className={clx.moreInfo}> */}
+      <Link to={`${ROUTER_PATH.USERS}/${id}`}>
+        <Button size={ButtonSize.S}>Подробнее &#62;</Button>
+      </Link>
+      {/* </div> */}
     </li>
   )
 }
