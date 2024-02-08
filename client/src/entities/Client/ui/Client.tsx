@@ -5,7 +5,7 @@ import { Button, ButtonSize } from '@/shared/ui/Button'
 
 import { IClient } from '..'
 
-import clx from './Client.module.scss'
+import cls from './Client.module.scss'
 
 interface ClientProps {
   client: IClient
@@ -15,34 +15,34 @@ export const Client = ({ client }: ClientProps) => {
   const { id, firstName, middleName, lastName, email, birthday, sex, mobilePhone, personalTrainingCount } = client
 
   return (
-    <li className={clx.client}>
-      <div className={clx.info}>
-        <div className={clx.name}>
+    <li className={cls.client}>
+      <div className={cls.info}>
+        <div className={cls.name}>
           <div>{middleName}</div>
           <div>{firstName}</div>
           <div>{lastName}</div>
         </div>
-        <div className={clx.addInfo}>
-          <div className={clx.value}>
-            <span className={clx.valueTitle}>Пол:</span> {sex === 1 ? 'Мужской' : 'Женский'}
+        <div className={cls.addInfo}>
+          <div className={cls.value}>
+            <span className={cls.valueTitle}>Пол:</span> {sex === 1 ? 'Мужской' : 'Женский'}
           </div>
-          <div className={clx.value}>
-            <span className={clx.valueTitle}>День рождения:</span> {birthday}
+          <div className={cls.value}>
+            <span className={cls.valueTitle}>День рождения:</span> {birthday}
           </div>
-          <div className={clx.value}>
-            <span className={clx.valueTitle}>Кол-во персональных:</span> {personalTrainingCount}
+          <div className={cls.value}>
+            <span className={cls.valueTitle}>Кол-во персональных:</span> {personalTrainingCount}
           </div>
         </div>
       </div>
-      <div className={clx.contacts}>
-        <a className={clx.email} href={`https://mail.google.com/mail/?view=cm&fs=1&to=${email}`} target="_blank">
+      <div className={cls.contacts}>
+        <a className={cls.email} href={`https://mail.google.com/mail/?view=cm&fs=1&to=${email}`} target="_blank">
           {email}
         </a>
-        <a className={clx.modilePhone} href={`tel:${mobilePhone}`}>
+        <a className={cls.modilePhone} href={`tel:${mobilePhone}`}>
           {mobilePhone}
         </a>
       </div>
-      <div className={clx.moreInfo}>
+      <div className={cls.moreInfo}>
         <Link to={`${ROUTER_PATH.USERS}/${id}`}>
           <Button size={ButtonSize.S}>Подробнее &#62;</Button>
         </Link>
