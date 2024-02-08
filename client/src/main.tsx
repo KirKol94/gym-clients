@@ -8,6 +8,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <RootProvider>
     <App />
   </RootProvider>
-  <Main />
 )
 

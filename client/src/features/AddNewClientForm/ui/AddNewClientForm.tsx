@@ -52,23 +52,7 @@ export const AddNewClientForm = () => {
           inputName="Имя"
         />
 
-        <Input
-          {...register('middleName')}
-          error={errors?.middleName?.message}
-          placeholder="Иванович"
-          className={cls.input}
-          inputName="Отчество"
-        />
-
-        <Input
-          {...register('lastName')}
-          error={errors?.lastName?.message}
-          placeholder="Иванов"
-          className={cls.input}
-          inputName="Фамилия"
-        />
-
-        <fieldset className={cls.gender}>
+<fieldset className={cls.gender}>
           <label className={cls.gender__row}>
             <Text size={TextSize.S}>Мужской</Text>
             <input type="radio" value="1" defaultChecked {...register('sex')} />
@@ -80,9 +64,19 @@ export const AddNewClientForm = () => {
         </fieldset>
 
         <Input
+          {...register('lastName')}
+          error={errors?.lastName?.message}
+          placeholder="Иванов"
+          className={cls.input}
+          inputName="Фамилия"
+        />
+
+     
+
+        <Input
           {...register('birthday', {
             pattern: {
-            value: /^\d{1,2}\.\d{1,2}\.\d{4}$/,
+            value: /\d{2}\.\d{2}\.\d{4}/,
               message: 'Дата должна быть в формате ДД.ММ.ГГГГ',
             },
           })}
