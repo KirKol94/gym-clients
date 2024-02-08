@@ -82,18 +82,18 @@ export const AuthForm = ({ type = AuthType.LOGIN }: AuthFormProps) => {
       </Title>
 
       <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          {...register('username', {
-            required: 'Это поле обязательное',
-            minLength: {
-              value: 5,
-              message: 'Не менее 5 символов',
-            },
-          })}
-          error={errors?.username?.message}
-          inputName="Имя пользователя"
-          placeholder="Имя пользователя"
-        />
+      <Input
+              {...register('email', {
+                required: 'Обязательное поле',
+                pattern: {
+                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                  message: 'Введите валидный email',
+                },
+              })}
+              error={errors?.email?.message}
+              inputName="Email"
+              placeholder="Email"
+            />
 
         <Input
           type="password"
@@ -115,18 +115,7 @@ export const AuthForm = ({ type = AuthType.LOGIN }: AuthFormProps) => {
 
         {type === AuthType.REGISTER && (
           <>
-            <Input
-              {...register('email', {
-                required: 'Обязательное поле',
-                pattern: {
-                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                  message: 'Введите валидный email',
-                },
-              })}
-              error={errors?.email?.message}
-              inputName="Email"
-              placeholder="Email"
-            />
+         
 
             <Input
               {...register('firstName', {
@@ -150,7 +139,7 @@ export const AuthForm = ({ type = AuthType.LOGIN }: AuthFormProps) => {
             />
 
             <Input
-              {...register('middleName', {
+              {...register('lastName', {
                 required: 'Обязательное поле',
                 minLength: {
                   value: 2,
@@ -165,30 +154,11 @@ export const AuthForm = ({ type = AuthType.LOGIN }: AuthFormProps) => {
                   message: 'Только русские буквы и «-»',
                 },
               })}
-              error={errors?.middleName?.message}
+              error={errors?.lastName?.message}
               inputName="Фамилия"
               placeholder="Фамилия"
             />
 
-            <Input
-              {...register('lastName', {
-                minLength: {
-                  value: 6,
-                  message: 'Не менее 6 символов',
-                },
-                maxLength: {
-                  value: 20,
-                  message: 'Не более 20 символов',
-                },
-                pattern: {
-                  value: /^[а-яА-ЯёЁ]*$/,
-                  message: 'Только русские буквы',
-                },
-              })}
-              error={errors?.lastName?.message}
-              inputName="Отчество"
-              placeholder="Отчество"
-            />
           </>
         )}
 
