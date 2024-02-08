@@ -18,7 +18,7 @@ export const schema = joi.object({
   lastName: joi.string().min(6).max(20).custom(validateFio).messages(customMessages).required(),
   email: joi.string().custom(validateEmail).messages(customMessages).allow(null),
   sex: joi.number().valid(0, 1),
-  birthday: joi.string().custom(validateDate).messages(customMessages).required(),
+  birthday: joi.string().custom(validateDate).messages(customMessages).allow(null),
   mobilePhone: joi.string().custom(validatePhoneNumber).messages(customMessages).allow(null),
-  personalTrainingCount: joi.number().min(0).max(100).custom(validateCount).messages(customMessages).required(),
+  personalTrainingCount: joi.number().min(0).max(100).custom(validateCount).messages(customMessages).allow(null),
 })

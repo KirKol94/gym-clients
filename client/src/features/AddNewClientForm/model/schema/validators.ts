@@ -90,5 +90,15 @@ export const validateDate: CustomValidator<string> = (date, helpers) => {
     })
   }
 
+  const currentYear = new Date().getFullYear()
+  const parts = date.split('.')
+  const year = parseInt(parts[2], 10)
+
+  if (year > currentYear) {
+    return helpers.message({
+      custom: 'Не может быть позже текущего года',
+    })
+  }
+
   return date
 }
