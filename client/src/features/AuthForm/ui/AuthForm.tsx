@@ -104,8 +104,8 @@ export const AuthForm = ({ type = AuthType.LOGIN }: AuthFormProps) => {
               message: 'Латинские буквы, цифра и символы, кроме пробела',
             },
             minLength: {
-              value: 6,
-              message: 'Не менее 6 символов',
+              value: 5,
+              message: 'Не менее 5 символов',
             },
           })}
           error={errors?.password?.message}
