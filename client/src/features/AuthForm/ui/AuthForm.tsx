@@ -87,7 +87,7 @@ export const AuthForm = ({ type = AuthType.LOGIN }: AuthFormProps) => {
                 required: 'Обязательное поле',
                 pattern: {
                   value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                  message: 'Введите валидный email',
+                  message: 'Введите корректный email',
                 },
               })}
               error={errors?.email?.message}
