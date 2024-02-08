@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import cx from 'classix'
 
 import { ROUTER_PATH } from '@/shared/const/path/PATH'
 import { Button, ButtonSize } from '@/shared/ui/Button'
@@ -14,10 +13,9 @@ interface ClientProps {
 
 export const Client = ({ client }: ClientProps) => {
   const { id, firstName, middleName, lastName, email, birthday, sex, mobilePhone, personalTrainingCount } = client
-  const clientClass = cx(clx.client)
 
   return (
-    <li className={clientClass}>
+    <li className={clx.client}>
       <div className={clx.info}>
         <div className={clx.name}>
           <div>{middleName}</div>
