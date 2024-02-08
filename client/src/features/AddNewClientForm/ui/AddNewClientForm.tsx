@@ -20,6 +20,10 @@ export const AddNewClientForm = () => {
   const methods = useForm<ClientDataType>({
     mode: 'onChange',
     resolver: joiResolver(schema),
+    defaultValues: {
+      email: null,
+      middleName: null,
+    },
   })
   const { refetch } = useGetAllClients()
 
@@ -29,6 +33,7 @@ export const AddNewClientForm = () => {
     reset,
     formState: { errors, isValid, isDirty },
   } = methods
+
   const [addClient, { data: resClient, status }] = useAddNewClient()
 
   const onSubmit: SubmitHandler<ClientDataType> = (data) => {
@@ -79,12 +84,13 @@ export const AddNewClientForm = () => {
           </label>
         </fieldset>
 
-        <Input
-          {...register('birthday')}
-          error={errors?.birthday?.message}
+        <BaseMaskInput
+          label="Дата рождения"
+          name="birthday"
+          type="text"
+          format="##.##.####"
           placeholder="дд.мм.гггг"
           className={cls.input}
-          inputName="Дата рождения"
         />
 
         <Input
