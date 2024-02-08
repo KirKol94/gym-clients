@@ -39,6 +39,7 @@ export const Client = ({ client }: ClientProps) => {
           className={cls.contacts__email}
           href={`https://mail.google.com/mail/?view=cm&fs=1&to=${email}`}
           target="_blank"
+          rel="noopener noreferrer"
         >
           {email}
         </a>
