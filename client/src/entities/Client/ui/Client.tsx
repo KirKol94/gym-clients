@@ -47,7 +47,9 @@ export const Client = ({ client }: ClientProps) => {
         </a>
       </div>
       <Link to={`${ROUTER_PATH.USERS}/${id}`}>
-        <Button size={ButtonSize.S}>Подробнее &#62;</Button>
+        <Button className={cls.button} size={ButtonSize.S}>
+          Подробнее &#62;
+        </Button>
       </Link>
     </li>
   )
