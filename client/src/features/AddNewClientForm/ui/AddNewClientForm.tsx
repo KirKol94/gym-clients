@@ -81,12 +81,8 @@ export const AddNewClientForm = () => {
 
         <Input
           {...register('birthday', {
-            required: {
-              value: true,
-              message: 'Пожалуйста введите свой день рождения',
-            },
             pattern: {
-              value: /^\d{1,2}\.\d{1,2}\.\d{4}$/,
+            value: /^\d{1,2}\.\d{1,2}\.\d{4}$/,
               message: 'Дата должна быть в формате ДД.ММ.ГГГГ',
             },
           })}
