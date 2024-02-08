@@ -23,8 +23,8 @@ const getUnmaskPhone = (value: string | null) => {
  */
 export const validateFio: CustomValidator<string> = (value, helpers) => {
   const isLastName = helpers.state.path?.[0] === 'lastName'
-  const matchPattern = isLastName ? /^[а-яА-ЯёЁ]*$/ : /^[а-яА-ЯёЁ-]*$/
-  const errorMessage = isLastName ? 'Только русские буквы' : 'Только русские буквы и «-»'
+  const matchPattern = isLastName ? /^[а-яА-ЯёЁa-zA-Z]*$/ : /^[а-яА-ЯёЁa-zA-Z-]*$/;
+  const errorMessage = isLastName ? 'Только русские или английские буквы' : 'Только русские или английские буквы  и «-»'
 
   if (!value?.match(matchPattern)) {
     return helpers.message({
