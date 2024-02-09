@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 import cx from 'classix'
 
 import Agent from '@/shared/assets/icons/Agent.svg?react'
@@ -19,6 +19,7 @@ import classes from './Sidebar.module.scss'
 
 export const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true)
+  const [renderLogo, setRenderLogo] = useState<ReactNode | null>(<Logo />)
 
   const sidebarItems = [
     {
@@ -62,10 +63,24 @@ export const Sidebar = () => {
     setIsOpen((prev) => !prev)
   }
 
+  useEffect(() => {
+    let timeoutId: number
+
+    if (isOpen) {
+      timeoutId = setTimeout(() => {
+        setRenderLogo(<Logo />)
+      }, 300)
+    } else {
+      setRenderLogo(<LogoMini />)
+    }
+
+    return () => clearTimeout(timeoutId)
+  }, [isOpen])
+
   return (
     <aside className={cx(classes.sidebar, !isOpen && classes.sidebar_hidden)}>
       <div className={classes.logo__wrapper}>
-        {isOpen ? <Logo /> : <LogoMini />}
+        {renderLogo}
         <button onClick={onSidebarVisibleToggle} className={cx(classes.back, !isOpen && classes.back_hidden)}>
           <BackArrow />
         </button>

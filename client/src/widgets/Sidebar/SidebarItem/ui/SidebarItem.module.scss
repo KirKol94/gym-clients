@@ -15,9 +15,16 @@
   padding: 0 10px;
   user-select: none;
   border-radius: 10px;
+  transition: all var(--transition-delay-fast);
+
+> svg {
+  width: 30px;
+  height: 30px;
+}
 
   &_active {
     background: var(--color-light-blue);
+    transition: all var(--transition-delay-fast);
   }
 
   > p {
@@ -28,6 +35,11 @@
   &__close {
     gap: 0;
     width: 50px;
+    transition: all var(--transition-delay-fast);
+
+    &_active {
+      transition: all var(--transition-delay-fast);
+    }
 
     > p {
       font-size: 0;

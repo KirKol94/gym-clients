@@ -37,13 +37,11 @@
 
   > svg {
     margin-right: 2px;
-    transition: transform var(--transition-delay-fast);
   }
 
   &_hidden {
     > svg {
       margin-left: 2px;
-      transition: transform var(--transition-delay-fast);
       transform: scale(-1);
     }
   }
