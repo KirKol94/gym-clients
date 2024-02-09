@@ -61,7 +61,7 @@ public class ClientService {
     }
 
     public ResponseEntity<?> findByName(String name) {
-        List<Client> clientList = clientRepository.findByName(name);
+        List<Client> clientList = clientRepository.findByName(name.toLowerCase());
         return ResponseEntity.ok(clientList);
     }
 }
