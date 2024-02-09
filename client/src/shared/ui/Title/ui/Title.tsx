@@ -8,10 +8,13 @@ import classes from './Title.module.scss'
 interface TitleProps {
   size: TitleSize
   children: ReactNode
+  level: 1 | 2 | 3 | 4 | 5 | 6
   className?: string
 }
 
-export const Title = ({ size, className, children }: TitleProps) => {
+export const Title = ({ size, className, level, children }: TitleProps) => {
+  const Tag = `h${level}` as keyof JSX.IntrinsicElements
+
   const cls = cx(
     classes.title,
     size === TitleSize.XL && classes.title__xl,
@@ -19,5 +22,5 @@ export const Title = ({ size, className, children }: TitleProps) => {
     className,
   )
 
-  return <h1 className={cls}>{children}</h1>
+  return <Tag className={cls}>{children}</Tag>
 }

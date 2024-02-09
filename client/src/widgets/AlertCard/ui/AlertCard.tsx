@@ -16,7 +16,9 @@ export const AlertCard = ({ count, title, alert }: AlertInfo) => {
     <div className={classes['alert-card']}>
       <div className={classes.header}>
         <Counter size={CounterSize.M} count={count} color={CounterColor.WHITE} />
-        <Title size={TitleSize.XL}>{title}</Title>
+        <Title level={2} size={TitleSize.XL}>
+          {title}
+        </Title>
       </div>
       <div className={classes.footer}>
         <Button size={ButtonSize.S} theme={ButtonTheme.PRIMARY}>
