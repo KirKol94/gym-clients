@@ -1,4 +1,4 @@
-﻿package ru.castroy10.backend.service;
+package ru.castroy10.backend.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -7,10 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.castroy10.backend.dto.trainee.TraineeDto;
-import ru.castroy10.backend.dto.trainee.TraineeDtoUpdate;
-import ru.castroy10.backend.dto.trainee.TraineeFullDto;
-import ru.castroy10.backend.dto.trainee.TraineeSaveDto;
+import ru.castroy10.backend.dto.trainee.TraineeRequestSaveDto;
+import ru.castroy10.backend.dto.trainee.TraineeRequestUpdateDto;
+import ru.castroy10.backend.dto.trainee.TraineeResponseFullDto;
+import ru.castroy10.backend.dto.trainee.TraineeResponseSaveDto;
 import ru.castroy10.backend.model.Trainee;
 import ru.castroy10.backend.repository.TraineeRepository;
 
@@ -30,24 +30,24 @@ public class TraineeService {
     }
 
     @Transactional
-    public ResponseEntity<?> save(TraineeDto traineeDto) {
-        Trainee trainee = modelMapper.map(traineeDto, Trainee.class);
+    public ResponseEntity<?> save(TraineeRequestSaveDto traineeRequestSaveDto) {
+        Trainee trainee = modelMapper.map(traineeRequestSaveDto, Trainee.class);
         traineeRepository.save(trainee);
         log.info("Тренер {} {} {} записан в базу данных, id={}", trainee.getLastName(), trainee.getFirstName(), trainee.getMiddleName(), trainee.getId());
-        return ResponseEntity.ok(modelMapper.map(trainee, TraineeSaveDto.class));
+        return ResponseEntity.ok(modelMapper.map(trainee, TraineeResponseSaveDto.class));
     }
 
     @Transactional
-    public ResponseEntity<?> update(TraineeDtoUpdate traineeDtoUpdate) {
-        Trainee trainee = traineeRepository.findById(traineeDtoUpdate.getId()).orElseThrow(() -> new UsernameNotFoundException("Тренер не найден"));
-        modelMapper.map(traineeDtoUpdate, trainee);
+    public ResponseEntity<?> update(TraineeRequestUpdateDto traineeRequestUpdateDto) {
+        Trainee trainee = traineeRepository.findById(traineeRequestUpdateDto.getId()).orElseThrow(() -> new UsernameNotFoundException("Тренер не найден"));
+        modelMapper.map(traineeRequestUpdateDto, trainee);
         log.info("Тренер {} {} {} обновлен, id={}", trainee.getLastName(), trainee.getFirstName(), trainee.getMiddleName(), trainee.getId());
-        return ResponseEntity.ok(modelMapper.map(trainee, TraineeSaveDto.class));
+        return ResponseEntity.ok(modelMapper.map(trainee, TraineeResponseSaveDto.class));
     }
 
     public ResponseEntity<?> findById(Long id) {
         Trainee trainee = traineeRepository.findById(id).orElseThrow(() -> new UsernameNotFoundException("Тренер не найден"));
-        return ResponseEntity.ok(modelMapper.map(trainee, TraineeFullDto.class));
+        return ResponseEntity.ok(modelMapper.map(trainee, TraineeResponseFullDto.class));
     }
 
     public ResponseEntity<?> findAll() {
@@ -56,7 +56,7 @@ public class TraineeService {
     }
 
     public ResponseEntity<?> findByName(String name) {
-        List<Trainee> traineeList = traineeRepository.findByName(name);
+        List<Trainee> traineeList = traineeRepository.findByName(name.toLowerCase());
         return ResponseEntity.ok(traineeList);
     }
 }

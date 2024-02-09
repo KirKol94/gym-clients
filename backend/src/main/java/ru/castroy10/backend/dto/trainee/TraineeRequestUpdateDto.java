@@ -6,7 +6,7 @@ import lombok.Data;
 import org.hibernate.validator.constraints.Range;
 
 @Data
-public class TraineeDtoUpdate {
+public class TraineeRequestUpdateDto {
     @NotNull
     private Long id;
     private String lastName;

@@ -7,14 +7,14 @@ import lombok.Data;
 import org.hibernate.validator.constraints.Range;
 
 @Data
-public class TraineetDto {
+public class TraineeRequestSaveDto {
     @NotNull
     @NotBlank
     private String lastName;
-     @NotNull
+    @NotNull
     @NotBlank
     private String firstName;
-     @NotNull
+    @NotNull
     @NotBlank
     private String middleName;
     @Range(min = 0, max = 1)

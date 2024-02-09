@@ -4,8 +4,8 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.castroy10.backend.dto.trainee.TraineeDto;
-import ru.castroy10.backend.dto.trainee.TraineeDtoUpdate;
+import ru.castroy10.backend.dto.trainee.TraineeRequestSaveDto;
+import ru.castroy10.backend.dto.trainee.TraineeRequestUpdateDto;
 import ru.castroy10.backend.service.TraineeService;
 
 @RestController
@@ -20,14 +20,13 @@ public class TraineeController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<?> save(@RequestBody @Valid TraineeDto traineeDto) {
-        return traineeService.save(traineeDto);
+    public ResponseEntity<?> save(@RequestBody @Valid TraineeRequestSaveDto traineeRequestSaveDto) {
+        return traineeService.save(traineeRequestSaveDto);
     }
 
-
     @PutMapping("/update")
-    public ResponseEntity<?> update(@RequestBody @Valid TraineeDtoUpdate traineeDtoUpdate) {
-        return traineeService.update(traineeDtoUpdate);
+    public ResponseEntity<?> update(@RequestBody @Valid TraineeRequestUpdateDto traineeRequestUpdateDto) {
+        return traineeService.update(traineeRequestUpdateDto);
     }
 
     @GetMapping("/find/{id}")
