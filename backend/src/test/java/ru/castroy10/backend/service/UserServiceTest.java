@@ -191,7 +191,7 @@ public class UserServiceTest {
         ResponseEntity<?> response = userController.refresh(request);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
-        Assertions.assertTrue(response.getBody().toString().contains("Refresh token"));
+        Assertions.assertTrue(response.getBody().toString().contains("Refreshtoken"));
     }
 
     @Test

@@ -15,6 +15,7 @@ import ru.castroy10.backend.model.Client;
 import ru.castroy10.backend.repository.ClientRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -48,6 +49,10 @@ public class ClientService {
     public ResponseEntity<?> findById(Long id) {
         Client client = clientRepository.findById(id).orElseThrow(() -> new UsernameNotFoundException("Клиент не найден"));
         return ResponseEntity.ok(modelMapper.map(client, ClientFullDto.class));
+    }
+
+    public Optional<Client> getById(Long id) {
+        return clientRepository.findById(id);
     }
 
     public ResponseEntity<?> findAll() {
