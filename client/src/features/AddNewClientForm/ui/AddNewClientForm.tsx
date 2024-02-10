@@ -7,7 +7,7 @@ import { useGetAllClients } from '@/features/ClientList/model/api/clientsApi'
 import { BaseMaskInput } from '@/shared/ui/BaseMaskInput'
 import { Button, ButtonSize } from '@/shared/ui/Button'
 import { Input } from '@/shared/ui/Input'
-import { Text, TextSize } from '@/shared/ui/Text'
+import { RadioButton } from '@/shared/ui/RadioButton'
 
 import { useAddNewClient } from '../model/api/addClientApi'
 import { schema } from '../model/schema'
@@ -70,12 +70,10 @@ export const AddNewClientForm = () => {
 
         <fieldset className={cls.gender}>
           <label className={cls.gender__row}>
-            <Text size={TextSize.S}>Мужской</Text>
-            <input type="radio" value="1" defaultChecked {...register('sex')} />
+            <RadioButton text="Мужской" {...register('sex')} />
           </label>
           <label className={cls.gender__row}>
-            <Text size={TextSize.S}>Женский</Text>
-            <input type="radio" value="0" {...register('sex')} />
+            <RadioButton text="Женский" {...register('sex')} />
           </label>
         </fieldset>
 
