@@ -1,18 +1,53 @@
-import { useRef } from 'react'
+import { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react'
 
-import { useGetProfileData, useSendAvatar } from '@/entities/User/model/api/profileApi'
+import { useGetProfileData, useSendAvatar, useUpdateProfileData } from '@/entities/User/model/api/profileApi'
 import Avatar from '@/shared/assets/icons/Avatar.svg?react'
 import Edit from '@/shared/assets/icons/Edit.svg?react'
 import Trash from '@/shared/assets/icons/Trash.svg?react'
+import { Button, ButtonSize } from '@/shared/ui/Button'
 import { Input } from '@/shared/ui/Input'
 import { RoundButton, RoundButtonSize, RoundButtonTheme } from '@/shared/ui/RoundButton'
 
 import cls from './ProfilePage.module.scss'
 
 export const ProfilePage = () => {
-  const { data: profile, refetch } = useGetProfileData()
+  const { data: profile, isSuccess: isProfileSuccess, refetch } = useGetProfileData()
   const [sendAvatar] = useSendAvatar()
+  const [updateProfileData] = useUpdateProfileData()
   const inputFileRef = useRef<HTMLInputElement>(null)
+  const [isEdit, setIsEdit] = useState(false)
+  const [profileData, setProfileData] = useState({
+    firstName: '',
+    middleName: '',
+    lastName: '',
+    email: '',
+  })
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target
+
+    setProfileData((prev) => ({
+      ...prev,
+      [name]: value,
+    }))
+  }
+
+  const handleEdit = () => {
+    setIsEdit(true)
+  }
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setIsEdit(false)
+
+    try {
+      const updatedData = { id: profile.id, ...profileData }
+      await updateProfileData(updatedData)
+      refetch()
+    } catch (e) {
+      console.log((e as Error).message)
+    }
+  }
 
   const handleClickOnFileInput = () => {
     if (inputFileRef.current) {
@@ -63,6 +98,17 @@ export const ProfilePage = () => {
     handleUploadIng()
   }
 
+  useEffect(() => {
+    if (isProfileSuccess) {
+      setProfileData({
+        firstName: profile.firstName,
+        middleName: profile.middleName,
+        lastName: profile.lastName,
+        email: profile.email,
+      })
+    }
+  }, [isProfileSuccess, profile])
+
   return (
     <div className={cls.profile}>
       <pre className={cls.tabs}>{JSON.stringify(profile, null, '   ')}</pre>
@@ -97,10 +143,41 @@ export const ProfilePage = () => {
           )}
         </div>
 
-        <Input inputName="Имя" placeholder={profile?.firstName} disabled onChange={() => {}} />
-        <Input inputName="Фамилия" placeholder={profile?.middleName} disabled onChange={() => {}} />
-        <Input inputName="Отчество" placeholder={profile?.lastName} disabled onChange={() => {}} />
-        <Input inputName="Email" placeholder={profile?.email} disabled onChange={() => {}} />
+        <Input
+          inputName="Имя"
+          name="firstName"
+          placeholder={profile?.firstName}
+          value={isEdit ? profileData.firstName : ''}
+          onChange={handleChange}
+          disabled={!isEdit}
+        />
+        <Input
+          inputName="Фамилия"
+          name="middleName"
+          placeholder={profile?.middleName}
+          value={isEdit ? profileData.middleName : ''}
+          onChange={handleChange}
+          disabled={!isEdit}
+        />
+        <Input
+          inputName="Отчество"
+          name="lastName"
+          placeholder={profile?.lastName}
+          value={isEdit ? profileData.lastName : ''}
+          onChange={handleChange}
+          disabled={!isEdit}
+        />
+        <Input
+          inputName="Email"
+          name="email"
+          placeholder={profile?.email}
+          value={isEdit ? profileData.email : ''}
+          onChange={handleChange}
+          disabled={!isEdit}
+        />
+        <Button size={ButtonSize.M} className={cls.button} onClick={isEdit ? handleSubmit : handleEdit}>
+          {isEdit ? 'Сохранить' : 'Редактировать'}
+        </Button>
       </div>
     </div>
   )
