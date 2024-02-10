@@ -1,3 +1,53 @@
-.page {
-  width: 100%;
+.profile {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  min-height: 100%;
+}
+
+.tabs {
+  padding: 1rem;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem;
+  background-color: var(--conor-white);
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  box-shadow: -5px 0 10px 2px rgb(34 60 80 / 0.2);
+}
+
+.file-input {
+  visibility: hidden;
+}
+
+.avatar {
+  position: relative;
+
+  &__trash,
+  &__edit {
+    position: absolute;
+  }
+
+  &__edit {
+    left: 10px;
+  }
+
+  &__trash {
+    right: 10px;
+
+    > svg {
+      fill: white;
+    }
+  }
+
+  &__fake {
+    > svg {
+      width: 150px;
+      height: 150px;
+    }
+  }
 }
