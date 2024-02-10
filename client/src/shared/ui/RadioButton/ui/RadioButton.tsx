@@ -1,32 +1,37 @@
+import { InputHTMLAttributes } from 'react'
 import cx from 'classix'
 
 import { Text, TextSize } from '../../Text'
-import { RadioButtonSize, TextSide } from '../models/types/radioButton'
+import { Align, RadioButtonSize } from '../models/types/radioButton'
 
-import clx from './RadioButton.module.scss'
+import classes from './RadioButton.module.scss'
 
-interface RadioButtonProps {
+interface RadioButtonProps extends InputHTMLAttributes<HTMLInputElement> {
   text: string
-  textSide?: TextSide
-  size?: RadioButtonSize
+  textSide?: Align
+  buttonSize?: RadioButtonSize
   className?: string
 }
 
-export const RadioButton = ({ size = RadioButtonSize.S, text, textSide, className, ...props }: RadioButtonProps) => {
+export const RadioButton = ({
+  buttonSize = RadioButtonSize.S,
+  text,
+  textSide,
+  className,
+  ...props
+}: RadioButtonProps) => {
   const cls = cx(
-    clx['radio-button'],
-    size && clx[`radio-button_${size}`],
-    textSide && clx[`radio-button_${textSide}`],
+    classes['radio-button'],
+    buttonSize && classes[`radio-button_${buttonSize}`],
+    textSide && classes[`radio-button_${textSide}`],
     className,
   )
 
   return (
     <label className={cls}>
-      <input type="radio" className={clx.radio} {...props} />
-      <span className={clx['custom-radio']}></span>
-      <Text size={size === RadioButtonSize.M ? TextSize.M : TextSize.S} className={clx.text}>
-        {text}
-      </Text>
+      <input type="radio" className={classes.radio} {...props} />
+      <span className={classes['custom-radio']}></span>
+      <Text size={buttonSize === RadioButtonSize.M ? TextSize.M : TextSize.S}>{text}</Text>
     </label>
   )
 }

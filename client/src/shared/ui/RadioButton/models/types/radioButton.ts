@@ -3,6 +3,6 @@ export enum RadioButtonSize {
   M = 'm',
 }
 
-export enum TextSide {
+export enum Align {
   LEFT = 'left',
 }

@@ -15,12 +15,7 @@
   gap: 0.4rem;
   justify-content: center;
 
-  &__row {
-    display: flex;
-    gap: 1rem;
-
-    input {
-      accent-color: var(--color-primary-90);
-    }
+  input {
+    accent-color: var(--color-primary-90);
   }
 }

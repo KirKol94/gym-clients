@@ -1,12 +1,39 @@
-@mixin sizes($firstValue, $secondValue) {
+@mixin sizes($mainValue, $beforeValue) {
   .custom-radio {
-    width: #{$firstValue}px;
-    height: #{$firstValue}px;
+    width: #{$mainValue}px;
+    height: #{$mainValue}px;
+
+    &::before {
+      width: #{$beforeValue}px;
+      height: #{$beforeValue}px;
+    }
+  }
+}
+
+.custom-radio {
+  position: relative;
+  display: inline-block;
+  vertical-align: text-top;
+  background-color: var(--color-white);
+  border: 2px solid var(--color-primary-90);
+  border-radius: 50%;
+  transition:
+    background-color var(--transition-delay-fast),
+    border-color var(--transition-delay-fast);
+
+  &:hover {
+    background-color: var(--color-light-blue);
   }
 
-  .custom-radio::before {
-    width: #{$secondValue}px;
-    height: #{$secondValue}px;
+  &::before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: inline-block;
+    content: '';
+    border-radius: 50%;
+    transition: background-color var(--transition-delay-fast);
+    transform: translate(-50%, -50%);
   }
 }
 
@@ -29,53 +56,23 @@
   }
 
   &_m {
-    @include sizes(22, 13)
+    @include sizes(22, 13);
   }
 
   &_left {
     flex-direction: row-reverse;
-  }
+  }  
+}
 
-  .radio {
-    position: absolute;
-    opacity: 0;
-  }
+.radio {
+  position: absolute;
+  opacity: 0;
 
-  .custom-radio {
-    position: relative;
-    display: inline-block;
-    vertical-align: text-top;
-    background-color: var(--color-white);
-    border: 2px solid var(--color-primary-90);
-    border-radius: 50%;
-    transition:
-      background-color var(--transition-delay-fast),
-      border-color var(--transition-delay-fast);
-  
-    &:hover {
-      background-color: var(--color-light-blue);
-    }
-  }
-  
-  .custom-radio::before {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    display: inline-block;
-    content: '';
-    border-radius: 50%;
-    transition: background-color var(--transition-delay-fast);
-    transform: translate(-50%, -50%);
-  }
-  
-  .radio:checked + .custom-radio::before {
+  &:checked + .custom-radio::before {
     background-color: var(--color-primary-90);
   }
-  
-  .radio:checked + .custom-radio {
+
+  &:checked + .custom-radio {
     background-color: var(--color-white);
   }
 }
-
-
-
