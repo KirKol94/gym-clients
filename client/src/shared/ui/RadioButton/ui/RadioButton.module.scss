@@ -1,4 +1,5 @@
-@mixin sizes($mainValue, $beforeValue) {
+@mixin sizes($mainValue, $beforeValue, $fontSize) {
+  font-size: #{$fontSize}px;
   .custom-radio {
     width: #{$mainValue}px;
     height: #{$mainValue}px;
@@ -51,17 +52,22 @@
     background-color: var(--color-light-blue);
   }
 
+  &:focus {
+    outline: none;
+    background-color: var(--color-light-blue);
+  }
+
   &_s {
-    @include sizes(16, 8);
+    @include sizes(16, 8, 12);
   }
 
   &_m {
-    @include sizes(22, 13);
+    @include sizes(22, 13, 18);
   }
 
   &_left {
     flex-direction: row-reverse;
-  }  
+  }
 }
 
 .radio {

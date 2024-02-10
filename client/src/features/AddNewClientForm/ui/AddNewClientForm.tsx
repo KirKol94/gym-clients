@@ -69,8 +69,8 @@ export const AddNewClientForm = () => {
         />
 
         <fieldset className={cls.gender}>
-          <RadioButton text="Мужской" {...register('sex')} />
-          <RadioButton text="Женский" {...register('sex')} />
+          <RadioButton text="Мужской" {...register('sex')} value="1" defaultChecked />
+          <RadioButton text="Женский" {...register('sex')} value="0" />
         </fieldset>
 
         <Input
