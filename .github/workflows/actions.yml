@@ -16,6 +16,9 @@ jobs:
     - name: Replace frontend env
       run: |
         cd client && rm -f .env && mv deploy.env .env && cat .env
+    - name: Clean old images and caches
+      run: |
+        docker image prune -af && docker system prune -af
     - name: Build Frontend
       run: |
         cd client && docker build -t cheblan/crm-frontend:latest . 
