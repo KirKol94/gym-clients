@@ -16,10 +16,11 @@ jobs:
     - name: Build Frontend
       run: |
         ls
-        cd client && rm .env && mv deploy.env .env
-        ls && cat .env
-        docker build -t cheblan/crm-frontend:latest .
-        docker push cheblan/crm-frontend:latest
+        cd client
+        rm -f .env
+        mv deploy.env .env
+        ls
+        cat .env
         echo "Nice"
     - name: Build Backend
       run: |
