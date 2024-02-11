@@ -15,6 +15,7 @@ const ContractPage = lazy(() => import('@/pages/ContractPage'))
 const DealsPage = lazy(() => import('@/pages/DealsPage'))
 const SettingsPage = lazy(() => import('@/pages/SettingsPage'))
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'))
+const ClientPage = lazy(() => import('@/pages/ClientPage'))
 const ClientsPage = lazy(() => import('@/pages/ClientsPage'))
 
 export const routesData: IRoutesData[] = [
@@ -37,6 +38,11 @@ export const routesData: IRoutesData[] = [
     component: ClientsPage,
     isAuth: true,
     path: ROUTER_PATH.CLIENTS,
+  },
+  {
+    component: ClientPage,
+    isAuth: true,
+    path: ROUTER_PATH.CLIENT,
   },
   {
     component: GroupPage,
