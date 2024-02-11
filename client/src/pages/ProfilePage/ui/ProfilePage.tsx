@@ -1,9 +1,9 @@
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
 
 import { getProfileData, useGetProfileData, useSendAvatar, useUpdateProfileData } from '@/entities/User'
-import Avatar from '@/shared/assets/icons/Avatar.svg?react'
+import Avatar from '@/shared/assets/icons/avatar.svg?react'
 import Edit from '@/shared/assets/icons/edit.svg?react'
-import Trash from '@/shared/assets/icons/Trash.svg?react'
+import Trash from '@/shared/assets/icons/trash.svg?react'
 import { useAppSelector } from '@/shared/hooks'
 import { Button, ButtonSize } from '@/shared/ui/Button'
 import { Input } from '@/shared/ui/Input'
