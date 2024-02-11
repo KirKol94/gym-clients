@@ -47,7 +47,7 @@ export const Client = ({ client }: ClientProps) => {
           {mobilePhone}
         </a>
       </div>
-      <Link to={`${ROUTER_PATH.USERS}/${id}`}>
+      <Link to={`${ROUTER_PATH.CLIENTS}/${id}`}>
         <Button className={cls.button} size={ButtonSize.S}>
           Подробнее &#62;
         </Button>

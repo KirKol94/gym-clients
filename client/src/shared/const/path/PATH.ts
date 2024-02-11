@@ -2,6 +2,8 @@ export enum ROUTER_PATH {
   HOME = '/',
   PROFILE = '/profile',
   USERS = '/users',
+  CLIENTS = '/clients',
+  CLIENT = '/clients/:id',
   GROUP = '/group',
   AGENT = '/agent',
   CONTRACT = '/contract',
