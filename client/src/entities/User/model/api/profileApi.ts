@@ -1,35 +1,17 @@
 import { rtkApi } from '@/shared/api/rtkApi'
 
-type ResGetProfileType = {
-  id: number
-  firstName: string
-  middleName: string
-  lastName: string
-  username: string
-  email: string
-  avatar: string
-  accountNonExpired: boolean
-  accountNonLocked: boolean
-  credentialsNonExpired: boolean
-  roles: [
-    {
-      id: number
-      roleName: string
-    },
-  ]
-  enabled: boolean
-}
+import { IProfileData } from '../..'
 
 const profileApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({
-    getProfileData: build.query<ResGetProfileType, void>({
+    getProfileData: build.query<IProfileData, void>({
       query: () => ({
         url: 'user/profile',
       }),
     }),
     updateProfileData: build.mutation<
-      ResGetProfileType,
-      Pick<ResGetProfileType, 'id' | 'firstName' | 'middleName' | 'lastName' | 'email'>
+      IProfileData,
+      Pick<IProfileData, 'id' | 'firstName' | 'middleName' | 'lastName' | 'email'>
     >({
       query: (body) => ({
         url: 'user/update',

@@ -1,6 +1,7 @@
 import { ReactNode, useEffect, useState } from 'react'
 import cx from 'classix'
 
+import { getUserNameAndLastName } from '@/entities/User'
 import Agent from '@/shared/assets/icons/Agent.svg?react'
 import Avatar from '@/shared/assets/icons/Avatar.svg?react'
 import BackArrow from '@/shared/assets/icons/Back.svg?react'
@@ -12,6 +13,7 @@ import LogoMini from '@/shared/assets/icons/LogoMini.svg?react'
 import Setting from '@/shared/assets/icons/SettingsWhite.svg?react'
 import Users from '@/shared/assets/icons/UsersWhite.svg?react'
 import { ROUTER_PATH } from '@/shared/const/path/PATH'
+import { useAppSelector } from '@/shared/hooks'
 
 import { SidebarItem } from '../../SidebarItem'
 
@@ -20,10 +22,11 @@ import classes from './Sidebar.module.scss'
 export const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true)
   const [renderLogo, setRenderLogo] = useState<ReactNode | null>(<Logo />)
+  const userName = useAppSelector(getUserNameAndLastName)
 
   const sidebarItems = [
     {
-      title: 'Иван Иванов',
+      title: userName,
       Icon: <Avatar />,
       to: ROUTER_PATH.PROFILE,
     },

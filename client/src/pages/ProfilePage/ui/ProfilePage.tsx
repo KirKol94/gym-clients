@@ -1,9 +1,10 @@
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
 
-import { useGetProfileData, useSendAvatar, useUpdateProfileData } from '@/entities/User/model/api/profileApi'
+import { getProfileData, useGetProfileData, useSendAvatar, useUpdateProfileData } from '@/entities/User'
 import Avatar from '@/shared/assets/icons/Avatar.svg?react'
 import Edit from '@/shared/assets/icons/Edit.svg?react'
 import Trash from '@/shared/assets/icons/Trash.svg?react'
+import { useAppSelector } from '@/shared/hooks'
 import { Button, ButtonSize } from '@/shared/ui/Button'
 import { Input } from '@/shared/ui/Input'
 import { RoundButton, RoundButtonSize, RoundButtonTheme } from '@/shared/ui/RoundButton'
@@ -11,7 +12,8 @@ import { RoundButton, RoundButtonSize, RoundButtonTheme } from '@/shared/ui/Roun
 import cls from './ProfilePage.module.scss'
 
 export const ProfilePage = () => {
-  const { data: profile, isSuccess: isProfileSuccess, refetch } = useGetProfileData()
+  const profile = useAppSelector(getProfileData)
+  const { isSuccess: isProfileSuccess, refetch } = useGetProfileData()
   const [sendAvatar] = useSendAvatar()
   const [updateProfileData] = useUpdateProfileData()
   const inputFileRef = useRef<HTMLInputElement>(null)
