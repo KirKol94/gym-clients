@@ -8,21 +8,15 @@ export interface User {
   middleName: string
   lastName: string
   username: string
-  email?: string
-  avatar?: string
-}
-
-export interface IResGetProfileType {
-  id: number
-  firstName: string
-  middleName: string
-  lastName: string
-  username: string
   email: string
   avatar: string
+}
+
+export interface IProfileData extends User {
+  id: number
   accountNonExpired: boolean
   accountNonLocked: boolean
   credentialsNonExpired: boolean
-  roles: IUserRole
+  roles: IUserRole[]
   enabled: boolean
 }

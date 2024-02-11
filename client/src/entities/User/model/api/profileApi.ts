@@ -1,17 +1,17 @@
 import { rtkApi } from '@/shared/api/rtkApi'
 
-import { IResGetProfileType } from '../..'
+import { IProfileData } from '../..'
 
 const profileApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({
-    getProfileData: build.query<IResGetProfileType, void>({
+    getProfileData: build.query<IProfileData, void>({
       query: () => ({
         url: 'user/profile',
       }),
     }),
     updateProfileData: build.mutation<
-      IResGetProfileType,
-      Pick<IResGetProfileType, 'id' | 'firstName' | 'middleName' | 'lastName' | 'email'>
+      IProfileData,
+      Pick<IProfileData, 'id' | 'firstName' | 'middleName' | 'lastName' | 'email'>
     >({
       query: (body) => ({
         url: 'user/update',
