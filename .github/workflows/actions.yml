@@ -15,13 +15,7 @@ jobs:
         clean: true
     - name: Build Frontend
       run: |
-        cd client 
-        rm -f .env 
-        mv deploy.env .env 
-        cat .env
-        docker build -t cheblan/crm-frontend:latest .
-        docker push cheblan/crm-frontend:latest
-        echo "Nice"
+        cd client && rm -f .env && mv deploy.env .env && cat .env && docker build -t cheblan/crm-frontend:latest . && docker push cheblan/crm-frontend:latest && echo "Nice"
     - name: Build Backend
       run: |
         cd backend && docker build -t cheblan/crm-backend:latest .
