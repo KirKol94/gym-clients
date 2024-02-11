@@ -3,7 +3,7 @@ export enum ROUTER_PATH {
   PROFILE = '/profile',
   USERS = '/users',
   CLIENTS = '/clients',
-  CLIENT = '/clients:id',
+  CLIENT = '/clients/:id',
   GROUP = '/group',
   AGENT = '/agent',
   CONTRACT = '/contract',
