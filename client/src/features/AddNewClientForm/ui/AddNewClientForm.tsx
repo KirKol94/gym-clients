@@ -29,7 +29,7 @@ export const AddNewClientForm = () => {
     reset,
     formState: { errors, isValid, isDirty },
   } = methods
-  const [addClient, { data: resClient, status }] = useAddNewClient()
+  const [addClient] = useAddNewClient()
 
   const onSubmit: SubmitHandler<ClientDataType> = (data) => {
     addClient(data)

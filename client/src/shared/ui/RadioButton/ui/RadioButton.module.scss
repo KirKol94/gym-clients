@@ -1,5 +1,6 @@
 @mixin sizes($mainValue, $beforeValue, $fontSize) {
   font-size: #{$fontSize}px;
+
   .custom-radio {
     width: #{$mainValue}px;
     height: #{$mainValue}px;
@@ -53,8 +54,8 @@
   }
 
   &:focus {
-    outline: none;
     background-color: var(--color-light-blue);
+    outline: none;
   }
 
   &_s {
