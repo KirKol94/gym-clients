@@ -15,7 +15,6 @@ export const ClientPage = () => {
   return (
     <div className={cls.clientPage}>
       <Title level={1} size={TitleSize.XXL}>{`${data?.firstName} ${data?.middleName}`}</Title>
-      <a href={`mailto:${data?.email}`}>{data?.email}</a>
 
       <pre>{JSON.stringify(data, null, '   ')}</pre>
     </div>
