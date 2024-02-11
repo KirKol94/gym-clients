@@ -1,10 +1,10 @@
 import { useParams } from 'react-router-dom'
 
 import { useGetClientData } from '@/entities/Client'
+import { Loader, LoaderSize } from '@/shared/ui/Loader'
 import { Title, TitleSize } from '@/shared/ui/Title'
 
 import cls from './ClientPage.module.scss'
-import { Loader, LoaderSize } from '@/shared/ui/Loader'
 
 export const ClientPage = () => {
   const { id } = useParams()
