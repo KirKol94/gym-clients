@@ -16,7 +16,7 @@ import Users from '@/shared/assets/icons/UsersWhite.svg?react'
 import { ROUTER_PATH } from '@/shared/const/path/PATH'
 import { useAppSelector } from '@/shared/hooks'
 
-import { SidebarItem } from '../../SidebarItem'
+import { SidebarItem } from '../../SidebarItem/SidebarItem'
 
 import classes from './Sidebar.module.scss'
 
