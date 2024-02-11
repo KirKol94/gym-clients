@@ -1,4 +1,4 @@
-import { forwardRef, InputHTMLAttributes } from 'react'
+import { forwardRef, InputHTMLAttributes, LegacyRef } from 'react'
 import cx from 'classix'
 
 import { Align, RadioButtonSize } from '../models/types/radioButton'
@@ -10,11 +10,13 @@ interface RadioButtonProps extends InputHTMLAttributes<HTMLInputElement> {
   align?: Align
   buttonSize?: RadioButtonSize
   className?: string
-  ref?: string
 }
 
 export const RadioButton = forwardRef(
-  ({ buttonSize = RadioButtonSize.S, text, align, className, ...props }: RadioButtonProps, ref) => {
+  (
+    { buttonSize = RadioButtonSize.S, text, align, className, ...props }: RadioButtonProps,
+    ref: LegacyRef<HTMLInputElement>,
+  ) => {
     const cls = cx(
       classes['radio-button'],
       buttonSize && classes[`radio-button_${buttonSize}`],
