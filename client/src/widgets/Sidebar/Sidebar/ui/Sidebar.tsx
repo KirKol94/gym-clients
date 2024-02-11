@@ -11,6 +11,7 @@ import Group from '@/shared/assets/icons/Group.svg?react'
 import Logo from '@/shared/assets/icons/Logo.svg?react'
 import LogoMini from '@/shared/assets/icons/LogoMini.svg?react'
 import Setting from '@/shared/assets/icons/SettingsWhite.svg?react'
+import StrongMan from '@/shared/assets/icons/StrongMan.svg?react'
 import Users from '@/shared/assets/icons/UsersWhite.svg?react'
 import { ROUTER_PATH } from '@/shared/const/path/PATH'
 import { useAppSelector } from '@/shared/hooks'
@@ -34,6 +35,11 @@ export const Sidebar = () => {
       title: 'Пользователи',
       Icon: <Users />,
       to: ROUTER_PATH.USERS,
+    },
+    {
+      title: 'Клиенты',
+      Icon: <StrongMan />,
+      to: ROUTER_PATH.CLIENTS,
     },
     {
       title: 'Группы компаний',
