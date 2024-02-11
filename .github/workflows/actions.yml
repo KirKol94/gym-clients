@@ -15,7 +15,7 @@ jobs:
         clean: true
     - name: Replace frontend env
       run: |
-        cd client && rm -f .env && mv deploy.env .env && cat.env
+        cd client && rm -f .env && mv deploy.env .env && cat .env
     - name: Build Frontend
       run: |
         cd client && docker build -t cheblan/crm-frontend:latest . 
