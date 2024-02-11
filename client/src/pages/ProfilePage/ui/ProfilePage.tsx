@@ -139,7 +139,7 @@ export const ProfilePage = () => {
             <Trash />
           </RoundButton>
 
-          {profile?.avatar.includes('http') ? (
+          {profile?.avatar ? (
             <img src={profile?.avatar} alt="User Avatar" />
           ) : (
             <div className={cls.avatar__fake}>
