@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { memo, ReactNode } from 'react'
 
 import { Footer } from '../../Footer'
 import { Sidebar } from '../../Sidebar'
@@ -9,7 +9,7 @@ interface Page {
   children: ReactNode
 }
 
-export const Page = ({ children }: Page) => {
+export const Page = memo(({ children }: Page) => {
   return (
     <div className="page__container">
       <div className={classes.content}>
@@ -19,4 +19,4 @@ export const Page = ({ children }: Page) => {
       <Footer />
     </div>
   )
-}
+})

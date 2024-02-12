@@ -22,6 +22,29 @@
   align-items: center;
   justify-content: center;
   width: 100%;
+  height: 18px;
+
+  > svg {
+    height: 100%;
+  }
+
+  // > [class='logo'] {
+  //   height: 100%;
+  // }
+
+  // > [class='logo-mini'] {
+  //   height: 100%;
+  // }
+
+  // &_close {
+  //   > [class='logo'] {
+  //     height: 100%;
+  //   }
+
+  //   > [class='logo-mini'] {
+  //     height: 100%;
+  //   }
+  // }
 }
 
 .back {
