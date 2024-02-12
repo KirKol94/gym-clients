@@ -62,21 +62,23 @@ export const AuthForm = ({ type = AuthType.LOGIN }: AuthFormProps) => {
     }
   }, [authStatus, dispatch, navigate, resAuthData?.Token])
 
+  useEffect(() => {
+    if (registerStatus === 'rejected') {
+      alert('ошибка регистрации (см. консоль)')
+      console.log((registerError as FetchBaseQueryError).data)
+    }
+
+    if (authStatus === 'rejected') {
+      alert('ошибка авторизации (см. консоль)')
+      console.log((authError as FetchBaseQueryError).data)
+    }
+  }, [authError, authStatus, registerError, registerStatus])
+
   if (registerStatus === 'fulfilled') return <Navigate to={ROUTER_PATH.LOGIN} />
-
-  if (registerStatus === 'rejected') {
-    alert('ошибка регистрации (см. консоль)')
-    console.log((registerError as FetchBaseQueryError).data)
-  }
-
-  if (authStatus === 'rejected') {
-    alert('ошибка авторизации (см. консоль)')
-    console.log((authError as FetchBaseQueryError).data)
-  }
 
   return (
     <>
-      <Title size={TitleSize.XXL} className={classes.title}>
+      <Title level={1} size={TitleSize.XXL} className={classes.title}>
         {type === AuthType.LOGIN && 'Авторизация'}
         {type === AuthType.REGISTER && 'Регистрация'}
       </Title>

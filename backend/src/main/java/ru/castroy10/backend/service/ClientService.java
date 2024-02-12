@@ -15,6 +15,7 @@ import ru.castroy10.backend.model.Client;
 import ru.castroy10.backend.repository.ClientRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -50,13 +51,17 @@ public class ClientService {
         return ResponseEntity.ok(modelMapper.map(client, ClientFullDto.class));
     }
 
+    public Optional<Client> getById(Long id) {
+        return clientRepository.findById(id);
+    }
+
     public ResponseEntity<?> findAll() {
         List<Client> clientList = clientRepository.findAll();
         return ResponseEntity.ok(clientList);
     }
 
     public ResponseEntity<?> findByName(String name) {
-        List<Client> clientList = clientRepository.findByName(name);
+        List<Client> clientList = clientRepository.findByName(name.toLowerCase());
         return ResponseEntity.ok(clientList);
     }
 }

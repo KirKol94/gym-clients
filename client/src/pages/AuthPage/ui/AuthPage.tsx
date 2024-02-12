@@ -16,13 +16,11 @@ export const AuthPage = ({ type = AuthType.LOGIN }: AuthPage) => {
   const isAuth = useAppSelector(getIsAuth)
   const currentLocationPath = localStorage.getItem(CURRENT_PATHNAME_KEY)
 
-  if (type === AuthType.LOGIN && isAuth)
-    return <Navigate to={currentLocationPath ? currentLocationPath : ROUTER_PATH.PROFILE} />
+  if (isAuth) return <Navigate to={currentLocationPath ? currentLocationPath : ROUTER_PATH.PROFILE} />
 
   return (
     <div className={classes.page}>
-      {type === AuthType.LOGIN && <AuthForm type={type} />}
-      {type === AuthType.REGISTER && <AuthForm type={type} />}
+      <AuthForm type={type} />
     </div>
   )
 }

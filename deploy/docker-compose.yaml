@@ -23,9 +23,11 @@ services:
       POSTGRES_USERNAME: ${POSTGRES_USERNAME}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
-      - "8080:8080"
+      - "127.0.0.1:8080:8080"
     depends_on:
       - postgres
+    volumes:
+      - uploads-volume:/uploads
 
   frontend:
     image: cheblan/crm-frontend:latest
@@ -37,8 +39,10 @@ services:
       POSTGRES_USERNAME: ${POSTGRES_USERNAME}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
-      - "5173:5173"
+      - "127.0.0.1:5173:5173"
 
 volumes:
   postgres-volume:
+    driver: local
+  uploads-volume:
     driver: local

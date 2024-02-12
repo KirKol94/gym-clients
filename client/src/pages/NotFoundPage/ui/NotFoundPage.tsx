@@ -13,7 +13,7 @@ export const NotFoundPage = () => {
 
   return (
     <div className={className}>
-      <Title className={classes.title} size={TitleSize.XXL}>
+      <Title level={1} className={classes.title} size={TitleSize.XXL}>
         Странца не найдена
       </Title>
       <NotFoundImg />
