@@ -14,11 +14,11 @@ const customMessages = {
 
 export const schema = joi.object({
   firstName: joi.string().min(2).max(15).custom(validateFio).messages(customMessages).required(),
-  middleName: joi.string().min(2).max(24).custom(validateFio).messages(customMessages).allow(null),
-  lastName: joi.string().min(1).max(20).custom(validateFio).messages(customMessages).required(),
-  email: joi.string().custom(validateEmail).messages(customMessages).allow(null),
+  middleName: joi.string().min(6).max(20).custom(validateFio).messages(customMessages).allow(null, ''),
+  lastName: joi.string().min(2).max(24).custom(validateFio).messages(customMessages).required(),
+  email: joi.string().custom(validateEmail).messages(customMessages).allow(null, ''),
   sex: joi.number().valid(0, 1),
-  birthday: joi.string().custom(validateDate).messages(customMessages).allow(null),
+  birthday: joi.string().custom(validateDate).messages(customMessages).allow(null, ''),
   mobilePhone: joi.string().custom(validatePhoneNumber).messages(customMessages).allow(null, ''),
   personalTrainingCount: joi.number().max(100).custom(validateCount).messages(customMessages).allow(null, ''),
 })
