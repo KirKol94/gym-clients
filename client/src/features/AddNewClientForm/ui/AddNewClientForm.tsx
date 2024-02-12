@@ -23,7 +23,7 @@ export const AddNewClientForm = () => {
     defaultValues: {
       email: null,
       middleName: null,
-      personalTrainingCount: null,
+      personalTrainingCount: 0,
     },
   })
   const { refetch } = useGetAllClients()
