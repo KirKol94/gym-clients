@@ -2,11 +2,11 @@ import { IClient } from '@/entities/Client'
 import { rtkApi } from '@/shared/api/rtkApi'
 
 type ReqClientData = Omit<IClient, 'id'>
-type ResClientData = Pick<IClient, 'birthday' | 'email' | 'mobilePhone' | 'personalTrainingCount' | 'sex'>
+type ResClientData = Omit<IClient, 'birthday' | 'email' | 'mobilePhone' | 'personalTrainingCount' | 'sex'>
 
 const newClientApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({
-    sendCliend: build.mutation<ResClientData, ReqClientData>({
+    sendClient: build.mutation<ResClientData, ReqClientData>({
       query: (body) => ({
         url: 'client/save',
         method: 'post',
@@ -16,4 +16,4 @@ const newClientApi = rtkApi.injectEndpoints({
   }),
 })
 
-export const useAddNewClient = newClientApi.useSendCliendMutation
+export const useAddNewClient = newClientApi.useSendClientMutation
