@@ -7,5 +7,5 @@ export interface IClient {
   sex?: number
   personalTrainingCount?: number | null
   email?: string | null
-  mobilePhone?: string
+  mobilePhone?: string | null
 }
