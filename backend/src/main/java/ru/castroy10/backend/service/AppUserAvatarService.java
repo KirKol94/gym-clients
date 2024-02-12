@@ -36,6 +36,6 @@ public class AppUserAvatarService {
         Path avatarFile = Path.of(pathForAvatars + filename);
         if (!Files.exists(avatarFile)) Files.createFile(avatarFile);
         Files.write(avatarFile, binaryBytes, StandardOpenOption.WRITE);
-        return avatarFile.toString();
+        return "file://" + avatarFile;
     }
 }
