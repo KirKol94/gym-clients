@@ -45,7 +45,7 @@ public class AbonementService {
 
     @Transactional
     public ResponseEntity<?> update(AbonementRequestUpdateDto abonementRequestUpdateDto) throws AbonementNotFoundException {
-        if (checkClientNotExist(abonementRequestUpdateDto.getClient_id()))
+        if (abonementRequestUpdateDto.getClient_id() != null && checkClientNotExist(abonementRequestUpdateDto.getClient_id()))
             throw new UsernameNotFoundException("Клиент c таким id не найден");
         Abonement abonement = abonementRepository.findById(abonementRequestUpdateDto.getId()).orElseThrow(() -> new AbonementNotFoundException("Абонемент не найден"));
         modelMapper.map(abonementRequestUpdateDto, abonement);
