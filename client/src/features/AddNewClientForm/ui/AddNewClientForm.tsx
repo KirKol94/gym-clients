@@ -1,4 +1,4 @@
-import { FormProvider, type SubmitHandler, useForm, useWatch } from 'react-hook-form'
+import { FormProvider, type SubmitHandler, useForm } from 'react-hook-form'
 import { joiResolver } from '@hookform/resolvers/joi'
 import cx from 'classix'
 
@@ -31,17 +31,11 @@ export const AddNewClientForm = () => {
 
   const {
     register,
-    control,
     handleSubmit,
     reset,
     formState: { errors, isValid, isDirty },
   } = methods
 
-  const kek = useWatch({
-    control,
-    name: 'mobilePhone',
-  })
-  console.log({ kek, errors })
   const [addClient, { data: resClient, status }] = useAddNewClient()
 
   const onSubmit: SubmitHandler<ClientDataType> = (data) => {
