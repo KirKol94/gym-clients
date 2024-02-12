@@ -3,7 +3,9 @@ import { Title, TitleSize } from '@/shared/ui/Title'
 export const ContractPage = () => {
   return (
     <div>
-      <Title size={TitleSize.XXL}>Contract</Title>
+      <Title level={1} size={TitleSize.XXL}>
+        Contract
+      </Title>
     </div>
   )
 }

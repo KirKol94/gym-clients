@@ -9,10 +9,11 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size: ButtonSize
   children: ReactNode
   theme?: ButtonTheme
+  className?: string
 }
 
-export const Button = ({ size, children, theme = ButtonTheme.PRIMARY, ...props }: ButtonProps) => {
-  const cls = cx(classes[`${theme}`], classes[`${theme}_${size}`], classes.button)
+export const Button = ({ size, children, theme = ButtonTheme.PRIMARY, className, ...props }: ButtonProps) => {
+  const cls = cx(classes[`${theme}`], classes[`${theme}_${size}`], classes.button, className)
 
   return (
     <button className={cls} {...props}>

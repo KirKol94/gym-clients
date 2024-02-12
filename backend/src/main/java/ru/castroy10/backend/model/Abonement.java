@@ -16,7 +16,7 @@ public class Abonement {
     private Long id;
     @Column(name = "date_created")
     private LocalDate dateCreated;
-    @Column(name = "date_experied")
+    @Column(name = "date_expired")
     private LocalDate dateExpired;
     @Column(name = "price")
     private Integer price;
@@ -26,7 +26,7 @@ public class Abonement {
     private boolean isFrozen;
     @Column(name = "date_frozen")
     private LocalDate dateFrozen;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "client_id")
     private Client client;
     @ManyToOne

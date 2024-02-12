@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 import cx from 'classix'
 
+import { getUserNameAndLastName } from '@/entities/User'
 import Agent from '@/shared/assets/icons/Agent.svg?react'
 import Avatar from '@/shared/assets/icons/Avatar.svg?react'
 import BackArrow from '@/shared/assets/icons/Back.svg?react'
@@ -10,19 +11,23 @@ import Group from '@/shared/assets/icons/Group.svg?react'
 import Logo from '@/shared/assets/icons/Logo.svg?react'
 import LogoMini from '@/shared/assets/icons/LogoMini.svg?react'
 import Setting from '@/shared/assets/icons/SettingsWhite.svg?react'
+import StrongMan from '@/shared/assets/icons/StrongMan.svg?react'
 import Users from '@/shared/assets/icons/UsersWhite.svg?react'
 import { ROUTER_PATH } from '@/shared/const/path/PATH'
+import { useAppSelector } from '@/shared/hooks'
 
-import { SidebarItem } from '../../SidebarItem'
+import { SidebarItem } from './SidebarItem/SidebarItem'
 
 import classes from './Sidebar.module.scss'
 
 export const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true)
+  const [renderLogo, setRenderLogo] = useState<ReactNode | null>(<Logo />)
+  const userName = useAppSelector(getUserNameAndLastName)
 
   const sidebarItems = [
     {
-      title: 'Иван Иванов',
+      title: userName,
       Icon: <Avatar />,
       to: ROUTER_PATH.PROFILE,
     },
@@ -30,6 +35,11 @@ export const Sidebar = () => {
       title: 'Пользователи',
       Icon: <Users />,
       to: ROUTER_PATH.USERS,
+    },
+    {
+      title: 'Клиенты',
+      Icon: <StrongMan />,
+      to: ROUTER_PATH.CLIENTS,
     },
     {
       title: 'Группы компаний',
@@ -62,10 +72,24 @@ export const Sidebar = () => {
     setIsOpen((prev) => !prev)
   }
 
+  useEffect(() => {
+    let timeoutId: number
+
+    if (isOpen) {
+      timeoutId = setTimeout(() => {
+        setRenderLogo(<Logo />)
+      }, 300)
+    } else {
+      setRenderLogo(<LogoMini />)
+    }
+
+    return () => clearTimeout(timeoutId)
+  }, [isOpen])
+
   return (
     <aside className={cx(classes.sidebar, !isOpen && classes.sidebar_hidden)}>
       <div className={classes.logo__wrapper}>
-        {isOpen ? <Logo /> : <LogoMini />}
+        {renderLogo}
         <button onClick={onSidebarVisibleToggle} className={cx(classes.back, !isOpen && classes.back_hidden)}>
           <BackArrow />
         </button>

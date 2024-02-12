@@ -1,14 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { ACCESS_TOKEN_LOCAL_STORAGE_KEY } from '@/shared/const/localStorage/accessTokenKey'
 
-interface InitialState {
-  isAuth: boolean
-}
+import { IProfileData } from '../..'
 
-const initialState: InitialState = {
-  isAuth: false,
-}
+import { initialState } from './initialState'
 
 const userSlice = createSlice({
   name: 'user',
@@ -16,6 +12,9 @@ const userSlice = createSlice({
   reducers: {
     setIsAuth: (state) => {
       state.isAuth = true
+    },
+    setProfileData: (state, action: PayloadAction<IProfileData>) => {
+      state.profileData = action.payload
     },
     initAuthData: (state) => {
       const accessToken = localStorage.getItem(ACCESS_TOKEN_LOCAL_STORAGE_KEY)

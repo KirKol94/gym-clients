@@ -191,7 +191,7 @@ public class UserServiceTest {
         ResponseEntity<?> response = userController.refresh(request);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
-        Assertions.assertTrue(response.getBody().toString().contains("Refresh token"));
+        Assertions.assertTrue(response.getBody().toString().contains("Refreshtoken"));
     }
 
     @Test
@@ -241,5 +241,16 @@ public class UserServiceTest {
                     System.out.println(errorMessage);
                     Assertions.assertTrue(errorMessage.contains("this test is valid"));
                 });
+    }
+
+    @Test
+    public void testGetProfile() throws UserDuplicateException {
+        HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
+        Mockito.when(appUserRepository.findAppuserByUsername(Mockito.anyString())).thenReturn(Optional.of(appuser));
+        String token = jwtUtil.generateToken(appuser.getUsername());
+        Mockito.when(request.getHeader("Authorization")).thenReturn("Bearer " + token);
+        ResponseEntity<?> response = userController.getProfile(request);
+        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
+        Assertions.assertTrue(response.getBody().toString().contains("id=999"));
     }
 }

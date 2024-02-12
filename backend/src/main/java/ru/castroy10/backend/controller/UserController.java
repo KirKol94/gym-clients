@@ -51,7 +51,7 @@ public class UserController {
 
     @PostMapping("/refresh")
     public ResponseEntity<?> refresh(HttpServletRequest httpServletRequest) {
-        return ResponseEntity.ok().body(Map.of("Refresh token", jwtUtil.refreshToken(httpServletRequest)));
+        return ResponseEntity.ok().body(Map.of("Refreshtoken", jwtUtil.refreshToken(httpServletRequest)));
     }
 
     @GetMapping ("/find/{id}")
@@ -61,5 +61,10 @@ public class UserController {
     @GetMapping("/find")
     public ResponseEntity<?> findByUserName(String username) throws UserDuplicateException {
         return appUserService.findByUserName(username);
+    }
+
+    @GetMapping("/profile")
+    public ResponseEntity<?> getProfile(HttpServletRequest httpServletRequest) throws UserDuplicateException {
+        return appUserService.getProfile(httpServletRequest);
     }
 }

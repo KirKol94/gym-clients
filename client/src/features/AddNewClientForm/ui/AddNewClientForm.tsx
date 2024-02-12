@@ -1,4 +1,4 @@
-import { FormProvider, type SubmitHandler, useForm } from 'react-hook-form'
+import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import { joiResolver } from '@hookform/resolvers/joi'
 import cx from 'classix'
 
@@ -7,7 +7,7 @@ import { useGetAllClients } from '@/features/ClientList/model/api/clientsApi'
 import { BaseMaskInput } from '@/shared/ui/BaseMaskInput'
 import { Button, ButtonSize } from '@/shared/ui/Button'
 import { Input } from '@/shared/ui/Input'
-import { Text, TextSize } from '@/shared/ui/Text'
+import { RadioButton } from '@/shared/ui/RadioButton'
 
 import { useAddNewClient } from '../model/api/addClientApi'
 import { schema } from '../model/schema'
@@ -29,16 +29,12 @@ export const AddNewClientForm = () => {
     reset,
     formState: { errors, isValid, isDirty },
   } = methods
-  const [addClient, { data: resClient, status }] = useAddNewClient()
+  const [addClient] = useAddNewClient()
 
   const onSubmit: SubmitHandler<ClientDataType> = (data) => {
     addClient(data)
     reset()
     refetch()
-  }
-
-  if (status === 'fulfilled') {
-    console.log(resClient)
   }
 
   return (
@@ -69,14 +65,8 @@ export const AddNewClientForm = () => {
         />
 
         <fieldset className={cls.gender}>
-          <label className={cls.gender__row}>
-            <Text size={TextSize.S}>Мужской</Text>
-            <input type="radio" value="1" defaultChecked {...register('sex')} />
-          </label>
-          <label className={cls.gender__row}>
-            <Text size={TextSize.S}>Женский</Text>
-            <input type="radio" value="0" {...register('sex')} />
-          </label>
+          <RadioButton text="Мужской" {...register('sex')} value="1" defaultChecked />
+          <RadioButton text="Женский" {...register('sex')} value="0" />
         </fieldset>
 
         <Input
@@ -114,7 +104,7 @@ export const AddNewClientForm = () => {
           {...register('personalTrainingCount')}
           error={errors?.personalTrainingCount?.message}
           placeholder="0"
-          defaultValue={1}
+          defaultValue={0}
           className={cls.input}
           inputName="Количество персональных тренировок"
         />

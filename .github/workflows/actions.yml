@@ -13,15 +13,19 @@ jobs:
     - uses: actions/checkout@v3
       with:
         clean: true
+    - name: Replace frontend env
+      run: |
+        cd client && rm -f .env && mv deploy.env .env && cat .env
+    - name: Clean old images and caches
+      run: |
+        docker image prune -af && docker system prune -af
     - name: Build Frontend
       run: |
-        ls
-        cd client && rm .env && mv deploy.env .env && docker build -t cheblan/crm-frontend:latest .
+        cd client && docker build -t cheblan/crm-frontend:latest . 
         docker push cheblan/crm-frontend:latest
         echo "Nice"
     - name: Build Backend
       run: |
-        ls
         cd backend && docker build -t cheblan/crm-backend:latest .
         docker push cheblan/crm-backend:latest
         echo "Nice"

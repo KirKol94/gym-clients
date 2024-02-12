@@ -1,12 +1,11 @@
 import { Link } from 'react-router-dom'
-import cx from 'classix'
 
 import { ROUTER_PATH } from '@/shared/const/path/PATH'
 import { Button, ButtonSize } from '@/shared/ui/Button'
 
 import { IClient } from '..'
 
-import clx from './Client.module.scss'
+import cls from './Client.module.scss'
 
 interface ClientProps {
   client: IClient
@@ -14,41 +13,45 @@ interface ClientProps {
 
 export const Client = ({ client }: ClientProps) => {
   const { id, firstName, middleName, lastName, email, birthday, sex, mobilePhone, personalTrainingCount } = client
-  const clientClass = cx(clx.client)
 
   return (
-    <li className={clientClass}>
-      <div className={clx.info}>
-        <div className={clx.name}>
+    <li className={cls.client}>
+      <div className={cls.info}>
+        <div className={cls.info__name}>
           <div>{middleName}</div>
           <div>{firstName}</div>
           <div>{lastName}</div>
         </div>
-        <div className={clx.addInfo}>
-          <div className={clx.value}>
-            <span className={clx.valueTitle}>Пол:</span> {sex === 1 ? 'Мужской' : 'Женский'}
+        <div className={cls.additional}>
+          <div className={cls.additional__item}>
+            <span className={cls.additional__title}>Пол:</span> {sex === 1 ? 'Мужской' : 'Женский'}
           </div>
-          <div className={clx.value}>
-            <span className={clx.valueTitle}>День рождения:</span> {birthday}
+          <div className={cls.additional__item}>
+            <span className={cls.additional__title}>День рождения:</span> {birthday}
           </div>
-          <div className={clx.value}>
-            <span className={clx.valueTitle}>Кол-во персональных:</span> {personalTrainingCount}
+          <div className={cls.additional__item}>
+            <span className={cls.additional__title}>Кол-во персональных:</span> {personalTrainingCount}
           </div>
         </div>
       </div>
-      <div className={clx.contacts}>
-        <a className={clx.email} href={`https://mail.google.com/mail/?view=cm&fs=1&to=${email}`} target="_blank">
+      <div className={cls.contacts}>
+        <a
+          className={cls.contacts__email}
+          href={`https://mail.google.com/mail/?view=cm&fs=1&to=${email}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           {email}
         </a>
-        <a className={clx.modilePhone} href={`tel:${mobilePhone}`}>
+        <a className={cls.contacts_mobile} href={`tel:${mobilePhone}`}>
           {mobilePhone}
         </a>
       </div>
-      <div className={clx.moreInfo}>
-        <Link to={`${ROUTER_PATH.USERS} + ":" + ${id}`}>
-          <Button size={ButtonSize.S}>Подробнее &#62;</Button>
-        </Link>
-      </div>
+      <Link to={`${ROUTER_PATH.CLIENTS}/${id}`}>
+        <Button className={cls.button} size={ButtonSize.S}>
+          Подробнее &#62;
+        </Button>
+      </Link>
     </li>
   )
 }
