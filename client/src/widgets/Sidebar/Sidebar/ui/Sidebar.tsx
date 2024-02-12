@@ -1,7 +1,6 @@
-import { ReactNode, useEffect, useState } from 'react'
+import { memo, ReactNode, useEffect, useMemo, useState } from 'react'
 import cx from 'classix'
 
-import { getUserNameAndLastName } from '@/entities/User'
 import Agent from '@/shared/assets/icons/Agent.svg?react'
 import Avatar from '@/shared/assets/icons/Avatar.svg?react'
 import BackArrow from '@/shared/assets/icons/Back.svg?react'
@@ -14,59 +13,60 @@ import Setting from '@/shared/assets/icons/SettingsWhite.svg?react'
 import StrongMan from '@/shared/assets/icons/StrongMan.svg?react'
 import Users from '@/shared/assets/icons/UsersWhite.svg?react'
 import { ROUTER_PATH } from '@/shared/const/path/PATH'
-import { useAppSelector } from '@/shared/hooks'
 
 import { SidebarItem } from './SidebarItem/SidebarItem'
 
 import classes from './Sidebar.module.scss'
 
-export const Sidebar = () => {
+export const Sidebar = memo(() => {
   const [isOpen, setIsOpen] = useState(true)
   const [renderLogo, setRenderLogo] = useState<ReactNode | null>(<Logo />)
-  const userName = useAppSelector(getUserNameAndLastName)
 
-  const sidebarItems = [
-    {
-      title: userName,
-      Icon: <Avatar />,
-      to: ROUTER_PATH.PROFILE,
-    },
-    {
-      title: 'Пользователи',
-      Icon: <Users />,
-      to: ROUTER_PATH.USERS,
-    },
-    {
-      title: 'Клиенты',
-      Icon: <StrongMan />,
-      to: ROUTER_PATH.CLIENTS,
-    },
-    {
-      title: 'Группы компаний',
-      Icon: <Group />,
-      to: ROUTER_PATH.GROUP,
-    },
-    {
-      title: 'Контрагенты',
-      Icon: <Agent />,
-      to: ROUTER_PATH.AGENT,
-    },
-    {
-      title: 'Контракты',
-      Icon: <Contract />,
-      to: ROUTER_PATH.CONTRACT,
-    },
-    {
-      title: 'Сделки',
-      Icon: <Deals />,
-      to: ROUTER_PATH.DEALS,
-    },
-    {
-      title: 'Настройки',
-      Icon: <Setting />,
-      to: ROUTER_PATH.SETTINGS,
-    },
-  ]
+  const sidebarItems = useMemo(
+    () => [
+      {
+        title: 'Профиль',
+        Icon: <Avatar />,
+        to: ROUTER_PATH.PROFILE,
+      },
+      {
+        title: 'Пользователи',
+        Icon: <Users />,
+        to: ROUTER_PATH.USERS,
+      },
+      {
+        title: 'Клиенты',
+        Icon: <StrongMan />,
+        to: ROUTER_PATH.CLIENTS,
+      },
+      {
+        title: 'Группы компаний',
+        Icon: <Group />,
+        to: ROUTER_PATH.GROUP,
+      },
+      {
+        title: 'Контрагенты',
+        Icon: <Agent />,
+        to: ROUTER_PATH.AGENT,
+      },
+      {
+        title: 'Контракты',
+        Icon: <Contract />,
+        to: ROUTER_PATH.CONTRACT,
+      },
+      {
+        title: 'Сделки',
+        Icon: <Deals />,
+        to: ROUTER_PATH.DEALS,
+      },
+      {
+        title: 'Настройки',
+        Icon: <Setting />,
+        to: ROUTER_PATH.SETTINGS,
+      },
+    ],
+    [],
+  )
 
   const onSidebarVisibleToggle = () => {
     setIsOpen((prev) => !prev)
@@ -86,6 +86,8 @@ export const Sidebar = () => {
     return () => clearTimeout(timeoutId)
   }, [isOpen])
 
+  console.log('sidebar')
+
   return (
     <aside className={cx(classes.sidebar, !isOpen && classes.sidebar_hidden)}>
       <div className={classes.logo__wrapper}>
@@ -104,4 +106,4 @@ export const Sidebar = () => {
       </nav>
     </aside>
   )
-}
+})
