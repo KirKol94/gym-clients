@@ -1,0 +1,97 @@
+.container {
+  position: relative;
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+  width: 20em;
+  min-height: 1.5em;
+  padding: 0.5em;
+  border: 0.05em solid #777;
+  border-radius: 0.25em;
+  outline: none;
+  box-shadow: 0 0 0.625em 0 #00000029;
+}
+
+.container.select_S {
+  font-size: 16px;
+}
+
+.container.select_M {
+  font-size: 24px;
+}
+
+.container.select_XL {
+  font-size: 32px;
+}
+
+.container:focus {
+  border-color: hsl(200deg 100% 50%);
+}
+
+.value {
+  flex-grow: 1;
+  padding: 0.3em 0.45em;
+}
+
+.clear-btn {
+  padding: 0;
+  font-size: 1.25em;
+  color: #777;
+  cursor: pointer;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.clear-btn:focus,
+.clear-btn:hover {
+  color: #333;
+}
+
+.divider {
+  align-self: stretch;
+  width: 0.05em;
+  height: 1em;
+  background-color: #777;
+}
+
+.caret {
+  border: 0.25em solid transparent;
+  border-top-color: #777;
+  translate: 0 25%;
+}
+
+.options {
+  position: absolute;
+  top: calc(100% + 0.25em);
+  left: 0;
+  z-index: 100;
+  display: none;
+  width: 100%;
+  max-height: 15em;
+  padding: 0;
+  margin: 0;
+  overflow-y: auto;
+  list-style: none;
+  background-color: white;
+  border: 0.05em solid #777;
+  border-radius: 0.25em;
+}
+
+.options.show {
+  display: block;
+}
+
+.option {
+  padding: 0.25em 0.5em;
+  cursor: pointer;
+}
+
+.option.selected {
+  background-color: #82c86c;
+}
+
+.option.highlighted {
+  color: white;
+  background-color: #d0ebc7;
+}
