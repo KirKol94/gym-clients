@@ -1,4 +1,4 @@
-import { IClient } from '@/entities/Client'
+import type { IClient } from '@/entities/Client'
 import { rtkApi } from '@/shared/api/rtkApi'
 
 type ReqClientData = Omit<IClient, 'id'>

@@ -1,4 +1,5 @@
-import { Counter, CounterColor, CounterSize } from '@/shared/ui/Counter'
+import type { CounterColor } from '@/shared/ui/Counter'
+import { Counter, CounterSize } from '@/shared/ui/Counter'
 import { Text, TextSize } from '@/shared/ui/Text'
 
 import classes from './EntityCard.module.scss'

@@ -2,7 +2,7 @@ import { FormProvider, type SubmitHandler, useForm } from 'react-hook-form'
 import { joiResolver } from '@hookform/resolvers/joi'
 import cx from 'classix'
 
-import { IClient } from '@/entities/Client'
+import type { IClient } from '@/entities/Client'
 import { clientsActions } from '@/features/ClientList'
 import { useGetAllClients } from '@/features/ClientList/model/api/clientsApi'
 import { useAppDispatch } from '@/shared/hooks'

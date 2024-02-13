@@ -1,3 +1,3 @@
-import { RootState } from '@/app/store'
+import type { RootState } from '@/app/store'
 
 export const getClients = (state: RootState) => state.clients.clients

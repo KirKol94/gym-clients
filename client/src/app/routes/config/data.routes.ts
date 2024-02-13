@@ -3,7 +3,7 @@ import { lazy } from 'react'
 import { AuthType } from '@/features/AuthForm'
 import { ROUTER_PATH } from '@/shared/const/path/PATH'
 
-import { IRoutesData } from '../types/routes.interface'
+import type { IRoutesData } from '../types/routes.interface'
 
 const AuthPage = lazy(() => import('@/pages/AuthPage'))
 const ProfilePage = lazy(() => import('@/pages/ProfilePage'))

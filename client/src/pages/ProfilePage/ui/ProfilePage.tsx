@@ -1,4 +1,5 @@
-import { ChangeEvent, useEffect, useRef, useState } from 'react'
+import type { ChangeEvent } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { getProfileData, useGetProfileData, useSendAvatar, useUpdateProfileData } from '@/entities/User'
 import Avatar from '@/shared/assets/icons/avatar.svg?react'

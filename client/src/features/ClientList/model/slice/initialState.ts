@@ -1,4 +1,4 @@
-import { IClient } from '@/entities/Client'
+import type { IClient } from '@/entities/Client'
 
 type InitialState = {
   clients: IClient[]

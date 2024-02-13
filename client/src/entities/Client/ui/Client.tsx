@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { ROUTER_PATH } from '@/shared/const/path/PATH'
 import { Button, ButtonSize } from '@/shared/ui/Button'
 
-import { IClient } from '..'
+import type { IClient } from '..'
 
 import cls from './Client.module.scss'
 

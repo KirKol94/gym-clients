@@ -1,8 +1,9 @@
-import { FC, Suspense } from 'react'
+import type { FC } from 'react'
+import { Suspense } from 'react'
 
 import { Loader } from '@/shared/ui/Loader'
 
-import { IRoutesData } from '../types/routes.interface'
+import type { IRoutesData } from '../types/routes.interface'
 
 interface IRouteSuspenseLayoutProps {
   route: IRoutesData
