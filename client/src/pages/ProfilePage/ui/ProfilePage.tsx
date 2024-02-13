@@ -1,11 +1,11 @@
 import type { ChangeEvent } from 'react'
 import { useEffect, useRef, useState } from 'react'
 
-import { getProfileData, useGetProfileData, useSendAvatar, useUpdateProfileData } from '@/entities/User'
+import { useGetProfileData, userActions, useSendAvatar, useUpdateProfileData } from '@/entities/User'
 import Avatar from '@/shared/assets/icons/avatar.svg?react'
 import Edit from '@/shared/assets/icons/edit.svg?react'
 import Trash from '@/shared/assets/icons/trash.svg?react'
-import { useAppSelector } from '@/shared/hooks'
+import { useAppDispatch } from '@/shared/hooks'
 import { Button, ButtonSize } from '@/shared/ui/Button'
 import { Input } from '@/shared/ui/Input'
 import { RoundButton, RoundButtonSize, RoundButtonTheme } from '@/shared/ui/RoundButton'
@@ -13,8 +13,8 @@ import { RoundButton, RoundButtonSize, RoundButtonTheme } from '@/shared/ui/Roun
 import cls from './ProfilePage.module.scss'
 
 export const ProfilePage = () => {
-  const profile = useAppSelector(getProfileData)
-  const { isSuccess: isProfileSuccess, refetch } = useGetProfileData()
+  const dispatch = useAppDispatch()
+  const { data: profile, isSuccess: isProfileSuccess, refetch } = useGetProfileData()
   const [sendAvatar] = useSendAvatar()
   const [updateProfileData] = useUpdateProfileData()
   const inputFileRef = useRef<HTMLInputElement>(null)
@@ -114,6 +114,12 @@ export const ProfilePage = () => {
       })
     }
   }, [isProfileSuccess, profile])
+
+  useEffect(() => {
+    if (profile) {
+      dispatch(userActions.setProfileData(profile))
+    }
+  }, [dispatch, profile])
 
   return (
     <div className={cls.profile}>
