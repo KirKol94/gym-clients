@@ -129,7 +129,7 @@ class AbonementServiceTest {
 
         mockMvc.perform(put("/api/v1/abonement/update")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"id\": 999}"))
+                        .content("{\"id\": 999,\"client_id\": 20}"))
                 .andExpect(status().is(400))
                 .andExpect(result -> {
                     String errorMessage = result.getResponse().getContentAsString();
