@@ -1,4 +1,4 @@
-import { IProfileData } from '../types/user'
+import type { IProfileData } from '../types/user'
 
 interface InitialState {
   isAuth: boolean

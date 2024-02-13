@@ -1,4 +1,5 @@
-import { forwardRef, InputHTMLAttributes } from 'react'
+import type { InputHTMLAttributes } from 'react'
+import { forwardRef } from 'react'
 import cx from 'classix'
 
 import classes from './Input.module.scss'

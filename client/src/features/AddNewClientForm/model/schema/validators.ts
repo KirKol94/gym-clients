@@ -80,3 +80,25 @@ export const validatePhoneNumber: CustomValidator<string> = (value, helpers) => 
 
   return value
 }
+
+export const validateDate: CustomValidator<string> = (date, helpers) => {
+  const regex = /^(0?[1-9]|[12][0-9]|3[01])\.(0?[1-9]|1[012])\.(19|20)\d{2}$/
+
+  if (!regex.test(date)) {
+    return helpers.message({
+      custom: 'Неверный формат даты',
+    })
+  }
+
+  const currentYear = new Date().getFullYear()
+  const parts = date.split('.')
+  const year = parseInt(parts[2], 10)
+
+  if (year > currentYear) {
+    return helpers.message({
+      custom: 'Не может быть позже текущего года',
+    })
+  }
+
+  return date
+}

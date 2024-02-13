@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import cx from 'classix'
 
 import Arrow from '@/shared/assets/icons/arrow.svg?react'

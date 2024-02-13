@@ -12,6 +12,7 @@ module.exports = {
   plugins: ['react-refresh', 'unused-imports', 'prefer-arrow', 'simple-import-sort'],
 
   rules: {
+    '@typescript-eslint/consistent-type-imports': 'error',
     'no-var': 'error',
     'prefer-const': 'error',
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],

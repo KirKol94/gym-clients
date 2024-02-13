@@ -1,7 +1,8 @@
-import { ButtonHTMLAttributes, ReactNode } from 'react'
+import type { ButtonHTMLAttributes, ReactNode } from 'react'
 import cx from 'classix'
 
-import { ButtonSize, ButtonTheme } from '../mode/types/button'
+import type { ButtonSize } from '../mode/types/button'
+import { ButtonTheme } from '../mode/types/button'
 
 import classes from './Button.module.scss'
 
