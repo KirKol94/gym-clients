@@ -2,10 +2,10 @@ export interface IClient {
   id: number
   lastName: string
   firstName: string
-  middleName: string | null
-  birthday?: string | null
+  middleName: string
+  birthday?: string
   sex?: number
-  personalTrainingCount?: number | null
-  email?: string | null
-  mobilePhone?: string | null
+  personalTrainingCount?: number
+  email?: string
+  mobilePhone?: string
 }

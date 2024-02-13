@@ -23,12 +23,6 @@ export const AddNewClientForm = () => {
   const methods = useForm<ClientDataType>({
     mode: 'onChange',
     resolver: joiResolver(schema),
-    defaultValues: {
-      email: null,
-      middleName: null,
-      mobilePhone: null,
-      personalTrainingCount: 0,
-    },
   })
   const { refetch } = useGetAllClients()
 
