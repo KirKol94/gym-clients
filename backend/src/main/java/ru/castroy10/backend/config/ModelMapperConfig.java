@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import ru.castroy10.backend.dto.abonement.AbonementRequestSaveDto;
 import ru.castroy10.backend.dto.abonement.AbonementRequestUpdateDto;
-import ru.castroy10.backend.dto.appuser.AppUserUpdateDto;
+import ru.castroy10.backend.dto.appuser.AppUserRequestUpdateDto;
 import ru.castroy10.backend.model.Abonement;
 import ru.castroy10.backend.model.Appuser;
 import ru.castroy10.backend.model.Client;
@@ -33,7 +33,7 @@ public class ModelMapperConfig {
         modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 
-        modelMapper.typeMap(AppUserUpdateDto.class, Appuser.class)
+        modelMapper.typeMap(AppUserRequestUpdateDto.class, Appuser.class)
                 .addMappings(mapper -> mapper.skip(Appuser::setRoles))
                 .addMappings(mapper -> mapper.skip(Appuser::setUsername));
         modelMapper.typeMap(AbonementRequestSaveDto.class, Abonement.class)
