@@ -15,6 +15,7 @@ import ru.castroy10.backend.model.Trainee;
 import ru.castroy10.backend.repository.TraineeRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -58,5 +59,9 @@ public class TraineeService {
     public ResponseEntity<?> findByName(String name) {
         List<Trainee> traineeList = traineeRepository.findByName(name.toLowerCase());
         return ResponseEntity.ok(traineeList);
+    }
+
+    public Optional<Trainee> getById(Long id) {
+        return traineeRepository.findById(id);
     }
 }
