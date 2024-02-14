@@ -1,3 +1,3 @@
-import { Agent } from './ui/AgentPage'
+import { AgentPage } from './ui/AgentPage'
 
-export default Agent
+export default AgentPage
