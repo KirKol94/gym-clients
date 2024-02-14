@@ -10,7 +10,7 @@ import { CounterRow } from './CounterRow'
 
 import classes from './EntityCard.module.scss'
 
-interface EntityCardProps {
+export interface EntityCardProps {
   children: ReactNode
   requireAttention?: number
   total?: number
