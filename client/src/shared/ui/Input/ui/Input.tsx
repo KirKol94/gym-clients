@@ -4,10 +4,10 @@ import cx from 'classix'
 
 import classes from './Input.module.scss'
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   inputName: string
-  className?: string
   error?: string
+  className?: string
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(({ inputName, className, error, ...props }, ref) => {
