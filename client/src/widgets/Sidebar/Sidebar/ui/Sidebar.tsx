@@ -1,5 +1,5 @@
 import { memo, useEffect, useMemo, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, Link } from 'react-router-dom'
 import cx from 'classix'
 
 import Agent from '@/shared/assets/icons/Agent.svg?react'
@@ -81,7 +81,15 @@ export const Sidebar = memo(() => {
   return (
     <aside className={cx(classes.sidebar, !isOpen && classes.sidebar_hidden)}>
       <div className={cx(classes.logo__wrapper, !isOpen && classes.logo__wrapper_close)}>
-        {isOpen ? <Logo /> : <LogoMini />}
+        {isOpen ? (
+          <Link to={ROUTER_PATH.HOME}>
+            <Logo />
+          </Link>
+        ) : (
+          <Link to={ROUTER_PATH.HOME}>
+            <LogoMini />
+          </Link>
+        )}
         <button onClick={onSidebarVisibleToggle} className={cx(classes.back, !isOpen && classes.back_hidden)}>
           <BackArrow />
         </button>
