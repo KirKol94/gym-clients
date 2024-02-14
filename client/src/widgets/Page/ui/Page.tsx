@@ -6,11 +6,11 @@ import { Sidebar } from '../../Sidebar'
 
 import classes from './Page.module.scss'
 
-interface Page {
+export interface PageProps {
   children: ReactNode
 }
 
-export const Page = memo(({ children }: Page) => {
+export const Page = memo(({ children }: PageProps) => {
   return (
     <div className="page__container">
       <div className={classes.content}>
