@@ -5,7 +5,7 @@ import type { IconWithTitleSize } from '../models/types/iconWithTitle'
 
 import classes from './IconWithTitle.module.scss'
 
-interface IconWithTitleProps {
+export interface IconWithTitleProps {
   children: ReactNode
   size: IconWithTitleSize
   className?: string
