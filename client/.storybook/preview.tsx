@@ -1,5 +1,7 @@
 import type { Preview } from '@storybook/react'
 import '../src/app/styles/index.scss'
+import React from 'react'
+import { RootProvider } from '../src/app/providers/RootProvider'
 
 const preview: Preview = {
   parameters: {
@@ -15,12 +17,12 @@ const preview: Preview = {
 
 export const decorators = [
   (Story) => (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-      <Story />
-    </div>
+    <RootProvider>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <Story />
+      </div>
+    </RootProvider>
   ),
-];
-
+]
 
 export default preview
-
