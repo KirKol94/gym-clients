@@ -3,7 +3,7 @@ import { PatternFormat } from 'react-number-format'
 
 import { Input } from '../../Input'
 
-type BaseMaskInputProps = {
+export type BaseMaskInputProps = {
   label: string
   format: string
   name: string
