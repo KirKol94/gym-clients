@@ -14,8 +14,6 @@ public class AppUserRequestRegisterDto implements AppUserDto{
     @NotNull
     @NotBlank
     private String firstName;
-    @NotNull
-    @NotBlank
     private String middleName;
     @NotNull
     @NotBlank
@@ -23,6 +21,8 @@ public class AppUserRequestRegisterDto implements AppUserDto{
     @NotNull
     @NotBlank
     private String password;
+    @NotNull
+    @NotBlank
     @Email
     private String email;
     private String avatarFileName;

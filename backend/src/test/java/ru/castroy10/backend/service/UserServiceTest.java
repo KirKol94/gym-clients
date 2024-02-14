@@ -134,7 +134,7 @@ public class UserServiceTest {
 
         mockMvc.perform(post("/api/v1/user/register")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"lastName\": \"A\",\"firstName\": \"A\",\"middleName\": \"A\",\"username\": \"A\",\"password\": \"A\"}"))
+                        .content("{\"lastName\": \"A\",\"firstName\": \"A\",\"email\": \"A@a.a\",\"username\": \"A\",\"password\": \"A\"}"))
                 .andExpect(status().is(400))
                 .andExpect(result -> {
                     String errorMessage = result.getResponse().getContentAsString();
