@@ -22,13 +22,6 @@ export default {
       },
     },
   },
-  decorators: [
-    (Story: Story) => (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-        <Story />
-      </div>
-    ),
-  ],
 }
 
 const Template: Story<TitleProps> = (args) => <Title {...args} />
