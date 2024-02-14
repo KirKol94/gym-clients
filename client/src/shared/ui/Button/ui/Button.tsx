@@ -6,7 +6,7 @@ import { ButtonTheme } from '../mode/types/button'
 
 import classes from './Button.module.scss'
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size: ButtonSize
   children: ReactNode
   theme?: ButtonTheme

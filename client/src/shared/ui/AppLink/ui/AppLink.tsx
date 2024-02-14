@@ -6,7 +6,7 @@ import { AppLinkSize } from '../model/types/appLink'
 
 import classes from './AppLink.module.scss'
 
-interface AppLinkProps {
+export interface AppLinkProps {
   to: string
   size: AppLinkSize
   children: ReactNode

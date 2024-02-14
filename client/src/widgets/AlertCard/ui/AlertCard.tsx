@@ -5,13 +5,13 @@ import { Title, TitleSize } from '@/shared/ui/Title'
 
 import classes from './AlertCard.module.scss'
 
-interface AlertInfo {
+export interface AlertCardProps {
   count: number
   title: string
   alert: string
 }
 
-export const AlertCard = ({ count, title, alert }: AlertInfo) => {
+export const AlertCard = ({ count, title, alert }: AlertCardProps) => {
   return (
     <div className={classes['alert-card']}>
       <div className={classes.header}>

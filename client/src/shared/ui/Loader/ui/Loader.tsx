@@ -4,7 +4,7 @@ import { LoaderColor, LoaderSize } from '../model/types/loader'
 
 import classes from './Loader.module.scss'
 
-type LoaderProps = {
+export type LoaderProps = {
   size?: LoaderSize
   color?: LoaderColor
 }
