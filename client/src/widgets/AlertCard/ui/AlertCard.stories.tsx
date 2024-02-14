@@ -1,5 +1,6 @@
 import type { Meta, Story } from '@storybook/react'
 
+import type { AlertCardProps } from './AlertCard'
 import { AlertCard } from './AlertCard'
 
 export default {
@@ -12,5 +13,5 @@ export default {
   },
 } as Meta
 
-const Template: Story = (args) => <AlertCard {...args} />
+const Template: Story<AlertCardProps> = (args) => <AlertCard {...args} />
 export const Default = Template.bind({})
