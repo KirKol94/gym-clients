@@ -21,7 +21,7 @@ import { AuthType } from '../model/types/auth'
 
 import classes from './AuthForm.module.scss'
 
-interface AuthFormProps {
+export interface AuthFormProps {
   type?: AuthType
 }
 
