@@ -15,8 +15,6 @@ public class ClientDto {
     @NotNull
     @NotBlank
     private String firstName;
-    @NotNull
-    @NotBlank
     private String middleName;
     private String birthday;
     @Range(min = 0, max = 1)
