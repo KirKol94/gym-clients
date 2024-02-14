@@ -1,3 +1,5 @@
+import type { Meta, Story } from '@storybook/react'
+
 import { ButtonSize, ButtonTheme } from '..'
 
 import type { ButtonProps } from './Button'
@@ -17,7 +19,7 @@ export default {
     },
     children: 'Button',
   },
-}
+} as Meta
 
 const Template: Story<ButtonProps> = (args) => <Button {...args} />
 export const Base = Template.bind({

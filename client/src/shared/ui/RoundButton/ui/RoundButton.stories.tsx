@@ -13,11 +13,7 @@ export default {
   argTypes: {
     size: {
       control: {
-        type: 'select',
-        options: [RoundButton.S, RoundButton.M],
-      },
-      theme: {
-        type: 'select',
+        type: 'radio',
         options: [RoundButtonSize.S, RoundButtonSize.M],
       },
     },
