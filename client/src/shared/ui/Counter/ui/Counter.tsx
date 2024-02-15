@@ -4,7 +4,7 @@ import { CounterColor, CounterSize } from '../model/types/counter'
 
 import classes from './Counter.module.scss'
 
-interface CounterProps {
+export interface CounterProps {
   count: number
   size: CounterSize
   color: CounterColor

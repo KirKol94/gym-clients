@@ -18,7 +18,7 @@ export const NotFoundPage = () => {
       </Title>
       <NotFoundImg />
       <div>
-        <AppLink to={ROUTER_PATH.HOME} size={AppLinkSize.M}>
+        <AppLink to={ROUTER_PATH.PROFILE} size={AppLinkSize.M}>
           На главную
         </AppLink>
       </div>

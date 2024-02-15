@@ -7,7 +7,7 @@ import type { IClient } from '..'
 
 import cls from './Client.module.scss'
 
-interface ClientProps {
+export interface ClientProps {
   client: IClient
 }
 

@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import type { SubmitHandler } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 
 import type { User } from '@/entities/User'
@@ -21,7 +21,7 @@ import { AuthType } from '../model/types/auth'
 
 import classes from './AuthForm.module.scss'
 
-interface AuthFormProps {
+export interface AuthFormProps {
   type?: AuthType
 }
 
@@ -62,7 +62,7 @@ export const AuthForm = ({ type = AuthType.LOGIN }: AuthFormProps) => {
       dispatch(userActions.setIsAuth())
       localStorage.setItem(ACCESS_TOKEN_LOCAL_STORAGE_KEY, resAuthData?.Token)
     }
-  }, [authStatus, dispatch, navigate, resAuthData?.Token])
+  }, [authStatus, dispatch, resAuthData])
 
   useEffect(() => {
     if (registerStatus === 'rejected') {
@@ -76,7 +76,9 @@ export const AuthForm = ({ type = AuthType.LOGIN }: AuthFormProps) => {
     }
   }, [authError, authStatus, registerError, registerStatus])
 
-  if (registerStatus === 'fulfilled') return <Navigate to={ROUTER_PATH.LOGIN} />
+  useEffect(() => {
+    if (registerStatus === 'fulfilled') navigate(ROUTER_PATH.LOGIN)
+  }, [navigate, registerStatus])
 
   return (
     <>
@@ -108,7 +110,7 @@ export const AuthForm = ({ type = AuthType.LOGIN }: AuthFormProps) => {
               message: 'Латинские буквы, цифра и символы, кроме пробела',
             },
             minLength: {
-              value: 6,
+              value: 5,
               message: 'Не менее 6 символов',
             },
           })}

@@ -6,7 +6,7 @@ import { RoundButtonSize, RoundButtonTheme } from '../model/types/roundButton'
 
 import classes from './RoundButton.module.scss'
 
-interface RoundButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface RoundButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: RoundButtonSize
   direction?: RoundButtonDirection
   theme?: RoundButtonTheme
