@@ -2,17 +2,17 @@ import { memo, useEffect, useMemo, useState } from 'react'
 import { useLocation, Link } from 'react-router-dom'
 import cx from 'classix'
 
-import Agent from '@/shared/assets/icons/Agent.svg?react'
-import Avatar from '@/shared/assets/icons/Avatar.svg?react'
-import BackArrow from '@/shared/assets/icons/Back.svg?react'
-import Contract from '@/shared/assets/icons/Contract.svg?react'
-import Deals from '@/shared/assets/icons/Deals.svg?react'
-import Group from '@/shared/assets/icons/Group.svg?react'
-import Logo from '@/shared/assets/icons/Logo.svg?react'
-import LogoMini from '@/shared/assets/icons/LogoMini.svg?react'
-import Setting from '@/shared/assets/icons/SettingsWhite.svg?react'
-import StrongMan from '@/shared/assets/icons/StrongMan.svg?react'
-import Users from '@/shared/assets/icons/UsersWhite.svg?react'
+import Agent from '@/shared/assets/icons/agent.svg?react'
+import Avatar from '@/shared/assets/icons/avatar.svg?react'
+import BackArrow from '@/shared/assets/icons/back.svg?react'
+import Contract from '@/shared/assets/icons/contract.svg?react'
+import Deals from '@/shared/assets/icons/deals.svg?react'
+import Group from '@/shared/assets/icons/group.svg?react'
+import Logo from '@/shared/assets/icons/logo.svg?react'
+import LogoMini from '@/shared/assets/icons/logoMini.svg?react'
+import Setting from '@/shared/assets/icons/settingsWhite.svg?react'
+import StrongMan from '@/shared/assets/icons/strongMan.svg?react'
+import Users from '@/shared/assets/icons/usersWhite.svg?react'
 import { CURRENT_PATHNAME_KEY } from '@/shared/const/localStorage/currentLocationKey'
 import { ROUTER_PATH } from '@/shared/const/path/PATH'
 
@@ -81,7 +81,7 @@ export const Sidebar = memo(() => {
   return (
     <aside className={cx(classes.sidebar, !isOpen && classes.sidebar_hidden)}>
       <div className={cx(classes.logo__wrapper, !isOpen && classes.logo__wrapper_close)}>
-        <Link to={ROUTER_PATH.HOME}>{isOpen ? <Logo /> : <LogoMini />}</Link>
+        <Link to={ROUTER_PATH.PROFILE}>{isOpen ? <Logo /> : <LogoMini />}</Link>
         <button onClick={onSidebarVisibleToggle} className={cx(classes.back, !isOpen && classes.back_hidden)}>
           <BackArrow />
         </button>
