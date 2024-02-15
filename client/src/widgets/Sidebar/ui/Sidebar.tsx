@@ -1,5 +1,5 @@
 import { memo, useEffect, useMemo, useState } from 'react'
-import { useLocation, Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import cx from 'classix'
 
 import Agent from '@/shared/assets/icons/agent.svg?react'
