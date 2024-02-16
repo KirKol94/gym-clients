@@ -1,3 +1,6 @@
-export type { User } from './model/types/user'
+export type { User, IProfileData } from './model/types/user'
 export { userReducer, userActions } from './model/slice/userSlice'
 export { getIsAuth } from './model/selectors/getIsAuth'
+export { getProfileData } from './model/selectors/getProfileData'
+export { getUserNameAndLastName } from './model/selectors/getUserNameAndLastName'
+export { useGetProfileData, useSendAvatar, useUpdateProfileData } from './model/api/profileApi'

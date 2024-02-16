@@ -1,22 +1,23 @@
 package ru.castroy10.backend.service;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.castroy10.backend.dto.appuser.AppUserDto;
-import ru.castroy10.backend.dto.appuser.AppUserRegisterDto;
+import ru.castroy10.backend.dto.appuser.AppUserRequestRegisterDto;
 import ru.castroy10.backend.dto.appuser.AppUserResponseFullDto;
-import ru.castroy10.backend.dto.appuser.AppUserUpdateDto;
+import ru.castroy10.backend.dto.appuser.AppUserRequestUpdateDto;
 import ru.castroy10.backend.exception.RollbackException;
 import ru.castroy10.backend.exception.UserDuplicateException;
 import ru.castroy10.backend.model.Appuser;
 import ru.castroy10.backend.model.Role;
 import ru.castroy10.backend.repository.AppUserRepository;
+import ru.castroy10.backend.security.jwt.JwtUtil;
 
 import java.io.IOException;
 import java.util.Map;
@@ -33,14 +34,16 @@ public class AppUserService {
     private final RoleService roleService;
     private final PasswordEncoder passwordEncoder;
     private final AppUserAvatarService appUserAvatarService;
+    private final JwtUtil jwtUtil;
 
     @Autowired
-    public AppUserService(AppUserRepository appUserRepository, ModelMapper modelMapper, RoleService roleService, PasswordEncoder passwordEncoder, AppUserAvatarService appUserAvatarService) {
+    public AppUserService(AppUserRepository appUserRepository, ModelMapper modelMapper, RoleService roleService, PasswordEncoder passwordEncoder, AppUserAvatarService appUserAvatarService, JwtUtil jwtUtil) {
         this.appUserRepository = appUserRepository;
         this.roleService = roleService;
         this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
         this.appUserAvatarService = appUserAvatarService;
+        this.jwtUtil = jwtUtil;
     }
 
     @Transactional
@@ -51,30 +54,30 @@ public class AppUserService {
     }
 
     @Transactional(rollbackFor = RollbackException.class)
-    public ResponseEntity<?> register(AppUserRegisterDto appUserRegisterDto) throws RollbackException {
+    public ResponseEntity<?> register(AppUserRequestRegisterDto appUserRequestRegisterDto) throws RollbackException {
         try {
-            if (checkUserExist(appUserRegisterDto.getUsername()))
+            if (checkUserExist(appUserRequestRegisterDto.getUsername()))
                 throw new UserDuplicateException("Такой пользователь уже существует");
-            Appuser appuser = modelMapper.map(appUserRegisterDto, Appuser.class);
-            appUserAvatarService.saveAvatar(appuser, appUserRegisterDto);
-            setUserAttributes(appuser, appUserRegisterDto);
+            Appuser appuser = modelMapper.map(appUserRequestRegisterDto, Appuser.class);
+            appUserAvatarService.saveAvatar(appuser, appUserRequestRegisterDto);
+            setUserAttributes(appuser, appUserRequestRegisterDto);
             appuser = save(appuser);
             return ResponseEntity.ok().body(Map.of("Пользователь сохранен с id", appuser.getId().intValue()));
         } catch (Exception e) {
-            log.error("Ошибка регистрации клиента {}, {}", appUserRegisterDto.getUsername(), e.getMessage());
+            log.error("Ошибка регистрации клиента {}, {}", appUserRequestRegisterDto.getUsername(), e.getMessage());
             throw new RollbackException(e.getMessage());
         }
     }
 
     @Transactional
-    public ResponseEntity<?> update(AppUserUpdateDto appUserUpdateDto) throws UserDuplicateException, IOException {
-        if (!checkUserExist(appUserUpdateDto.getId()))
+    public ResponseEntity<?> update(AppUserRequestUpdateDto appUserRequestUpdateDto) throws UserDuplicateException, IOException {
+        if (!checkUserExist(appUserRequestUpdateDto.getId()))
             throw new UserDuplicateException("Пользователя с таким id не существует");
-        Appuser appuser = appUserRepository.findAppuserById(appUserUpdateDto.getId()).orElse(new Appuser());
-        modelMapper.map(appUserUpdateDto, appuser);
-        appUserAvatarService.saveAvatar(appuser, appUserUpdateDto);
-        setUserAttributes(appuser, appUserUpdateDto);
-        setUserRoles(appuser, appUserUpdateDto);
+        Appuser appuser = appUserRepository.findAppuserById(appUserRequestUpdateDto.getId()).orElse(new Appuser());
+        modelMapper.map(appUserRequestUpdateDto, appuser);
+        appUserAvatarService.saveAvatar(appuser, appUserRequestUpdateDto);
+        setUserAttributes(appuser, appUserRequestUpdateDto);
+        setUserRoles(appuser, appUserRequestUpdateDto);
         log.info("Пользователь {} {} {} обновлен в базу данных, id={}", appuser.getLastName(), appuser.getFirstName(), appuser.getMiddleName(), appuser.getId());
         return ResponseEntity.ok().body(Map.of("Пользователь обновлен с id", appuser.getId().intValue()));
     }
@@ -93,6 +96,11 @@ public class AppUserService {
         return ResponseEntity.ok().body(modelMapper.map(appuser, AppUserResponseFullDto.class));
     }
 
+    public ResponseEntity<?> getProfile(HttpServletRequest httpServletRequest) throws UserDuplicateException {
+        String username = jwtUtil.verifyToken(httpServletRequest.getHeader("Authorization").substring(7));
+        return findByUserName(username);
+    }
+
     private boolean checkUserExist(String username) {
         Optional<Appuser> appuser = appUserRepository.findAppuserByUsername(username);
         return appuser.isPresent();
@@ -103,15 +111,15 @@ public class AppUserService {
         return appuser.isPresent();
     }
 
-    private void setUserRoles(Appuser appuser, AppUserUpdateDto appUserUpdateDto) {
-        if (appUserUpdateDto.getRoles() != null && !getRolesFromDB(appUserUpdateDto).isEmpty()) {
+    private void setUserRoles(Appuser appuser, AppUserRequestUpdateDto appUserRequestUpdateDto) {
+        if (appUserRequestUpdateDto.getRoles() != null && !getRolesFromDB(appUserRequestUpdateDto).isEmpty()) {
             appuser.setRoles(null);
-            appuser.setRoles(getRolesFromDB(appUserUpdateDto));
+            appuser.setRoles(getRolesFromDB(appUserRequestUpdateDto));
         }
     }
 
-    private Set<Role> getRolesFromDB(AppUserUpdateDto appUserUpdateDto) {
-        return appUserUpdateDto.getRoles().stream()
+    private Set<Role> getRolesFromDB(AppUserRequestUpdateDto appUserRequestUpdateDto) {
+        return appUserRequestUpdateDto.getRoles().stream()
                 .map(role -> roleService.findByRoleName(role.getRoleName()))
                 .collect(Collectors.toSet());
     }
@@ -122,7 +130,7 @@ public class AppUserService {
         appuser.setAccountNonExpired(true);
         appuser.setCredentialsNonExpired(true);
         appuser.setEnabled(true);
-        if (appUserDto instanceof AppUserRegisterDto) {
+        if (appUserDto instanceof AppUserRequestRegisterDto) {
             Role role = roleService.findByRoleName("ROLE_USER");
             appuser.setRoles(Set.of(role));
         }

@@ -1,7 +1,7 @@
-import RightsAndRoles from '@/shared/assets//icons/rightsAndRoles.svg?react'
-import Settings from '@/shared/assets//icons/settings.svg?react'
-import TransactionStatuses from '@/shared/assets//icons/transactionStatuses.svg?react'
 import AdditionalFields from '@/shared/assets/icons/additionalFields.svg?react'
+import RightsAndRoles from '@/shared/assets/icons/rightsAndRoles.svg?react'
+import Settings from '@/shared/assets/icons/settings.svg?react'
+import TransactionStatuses from '@/shared/assets/icons/transactionStatuses.svg?react'
 import { Button, ButtonSize, ButtonTheme } from '@/shared/ui/Button'
 import { IconWithTitle, IconWithTitleSize } from '@/shared/ui/IconWithTitle'
 

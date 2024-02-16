@@ -2,12 +2,14 @@ import { FormProvider, type SubmitHandler, useForm } from 'react-hook-form'
 import { joiResolver } from '@hookform/resolvers/joi'
 import cx from 'classix'
 
-import { IClient } from '@/entities/Client'
+import type { IClient } from '@/entities/Client'
+import { clientsActions } from '@/features/ClientList'
 import { useGetAllClients } from '@/features/ClientList/model/api/clientsApi'
+import { useAppDispatch } from '@/shared/hooks'
 import { BaseMaskInput } from '@/shared/ui/BaseMaskInput'
 import { Button, ButtonSize } from '@/shared/ui/Button'
 import { Input } from '@/shared/ui/Input'
-import { Text, TextSize } from '@/shared/ui/Text'
+import { RadioButton } from '@/shared/ui/RadioButton'
 
 import { useAddNewClient } from '../model/api/addClientApi'
 import { schema } from '../model/schema'
@@ -17,9 +19,17 @@ import cls from './AddNewClientForm.module.scss'
 type ClientDataType = Omit<IClient, 'id'>
 
 export const AddNewClientForm = () => {
+  const dispatch = useAppDispatch()
   const methods = useForm<ClientDataType>({
     mode: 'onChange',
     resolver: joiResolver(schema),
+    defaultValues: {
+      middleName: null,
+      email: null,
+      mobilePhone: null,
+      birthday: null,
+      personalTrainingCount: null,
+    },
   })
   const { refetch } = useGetAllClients()
 
@@ -29,16 +39,18 @@ export const AddNewClientForm = () => {
     reset,
     formState: { errors, isValid, isDirty },
   } = methods
-  const [addClient, { data: resClient, status }] = useAddNewClient()
+  const [addClient, { data: addedClientData }] = useAddNewClient()
 
-  const onSubmit: SubmitHandler<ClientDataType> = (data) => {
-    addClient(data)
+  const onSubmit: SubmitHandler<ClientDataType> = async (data) => {
+    await addClient(data)
+
+    if (addedClientData) {
+      const addedClient = { ...data, id: addedClientData.id }
+      dispatch(clientsActions.addNewClient(addedClient))
+    }
+
     reset()
     refetch()
-  }
-
-  if (status === 'fulfilled') {
-    console.log(resClient)
   }
 
   return (
@@ -69,27 +81,17 @@ export const AddNewClientForm = () => {
         />
 
         <fieldset className={cls.gender}>
-          <label className={cls.gender__row}>
-            <Text size={TextSize.S}>Мужской</Text>
-            <input type="radio" value="1" defaultChecked {...register('sex')} />
-          </label>
-          <label className={cls.gender__row}>
-            <Text size={TextSize.S}>Женский</Text>
-            <input type="radio" value="0" {...register('sex')} />
-          </label>
+          <RadioButton text="Мужской" {...register('sex')} value="1" defaultChecked />
+          <RadioButton text="Женский" {...register('sex')} value="0" />
         </fieldset>
 
-        <Input
-          {...register('birthday', {
-            pattern: {
-              value: /\d{2}\.\d{2}\.\d{4}/,
-              message: 'Дата должна быть в формате ДД.ММ.ГГГГ',
-            },
-          })}
-          error={errors?.birthday?.message}
+        <BaseMaskInput
+          label="Дата рождения"
+          name="birthday"
+          type="text"
+          format="##.##.####"
           placeholder="дд.мм.гггг"
           className={cls.input}
-          inputName="Дата рождения"
         />
 
         <Input
@@ -114,7 +116,7 @@ export const AddNewClientForm = () => {
           {...register('personalTrainingCount')}
           error={errors?.personalTrainingCount?.message}
           placeholder="0"
-          defaultValue={1}
+          defaultValue={0}
           className={cls.input}
           inputName="Количество персональных тренировок"
         />

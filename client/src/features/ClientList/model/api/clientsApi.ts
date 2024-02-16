@@ -1,4 +1,4 @@
-import { IClient } from '@/entities/Client'
+import type { IClient } from '@/entities/Client'
 import { rtkApi } from '@/shared/api/rtkApi'
 
 const clientsApi = rtkApi.injectEndpoints({

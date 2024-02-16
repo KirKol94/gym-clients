@@ -1,10 +1,9 @@
-import { useState } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 import { PatternFormat } from 'react-number-format'
 
 import { Input } from '../../Input'
 
-type BaseMaskInputProps = {
+export type BaseMaskInputProps = {
   label: string
   format: string
   name: string
@@ -23,20 +22,11 @@ export const BaseMaskInput = ({
   className,
 }: BaseMaskInputProps) => {
   const { control } = useFormContext()
-  const [patternShow, setPatternShow] = useState(false)
-  const isPhoneField = type === 'tel'
-
-  const focusPhoneFieldHandler = () => setPatternShow(true)
-
   return (
     <Controller
       control={control}
       name={name}
       render={({ field: { value, onChange, onBlur }, fieldState: { error } }) => {
-        const blurPhoneFieldHandler = () => {
-          setPatternShow(false)
-          onBlur()
-        }
         return (
           <PatternFormat
             value={value || ''}
@@ -46,9 +36,9 @@ export const BaseMaskInput = ({
             customInput={Input}
             placeholder={placeholder}
             format={format}
-            onBlur={isPhoneField ? blurPhoneFieldHandler : onBlur}
-            onFocus={isPhoneField ? focusPhoneFieldHandler : undefined}
-            allowEmptyFormatting={isPhoneField ? patternShow : false}
+            onBlur={onBlur}
+            onFocus={undefined}
+            allowEmptyFormatting={false}
             mask={mask}
             onChange={onChange}
             type={type}

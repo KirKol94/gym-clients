@@ -13,12 +13,12 @@ export const NotFoundPage = () => {
 
   return (
     <div className={className}>
-      <Title className={classes.title} size={TitleSize.XXL}>
+      <Title level={1} className={classes.title} size={TitleSize.XXL}>
         Странца не найдена
       </Title>
       <NotFoundImg />
       <div>
-        <AppLink to={ROUTER_PATH.HOME} size={AppLinkSize.M}>
+        <AppLink to={ROUTER_PATH.PROFILE} size={AppLinkSize.M}>
           На главную
         </AppLink>
       </div>

@@ -1,9 +1,11 @@
 import { useEffect } from 'react'
-import { SubmitHandler, useForm } from 'react-hook-form'
-import { Navigate, useNavigate } from 'react-router-dom'
-import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
+import type { SubmitHandler } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
+import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 
-import { User, userActions } from '@/entities/User'
+import type { User } from '@/entities/User'
+import { userActions } from '@/entities/User'
 import { ACCESS_TOKEN_LOCAL_STORAGE_KEY } from '@/shared/const/localStorage/accessTokenKey'
 import { ROUTER_PATH } from '@/shared/const/path/PATH'
 import { useAppDispatch } from '@/shared/hooks'
@@ -19,7 +21,7 @@ import { AuthType } from '../model/types/auth'
 
 import classes from './AuthForm.module.scss'
 
-interface AuthFormProps {
+export interface AuthFormProps {
   type?: AuthType
 }
 
@@ -60,23 +62,27 @@ export const AuthForm = ({ type = AuthType.LOGIN }: AuthFormProps) => {
       dispatch(userActions.setIsAuth())
       localStorage.setItem(ACCESS_TOKEN_LOCAL_STORAGE_KEY, resAuthData?.Token)
     }
-  }, [authStatus, dispatch, navigate, resAuthData?.Token])
+  }, [authStatus, dispatch, resAuthData])
 
-  if (registerStatus === 'fulfilled') return <Navigate to={ROUTER_PATH.LOGIN} />
+  useEffect(() => {
+    if (registerStatus === 'rejected') {
+      alert('ошибка регистрации (см. консоль)')
+      console.log((registerError as FetchBaseQueryError).data)
+    }
 
-  if (registerStatus === 'rejected') {
-    alert('ошибка регистрации (см. консоль)')
-    console.log((registerError as FetchBaseQueryError).data)
-  }
+    if (authStatus === 'rejected') {
+      alert('ошибка авторизации (см. консоль)')
+      console.log((authError as FetchBaseQueryError).data)
+    }
+  }, [authError, authStatus, registerError, registerStatus])
 
-  if (authStatus === 'rejected') {
-    alert('ошибка авторизации (см. консоль)')
-    console.log((authError as FetchBaseQueryError).data)
-  }
+  useEffect(() => {
+    if (registerStatus === 'fulfilled') navigate(ROUTER_PATH.LOGIN)
+  }, [navigate, registerStatus])
 
   return (
     <>
-      <Title size={TitleSize.XXL} className={classes.title}>
+      <Title level={1} size={TitleSize.XXL} className={classes.title}>
         {type === AuthType.LOGIN && 'Авторизация'}
         {type === AuthType.REGISTER && 'Регистрация'}
       </Title>
@@ -104,7 +110,7 @@ export const AuthForm = ({ type = AuthType.LOGIN }: AuthFormProps) => {
               message: 'Латинские буквы, цифра и символы, кроме пробела',
             },
             minLength: {
-              value: 6,
+              value: 5,
               message: 'Не менее 6 символов',
             },
           })}

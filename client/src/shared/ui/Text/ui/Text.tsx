@@ -1,11 +1,11 @@
-import { ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import cx from 'classix'
 
 import { TextSize } from '../model/types/text'
 
 import classes from './Text.module.scss'
 
-interface TextProps {
+export interface TextProps {
   size: TextSize
   children: ReactNode
   className?: string
