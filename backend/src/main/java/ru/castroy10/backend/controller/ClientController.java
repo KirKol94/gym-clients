@@ -4,8 +4,8 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.castroy10.backend.dto.client.ClientDto;
-import ru.castroy10.backend.dto.client.ClientDtoUpdate;
+import ru.castroy10.backend.dto.client.ClientRequestSaveDto;
+import ru.castroy10.backend.dto.client.ClientRequestUpdateDto;
 import ru.castroy10.backend.service.ClientService;
 
 @RestController
@@ -20,14 +20,14 @@ public class ClientController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<?> save(@RequestBody @Valid ClientDto clientDto) {
-        return clientService.save(clientDto);
+    public ResponseEntity<?> save(@RequestBody @Valid ClientRequestSaveDto clientRequestSaveDto) {
+        return clientService.save(clientRequestSaveDto);
     }
 
 
     @PutMapping("/update")
-    public ResponseEntity<?> update(@RequestBody @Valid ClientDtoUpdate clientDtoUpdate) {
-        return clientService.update(clientDtoUpdate);
+    public ResponseEntity<?> update(@RequestBody @Valid ClientRequestUpdateDto clientRequestUpdateDto) {
+        return clientService.update(clientRequestUpdateDto);
     }
 
     @GetMapping("/find/{id}")
