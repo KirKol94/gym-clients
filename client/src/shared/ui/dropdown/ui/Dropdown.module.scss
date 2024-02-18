@@ -10,42 +10,26 @@
   border-radius: 0.25em;
   outline: none;
   box-shadow: 0 0 0.625em 0 #00000029;
-}
 
-
-.container {
-
-  .select_M {
+  &.select_M {
     font-size: 24px;
   }
 
-}
-
-.container {
-
-  .select_XL {
+  &.select_XL {
     font-size: 32px;
   }
-
-}
-
-.container {
 
   &:focus {
     border-color: var(--color-primary-90);
   }
-
 }
 
 .value {
-
   flex-grow: 1;
   padding: 0.3em 0.45em;
-
 }
 
 .clear-btn {
-
   padding: 0;
   font-size: 1.25em;
   color: var(--color-primary-90);
@@ -53,11 +37,9 @@
   background: none;
   border: none;
   outline: none;
-
 }
 
 .clear-btn {
-
   &:hover {
     color: var(--color-neutral-80);
   }
@@ -65,29 +47,22 @@
   &:focus {
     color: var(--color-neutral-80);
   }
-
 }
 
 .divider {
-
   align-self: stretch;
   width: 0.05em;
   height: 1em;
   background-color: var(--color-primary-90);
-
 }
 
 .caret {
-
   border: 0.25em solid transparent;
   border-top-color: var(--color-primary-90);
   translate: 0 25%;
-
 }
 
 .options {
-
-
   &.show {
     display: block;
   }
@@ -106,14 +81,9 @@
   background-color: white;
   border: 0.05em solid var(--color-primary-90);
   border-radius: 0.25em;
-
-
 }
 
-
-
 .option {
-
   padding: 0.25em 0.5em;
   cursor: pointer;
 
@@ -125,5 +95,4 @@
     color: white;
     background-color: #d0ebc7;
   }
-
 }

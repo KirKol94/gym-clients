@@ -10,7 +10,7 @@
       "/^border/": ["px", "%"],
       "/^gap/": ["px", "rem"]
     },
-    "unit-allowed-list": ["%", "deg", "px", "rem", "ms", "vh", "svh", "vw", "fr"],
+    "unit-allowed-list": ["%", "deg", "px", "rem", "ms", "vh", "svh", "vw", "fr", "em"],
     "selector-max-id": 0,
     "block-no-empty": true,
     "color-no-invalid-hex": true,
