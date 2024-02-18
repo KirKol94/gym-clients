@@ -4,7 +4,7 @@ import { DropdownSize, SelectOption } from '../model/types/dropdown'
 
 import { DropdownMenu } from './DropdownMenu'
 
-interface DropdownProps {
+export interface DropdownProps {
   options: SelectOption[]
   label?: string
   size?: DropdownSize
