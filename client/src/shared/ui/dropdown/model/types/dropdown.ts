@@ -1,9 +1,11 @@
-export type SelectOption = {
-  label: string
-  value: number
-}
+export type SelectOption =
+  | {
+      label: string
+      value: number
+    }
+  | undefined
 
-export enum Select {
+export enum TypeSelect {
   MULTI_SELECT = 'multi_select',
   SINGLE_SELECT = 'single_select',
 } // для MultiSelect в дальнейшем
