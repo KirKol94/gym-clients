@@ -16,9 +16,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 import ru.castroy10.backend.controller.UserController;
-import ru.castroy10.backend.dto.appuser.AppUserLoginDto;
-import ru.castroy10.backend.dto.appuser.AppUserRegisterDto;
-import ru.castroy10.backend.dto.appuser.AppUserUpdateDto;
+import ru.castroy10.backend.dto.appuser.AppUserRequestLoginDto;
+import ru.castroy10.backend.dto.appuser.AppUserRequestRegisterDto;
+import ru.castroy10.backend.dto.appuser.AppUserRequestUpdateDto;
 import ru.castroy10.backend.exception.RollbackException;
 import ru.castroy10.backend.exception.UserDuplicateException;
 import ru.castroy10.backend.model.Appuser;
@@ -46,9 +46,9 @@ public class UserServiceTest {
     private final JwtUtil jwtUtil;
 
     private final Appuser appuser = new Appuser();
-    private final AppUserLoginDto appUserLoginDto = new AppUserLoginDto();
-    private final AppUserRegisterDto appUserRegisterDto = new AppUserRegisterDto();
-    private final AppUserUpdateDto appUserUpdateDto = new AppUserUpdateDto();
+    private final AppUserRequestLoginDto appUserRequestLoginDto = new AppUserRequestLoginDto();
+    private final AppUserRequestRegisterDto appUserRequestRegisterDto = new AppUserRequestRegisterDto();
+    private final AppUserRequestUpdateDto appUserRequestUpdateDto = new AppUserRequestUpdateDto();
     private final Role role = new Role();
     private final WebApplicationContext webApplicationContext;
 
@@ -75,16 +75,16 @@ public class UserServiceTest {
         appuser.setCredentialsNonExpired(true);
         appuser.setEnabled(true);
 
-        appUserLoginDto.setUsername("user");
-        appUserLoginDto.setPassword("password");
+        appUserRequestLoginDto.setUsername("user");
+        appUserRequestLoginDto.setPassword("password");
 
-        appUserUpdateDto.setId(999L);
+        appUserRequestUpdateDto.setId(999L);
 
-        appUserRegisterDto.setFirstName("a");
-        appUserRegisterDto.setLastName("b");
-        appUserRegisterDto.setMiddleName("c");
-        appUserRegisterDto.setUsername("test_user");
-        appUserRegisterDto.setPassword("test_password");
+        appUserRequestRegisterDto.setFirstName("a");
+        appUserRequestRegisterDto.setLastName("b");
+        appUserRequestRegisterDto.setMiddleName("c");
+        appUserRequestRegisterDto.setUsername("test_user");
+        appUserRequestRegisterDto.setPassword("test_password");
 
         role.setId(999L);
         role.setRoleName("ROLE_SUPERUSER");
@@ -93,7 +93,7 @@ public class UserServiceTest {
     @Test
     public void testLoginSuccess() {
         Mockito.when(appUserRepository.findAppuserByUsername(Mockito.anyString())).thenReturn(Optional.of(appuser));
-        ResponseEntity<?> response = userController.getToken(appUserLoginDto);
+        ResponseEntity<?> response = userController.getToken(appUserRequestLoginDto);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
         Assertions.assertTrue(response.getBody().toString().contains("Token"));
@@ -119,7 +119,7 @@ public class UserServiceTest {
     public void testRegisterSuccess() throws RollbackException {
         Mockito.when(appUserRepository.save(Mockito.any(Appuser.class))).thenReturn(appuser);
         Mockito.when(roleService.findByRoleName(Mockito.any(String.class))).thenReturn(role);
-        ResponseEntity<?> response = userController.register(appUserRegisterDto);
+        ResponseEntity<?> response = userController.register(appUserRequestRegisterDto);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
         Assertions.assertEquals("{Пользователь сохранен с id=999}", response.getBody().toString());
@@ -134,7 +134,7 @@ public class UserServiceTest {
 
         mockMvc.perform(post("/api/v1/user/register")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"lastName\": \"A\",\"firstName\": \"A\",\"middleName\": \"A\",\"username\": \"A\",\"password\": \"A\"}"))
+                        .content("{\"lastName\": \"A\",\"firstName\": \"A\",\"email\": \"A@a.a\",\"username\": \"A\",\"password\": \"A\"}"))
                 .andExpect(status().is(400))
                 .andExpect(result -> {
                     String errorMessage = result.getResponse().getContentAsString();
@@ -146,7 +146,7 @@ public class UserServiceTest {
     public void testUpdateSuccess() throws Exception {
         Mockito.when(appUserRepository.findAppuserById(Mockito.any(Long.class))).thenReturn(Optional.of(appuser));
         Mockito.when(roleService.findByRoleName(Mockito.any(String.class))).thenReturn(role);
-        ResponseEntity<?> response = userController.update(appUserUpdateDto);
+        ResponseEntity<?> response = userController.update(appUserRequestUpdateDto);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
         Assertions.assertEquals("{Пользователь обновлен с id=999}", response.getBody().toString());

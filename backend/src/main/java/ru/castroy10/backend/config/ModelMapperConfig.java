@@ -8,11 +8,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import ru.castroy10.backend.dto.abonement.AbonementRequestSaveDto;
 import ru.castroy10.backend.dto.abonement.AbonementRequestUpdateDto;
-import ru.castroy10.backend.dto.appuser.AppUserUpdateDto;
-import ru.castroy10.backend.model.Abonement;
-import ru.castroy10.backend.model.Appuser;
-import ru.castroy10.backend.model.Client;
+import ru.castroy10.backend.dto.appuser.AppUserRequestUpdateDto;
+import ru.castroy10.backend.dto.personaltraining.PersonalTrainingRequestSaveDto;
+import ru.castroy10.backend.model.*;
 import ru.castroy10.backend.repository.ClientRepository;
+import ru.castroy10.backend.repository.TraineeRepository;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -21,9 +21,11 @@ import java.time.format.DateTimeFormatter;
 public class ModelMapperConfig {
 
     private final ClientRepository clientRepository;
+    private final TraineeRepository traineeRepository;
 
-    public ModelMapperConfig(ClientRepository clientRepository) {
+    public ModelMapperConfig(ClientRepository clientRepository, TraineeRepository traineeRepository) {
         this.clientRepository = clientRepository;
+        this.traineeRepository = traineeRepository;
     }
 
     @Bean
@@ -33,13 +35,17 @@ public class ModelMapperConfig {
         modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 
-        modelMapper.typeMap(AppUserUpdateDto.class, Appuser.class)
+        modelMapper.typeMap(AppUserRequestUpdateDto.class, Appuser.class)
                 .addMappings(mapper -> mapper.skip(Appuser::setRoles))
                 .addMappings(mapper -> mapper.skip(Appuser::setUsername));
         modelMapper.typeMap(AbonementRequestSaveDto.class, Abonement.class)
                 .addMappings(mapper -> mapper.using(clientIdToClient).map(AbonementRequestSaveDto::getClient_id, Abonement::setClient));
         modelMapper.typeMap(AbonementRequestUpdateDto.class, Abonement.class)
                 .addMappings(mapper -> mapper.using(clientIdToClient).map(AbonementRequestUpdateDto::getClient_id, Abonement::setClient));
+        modelMapper.typeMap(PersonalTrainingRequestSaveDto.class, PersonalTraining.class)
+                .addMappings(mapper -> mapper.using(clientIdToClient).map(PersonalTrainingRequestSaveDto::getClient_id, PersonalTraining::setClient));
+        modelMapper.typeMap(PersonalTrainingRequestSaveDto.class, PersonalTraining.class)
+                .addMappings(mapper -> mapper.using(traineeIdToClient).map(PersonalTrainingRequestSaveDto::getTrainee_id, PersonalTraining::setTrainee));
 
         return modelMapper;
     }
@@ -55,6 +61,13 @@ public class ModelMapperConfig {
         @Override
         protected Client convert(Long id) {
             return clientRepository.findById(id).orElse(null);
+        }
+    };
+
+    private final AbstractConverter<Long, Trainee> traineeIdToClient = new AbstractConverter<>() {
+        @Override
+        protected Trainee convert(Long id) {
+            return traineeRepository.findById(id).orElse(null);
         }
     };
 }

@@ -15,10 +15,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 import ru.castroy10.backend.controller.ClientController;
-import ru.castroy10.backend.dto.client.ClientDto;
-import ru.castroy10.backend.dto.client.ClientDtoUpdate;
-import ru.castroy10.backend.dto.client.ClientFullDto;
-import ru.castroy10.backend.dto.client.ClientSaveDto;
+import ru.castroy10.backend.dto.client.ClientRequestSaveDto;
+import ru.castroy10.backend.dto.client.ClientRequestUpdateDto;
+import ru.castroy10.backend.dto.client.ClientResponseFullDto;
+import ru.castroy10.backend.dto.client.ClientResponseSaveDto;
 import ru.castroy10.backend.model.Client;
 import ru.castroy10.backend.repository.ClientRepository;
 
@@ -111,7 +111,7 @@ class ClientServiceTest {
         ResponseEntity<?> response = clientService.findById(1L);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
-        Assertions.assertEquals(modelMapper.map(client, ClientFullDto.class), response.getBody());
+        Assertions.assertEquals(modelMapper.map(client, ClientResponseFullDto.class), response.getBody());
     }
 
     @Test
@@ -144,17 +144,17 @@ class ClientServiceTest {
 
     @Test
     public void testUpdateSuccess() {
-        ClientDtoUpdate clientDtoUpdate = new ClientDtoUpdate();
-        clientDtoUpdate.setId(2L);
-        ClientSaveDto expectedClientSaveDto = new ClientSaveDto();
-        expectedClientSaveDto.setId(2L);
+        ClientRequestUpdateDto clientRequestUpdateDto = new ClientRequestUpdateDto();
+        clientRequestUpdateDto.setId(2L);
+        ClientResponseSaveDto expectedClientResponseSaveDto = new ClientResponseSaveDto();
+        expectedClientResponseSaveDto.setId(2L);
 
         Mockito.when(clientRepository.findById(2L)).thenReturn(Optional.of(client));
         Mockito.when(clientRepository.save(client)).thenReturn(client);
-        ResponseEntity<?> response = clientController.update(clientDtoUpdate);
+        ResponseEntity<?> response = clientController.update(clientRequestUpdateDto);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
-        Assertions.assertEquals(expectedClientSaveDto, response.getBody());
+        Assertions.assertEquals(expectedClientResponseSaveDto, response.getBody());
     }
 
     @Test
@@ -188,16 +188,16 @@ class ClientServiceTest {
 
     @Test
     public void testSaveSuccess() {
-        ClientDto clientDto = new ClientDto();
-        clientDto.setFirstName("test");
-        ClientSaveDto expectedClientSaveDto = new ClientSaveDto();
-        expectedClientSaveDto.setFirstName("test");
+        ClientRequestSaveDto clientRequestSaveDto = new ClientRequestSaveDto();
+        clientRequestSaveDto.setFirstName("test");
+        ClientResponseSaveDto expectedClientResponseSaveDto = new ClientResponseSaveDto();
+        expectedClientResponseSaveDto.setFirstName("test");
 
         Mockito.when(clientRepository.save(Mockito.any(Client.class))).thenReturn(client);
-        ResponseEntity<?> response = clientController.save(clientDto);
+        ResponseEntity<?> response = clientController.save(clientRequestSaveDto);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
-        Assertions.assertEquals(expectedClientSaveDto, response.getBody());
+        Assertions.assertEquals(expectedClientResponseSaveDto, response.getBody());
     }
 
     @Test

@@ -1,6 +1,6 @@
 import { rtkApi } from '@/shared/api/rtkApi'
 
-import { ReqAuthData, ResAuthData } from '../model/types/auth'
+import type { ReqAuthData, ResAuthData } from '../model/types/auth'
 
 const authApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({

@@ -1,6 +1,7 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import type { PayloadAction } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
-import { IClient } from '@/entities/Client'
+import type { IClient } from '@/entities/Client'
 
 import { initialState } from './initialState'
 

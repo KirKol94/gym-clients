@@ -1,6 +1,6 @@
 import { rtkApi } from '@/shared/api/rtkApi'
 
-import { IClient } from '../..'
+import type { IClient } from '../..'
 
 const clientApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({

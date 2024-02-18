@@ -1,11 +1,11 @@
-import { ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import cx from 'classix'
 
 import { TitleSize } from '../model/types/title'
 
 import classes from './Title.module.scss'
 
-interface TitleProps {
+export interface TitleProps {
   size: TitleSize
   children: ReactNode
   level: 1 | 2 | 3 | 4 | 5 | 6

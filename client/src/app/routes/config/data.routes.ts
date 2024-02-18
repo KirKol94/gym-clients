@@ -3,14 +3,13 @@ import { lazy } from 'react'
 import { AuthType } from '@/features/AuthForm'
 import { ROUTER_PATH } from '@/shared/const/path/PATH'
 
-import { IRoutesData } from '../types/routes.interface'
+import type { IRoutesData } from '../types/routes.interface'
 
 const AuthPage = lazy(() => import('@/pages/AuthPage'))
 const ProfilePage = lazy(() => import('@/pages/ProfilePage'))
 const UsersPage = lazy(() => import('@/pages/UsersPage'))
 const GroupPage = lazy(() => import('@/pages/GroupPage'))
 const AgentPage = lazy(() => import('@/pages/AgentPage'))
-const HomePage = lazy(() => import('@/pages/HomePage'))
 const ContractPage = lazy(() => import('@/pages/ContractPage'))
 const DealsPage = lazy(() => import('@/pages/DealsPage'))
 const SettingsPage = lazy(() => import('@/pages/SettingsPage'))
@@ -21,10 +20,6 @@ const ClientsPage = lazy(() => import('@/pages/ClientsPage'))
 export const routesData: IRoutesData[] = [
   {
     index: true,
-    component: HomePage,
-    isAuth: true,
-  },
-  {
     path: ROUTER_PATH.PROFILE,
     component: ProfilePage,
     isAuth: true,

@@ -8,7 +8,19 @@ import cls from './ClientPage.module.scss'
 
 export const ClientPage = () => {
   const { id } = useParams()
-  const { data, isLoading } = useGetClientData(id)
+  const { data: client, isLoading } = useGetClientData(id)
+
+  const data = client || {
+    id: 1,
+    firstName: 'Иван',
+    lastName: 'Иванов',
+    middleName: 'Иванович',
+    sex: 1,
+    email: 'ivan@ivan.ru',
+    mobilePhone: '+7(999)999-99-99',
+    birthday: '2000-02-01',
+    personalTrainingCount: 10,
+  }
 
   if (isLoading) return <Loader size={LoaderSize.BIG} />
 

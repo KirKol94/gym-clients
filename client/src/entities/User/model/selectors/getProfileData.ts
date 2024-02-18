@@ -1,3 +1,3 @@
-import { RootState } from '@/app/store'
+import type { RootState } from '@/app/store'
 
 export const getProfileData = (state: RootState) => state.user.profileData

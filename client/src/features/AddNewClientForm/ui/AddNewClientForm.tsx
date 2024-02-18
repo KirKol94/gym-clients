@@ -1,9 +1,11 @@
-import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
+import { FormProvider, type SubmitHandler, useForm } from 'react-hook-form'
 import { joiResolver } from '@hookform/resolvers/joi'
 import cx from 'classix'
 
-import { IClient } from '@/entities/Client'
+import type { IClient } from '@/entities/Client'
+import { clientsActions } from '@/features/ClientList'
 import { useGetAllClients } from '@/features/ClientList/model/api/clientsApi'
+import { useAppDispatch } from '@/shared/hooks'
 import { BaseMaskInput } from '@/shared/ui/BaseMaskInput'
 import { Button, ButtonSize } from '@/shared/ui/Button'
 import { Input } from '@/shared/ui/Input'
@@ -17,9 +19,17 @@ import cls from './AddNewClientForm.module.scss'
 type ClientDataType = Omit<IClient, 'id'>
 
 export const AddNewClientForm = () => {
+  const dispatch = useAppDispatch()
   const methods = useForm<ClientDataType>({
     mode: 'onChange',
     resolver: joiResolver(schema),
+    defaultValues: {
+      middleName: null,
+      email: null,
+      mobilePhone: null,
+      birthday: null,
+      personalTrainingCount: null,
+    },
   })
   const { refetch } = useGetAllClients()
 
@@ -29,10 +39,16 @@ export const AddNewClientForm = () => {
     reset,
     formState: { errors, isValid, isDirty },
   } = methods
-  const [addClient] = useAddNewClient()
+  const [addClient, { data: addedClientData }] = useAddNewClient()
 
-  const onSubmit: SubmitHandler<ClientDataType> = (data) => {
-    addClient(data)
+  const onSubmit: SubmitHandler<ClientDataType> = async (data) => {
+    await addClient(data)
+
+    if (addedClientData) {
+      const addedClient = { ...data, id: addedClientData.id }
+      dispatch(clientsActions.addNewClient(addedClient))
+    }
+
     reset()
     refetch()
   }
@@ -69,17 +85,13 @@ export const AddNewClientForm = () => {
           <RadioButton text="Женский" {...register('sex')} value="0" />
         </fieldset>
 
-        <Input
-          {...register('birthday', {
-            pattern: {
-              value: /\d{2}\.\d{2}\.\d{4}/,
-              message: 'Дата должна быть в формате ДД.ММ.ГГГГ',
-            },
-          })}
-          error={errors?.birthday?.message}
+        <BaseMaskInput
+          label="Дата рождения"
+          name="birthday"
+          type="text"
+          format="##.##.####"
           placeholder="дд.мм.гггг"
           className={cls.input}
-          inputName="Дата рождения"
         />
 
         <Input

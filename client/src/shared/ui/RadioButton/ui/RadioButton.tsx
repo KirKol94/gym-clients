@@ -1,11 +1,12 @@
-import { forwardRef, InputHTMLAttributes, LegacyRef } from 'react'
+import type { InputHTMLAttributes, LegacyRef } from 'react'
+import { forwardRef } from 'react'
 import cx from 'classix'
 
-import { Align, RadioButtonSize } from '../models/types/radioButton'
+import { type Align, RadioButtonSize } from '../models/types/radioButton'
 
 import classes from './RadioButton.module.scss'
 
-interface RadioButtonProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface RadioButtonProps extends InputHTMLAttributes<HTMLInputElement> {
   text: string
   align?: Align
   buttonSize?: RadioButtonSize
