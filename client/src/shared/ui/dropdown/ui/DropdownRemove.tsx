@@ -6,7 +6,7 @@ interface DropdownRemoveProps {
   handleOnClickRemove: (e: MouseEvent<HTMLButtonElement>) => void
 }
 
-const DropdownRemove = (props: DropdownRemoveProps) => {
+export const DropdownRemove = (props: DropdownRemoveProps) => {
   const { handleOnClickRemove } = props
   return (
     <button onClick={handleOnClickRemove} className={classes['clear-btn']}>
@@ -14,5 +14,3 @@ const DropdownRemove = (props: DropdownRemoveProps) => {
     </button>
   )
 }
-
-export default DropdownRemove

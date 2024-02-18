@@ -1,4 +1,5 @@
-import { memo, MouseEvent, useEffect } from 'react'
+import { Dispatch, memo, MouseEvent, useEffect } from 'react'
+import cs from 'classix'
 
 import { SelectOption } from '../model/types/dropdown'
 
@@ -8,8 +9,8 @@ interface DropdownMenuItemProps {
   option: SelectOption
   index: number
   isOpen: boolean
-  onChange: (option: SelectOption) => void
-  value: SelectOption | undefined
+  onChange: Dispatch<SelectOption>
+  value: SelectOption
   close: () => void
   changeHighlightedIndex: (index: number) => void
   highlightedIndex: number
@@ -17,10 +18,10 @@ interface DropdownMenuItemProps {
 
 export const DropdownMenuItem = memo((props: DropdownMenuItemProps) => {
   const { isOpen, onChange, option, index, close, value, changeHighlightedIndex, highlightedIndex } = props
-  const { label } = option
+  const label = option?.label
 
   const isOptionSelected = (option: SelectOption) => {
-    return option.label === value?.label
+    return option?.label === value?.label
   }
 
   const onHandleClickItem = (e: MouseEvent<HTMLLIElement>, option: SelectOption) => {
@@ -35,12 +36,6 @@ export const DropdownMenuItem = memo((props: DropdownMenuItemProps) => {
     }
   }, [changeHighlightedIndex, isOpen])
 
-  const itemClassnames = (option: SelectOption, index: number) => {
-    return `${classes.option} ${
-      isOptionSelected(option) && classes.selected
-    }  ${index === highlightedIndex && classes.highlighted}`
-  }
-
   const onMouseEnterItem = (index: number) => {
     changeHighlightedIndex(index)
   }
@@ -49,7 +44,11 @@ export const DropdownMenuItem = memo((props: DropdownMenuItemProps) => {
     <li
       onClick={(e) => onHandleClickItem(e, option)}
       key={label}
-      className={itemClassnames(option, index)}
+      className={cs(
+        classes.option,
+        isOptionSelected(option) && classes.selected,
+        index === highlightedIndex && classes.highlighted,
+      )}
       onMouseEnter={() => onMouseEnterItem(index)}
     >
       {label}

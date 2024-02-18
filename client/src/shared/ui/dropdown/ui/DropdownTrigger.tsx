@@ -1,4 +1,4 @@
-import DropdownSeparator from './DropdownSeparator'
+import { DropdownSeparator } from './DropdownSeparator'
 
 import classes from './Dropdown.module.scss'
 
@@ -7,7 +7,7 @@ interface DropdownTriggerProps {
   value?: string
 }
 
-const DropdownTrigger = (props: DropdownTriggerProps) => {
+export const DropdownTrigger = (props: DropdownTriggerProps) => {
   const { value, label } = props
   return (
     <span className={classes.value}>
@@ -16,5 +16,3 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
     </span>
   )
 }
-
-export default DropdownTrigger
