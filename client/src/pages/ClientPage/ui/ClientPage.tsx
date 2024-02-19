@@ -1,8 +1,7 @@
 import { useParams } from 'react-router-dom'
 
 import { useGetClientData } from '@/entities/Client'
-import { Loader } from '@/shared/ui/Loader'
-import { loaderSize } from '@/shared/ui/Loader'
+import { Loader, loaderSize } from '@/shared/ui/Loader'
 import { Title, titleSize } from '@/shared/ui/Title'
 
 import cls from './ClientPage.module.scss'
