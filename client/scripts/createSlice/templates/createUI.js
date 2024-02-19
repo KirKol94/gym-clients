@@ -4,6 +4,7 @@ import firstCharUpperCase from '../firstCharUpperCase.js'
 import resolveRoot from '../resolveRoot.js'
 
 import componentTemplate from './componentTemplate.js'
+import storiesTemplate from './storiesTemplate.js'
 import styleTemplate from './styleTemplate.js'
 
 export default async (layer, sliceName) => {
@@ -23,6 +24,7 @@ export default async (layer, sliceName) => {
 
       await writeFile(resolveUIPath(`${componentName}.tsx`), componentTemplate(componentName))
       await writeFile(resolveUIPath(`${componentName}.module.scss`), styleTemplate(componentName))
+      await writeFile(resolveUIPath(`${componentName}.stories.tsx`), storiesTemplate(componentName, layer))
     } catch (e) {
       console.log('Не удалось создать компонент')
     }
