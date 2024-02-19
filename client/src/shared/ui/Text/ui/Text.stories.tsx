@@ -1,4 +1,4 @@
-import type { Story } from '@storybook/react'
+import type { StoryFn } from '@storybook/react'
 
 import { textSize } from '@/shared/ui/Text/model/types/textSize.ts'
 
@@ -18,7 +18,7 @@ export default {
   },
 }
 
-const Template: Story<TextProps> = (args) => <Text {...args} />
+const Template: StoryFn<TextProps> = (args) => <Text {...args} />
 
 export const S = Template.bind({})
 S.args = {
