@@ -1,6 +1,5 @@
 import { AppLink, appLinkSize } from '@/shared/ui/AppLink'
-import { Text } from '@/shared/ui/Text'
-import { textSize } from '@/shared/ui/Text/model/types/textSize.ts'
+import { Text, textSize } from '@/shared/ui/Text'
 
 import classes from './Footer.module.scss'
 
