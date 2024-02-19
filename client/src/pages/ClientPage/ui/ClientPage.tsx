@@ -1,8 +1,8 @@
 import { useParams } from 'react-router-dom'
 
 import { useGetClientData } from '@/entities/Client'
-import { Loader, LoaderSize } from '@/shared/ui/Loader'
-import { Title, TitleSize } from '@/shared/ui/Title'
+import { Loader, loaderSize } from '@/shared/ui/Loader'
+import { Title, titleSize } from '@/shared/ui/Title'
 
 import cls from './ClientPage.module.scss'
 
@@ -22,11 +22,11 @@ export const ClientPage = () => {
     personalTrainingCount: 10,
   }
 
-  if (isLoading) return <Loader size={LoaderSize.BIG} />
+  if (isLoading) return <Loader size={loaderSize.big} />
 
   return (
     <div className={cls.clientPage}>
-      <Title level={1} size={TitleSize.XXL}>{`${data?.firstName} ${data?.middleName}`}</Title>
+      <Title level={1} size={titleSize.xxl}>{`${data?.firstName} ${data?.middleName}`}</Title>
 
       <pre>{JSON.stringify(data, null, '   ')}</pre>
     </div>

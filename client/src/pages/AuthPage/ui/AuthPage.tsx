@@ -1,7 +1,7 @@
 import { Navigate } from 'react-router-dom'
 
 import { getIsAuth } from '@/entities/User/model/selectors/getIsAuth'
-import { AuthForm, AuthType } from '@/features/AuthForm'
+import { AuthForm, authType } from '@/features/AuthForm'
 import { CURRENT_PATHNAME_KEY } from '@/shared/const/localStorage/currentLocationKey'
 import { ROUTER_PATH } from '@/shared/const/path/PATH'
 import { useAppSelector } from '@/shared/hooks'
@@ -9,10 +9,10 @@ import { useAppSelector } from '@/shared/hooks'
 import classes from './AuthPage.module.scss'
 
 interface AuthPage {
-  type?: AuthType
+  type?: keyof typeof authType
 }
 
-export const AuthPage = ({ type = AuthType.LOGIN }: AuthPage) => {
+export const AuthPage = ({ type = authType.login }: AuthPage) => {
   const isAuth = useAppSelector(getIsAuth)
   const currentLocationPath = localStorage.getItem(CURRENT_PATHNAME_KEY)
 

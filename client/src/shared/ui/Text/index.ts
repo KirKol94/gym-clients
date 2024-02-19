@@ -1,2 +1,2 @@
 export { Text } from './ui/Text'
-export { TextSize } from './model/types/text'
+export { textSize } from './model/types/textSize.ts'

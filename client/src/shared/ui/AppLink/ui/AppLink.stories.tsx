@@ -1,6 +1,6 @@
-import type { Meta, Story } from '@storybook/react'
+import type { Meta, StoryFn } from '@storybook/react'
 
-import { AppLinkSize } from '../model/types/appLink'
+import { appLinkSize } from '../model/types/appLink'
 
 import type { AppLinkProps } from './AppLink'
 import { AppLink } from './AppLink'
@@ -10,13 +10,13 @@ export default {
   component: AppLink,
   args: {
     to: '/',
-    size: [AppLinkSize.S, AppLinkSize.M],
+    size: appLinkSize,
     children: 'AppLink',
   },
 } as Meta
 
-const Template: Story<AppLinkProps> = (args) => <AppLink {...args} />
+const Template: StoryFn<AppLinkProps> = (args) => <AppLink {...args} />
 
 export const Default = Template.bind({
-  size: AppLinkSize.S,
+  size: appLinkSize.small,
 })

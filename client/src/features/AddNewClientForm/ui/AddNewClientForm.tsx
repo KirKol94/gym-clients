@@ -7,7 +7,7 @@ import { clientsActions } from '@/features/ClientList'
 import { useGetAllClients } from '@/features/ClientList/model/api/clientsApi'
 import { useAppDispatch } from '@/shared/hooks'
 import { BaseMaskInput } from '@/shared/ui/BaseMaskInput'
-import { Button, ButtonSize } from '@/shared/ui/Button'
+import { Button, buttonSize } from '@/shared/ui/Button'
 import { Input } from '@/shared/ui/Input'
 import { RadioButton } from '@/shared/ui/RadioButton'
 
@@ -120,7 +120,7 @@ export const AddNewClientForm = () => {
           className={cls.input}
           inputName="Количество персональных тренировок"
         />
-        <Button type="submit" size={ButtonSize.M} disabled={!isDirty || !isValid}>
+        <Button type="submit" size={buttonSize.m} disabled={!isDirty || !isValid}>
           Добавить
         </Button>
       </form>

@@ -3,7 +3,7 @@ import cx from 'classix'
 
 import { Client } from '@/entities/Client'
 import { useAppDispatch, useAppSelector } from '@/shared/hooks'
-import { Title, TitleSize } from '@/shared/ui/Title'
+import { Title, titleSize } from '@/shared/ui/Title'
 
 import { useGetAllClients } from '../model/api/clientsApi'
 import { clientsActions, getClients } from '..'
@@ -24,7 +24,7 @@ export const ClientList = () => {
 
   return (
     <div className={clientListClass}>
-      <Title level={1} size={TitleSize.XL} className={clx.title}>
+      <Title level={1} size={titleSize.xl} className={clx.title}>
         {clients?.length === 0 ? 'Пока что здесь ничего нет' : 'Список пользователей'}
       </Title>
 

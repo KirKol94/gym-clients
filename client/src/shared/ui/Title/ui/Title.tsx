@@ -1,12 +1,12 @@
 import type { ReactNode } from 'react'
 import cx from 'classix'
 
-import { TitleSize } from '../model/types/title'
+import { titleSize } from '../model/types/title'
 
 import classes from './Title.module.scss'
 
 export interface TitleProps {
-  size: TitleSize
+  size: keyof typeof titleSize
   children: ReactNode
   level: 1 | 2 | 3 | 4 | 5 | 6
   className?: string
@@ -17,8 +17,8 @@ export const Title = ({ size, className, level, children }: TitleProps) => {
 
   const cls = cx(
     classes.title,
-    size === TitleSize.XL && classes.title__xl,
-    size === TitleSize.XXL && classes.title__xxl,
+    size === titleSize.xl && classes.title__xl,
+    size === titleSize.xxl && classes.title__xxl,
     className,
   )
 

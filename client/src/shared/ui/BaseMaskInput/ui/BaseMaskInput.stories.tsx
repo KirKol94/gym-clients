@@ -1,5 +1,5 @@
 import { FormProvider, useForm } from 'react-hook-form'
-import type { Meta, Story } from '@storybook/react'
+import type { Meta, StoryFn } from '@storybook/react'
 
 import type { BaseMaskInputProps } from './BaseMaskInput'
 import { BaseMaskInput } from './BaseMaskInput'
@@ -15,7 +15,7 @@ export default {
   },
 } as Meta
 
-const Template: Story<BaseMaskInputProps> = (args) => {
+const Template: StoryFn<BaseMaskInputProps> = (args) => {
   const methods = useForm<{ phone: string }>({
     mode: 'onChange',
   })

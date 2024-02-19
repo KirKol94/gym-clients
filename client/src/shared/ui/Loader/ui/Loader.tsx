@@ -1,20 +1,21 @@
 import cx from 'classix'
 
-import { LoaderColor, LoaderSize } from '../model/types/loader'
+import { loaderColor } from '@/shared/ui/Loader/model/types/loader.ts'
+import { loaderSize } from '@/shared/ui/Loader/model/types/loader.ts'
 
 import classes from './Loader.module.scss'
 
 export type LoaderProps = {
-  size?: LoaderSize
-  color?: LoaderColor
+  size?: (typeof loaderSize)[keyof typeof loaderSize]
+  color?: (typeof loaderColor)[keyof typeof loaderColor]
 }
 
 export const Loader = ({ size, color }: LoaderProps) => {
   const className = cx(
     classes.wrapper,
-    size === LoaderSize.SMALL && classes['small-loader'],
-    size === LoaderSize.BIG && classes['big-loader'],
-    color === LoaderColor.WHITE && classes['white-loader'],
+    size === loaderSize.small && classes['small-loader'],
+    size === loaderSize.big && classes['big-loader'],
+    color === loaderColor.white && classes['white-loader'],
   )
 
   return (

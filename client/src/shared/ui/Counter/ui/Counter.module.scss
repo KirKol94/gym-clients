@@ -10,11 +10,11 @@
   justify-content: center;
   border-radius: 50%;
 
-  &__s {
+  &__small {
     @include size(20, 20, 12);
   }
 
-  &__m {
+  &__medium {
     @include size(40, 40, 20);
   }
 

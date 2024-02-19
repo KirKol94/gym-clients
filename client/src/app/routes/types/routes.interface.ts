@@ -1,12 +1,14 @@
-import type { AuthType } from '@/features/AuthForm'
-import type { ROUTER_PATH } from '@/shared/const/path/PATH'
+import type { FC, LazyExoticComponent } from 'react'
 
-type LazyComponentType = React.LazyExoticComponent<React.FC<{ type?: AuthType }>>
+import type { authType } from '@/features/AuthForm'
+import type { ROUTER_PATH } from '@/shared/const/path/PATH.ts'
+
+type LazyComponentType = LazyExoticComponent<FC<{ type?: keyof typeof authType }>>
 
 export interface IRoutesData {
   component: LazyComponentType
-  path?: ROUTER_PATH
+  path?: (typeof ROUTER_PATH)[keyof typeof ROUTER_PATH]
   index?: boolean
-  type?: AuthType
+  type?: keyof typeof authType
   isAuth?: boolean
 }

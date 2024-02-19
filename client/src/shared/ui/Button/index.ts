@@ -1,2 +1,2 @@
 export { Button } from './ui/Button'
-export { ButtonSize, ButtonTheme } from './mode/types/button'
+export { buttonSize, buttonTheme } from './mode/types/button'

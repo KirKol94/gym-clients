@@ -1,6 +1,6 @@
-import type { Story } from '@storybook/react'
+import type { Meta, StoryFn } from '@storybook/react'
 
-import { TitleSize } from '../model/types/title'
+import { titleSize } from '../model/types/title'
 
 import type { TitleProps } from './Title'
 import { Title } from './Title'
@@ -8,33 +8,22 @@ import { Title } from './Title'
 export default {
   title: 'shared/ui/Title',
   component: Title,
-  argTypes: {
+  args: {
     size: {
-      control: {
-        type: 'select',
-        options: [TitleSize.XL, TitleSize.XXL],
-      },
+      type: 'radio',
+      options: titleSize,
     },
     level: {
-      control: {
-        type: 'select',
-        options: [1, 2, 3, 4, 5, 6],
-      },
+      type: 'radio',
+      options: [1, 2, 3, 4, 5, 6],
     },
+    children: 'some title text',
   },
-}
+} as Meta
 
-const Template: Story<TitleProps> = (args) => <Title {...args} />
+const Template: StoryFn<TitleProps> = (args) => <Title {...args} />
 
-export const XL = Template.bind({})
-XL.args = {
-  size: TitleSize.XL,
+export const Default = Template.bind({
+  size: titleSize.xl,
   level: 1,
-  children: 'XL Title 1 level',
-}
-export const XXL = Template.bind({})
-XXL.args = {
-  size: TitleSize.XXL,
-  level: 1,
-  children: 'XXL Title 1 level',
-}
+})

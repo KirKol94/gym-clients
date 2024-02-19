@@ -1,9 +1,9 @@
-import { Title, TitleSize } from '@/shared/ui/Title'
+import { Title, titleSize } from '@/shared/ui/Title'
 
 export const DealsPage = () => {
   return (
     <div>
-      <Title level={1} size={TitleSize.XXL}>
+      <Title level={1} size={titleSize.xxl}>
         Deals
       </Title>
     </div>
