@@ -15,8 +15,8 @@ export interface AppLinkProps {
 export const AppLink = ({ to, size, children }: AppLinkProps) => {
   const className = cx(
     classes.applink,
-    size === appLinkSize.small && classes.applink__s,
-    size === appLinkSize.medium && classes.applink__m,
+    size === appLinkSize.small && classes.applink__small,
+    size === appLinkSize.medium && classes.applink__medium,
   )
 
   return (

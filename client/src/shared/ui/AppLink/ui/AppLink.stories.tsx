@@ -10,7 +10,7 @@ export default {
   component: AppLink,
   args: {
     to: '/',
-    size: [appLinkSize.small, appLinkSize.medium],
+    size: appLinkSize,
     children: 'AppLink',
   },
 } as Meta
