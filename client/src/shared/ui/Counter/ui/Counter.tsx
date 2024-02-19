@@ -13,8 +13,8 @@ export interface CounterProps {
 export const Counter = ({ count, size, color }: CounterProps) => {
   const cls = cx(
     classes.counter,
-    size === counterSize.small && classes.counter__s,
-    size === counterSize.medium && classes.counter__m,
+    size === counterSize.small && classes.counter__small,
+    size === counterSize.medium && classes.counter__medium,
     color === counterColor.white && classes.counter__white,
     color === counterColor.yellow && classes.counter__yellow,
   )
