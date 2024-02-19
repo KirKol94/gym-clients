@@ -11,7 +11,7 @@ export default {
   args: {
     size: {
       type: 'radio',
-      options: [iconWithTitleSize.small, iconWithTitleSize.medium],
+      options: iconWithTitleSize,
     },
   },
 }
