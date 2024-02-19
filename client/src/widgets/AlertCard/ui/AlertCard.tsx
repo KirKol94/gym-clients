@@ -1,7 +1,6 @@
 import { Button, buttonSize, buttonTheme } from '@/shared/ui/Button'
 import { Counter, counterColor, counterSize } from '@/shared/ui/Counter'
-import { Text } from '@/shared/ui/Text'
-import { textSize } from '@/shared/ui/Text/model/types/textSize.ts'
+import { Text, textSize } from '@/shared/ui/Text'
 import { Title, titleSize } from '@/shared/ui/Title'
 
 import classes from './AlertCard.module.scss'
