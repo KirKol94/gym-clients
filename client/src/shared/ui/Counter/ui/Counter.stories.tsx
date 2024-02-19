@@ -11,7 +11,7 @@ export default {
   args: {
     size: {
       type: 'radio',
-      options: [counterSize.small, counterSize.medium],
+      options: counterSize,
     },
   },
 }
