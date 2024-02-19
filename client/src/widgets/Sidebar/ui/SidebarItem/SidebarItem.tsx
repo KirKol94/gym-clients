@@ -2,8 +2,7 @@ import { memo } from 'react'
 import { Link } from 'react-router-dom'
 import cx from 'classix'
 
-import { Text } from '@/shared/ui/Text'
-import { textSize } from '@/shared/ui/Text/model/types/textSize.ts'
+import { Text, textSize } from '@/shared/ui/Text'
 
 import classes from './SidebarItem.module.scss'
 
