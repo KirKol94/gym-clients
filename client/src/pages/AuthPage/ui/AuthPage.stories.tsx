@@ -10,7 +10,7 @@ export default {
   args: {
     type: {
       type: 'radio',
-      options: [authType.login, authType.register],
+      options: authType,
     },
   },
 } as Meta
