@@ -11,11 +11,11 @@ export default {
   args: {
     size: {
       type: 'radio',
-      options: [buttonSize.xs, buttonSize.s, buttonSize.m],
+      options: buttonSize,
     },
     theme: {
       type: 'radio',
-      options: [buttonTheme.primary, buttonTheme.secondary, buttonTheme.secondaryBlue, buttonTheme.secondaryWhite],
+      options: buttonTheme,
     },
     children: 'Button',
   },
