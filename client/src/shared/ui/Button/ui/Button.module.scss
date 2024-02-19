@@ -57,17 +57,17 @@
   }
 }
 
-.secondary__white {
+.secondaryWhite {
   @include color(var(--color-white));
 }
 
-.secondary__blue {
+.secondaryBlue {
   @include color(var(--color-primary-90));
 }
 
 .secondary,
-.secondary__white,
-.secondary__blue {
+.secondaryWhite,
+.secondaryBlue {
   display: flex;
   align-items: center;
   border: 1px solid var(--color-neutral-100);
