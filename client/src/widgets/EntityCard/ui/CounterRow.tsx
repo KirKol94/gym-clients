@@ -1,8 +1,6 @@
 import type { counterColor } from '@/shared/ui/Counter'
-import { counterSize } from '@/shared/ui/Counter'
-import { Counter } from '@/shared/ui/Counter'
-import { Text } from '@/shared/ui/Text'
-import { textSize } from '@/shared/ui/Text/model/types/textSize.ts'
+import { Counter, counterSize } from '@/shared/ui/Counter'
+import { Text, textSize } from '@/shared/ui/Text'
 
 import classes from './EntityCard.module.scss'
 
