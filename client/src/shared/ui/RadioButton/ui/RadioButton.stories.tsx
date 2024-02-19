@@ -1,4 +1,4 @@
-import type { StoryFn } from '@storybook/react'
+import type { Meta, StoryFn } from '@storybook/react'
 
 import { align, radioButtonSize } from '../models/types/radioButton'
 
@@ -8,29 +8,21 @@ import { RadioButton } from './RadioButton'
 export default {
   title: 'shared/ui/RadioButton',
   component: RadioButton,
-  argTypes: {
+  args: {
     buttonSize: {
-      control: {
-        type: 'radio',
-        options: [radioButtonSize.small, radioButtonSize.medium],
-      },
+      type: 'radio',
+      options: radioButtonSize,
     },
     align: {
-      type: 'select',
-      options: [align.left],
+      type: 'radio',
+      options: align,
     },
   },
-}
+} as Meta
 
 const Template: StoryFn<RadioButtonProps> = (args) => <RadioButton {...args} />
 
-export const S = Template.bind({})
-S.args = {
+export const Default = Template.bind({
   buttonSize: radioButtonSize.small,
   text: 'radio button text',
-}
-export const M = Template.bind({})
-M.args = {
-  buttonSize: radioButtonSize.medium,
-  text: 'radio button text',
-}
+})
