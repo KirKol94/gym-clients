@@ -1,4 +1,4 @@
-import type { StoryFn } from '@storybook/react'
+import type { Meta, StoryFn } from '@storybook/react'
 
 import Arrow from '../../../assets/icons/arrow.svg'
 import Back from '../../../assets/icons/back.svg'
@@ -10,15 +10,13 @@ import { RoundButton } from './RoundButton'
 export default {
   title: 'shared/ui/RoundButton',
   component: RoundButton,
-  argTypes: {
+  args: {
     size: {
-      control: {
-        type: 'radio',
-        options: [roundButtonSize.small, roundButtonSize.medium],
-      },
+      type: 'radio',
+      options: roundButtonSize,
     },
   },
-}
+} as Meta
 
 const Template: StoryFn<RoundButtonProps> = (args) => <RoundButton {...args} />
 
@@ -28,6 +26,7 @@ PRIMARY.args = {
   theme: roundButtonTheme.primary,
   children: <img src={Arrow} alt="arrow" />,
 }
+
 export const SECONDARY = Template.bind({})
 SECONDARY.args = {
   size: roundButtonSize.small,
