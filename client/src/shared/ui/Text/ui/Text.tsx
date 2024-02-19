@@ -12,12 +12,7 @@ export interface TextProps {
 }
 
 export const Text = ({ size, children, className }: TextProps) => {
-  const cls = cx(
-    classes.text,
-    size === textSize.small && classes.text__s,
-    size === textSize.medium && classes.text__m,
-    className,
-  )
+  const cls = cx(classes.text, size === textSize[size] && classes[`text__${size}`], className)
 
   return <p className={cls}>{children}</p>
 }

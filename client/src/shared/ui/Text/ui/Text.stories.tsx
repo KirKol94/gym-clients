@@ -8,25 +8,17 @@ import { Text } from './Text'
 export default {
   title: 'shared/ui/Text',
   component: Text,
-  argTypes: {
+  args: {
     size: {
-      control: {
-        type: 'select',
-        options: [textSize.small, textSize.medium],
-      },
+      type: 'radio',
+      options: textSize,
     },
+    children: 'Some Text with S size',
   },
 }
 
 const Template: StoryFn<TextProps> = (args) => <Text {...args} />
 
-export const S = Template.bind({})
-S.args = {
+export const Default = Template.bind({
   size: textSize.small,
-  children: 'Some Text with S size',
-}
-export const M = Template.bind({})
-M.args = {
-  size: textSize.medium,
-  children: 'Some Text with M size',
-}
+})
