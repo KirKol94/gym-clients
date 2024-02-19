@@ -9,25 +9,26 @@ import { userActions } from '@/entities/User'
 import { ACCESS_TOKEN_LOCAL_STORAGE_KEY } from '@/shared/const/localStorage/accessTokenKey'
 import { ROUTER_PATH } from '@/shared/const/path/PATH'
 import { useAppDispatch } from '@/shared/hooks'
-import { AppLink, AppLinkSize } from '@/shared/ui/AppLink'
-import { Button, ButtonSize, ButtonTheme } from '@/shared/ui/Button'
+import { AppLink, appLinkSize } from '@/shared/ui/AppLink'
+import { Button, buttonSize, buttonTheme } from '@/shared/ui/Button'
 import { Input } from '@/shared/ui/Input'
-import { Text, TextSize } from '@/shared/ui/Text'
-import { Title, TitleSize } from '@/shared/ui/Title'
+import { Text } from '@/shared/ui/Text'
+import { textSize } from '@/shared/ui/Text/model/types/textSize.ts'
+import { Title, titleSize } from '@/shared/ui/Title'
 
 import { useSendAuthData } from '../api/login.api'
 import { useSendRegisterData } from '../api/register.api'
-import { AuthType } from '../model/types/auth'
+import { authType } from '../model/types/auth'
 
 import classes from './AuthForm.module.scss'
 
 export interface AuthFormProps {
-  type?: AuthType
+  type?: keyof typeof authType
 }
 
 type FormData = Omit<User, 'id'> & { password: string }
 
-export const AuthForm = ({ type = AuthType.LOGIN }: AuthFormProps) => {
+export const AuthForm = ({ type = authType.login }: AuthFormProps) => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const [sendAuthData, { data: resAuthData, status: authStatus, error: authError }] = useSendAuthData()
@@ -40,8 +41,8 @@ export const AuthForm = ({ type = AuthType.LOGIN }: AuthFormProps) => {
   } = useForm<FormData>({ mode: 'onChange' })
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
-    type === AuthType.LOGIN && handleLogin(data)
-    type === AuthType.REGISTER && handleRegister(data)
+    type === authType.login && handleLogin(data)
+    type === authType.register && handleRegister(data)
     reset()
   }
 
@@ -82,9 +83,9 @@ export const AuthForm = ({ type = AuthType.LOGIN }: AuthFormProps) => {
 
   return (
     <>
-      <Title level={1} size={TitleSize.XXL} className={classes.title}>
-        {type === AuthType.LOGIN && 'Авторизация'}
-        {type === AuthType.REGISTER && 'Регистрация'}
+      <Title level={1} size={titleSize.xxl} className={classes.title}>
+        {type === authType.login && 'Авторизация'}
+        {type === authType.register && 'Регистрация'}
       </Title>
 
       <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
@@ -119,7 +120,7 @@ export const AuthForm = ({ type = AuthType.LOGIN }: AuthFormProps) => {
           placeholder="Пароль"
         />
 
-        {type === AuthType.REGISTER && (
+        {type === authType.register && (
           <>
             <Input
               {...register('email', {
@@ -199,20 +200,20 @@ export const AuthForm = ({ type = AuthType.LOGIN }: AuthFormProps) => {
         )}
 
         <div className={classes.footer}>
-          <Button size={ButtonSize.M} type="submit" theme={ButtonTheme.PRIMARY} disabled={!isValid}>
-            {type === AuthType.LOGIN && 'Войти'}
-            {type === AuthType.REGISTER && 'Регистрация'}
+          <Button size={buttonSize.m} type="submit" theme={buttonTheme.primary} disabled={!isValid}>
+            {type === authType.login && 'Войти'}
+            {type === authType.register && 'Регистрация'}
           </Button>
 
           <div>
-            <Text size={TextSize.S}>
-              {type === AuthType.LOGIN && 'Еще нет аккаунта?'}
-              {type === AuthType.REGISTER && 'Уже нет аккаунт?'}
+            <Text size={textSize.small}>
+              {type === authType.login && 'Еще нет аккаунта?'}
+              {type === authType.register && 'Уже нет аккаунт?'}
             </Text>
 
-            <AppLink to={type === AuthType.LOGIN ? ROUTER_PATH.REGISTER : ROUTER_PATH.LOGIN} size={AppLinkSize.S}>
-              {type === AuthType.REGISTER && 'Войти'}
-              {type === AuthType.LOGIN && 'Регистрация'}
+            <AppLink to={type === authType.login ? ROUTER_PATH.REGISTER : ROUTER_PATH.LOGIN} size={appLinkSize.small}>
+              {type === authType.register && 'Войти'}
+              {type === authType.login && 'Регистрация'}
             </AppLink>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import { lazy } from 'react'
 
-import { AuthType } from '@/features/AuthForm'
+import { authType } from '@/features/AuthForm'
 import { ROUTER_PATH } from '@/shared/const/path/PATH'
 
 import type { IRoutesData } from '../types/routes.interface'
@@ -72,7 +72,7 @@ export const routesData: IRoutesData[] = [
   {
     component: AuthPage,
     path: ROUTER_PATH.REGISTER,
-    type: AuthType.REGISTER,
+    type: authType.register,
     isAuth: false,
   },
   {

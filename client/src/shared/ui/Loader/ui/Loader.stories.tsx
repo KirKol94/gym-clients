@@ -1,6 +1,6 @@
-import type { Story } from '@storybook/react'
+import type { StoryFn } from '@storybook/react'
 
-import { LoaderColor, LoaderSize } from '../model/types/loader'
+import { loaderColor, loaderSize } from '../model/types/loader'
 
 import type { LoaderProps } from './Loader'
 import { Loader } from './Loader'
@@ -12,28 +12,28 @@ export default {
     size: {
       control: {
         type: 'radio',
-        options: [LoaderSize.SMALL, LoaderSize.BIG],
+        options: [loaderSize.small, loaderSize.big],
       },
     },
     color: {
       type: 'radio',
-      options: [LoaderColor.WHITE],
+      options: [loaderColor.white],
     },
   },
 }
 
-const Template: Story<LoaderProps> = (args) => <Loader {...args} />
+const Template: StoryFn<LoaderProps> = (args) => <Loader {...args} />
 
 export const Small = Template.bind({})
 Small.args = {
-  size: LoaderSize.SMALL,
+  size: loaderSize.small,
 }
 export const Big = Template.bind({})
 Big.args = {
-  size: LoaderSize.BIG,
+  size: loaderSize.big,
 }
 
-const TemplateWithBg: Story<LoaderProps> = (args) => (
+const TemplateWithBg: StoryFn<LoaderProps> = (args) => (
   <div style={{ backgroundColor: 'gray', width: '100%' }}>
     <Loader {...args} />
   </div>
@@ -41,11 +41,11 @@ const TemplateWithBg: Story<LoaderProps> = (args) => (
 
 export const SmallWhite = TemplateWithBg.bind({})
 SmallWhite.args = {
-  size: LoaderSize.SMALL,
-  color: LoaderColor.WHITE,
+  size: loaderSize.small,
+  color: loaderColor.white,
 }
 export const BigWhite = TemplateWithBg.bind({})
 BigWhite.args = {
-  size: LoaderSize.BIG,
-  color: LoaderColor.WHITE,
+  size: loaderSize.big,
+  color: loaderColor.white,
 }

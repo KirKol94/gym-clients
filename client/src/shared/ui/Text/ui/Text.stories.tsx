@@ -1,6 +1,6 @@
 import type { Story } from '@storybook/react'
 
-import { TextSize } from '../model/types/text'
+import { textSize } from '@/shared/ui/Text/model/types/textSize.ts'
 
 import type { TextProps } from './Text'
 import { Text } from './Text'
@@ -12,7 +12,7 @@ export default {
     size: {
       control: {
         type: 'select',
-        options: [TextSize.S, TextSize.M],
+        options: [textSize.small, textSize.medium],
       },
     },
   },
@@ -22,11 +22,11 @@ const Template: Story<TextProps> = (args) => <Text {...args} />
 
 export const S = Template.bind({})
 S.args = {
-  size: TextSize.S,
+  size: textSize.small,
   children: 'Some Text with S size',
 }
 export const M = Template.bind({})
 M.args = {
-  size: TextSize.M,
+  size: textSize.medium,
   children: 'Some Text with M size',
 }

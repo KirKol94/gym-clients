@@ -2,8 +2,8 @@ import AdditionalFields from '@/shared/assets/icons/additionalFields.svg?react'
 import RightsAndRoles from '@/shared/assets/icons/rightsAndRoles.svg?react'
 import Settings from '@/shared/assets/icons/settings.svg?react'
 import TransactionStatuses from '@/shared/assets/icons/transactionStatuses.svg?react'
-import { Button, ButtonSize, ButtonTheme } from '@/shared/ui/Button'
-import { IconWithTitle, IconWithTitleSize } from '@/shared/ui/IconWithTitle'
+import { Button, buttonSize, buttonTheme } from '@/shared/ui/Button'
+import { IconWithTitle, iconWithTitleSize } from '@/shared/ui/IconWithTitle'
 
 import classes from './SettingsCard.module.scss'
 
@@ -18,7 +18,7 @@ export const SettingsCard = () => {
   return (
     <div className={classes['settings-card']}>
       <div className={classes.header}>
-        <IconWithTitle size={IconWithTitleSize.M}>
+        <IconWithTitle size={iconWithTitleSize.medium}>
           <Settings />
           Настройки
         </IconWithTitle>
@@ -27,11 +27,11 @@ export const SettingsCard = () => {
         {buttonsData.map((data, index) => (
           <Button
             key={index}
-            size={ButtonSize.XS}
-            theme={ButtonTheme.SECONDARY}
+            size={buttonSize.xs}
+            theme={buttonTheme.secondary}
             onClick={() => console.log('click on ', data.text)}
           >
-            <IconWithTitle size={IconWithTitleSize.S}>
+            <IconWithTitle size={iconWithTitleSize.small}>
               {data.icon}
               {data.text}
             </IconWithTitle>

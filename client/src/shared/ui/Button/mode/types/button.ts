@@ -1,12 +1,12 @@
-export enum ButtonSize {
-  XS = 'xs',
-  S = 's',
-  M = 'm',
-}
+export const buttonSize = {
+  xs: 'xs',
+  s: 's',
+  m: 'm',
+} as const
 
-export enum ButtonTheme {
-  PRIMARY = 'primary',
-  SECONDARY = 'secondary',
-  SECONDARY_WHITE = 'secondary__white',
-  SECONDARY_BLUE = 'secondary__blue',
-}
+export const buttonTheme = {
+  primary: 'primary',
+  secondary: 'secondary',
+  secondaryWhite: 'secondaryWhite',
+  secondaryBlue: 'secondaryBlue',
+} as const

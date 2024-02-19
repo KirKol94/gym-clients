@@ -1,6 +1,6 @@
-import type { Story } from '@storybook/react'
+import type { StoryFn } from '@storybook/react'
 
-import { CounterColor, CounterSize } from '../model/types/counter'
+import { counterColor, counterSize } from '../model/types/counter'
 
 import type { CounterProps } from './Counter'
 import { Counter } from './Counter'
@@ -11,21 +11,21 @@ export default {
   args: {
     size: {
       type: 'radio',
-      options: [CounterSize.S, CounterSize.M],
+      options: [counterSize.small, counterSize.medium],
     },
   },
 }
 
-const Template: Story<CounterProps> = (args) => <Counter {...args} />
+const Template: StoryFn<CounterProps> = (args) => <Counter {...args} />
 
 export const Yellow = Template.bind({})
 Yellow.args = {
   count: 20,
-  size: CounterSize.S,
-  color: CounterColor.YELLOW,
+  size: counterSize.small,
+  color: counterColor.yellow,
 }
 
-const TemplateWithBg: Story<CounterProps> = (args) => (
+const TemplateWithBg: StoryFn<CounterProps> = (args) => (
   <div
     style={{
       backgroundColor: 'gray',
@@ -43,6 +43,6 @@ const TemplateWithBg: Story<CounterProps> = (args) => (
 export const White = TemplateWithBg.bind({})
 White.args = {
   count: 20,
-  size: CounterSize.S,
-  color: CounterColor.WHITE,
+  size: counterSize.small,
+  color: counterColor.white,
 }

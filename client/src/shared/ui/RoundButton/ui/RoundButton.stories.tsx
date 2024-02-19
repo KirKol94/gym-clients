@@ -1,8 +1,8 @@
-import type { Story } from '@storybook/react'
+import type { StoryFn } from '@storybook/react'
 
 import Arrow from '../../../assets/icons/arrow.svg'
 import Back from '../../../assets/icons/back.svg'
-import { RoundButtonSize, RoundButtonTheme } from '../model/types/roundButton'
+import { roundButtonSize, roundButtonTheme } from '../model/types/roundButton'
 
 import type { RoundButtonProps } from './RoundButton'
 import { RoundButton } from './RoundButton'
@@ -14,23 +14,23 @@ export default {
     size: {
       control: {
         type: 'radio',
-        options: [RoundButtonSize.S, RoundButtonSize.M],
+        options: [roundButtonSize.small, roundButtonSize.medium],
       },
     },
   },
 }
 
-const Template: Story<RoundButtonProps> = (args) => <RoundButton {...args} />
+const Template: StoryFn<RoundButtonProps> = (args) => <RoundButton {...args} />
 
 export const PRIMARY = Template.bind({})
 PRIMARY.args = {
-  size: RoundButtonSize.S,
-  theme: RoundButtonTheme.PRIMARY,
-  children: <img src={Arrow} />,
+  size: roundButtonSize.small,
+  theme: roundButtonTheme.primary,
+  children: <img src={Arrow} alt="arrow" />,
 }
 export const SECONDARY = Template.bind({})
 SECONDARY.args = {
-  size: RoundButtonSize.S,
-  theme: RoundButtonTheme.SECONDARY,
-  children: <img src={Back} />,
+  size: roundButtonSize.small,
+  theme: roundButtonTheme.secondary,
+  children: <img src={Back} alt="back" />,
 }

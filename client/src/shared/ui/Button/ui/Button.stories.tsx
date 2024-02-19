@@ -1,6 +1,6 @@
-import type { Meta, Story } from '@storybook/react'
+import type { Meta, StoryFn } from '@storybook/react'
 
-import { ButtonSize, ButtonTheme } from '..'
+import { buttonSize, buttonTheme } from '../mode/types/button'
 
 import type { ButtonProps } from './Button'
 import { Button } from './Button'
@@ -11,18 +11,18 @@ export default {
   args: {
     size: {
       type: 'radio',
-      options: [ButtonSize.XS, ButtonSize.S, ButtonSize.M],
+      options: [buttonSize.xs, buttonSize.s, buttonSize.m],
     },
     theme: {
       type: 'radio',
-      options: [ButtonTheme.PRIMARY, ButtonTheme.SECONDARY, ButtonTheme.SECONDARY_BLUE, ButtonTheme.SECONDARY_WHITE],
+      options: [buttonTheme.primary, buttonTheme.secondary, buttonTheme.secondaryBlue, buttonTheme.secondaryWhite],
     },
     children: 'Button',
   },
 } as Meta
 
-const Template: Story<ButtonProps> = (args) => <Button {...args} />
+const Template: StoryFn<ButtonProps> = (args) => <Button {...args} />
 export const Base = Template.bind({
-  size: ButtonSize.XS,
-  theme: ButtonTheme.PRIMARY,
+  size: buttonSize.xs,
+  theme: buttonTheme.primary,
 })

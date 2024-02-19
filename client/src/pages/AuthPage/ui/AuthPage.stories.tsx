@@ -1,6 +1,6 @@
-import type { Meta, Story } from '@storybook/react'
+import type { Meta, StoryFn } from '@storybook/react'
 
-import { AuthType } from '@/features/AuthForm'
+import { authType } from '@/features/AuthForm'
 
 import { AuthPage } from './AuthPage'
 
@@ -10,14 +10,14 @@ export default {
   args: {
     type: {
       type: 'radio',
-      options: [AuthType.LOGIN, AuthType.REGISTER],
+      options: [authType.login, authType.register],
     },
   },
 } as Meta
 
-const Template: Story = (args) => <AuthPage {...args} />
+const Template: StoryFn<typeof AuthPage> = (args) => <AuthPage {...args} />
 export const Default = Template.bind({
   args: {
-    type: AuthType.LOGIN,
+    type: authType.login,
   },
 })

@@ -6,9 +6,9 @@ import Avatar from '@/shared/assets/icons/avatar.svg?react'
 import Edit from '@/shared/assets/icons/edit.svg?react'
 import Trash from '@/shared/assets/icons/trash.svg?react'
 import { useAppDispatch } from '@/shared/hooks'
-import { Button, ButtonSize } from '@/shared/ui/Button'
+import { Button, buttonSize } from '@/shared/ui/Button'
 import { Input } from '@/shared/ui/Input'
-import { RoundButton, RoundButtonSize, RoundButtonTheme } from '@/shared/ui/RoundButton'
+import { RoundButton, roundButtonSize, roundButtonTheme } from '@/shared/ui/RoundButton'
 
 import cls from './ProfilePage.module.scss'
 
@@ -136,13 +136,13 @@ export const ProfilePage = () => {
         <div className={cls.avatar}>
           <RoundButton
             className={cls.avatar__edit}
-            size={RoundButtonSize.M}
-            theme={RoundButtonTheme.SECONDARY}
+            size={roundButtonSize.medium}
+            theme={roundButtonTheme.secondary}
             onClick={handleClickOnFileInput}
           >
             <Edit />
           </RoundButton>
-          <RoundButton className={cls.avatar__trash} size={RoundButtonSize.M} theme={RoundButtonTheme.SECONDARY}>
+          <RoundButton className={cls.avatar__trash} size={roundButtonSize.medium} theme={roundButtonTheme.secondary}>
             <Trash />
           </RoundButton>
 
@@ -187,7 +187,7 @@ export const ProfilePage = () => {
           onChange={handleChange}
           disabled={!isEdit}
         />
-        <Button size={ButtonSize.M} className={cls.button} onClick={isEdit ? handleSubmit : handleEdit}>
+        <Button size={buttonSize.m} className={cls.button} onClick={isEdit ? handleSubmit : handleEdit}>
           {isEdit ? 'Сохранить' : 'Редактировать'}
         </Button>
       </div>

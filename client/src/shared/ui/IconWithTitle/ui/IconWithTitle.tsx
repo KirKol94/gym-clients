@@ -1,13 +1,13 @@
 import type { ReactNode } from 'react'
 import cx from 'classix'
 
-import type { IconWithTitleSize } from '../models/types/iconWithTitle'
+import type { iconWithTitleSize } from '../models/types/iconWithTitle.ts'
 
 import classes from './IconWithTitle.module.scss'
 
 export interface IconWithTitleProps {
   children: ReactNode
-  size: IconWithTitleSize
+  size: keyof typeof iconWithTitleSize
   className?: string
 }
 

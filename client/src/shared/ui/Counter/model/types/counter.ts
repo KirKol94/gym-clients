@@ -1,9 +1,9 @@
-export enum CounterSize {
-  S = 's',
-  M = 'm',
-}
+export const counterSize = {
+  small: 'small',
+  medium: 'medium',
+} as const
 
-export enum CounterColor {
-  WHITE = 'white',
-  YELLOW = 'yellow',
-}
+export const counterColor = {
+  white: 'white',
+  yellow: 'yellow',
+} as const

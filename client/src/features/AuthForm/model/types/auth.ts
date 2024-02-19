@@ -1,7 +1,7 @@
-export enum AuthType {
-  LOGIN = 'login',
-  REGISTER = 'register',
-}
+export const authType = {
+  login: 'login',
+  register: 'register',
+} as const
 
 export interface ReqAuthData {
   username: string

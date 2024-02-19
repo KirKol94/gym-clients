@@ -1,8 +1,8 @@
-export enum RadioButtonSize {
-  S = 's',
-  M = 'm',
-}
+export const radioButtonSize = {
+  small: 'small',
+  medium: 'medium',
+} as const
 
-export enum Align {
-  LEFT = 'left',
-}
+export const align = {
+  left: 'left',
+} as const

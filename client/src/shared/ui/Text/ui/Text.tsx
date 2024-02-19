@@ -1,12 +1,12 @@
 import type { ReactNode } from 'react'
 import cx from 'classix'
 
-import { TextSize } from '../model/types/text'
+import { textSize } from '../model/types/textSize.ts'
 
 import classes from './Text.module.scss'
 
 export interface TextProps {
-  size: TextSize
+  size: keyof typeof textSize
   children: ReactNode
   className?: string
 }
@@ -14,8 +14,8 @@ export interface TextProps {
 export const Text = ({ size, children, className }: TextProps) => {
   const cls = cx(
     classes.text,
-    size === TextSize.S && classes.text__s,
-    size === TextSize.M && classes.text__m,
+    size === textSize.small && classes.text__s,
+    size === textSize.medium && classes.text__m,
     className,
   )
 
