@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { memo } from 'react'
+import cx from 'classix'
 
 import { Footer } from '../../Footer'
 import { Sidebar } from '../../Sidebar'
@@ -12,7 +13,7 @@ export interface PageProps {
 
 export const Page = memo(({ children }: PageProps) => {
   return (
-    <div className="page__container">
+    <div className={cx('page__container', classes.page)}>
       <div className={classes.content}>
         <Sidebar />
         <main className={classes.main}>{children}</main>
