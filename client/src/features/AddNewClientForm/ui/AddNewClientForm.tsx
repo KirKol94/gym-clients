@@ -4,7 +4,7 @@ import cx from 'classix'
 
 import type { IClient } from '@/entities/Client'
 import { clientsActions } from '@/features/ClientList'
-import { useGetAllClients } from '@/features/ClientList/model/api/clientsApi'
+import { useGetClients } from '@/features/ClientList/model/api/clientsApi'
 import { useAppDispatch } from '@/shared/hooks'
 import { BaseMaskInput } from '@/shared/ui/BaseMaskInput'
 import { Button, buttonSize } from '@/shared/ui/Button'
@@ -31,7 +31,7 @@ export const AddNewClientForm = () => {
       personalTrainingCount: null,
     },
   })
-  const { refetch } = useGetAllClients()
+  const { refetch } = useGetClients()
 
   const {
     register,
