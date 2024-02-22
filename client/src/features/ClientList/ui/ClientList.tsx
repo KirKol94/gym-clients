@@ -14,12 +14,13 @@ import clx from './ClientList.module.scss'
 export const ClientList = () => {
   const dispatch = useAppDispatch()
   const clients = useAppSelector(getClients)
+  const [skip, setSkip] = useState(true)
   const { data: clientsData } = useGetAllClients()
   const clientListClass = cx(clx.clientList)
   const [searchValue, setSearchValue] = useState('')
   const debouncedValue = useDebounce(searchValue, 500)
   const { data: foundedClients } = useGetFoundedClientsByName(debouncedValue, {
-    skip: debouncedValue === '',
+    skip,
   })
 
   useEffect(() => {
@@ -32,11 +33,16 @@ export const ClientList = () => {
     if (foundedClients) {
       dispatch(clientsActions.setClients(foundedClients))
     }
-  }, [searchValue, dispatch, foundedClients])
+  }, [searchValue, dispatch, foundedClients, clientsData])
 
   return (
     <div className={clientListClass}>
-      <Input inputName="Поиск" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} />
+      <Input
+        inputName="Поиск"
+        value={searchValue}
+        onChange={(e) => setSearchValue(e.target.value)}
+        onFocus={() => setSkip(false)}
+      />
 
       <ul className={clientListClass}>
         {clients && clients.map((client) => <Client key={client.id} client={client} />)}
