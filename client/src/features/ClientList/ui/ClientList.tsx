@@ -18,7 +18,9 @@ export const ClientList = () => {
   const clientListClass = cx(clx.clientList)
   const [searchValue, setSearchValue] = useState('')
   const debouncedValue = useDebounce(searchValue, 500)
-  const { data: foundedClients } = useGetFoundedClientsByName(debouncedValue)
+  const { data: foundedClients } = useGetFoundedClientsByName(debouncedValue, {
+    skip: debouncedValue === '',
+  })
 
   useEffect(() => {
     if (clientsData) {
