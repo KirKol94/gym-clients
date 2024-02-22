@@ -10,7 +10,7 @@ export interface ${firstCharUpperCase(componentName)}Props {
   className?: string
 }
 
-export const ${firstCharUpperCase(componentName)} = memo(({className}: ${firstCharUpperCase(componentName)}Props) => {
+export const ${firstCharUpperCase(componentName)} = memo(({ className }: ${firstCharUpperCase(componentName)}Props) => {
   const ${firstCharLowerCase(componentName)}Class = cx(cls.${firstCharLowerCase(componentName)}, className)
 
   return <div className={${firstCharLowerCase(componentName)}Class}>${componentName}</div>
