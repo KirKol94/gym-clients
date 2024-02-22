@@ -8,7 +8,13 @@ const clientsApi = rtkApi.injectEndpoints({
         url: 'client/find/all',
       }),
     }),
+    getFoundedClientsByName: build.query<IClient[], string>({
+      query: (name) => ({
+        url: `client/find?name=${name}`,
+      }),
+    }),
   }),
 })
 
 export const useGetAllClients = clientsApi.useGetAllClientsQuery
+export const useGetFoundedClientsByName = clientsApi.useGetFoundedClientsByNameQuery
