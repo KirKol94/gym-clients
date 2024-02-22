@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import cx from 'classix'
 
 import { Client } from '@/entities/Client'
-import { useAppDispatch, useAppSelector } from '@/shared/hooks'
+import { useAppDispatch, useAppSelector, useDebounce } from '@/shared/hooks'
 import { Input } from '@/shared/ui/Input'
 
 import { useGetAllClients, useGetFoundedClientsByName } from '../model/api/clientsApi'
@@ -17,7 +17,8 @@ export const ClientList = () => {
   const { data: clientsData } = useGetAllClients()
   const clientListClass = cx(clx.clientList)
   const [searchValue, setSearchValue] = useState('')
-  const { data: foundedClients } = useGetFoundedClientsByName(searchValue)
+  const debouncedValue = useDebounce(searchValue, 500)
+  const { data: foundedClients } = useGetFoundedClientsByName(debouncedValue)
 
   useEffect(() => {
     if (clientsData) {
