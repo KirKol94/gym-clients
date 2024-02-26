@@ -111,7 +111,7 @@ export const AuthForm = ({ type = AuthType.LOGIN }: AuthFormProps) => {
             },
             minLength: {
               value: 5,
-              message: 'Не менее 6 символов',
+              message: 'Не менее 5 символов',
             },
           })}
           error={errors?.password?.message}
@@ -207,7 +207,7 @@ export const AuthForm = ({ type = AuthType.LOGIN }: AuthFormProps) => {
           <div>
             <Text size={TextSize.S}>
               {type === AuthType.LOGIN && 'Еще нет аккаунта?'}
-              {type === AuthType.REGISTER && 'Уже нет аккаунт?'}
+              {type === AuthType.REGISTER && 'Уже есть аккаунт?'}
             </Text>
 
             <AppLink to={type === AuthType.LOGIN ? ROUTER_PATH.REGISTER : ROUTER_PATH.LOGIN} size={AppLinkSize.S}>
