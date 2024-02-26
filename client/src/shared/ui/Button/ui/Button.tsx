@@ -1,19 +1,19 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react'
 import cx from 'classix'
 
-import type { ButtonSize } from '../mode/types/button'
-import { ButtonTheme } from '../mode/types/button'
+import type { buttonSize } from '../mode/types/button'
+import { buttonTheme } from '../mode/types/button'
 
 import classes from './Button.module.scss'
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  size: ButtonSize
+  size: keyof typeof buttonSize
   children: ReactNode
-  theme?: ButtonTheme
+  theme?: keyof typeof buttonTheme
   className?: string
 }
 
-export const Button = ({ size, children, theme = ButtonTheme.PRIMARY, className, ...props }: ButtonProps) => {
+export const Button = ({ size, children, theme = buttonTheme.primary, className, ...props }: ButtonProps) => {
   const cls = cx(classes[`${theme}`], classes[`${theme}_${size}`], classes.button, className)
 
   return (

@@ -1,2 +1,2 @@
 export { AppLink } from './ui/AppLink'
-export { AppLinkSize } from './model/types/appLink'
+export { appLinkSize } from './model/types/appLink'

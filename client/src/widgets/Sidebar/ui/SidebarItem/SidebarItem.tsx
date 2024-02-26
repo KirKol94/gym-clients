@@ -2,7 +2,7 @@ import { memo } from 'react'
 import { Link } from 'react-router-dom'
 import cx from 'classix'
 
-import { Text, TextSize } from '@/shared/ui/Text'
+import { Text, textSize } from '@/shared/ui/Text'
 
 import classes from './SidebarItem.module.scss'
 
@@ -31,7 +31,7 @@ export const SidebarItem = memo(({ data, isOpen, pathname }: SidebarItemProps) =
     <div className={classes.wrapper}>
       <Link className={cardClass} to={to}>
         {Icon}
-        <Text className={textClass} size={TextSize.S}>
+        <Text className={textClass} size={textSize.small}>
           {title}
         </Text>
       </Link>

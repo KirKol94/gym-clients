@@ -1,6 +1,6 @@
-import type { Story } from '@storybook/react'
+import type { StoryFn } from '@storybook/react'
 
-import { TextSize } from '../model/types/text'
+import { textSize } from '@/shared/ui/Text/model/types/textSize.ts'
 
 import type { TextProps } from './Text'
 import { Text } from './Text'
@@ -8,25 +8,17 @@ import { Text } from './Text'
 export default {
   title: 'shared/ui/Text',
   component: Text,
-  argTypes: {
+  args: {
     size: {
-      control: {
-        type: 'select',
-        options: [TextSize.S, TextSize.M],
-      },
+      type: 'radio',
+      options: textSize,
     },
+    children: 'Some Text with S size',
   },
 }
 
-const Template: Story<TextProps> = (args) => <Text {...args} />
+const Template: StoryFn<TextProps> = (args) => <Text {...args} />
 
-export const S = Template.bind({})
-S.args = {
-  size: TextSize.S,
-  children: 'Some Text with S size',
-}
-export const M = Template.bind({})
-M.args = {
-  size: TextSize.M,
-  children: 'Some Text with M size',
-}
+export const Default = Template.bind({
+  size: textSize.small,
+})

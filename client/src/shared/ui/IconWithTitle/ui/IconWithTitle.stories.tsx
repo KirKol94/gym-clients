@@ -1,7 +1,7 @@
-import type { Story } from '@storybook/react'
+import type { StoryFn } from '@storybook/react'
 
 import Avatar from '../../../assets/icons/avatar.svg'
-import { IconWithTitleSize } from '../models/types/iconWithTitle'
+import { iconWithTitleSize } from '../models/types/iconWithTitle.ts'
 
 import { IconWithTitle, type IconWithTitleProps } from './IconWithTitle'
 
@@ -11,16 +11,16 @@ export default {
   args: {
     size: {
       type: 'radio',
-      options: [IconWithTitleSize.S, IconWithTitleSize.M],
+      options: iconWithTitleSize,
     },
   },
 }
 
-const Template: Story<IconWithTitleProps> = (args) => <IconWithTitle {...args} />
+const Template: StoryFn<IconWithTitleProps> = (args) => <IconWithTitle {...args} />
 
 export const Base = Template.bind({})
 Base.args = {
-  size: IconWithTitleSize.S,
+  size: iconWithTitleSize.small,
   children: (
     <>
       <img src={Avatar} alt="avatar" />

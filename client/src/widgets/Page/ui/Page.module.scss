@@ -1,9 +1,14 @@
-.content {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 0 35px;
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 
-  .main {
-    width: 100%;
-  }
+.content {
+  display: flex;
+  flex: 1 0 100%;
+}
+
+.main {
+  width: 100%;
 }

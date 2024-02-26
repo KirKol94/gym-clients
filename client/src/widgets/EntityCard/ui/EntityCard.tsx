@@ -2,8 +2,8 @@ import type { ReactNode } from 'react'
 import cx from 'classix'
 
 import Arrow from '@/shared/assets/icons/arrow.svg?react'
-import { CounterColor } from '@/shared/ui/Counter'
-import { IconWithTitle, IconWithTitleSize } from '@/shared/ui/IconWithTitle'
+import { counterColor } from '@/shared/ui/Counter'
+import { IconWithTitle, iconWithTitleSize } from '@/shared/ui/IconWithTitle'
 import { RoundButton } from '@/shared/ui/RoundButton'
 
 import { CounterRow } from './CounterRow'
@@ -31,7 +31,7 @@ export const EntityCard = ({
     <div className={cx(classes['entity-card'], className)}>
       <div className={classes.header}>
         <div className={classes.icon}>
-          <IconWithTitle size={IconWithTitleSize.M}>{children}</IconWithTitle>
+          <IconWithTitle size={iconWithTitleSize.medium}>{children}</IconWithTitle>
         </div>
         <RoundButton onClick={onArrowClick}>
           <Arrow />
@@ -39,10 +39,10 @@ export const EntityCard = ({
       </div>
       <div className={classes.footer}>
         {requireAttention && (
-          <CounterRow count={requireAttention} color={CounterColor.YELLOW} text="Требуют внимания" />
+          <CounterRow count={requireAttention} color={counterColor.yellow} text="Требуют внимания" />
         )}
-        {total && <CounterRow count={total} color={CounterColor.WHITE} text="Всего" />}
-        {thisMonth && <CounterRow count={thisMonth} color={CounterColor.WHITE} text="В этом месяце" />}
+        {total && <CounterRow count={total} color={counterColor.white} text="Всего" />}
+        {thisMonth && <CounterRow count={thisMonth} color={counterColor.white} text="В этом месяце" />}
       </div>
     </div>
   )

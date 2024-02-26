@@ -1,4 +1,4 @@
-export enum IconWithTitleSize {
-  S = 's',
-  M = 'm',
-}
+export const iconWithTitleSize = {
+  small: 'small',
+  medium: 'medium',
+} as const

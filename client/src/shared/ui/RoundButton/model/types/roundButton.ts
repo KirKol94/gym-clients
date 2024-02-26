@@ -1,16 +1,16 @@
-export enum RoundButtonSize {
-  S = 's',
-  M = 'm',
-}
+export const roundButtonSize = {
+  small: 'small',
+  medium: 'medium',
+} as const
 
-export enum RoundButtonDirection {
-  UP = 'up',
-  RIGHT = 'right',
-  DOWN = 'down',
-  LEFT = 'left',
-}
+export const roundButtonDirection = {
+  up: 'up',
+  right: 'right',
+  down: 'down',
+  left: 'left',
+} as const
 
-export enum RoundButtonTheme {
-  PRIMARY = 'primary',
-  SECONDARY = 'secondary',
-}
+export const roundButtonTheme = {
+  primary: 'primary',
+  secondary: 'secondary',
+} as const

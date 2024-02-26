@@ -1,8 +1,8 @@
-export enum LoaderSize {
-  SMALL = 'small',
-  BIG = 'big',
+export const loaderSize = {
+  small: 'small',
+  big: 'big',
 }
 
-export enum LoaderColor {
-  WHITE = 'White',
+export const loaderColor = {
+  white: 'white',
 }

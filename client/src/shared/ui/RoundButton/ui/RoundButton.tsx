@@ -1,23 +1,23 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react'
 import cx from 'classix'
 
-import type { RoundButtonDirection } from '../model/types/roundButton'
-import { RoundButtonSize, RoundButtonTheme } from '../model/types/roundButton'
+import type { roundButtonDirection } from '../model/types/roundButton'
+import { roundButtonSize, roundButtonTheme } from '../model/types/roundButton'
 
 import classes from './RoundButton.module.scss'
 
 export interface RoundButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  size?: RoundButtonSize
-  direction?: RoundButtonDirection
-  theme?: RoundButtonTheme
+  size?: keyof typeof roundButtonSize
+  direction?: keyof typeof roundButtonDirection
+  theme?: keyof typeof roundButtonTheme
   children: ReactNode
   className?: string
 }
 
 export const RoundButton = ({
-  size = RoundButtonSize.M,
+  size = roundButtonSize.medium,
   direction,
-  theme = RoundButtonTheme.PRIMARY,
+  theme = roundButtonTheme.primary,
   children,
   className,
   ...props

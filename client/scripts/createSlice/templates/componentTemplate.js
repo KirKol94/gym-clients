@@ -6,10 +6,12 @@ import cx from 'classix'
 
 import cls from './${firstCharUpperCase(componentName)}.module.scss'
 
-export interface ${firstCharUpperCase(componentName)}Props {}
+export interface ${firstCharUpperCase(componentName)}Props {
+  className?: string
+}
 
-export const ${firstCharUpperCase(componentName)} = memo(({}: ${firstCharUpperCase(componentName)}Props) => {
-  const ${firstCharLowerCase(componentName)}Class = cx(cls.${firstCharLowerCase(componentName)})
+export const ${firstCharUpperCase(componentName)} = memo(({ className }: ${firstCharUpperCase(componentName)}Props) => {
+  const ${firstCharLowerCase(componentName)}Class = cx(cls.${firstCharLowerCase(componentName)}, className)
 
   return <div className={${firstCharLowerCase(componentName)}Class}>${componentName}</div>
 })

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 
 import { ROUTER_PATH } from '@/shared/const/path/PATH'
-import { Button, ButtonSize } from '@/shared/ui/Button'
+import { Button, buttonSize } from '@/shared/ui/Button'
 
 import type { IClient } from '..'
 
@@ -48,7 +48,7 @@ export const Client = ({ client }: ClientProps) => {
         </a>
       </div>
       <Link to={`${ROUTER_PATH.CLIENTS}/${id}`}>
-        <Button className={cls.button} size={ButtonSize.S}>
+        <Button className={cls.button} size={buttonSize.s}>
           Подробнее &#62;
         </Button>
       </Link>
