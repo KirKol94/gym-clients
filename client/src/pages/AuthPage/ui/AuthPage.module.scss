@@ -1,3 +1,5 @@
+@import '../../../shared/styles/mixins';
+
 .page {
   position: absolute;
   top: 5vh;
@@ -8,11 +10,12 @@
   width: 100%;
   height: min-content;
   padding-bottom: 6vh;
-}
 
-@media screen and (width <= 600px) {
-  .page {
-    padding: 0 3vw;
-    padding-bottom: 6vh;
+  @include mobile {
+    padding: 0 6vw !important;
+  }
+
+  @include tablet {
+    padding: 0 9vw;
   }
 }

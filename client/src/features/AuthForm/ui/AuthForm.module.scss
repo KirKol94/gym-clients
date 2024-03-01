@@ -1,5 +1,16 @@
+@import '../../../shared/styles/mixins';
+
 .title {
   padding-bottom: 40px;
+
+  @include mobile {
+    font-size: 7vw;
+  }
+
+  @include tablet {
+    padding-bottom: 6vw;
+    font-size: 6vw;
+  }
 }
 
 .form {
@@ -13,38 +24,37 @@
   background: var(--color-white);
   border-radius: 20px;
   box-shadow: 0 0 25px 0 rgb(0 0 0 / 0.16);
+
+  @include tablet {
+    width: 100%;
+    padding: 12vw 7vw;
+    box-shadow: 0 0 15px 0 rgb(0 0 0 / 0.16);
+  }
+
+  & input {
+    @include tablet {
+      padding: 3vw;
+      font-size: 80%;
+      box-shadow: 5px 2px 4px 0 rgb(34 60 80 / 0.2);
+    }
+  }
+
+  & input + div {
+    @include tablet {
+      padding-top: 1vw;
+      font-size: 70%;
+    }
+  }
+
+  & button {
+    @include tablet {
+      padding: 3vw 7vw;
+    }
+  }
 }
 
 .footer {
   display: flex;
   gap: 1.25rem;
   align-items: center;
-}
-
-@media screen and (width <= 600px) {
-  .title {
-    padding-bottom: 6vw;
-    font-size: 7vw;
-  }
-
-  .form {
-    width: 100%;
-    padding: 12vw 7vw;
-    box-shadow: 0 0 15px 0 rgb(0 0 0 / 0.16);
-  }
-
-  .form input {
-    padding: 3vw;
-    font-size: 80%;
-    box-shadow: 5px 2px 4px 0 rgb(34 60 80 / 0.2);
-  }
-
-  .form button {
-    padding: 3vw 7vw;
-  }
-
-  .form input + div {
-    padding-top: 1vw;
-    font-size: 70%;
-  }
 }
