@@ -1,18 +1,18 @@
 .page {
-  display        : flex;
-  flex-direction : column;
-  align-items    : center;
+  position: absolute;
+  top: 5vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  height         : min-content;
-  width          : 100%;
-  position       : absolute;
-  top            : 5vh;
-  padding-bottom : 6vh;
+  width: 100%;
+  height: min-content;
+  padding-bottom: 6vh;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (width <= 600px) {
   .page {
-    padding       : 0 3vw;
+    padding: 0 3vw;
     padding-bottom: 6vh;
   }
 }
