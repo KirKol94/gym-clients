@@ -1,3 +1,17 @@
 .clientPage {
   padding: 1rem;
 }
+
+.content {
+  display: flex;
+}
+
+.data {
+  flex: 0 1 100%;
+}
+
+.form {
+  background-color: var(--conor-white);
+  border-radius: 15px;
+  box-shadow: -5px 0 10px 2px rgb(34 60 80 / 0.2);
+}
