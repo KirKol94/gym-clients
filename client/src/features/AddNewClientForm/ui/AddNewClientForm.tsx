@@ -1,10 +1,10 @@
+import { useEffect } from 'react'
 import { FormProvider, type SubmitHandler, useForm } from 'react-hook-form'
 import { joiResolver } from '@hookform/resolvers/joi'
 import cx from 'classix'
 
 import type { IClient } from '@/entities/Client'
 import { clientsActions } from '@/features/ClientList'
-import { useGetClients } from '@/features/ClientList/model/api/clientsApi'
 import { useAppDispatch } from '@/shared/hooks'
 import { BaseMaskInput } from '@/shared/ui/BaseMaskInput'
 import { Button, buttonSize } from '@/shared/ui/Button'
@@ -31,7 +31,6 @@ export const AddNewClientForm = () => {
       personalTrainingCount: null,
     },
   })
-  const { refetch } = useGetClients()
 
   const {
     register,
@@ -39,19 +38,19 @@ export const AddNewClientForm = () => {
     reset,
     formState: { errors, isValid, isDirty },
   } = methods
-  const [addClient, { data: addedClientData }] = useAddNewClient()
+  const [addClient, { data: addedClientData, status: addNewClientStatus }] = useAddNewClient()
 
   const onSubmit: SubmitHandler<ClientDataType> = async (data) => {
     await addClient(data)
 
-    if (addedClientData) {
-      const addedClient = { ...data, id: addedClientData.id }
-      dispatch(clientsActions.addNewClient(addedClient))
-    }
-
     reset()
-    refetch()
   }
+
+  useEffect(() => {
+    if (addNewClientStatus === 'fulfilled' && addedClientData) {
+      dispatch(clientsActions.addNewClient(addedClientData))
+    }
+  }, [addNewClientStatus, addedClientData, dispatch])
 
   return (
     <FormProvider {...methods}>
