@@ -1,15 +1,15 @@
-@import '../../../shared/styles/mixins';
+@import '@/app/styles/mixins';
 
 .title {
   padding-bottom: 40px;
 
-  @include mobile {
-    font-size: 7vw;
-  }
-
   @include tablet {
     padding-bottom: 6vw;
-    font-size: 6vw;
+    font-size: 32px;
+  }
+
+  @include mobile {
+    font-size: 26px;
   }
 }
 
@@ -31,22 +31,22 @@
     box-shadow: 0 0 15px 0 rgb(0 0 0 / 0.16);
   }
 
-  & input {
+  input {
     @include tablet {
       padding: 3vw;
-      font-size: 80%;
+      font-size: 16px;
       box-shadow: 5px 2px 4px 0 rgb(34 60 80 / 0.2);
     }
   }
 
-  & input + div {
+  input + div {
     @include tablet {
       padding-top: 1vw;
-      font-size: 70%;
+      font-size: 14px;
     }
   }
 
-  & button {
+  button {
     @include tablet {
       padding: 3vw 7vw;
     }

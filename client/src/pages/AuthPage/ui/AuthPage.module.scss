@@ -1,4 +1,4 @@
-@import '../../../shared/styles/mixins';
+@import '@/app/styles/mixins';
 
 .page {
   position: absolute;
@@ -11,11 +11,11 @@
   height: min-content;
   padding-bottom: 6vh;
 
-  @include mobile {
-    padding: 0 6vw !important;
-  }
-
   @include tablet {
     padding: 0 9vw;
+  }
+
+  @include mobile {
+    padding: 0 4vw;
   }
 }
