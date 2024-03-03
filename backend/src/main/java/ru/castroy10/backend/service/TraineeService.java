@@ -53,12 +53,12 @@ public class TraineeService {
 
     public ResponseEntity<?> findAll() {
         List<Trainee> traineeList = traineeRepository.findAll();
-        return ResponseEntity.ok(traineeList);
+        return ResponseEntity.ok(traineeList.stream().map(trainee -> modelMapper.map(trainee, TraineeResponseFullDto.class)).toList());
     }
 
     public ResponseEntity<?> findByName(String name) {
         List<Trainee> traineeList = traineeRepository.findByName(name.toLowerCase());
-        return ResponseEntity.ok(traineeList);
+        return ResponseEntity.ok(traineeList.stream().map(trainee -> modelMapper.map(trainee, TraineeResponseFullDto.class)).toList());
     }
 
     public Optional<Trainee> getById(Long id) {
