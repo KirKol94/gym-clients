@@ -55,13 +55,14 @@ public class ClientService {
         return clientRepository.findById(id);
     }
 
+
     public ResponseEntity<?> findAll() {
         List<Client> clientList = clientRepository.findAll();
-        return ResponseEntity.ok(clientList);
+        return ResponseEntity.ok(clientList.stream().map(client -> modelMapper.map(client, ClientResponseFullDto.class)).toList());
     }
 
     public ResponseEntity<?> findByName(String name) {
         List<Client> clientList = clientRepository.findByName(name.toLowerCase());
-        return ResponseEntity.ok(clientList);
+        return ResponseEntity.ok(clientList.stream().map(client -> modelMapper.map(client, ClientResponseFullDto.class)).toList());
     }
 }
