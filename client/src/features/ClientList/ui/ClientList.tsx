@@ -18,13 +18,17 @@ export const ClientList = () => {
 
   const [searchValue, setSearchValue] = useState('')
   const debouncedValue = useDebounce(searchValue, 500)
-  const { data: clientsData } = useGetClients(debouncedValue)
+  const { data: clientsData, refetch } = useGetClients(debouncedValue)
 
   useEffect(() => {
     if (clientsData) {
       dispatch(clientsActions.setClients(clientsData))
     }
   }, [clientsData, dispatch])
+
+  useEffect(() => {
+    refetch()
+  }, [clients])
 
   return (
     <div className={clientListClass}>
