@@ -1,6 +1,35 @@
 body {
   font-family: var(--font-family);
   background: var(--color-light-bg);
+  transition: 0.3s;
+}
+
+[id='dark'] {
+  --color-light-bg: #1d2124;
+  --color-white: #121212;
+  --color-light-gray: #121212;
+  --color-neutral-60: #444;
+  --color-neutral-80: #fff;
+  --color-neutral-100: #fff;
+  --color-default: #fff;
+  color: var(--color-default) !important;
+
+  p,
+  a {
+    color: var(--color-default);
+  }
+  span {
+    color: var(--color-default);
+    background: transparent;
+  }
+  button {
+    color: var(--color-default);
+  }
+  input {
+    &:focus {
+      border-color: var(--color-primary-90);
+    }
+  }
 }
 
 [class*='__container'] {
