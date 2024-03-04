@@ -43,6 +43,10 @@
     }
   }
 
+  &__img {
+    border-radius: 50%;
+  }
+
   &__fake {
     > svg {
       width: 150px;
