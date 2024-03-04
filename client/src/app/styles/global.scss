@@ -1,8 +1,8 @@
 body {
   font-family: var(--font-family);
+  color: var(--color-dark);
   background: var(--color-light-bg);
   transition: all var(--transition-delay-fast);
-  color: var(--color-dark);
 }
 
 [id='dark'] {
@@ -13,19 +13,23 @@ body {
   --color-neutral-80: #fff;
   --color-neutral-100: #fff;
   --color-default: #fff;
+
   color: var(--color-default);
 
   p,
   a {
     color: var(--color-default);
   }
+
   span {
     color: var(--color-default);
     background: transparent;
   }
+
   button {
     color: var(--color-default);
   }
+
   input {
     color: var(--color-default);
 

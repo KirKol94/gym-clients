@@ -10,6 +10,7 @@
   transition:
     background var(--transition-delay-fast),
     width var(--transition-delay-fast);
+
   &_hidden {
     width: 75px;
     transition:
