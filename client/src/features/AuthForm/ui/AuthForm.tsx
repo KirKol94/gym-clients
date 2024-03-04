@@ -83,8 +83,7 @@ export const AuthForm = ({ type = authType.login }: AuthFormProps) => {
   return (
     <>
       <Title level={1} size={titleSize.xxl} className={classes.title}>
-        {type === authType.login && 'Авторизация'}
-        {type === authType.register && 'Регистрация'}
+        {type === authType.login ? 'Авторизация' : 'Регистрация'}
       </Title>
 
       <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>

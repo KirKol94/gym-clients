@@ -238,7 +238,6 @@ public class UserServiceTest {
                 .andExpect(status().is(400))
                 .andExpect(result -> {
                     String errorMessage = result.getResponse().getContentAsString();
-                    System.out.println(errorMessage);
                     Assertions.assertTrue(errorMessage.contains("this test is valid"));
                 });
     }

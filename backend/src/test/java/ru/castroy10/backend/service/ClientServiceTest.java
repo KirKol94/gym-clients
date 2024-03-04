@@ -212,4 +212,10 @@ class ClientServiceTest {
                     Assertions.assertTrue(errorMessage.contains("this test is valid, sql exception with runtime exception"));
                 });
     }
+
+    @Test
+    public void testGetByIdSuccess(){
+        Mockito.when(clientRepository.findById(1L)).thenReturn(Optional.of(client));
+        Assertions.assertEquals(clientService.getById(1L).get(),client);
+    }
 }

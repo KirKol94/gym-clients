@@ -147,7 +147,11 @@ export const ProfilePage = () => {
           </RoundButton>
 
           {profile?.avatar ? (
-            <img src={profile?.avatar} alt="User Avatar" />
+            <img
+              className={cls.avatar__img}
+              src={import.meta.env.DEV ? profile.avatar.replace('backend', 'localhost') : profile.avatar}
+              alt="User Avatar"
+            />
           ) : (
             <div className={cls.avatar__fake}>
               <Avatar />

@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom'
 
 import { useGetClientData } from '@/entities/Client'
+import { EditClientDataForm } from '@/features/EditClientDataForm'
 import { Loader, loaderSize } from '@/shared/ui/Loader'
 import { Title, titleSize } from '@/shared/ui/Title'
 
@@ -8,7 +9,7 @@ import cls from './ClientPage.module.scss'
 
 export const ClientPage = () => {
   const { id } = useParams()
-  const { data: client, isLoading } = useGetClientData(id)
+  const { data: client, isLoading, refetch } = useGetClientData(id)
 
   const data = client || {
     id: 1,
@@ -28,7 +29,12 @@ export const ClientPage = () => {
     <div className={cls.clientPage}>
       <Title level={1} size={titleSize.xxl}>{`${data?.firstName} ${data?.middleName}`}</Title>
 
-      <pre>{JSON.stringify(data, null, '   ')}</pre>
+      <div className={cls.content}>
+        <div className={cls.data}>
+          <pre>{JSON.stringify(data, null, '   ')}</pre>
+        </div>
+        <EditClientDataForm className={cls.form} client={data} refetch={refetch} />
+      </div>
     </div>
   )
 }

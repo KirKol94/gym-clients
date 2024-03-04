@@ -1,4 +1,4 @@
-FROM maven:3.8.5-openjdk-17-slim AS build
+FROM maven:3.9.6-eclipse-temurin-17-alpine AS build
 COPY /src /src
 COPY pom.xml /
 RUN mvn -f /pom.xml clean package -DskipTests

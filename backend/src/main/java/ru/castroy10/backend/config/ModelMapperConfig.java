@@ -32,6 +32,7 @@ public class ModelMapperConfig {
     public ModelMapper modelMapper() {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.addConverter(stringToLocalDate);
+        modelMapper.addConverter(localDateToString);
         modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 
@@ -57,6 +58,13 @@ public class ModelMapperConfig {
         }
     };
 
+    private final AbstractConverter<LocalDate , String> localDateToString = new AbstractConverter<>() {
+        @Override
+        protected String convert(LocalDate source) {
+            return source.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        }
+    };
+
     private final AbstractConverter<Long, Client> clientIdToClient = new AbstractConverter<>() {
         @Override
         protected Client convert(Long id) {
@@ -70,4 +78,6 @@ public class ModelMapperConfig {
             return traineeRepository.findById(id).orElse(null);
         }
     };
+
+
 }
