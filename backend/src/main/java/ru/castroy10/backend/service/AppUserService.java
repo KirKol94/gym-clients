@@ -4,6 +4,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,7 +23,9 @@ import ru.castroy10.backend.model.Role;
 import ru.castroy10.backend.repository.AppUserRepository;
 import ru.castroy10.backend.security.jwt.JwtUtil;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -35,6 +41,8 @@ public class AppUserService {
     private final PasswordEncoder passwordEncoder;
     private final AppUserAvatarService appUserAvatarService;
     private final JwtUtil jwtUtil;
+    @Value("${pathForAvatars}")
+    private String pathForAvatar;
 
     @Autowired
     public AppUserService(AppUserRepository appUserRepository, ModelMapper modelMapper, RoleService roleService, PasswordEncoder passwordEncoder, AppUserAvatarService appUserAvatarService, JwtUtil jwtUtil) {
@@ -99,6 +107,12 @@ public class AppUserService {
     public ResponseEntity<?> getProfile(HttpServletRequest httpServletRequest) throws UserDuplicateException {
         String username = jwtUtil.verifyToken(httpServletRequest.getHeader("Authorization").substring(7));
         return findByUserName(username);
+    }
+
+    public ResponseEntity<?> getAvatar(String filename) throws MalformedURLException {
+        File file = new File(pathForAvatar, filename);
+        Resource resource = new UrlResource(file.toURI());
+        return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(resource);
     }
 
     private boolean checkUserExist(String username) {
