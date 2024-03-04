@@ -3,4 +3,4 @@ INSERT INTO public.role (id, role_name) VALUES (1, 'ROLE_ADMIN') ON CONFLICT (id
 INSERT INTO public.role (id, role_name) VALUES (2, 'ROLE_USER') ON CONFLICT (id) DO NOTHING;
 INSERT INTO public.role (id, role_name) VALUES (3, 'ROLE_GUEST') ON CONFLICT (id) DO NOTHING;
 INSERT INTO public.appuser_role (appuser_id, role_id) VALUES (1, 1) ON CONFLICT (appuser_id, role_id) DO NOTHING;
-ALTER SEQUENCE appuser_id_seq RESTART WITH 2;
+SELECT setval('appuser_id_seq', nextval('appuser_id_seq'));

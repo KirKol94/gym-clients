@@ -16,6 +16,7 @@ import ru.castroy10.backend.security.jwt.JwtUtil;
 import ru.castroy10.backend.service.AppUserService;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.Map;
 
 @RestController
@@ -54,10 +55,11 @@ public class UserController {
         return ResponseEntity.ok().body(Map.of("Refreshtoken", jwtUtil.refreshToken(httpServletRequest)));
     }
 
-    @GetMapping ("/find/{id}")
+    @GetMapping("/find/{id}")
     public ResponseEntity<?> findById(@PathVariable("id") Long id) throws UserDuplicateException {
         return appUserService.findById(id);
     }
+
     @GetMapping("/find")
     public ResponseEntity<?> findByUserName(String username) throws UserDuplicateException {
         return appUserService.findByUserName(username);
@@ -66,5 +68,10 @@ public class UserController {
     @GetMapping("/profile")
     public ResponseEntity<?> getProfile(HttpServletRequest httpServletRequest) throws UserDuplicateException {
         return appUserService.getProfile(httpServletRequest);
+    }
+
+    @GetMapping("/getavatar/{filename}")
+    public ResponseEntity<?> getAvatar(@PathVariable("filename") String filename) throws MalformedURLException {
+        return appUserService.getAvatar(filename);
     }
 }

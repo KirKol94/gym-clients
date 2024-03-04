@@ -36,6 +36,6 @@ public class AppUserAvatarService {
         Path avatarFile = Path.of(pathForAvatars + filename);
         if (!Files.exists(avatarFile)) Files.createFile(avatarFile);
         Files.write(avatarFile, binaryBytes, StandardOpenOption.WRITE);
-        return "file://" + avatarFile;
+        return "http://backend:8080/api/v1/user/getavatar/" + filename;
     }
 }
