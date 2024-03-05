@@ -28,7 +28,7 @@ export const ClientList = () => {
 
   useEffect(() => {
     refetch()
-  }, [clients])
+  }, [clients, refetch])
 
   return (
     <div className={clientListClass}>
