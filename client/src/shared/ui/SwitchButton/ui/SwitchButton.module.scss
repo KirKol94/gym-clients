@@ -3,7 +3,7 @@
   margin-left: 10px;
 }
 
-.box label {
+.label {
   cursor: pointer;
   display: block;
   text-indent: -9999px;
@@ -11,7 +11,7 @@
   width: 60px;
   border-radius: 50px;
   background-color: var(--color-neutral-80);
-  transition: 0.3s ease background-color;
+  transition: background-color var(--transition-delay-fast);
   &:after {
     position: absolute;
     content: '';
@@ -22,7 +22,7 @@
     left: 5px;
     transform: translateY(-50%);
     background-color: var(--color-white);
-    transition: 0.3s ease;
+    transition: var(--transition-delay-fast);
   }
 }
 

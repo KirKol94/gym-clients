@@ -8,11 +8,13 @@
   background: var(--color-white);
   border-radius: 24px;
   transition:
-    background 0.3s,
+    background var(--transition-delay-fast),
     width var(--transition-delay-fast);
   &_hidden {
     width: 75px;
-    transition: width var(--transition-delay-fast);
+    transition:
+      background var(--transition-delay-fast),
+      width var(--transition-delay-fast);
   }
 }
 

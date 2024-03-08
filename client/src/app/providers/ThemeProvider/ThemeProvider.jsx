@@ -1,5 +1,5 @@
 import React, { createContext, useEffect } from 'react'
-import { useLocalStorage } from '../../../shared/hooks/LocalStorage/useLocalStorage'
+import { useLocalStorage } from '@/shared/hooks/LocalStorage/useLocalStorage'
 
 export const ThemeContext = createContext()
 
@@ -8,7 +8,7 @@ export const ThemeProvider = ({ children }) => {
 
   useEffect(() => {
     if (theme === 'dark') {
-      document.body.id = theme
+      document.body.id = 'dark'
     } else {
       document.body.id = 'light'
     }

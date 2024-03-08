@@ -1,7 +1,8 @@
 body {
   font-family: var(--font-family);
   background: var(--color-light-bg);
-  transition: 0.3s;
+  transition: all var(--transition-delay-fast);
+  color: var(--color-dark);
 }
 
 [id='dark'] {
@@ -12,7 +13,7 @@ body {
   --color-neutral-80: #fff;
   --color-neutral-100: #fff;
   --color-default: #fff;
-  color: var(--color-default) !important;
+  color: var(--color-default);
 
   p,
   a {
@@ -26,6 +27,8 @@ body {
     color: var(--color-default);
   }
   input {
+    color: var(--color-default);
+
     &:focus {
       border-color: var(--color-primary-90);
     }

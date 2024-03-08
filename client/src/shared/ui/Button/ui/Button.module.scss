@@ -15,7 +15,6 @@
 }
 
 .button {
-  transition: 0.3s !important;
   &:disabled {
     cursor: not-allowed;
     background-color: var(--color-light-gray);
@@ -25,9 +24,7 @@
 .primary {
   color: var(--color-white);
   background: var(--color-primary-90);
-  transition:
-    box-shadow var(--transition-delay-fast) ease,
-    opacity var(--transition-delay-fast) ease;
+  transition: all var(--transition-delay-fast);
 
   svg {
     width: 20px;
