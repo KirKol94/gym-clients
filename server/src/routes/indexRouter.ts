@@ -2,11 +2,11 @@ import type { Router, Request, Response } from 'express'
 import express from 'express'
 
 export const indexRouter = (): Router => {
-      const router = express.Router()
+  const router = express.Router()
 
-      router.get('/', async (req: Request, res: Response) => {
-            res.send({ message: 'ok' })
-      })
+  router.get('/', (req: Request, res: Response) => {
+    res.send({ message: 'ok' })
+  })
 
-      return router
+  return router
 }
