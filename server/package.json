@@ -5,8 +5,10 @@
   "main": "./dist/index.js",
   "scripts": {
     "start": "node ./dist/index.js",
-    "dev": "concurrently \"tsc --watch\" \"nodemon --inspect ./dist/index.js\"",
-    "prettier": "prettier --write ./src"
+    "dev": "concurrently \"tsc --watch\" \"nodemon --inspect ./dist/index.js\" DEV=true",
+    "prettier": "npx prettier --write ./src",
+    "eslint": "npx eslint --fix ./src/**/*.ts",
+    "lint": "concurrently \"npm run eslint\" \"npm run prettier\""
   },
   "keywords": [],
   "author": "",
@@ -26,9 +28,9 @@
     "eslint-plugin-n": "^16.6.2",
     "eslint-plugin-promise": "^6.1.1",
     "nodemon": "^3.1.0",
-    "prettier": "^3.2.5",
+    "prettier": "3.2.5",
     "ts-node": "^10.9.2",
-    "typescript": "^5.3.3"
+    "typescript": "^5.4.2"
   },
   "dependencies": {
     "cors": "^2.8.5",
