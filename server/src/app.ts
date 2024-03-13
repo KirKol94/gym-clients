@@ -1,7 +1,7 @@
 import cors from 'cors'
 import express, { json } from 'express'
 
-import { authRouter } from './routes/authRouter'
+import { authRouter } from './routes/auth/authRouter'
 
 export const app = express()
 app.use(cors())
