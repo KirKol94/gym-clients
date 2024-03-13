@@ -1,13 +1,14 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "## Запуск - ```npm run dev``` <- запуск сервера в режиме разработчки",
+  "description": "Сервер для CRM системы",
   "main": "./dist/index.js",
   "scripts": {
+    "build": "tsc",
     "start": "node ./dist/index.js",
     "dev": "concurrently \"tsc --watch\" \"nodemon --inspect ./dist/index.js\"",
     "prettier": "npx prettier --write ./src",
-    "eslint": "eslint . --ext ts,js --report-unused-disable-directives --max-warnings 0 --fix --ignore-path .gitignore",
+    "eslint": "eslint . --ext ts,js,json --report-unused-disable-directives --max-warnings 0 --fix --ignore-path .gitignore",
     "lint": "concurrently \"npm run eslint\" \"npm run prettier\""
   },
   "keywords": [],
