@@ -5,9 +5,9 @@
   "main": "./dist/index.js",
   "scripts": {
     "start": "node ./dist/index.js",
-    "dev": "concurrently \"tsc --watch\" \"nodemon --inspect ./dist/index.js\" DEV=true",
+    "dev": "concurrently \"tsc --watch\" \"nodemon --inspect ./dist/index.js\"",
     "prettier": "npx prettier --write ./src",
-    "eslint": "eslint . --ext ts --report-unused-disable-directives --max-warnings 0 --fix",
+    "eslint": "eslint . --ext ts,js --report-unused-disable-directives --max-warnings 0 --fix --ignore-path .gitignore",
     "lint": "concurrently \"npm run eslint\" \"npm run prettier\""
   },
   "keywords": [],
