@@ -2,7 +2,7 @@ import { config as dotenvConfig } from 'dotenv'
 
 import { app } from './app'
 
-dotenvConfig()
+dotenvConfig() // разрешаем доступ до process.env переменных
 
 const PORT = process.env.PORT ?? 3001
 
