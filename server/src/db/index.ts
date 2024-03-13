@@ -1,17 +1,15 @@
-const { Sequelize, DataTypes } = require('sequelize')
-const sqlite3 = require('sqlite3').verbose()
+import { Sequelize } from 'sequelize'
+import { verbose } from 'sqlite3'
 
-const UserModel = require('./models/User')
+import { UserModel } from './models/UserModel'
+
+verbose()
 
 const sequelize = new Sequelize({
   dialect: 'sqlite',
   storage: './database.db',
 })
 
-const User = UserModel(sequelize, DataTypes)
+export const User = UserModel(sequelize)
 
 sequelize.sync()
-
-module.exports = {
-  User,
-}
