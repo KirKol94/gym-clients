@@ -1,9 +1,9 @@
 import type { Database } from 'sqlite3'
+import cors from 'cors'
+import express from 'express'
+import { indexRouter } from './routes/indexRouter'
 import path from 'path'
 import sqlite3 from 'sqlite3'
-import express from 'express'
-import cors from 'cors'
-import { indexRouter } from './routes/indexRouter'
 
 const db: Database = new sqlite3.Database(path.resolve(__dirname, '..', 'database.db'))
 
