@@ -1,8 +1,7 @@
-import type { Request, Response, Router } from 'express'
-import express from 'express'
+import { type Request, type Response, Router } from 'express'
 
 export const indexRouter = (): Router => {
-   const router = express.Router()
+   const router = Router()
 
    router.get('/', (req: Request, res: Response) => {
       res.send({ message: 'ok' })
