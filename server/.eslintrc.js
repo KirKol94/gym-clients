@@ -7,7 +7,7 @@ module.exports = {
    env: {
       node: true,
    },
-   plugins: ['@typescript-eslint', 'prettier', 'import'],
+   plugins: ['@typescript-eslint', 'prettier', 'import', 'prefer-arrow'],
    extends: [
       'eslint:recommended',
       'plugin:@typescript-eslint/recommended',
@@ -55,5 +55,15 @@ module.exports = {
             },
          },
       ],
+      'prefer-arrow/prefer-arrow-functions': [
+         'error',
+         {
+            disallowPrototype: true,
+            singleReturnOnly: false,
+            classPropertiesAllowed: false,
+         },
+      ],
+      'prefer-arrow-callback': ['error', { allowNamedFunctions: true }],
+      'func-style': ['error', 'expression', { allowArrowFunctions: true }],
    },
 }
