@@ -1,4 +1,4 @@
-import type { Router, Request, Response } from 'express'
+import type { Request, Response, Router } from 'express'
 import express from 'express'
 
 export const indexRouter = (): Router => {

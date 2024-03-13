@@ -7,8 +7,8 @@
     "start": "node ./dist/index.js",
     "dev": "concurrently \"tsc --watch\" \"nodemon --inspect ./dist/index.js\" DEV=true",
     "prettier": "npx prettier --write ./src",
-    "eslint": "npx eslint --fix ./src/**/*.ts",
-    "lint": "concurrently \"npm run eslint\" \"npm run prettier\""
+    "eslint": "npx eslint --fix --ext .ts",
+    "lint": "concurrently \"tsc\" \"npm run eslint\" \"npm run prettier\""
   },
   "keywords": [],
   "author": "",
