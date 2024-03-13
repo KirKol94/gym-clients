@@ -1,7 +1,6 @@
 import { type Request, type Response, Router } from 'express'
 
 import type { LoginInputData } from './types'
-import type { Empty } from '../../types/Empty'
 
 export const authRouter = (): Router => {
   const router = Router()
