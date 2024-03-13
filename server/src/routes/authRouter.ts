@@ -1,5 +1,7 @@
 import { type Request, type Response, Router } from 'express'
 
+import type { Empty } from '../types/Empty'
+
 type LoginInputData = {
   login: string
   password: string
@@ -15,7 +17,7 @@ export const authRouter = (): Router => {
   })
 
   //   обработка /auth/login
-  router.post('/login', (req: Request<{}, {}, LoginInputData>, res: Response) => {
+  router.post('/login', (req: Request<Empty, Empty, LoginInputData>, res: Response) => {
     const { login, password } = req.body
     // проверяем входные данные и если всё ок - отправляем JWT
     res.send({ login, password })
