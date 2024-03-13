@@ -3,13 +3,47 @@
         "browser": true,
         "es2021": true
     },
-    "extends": "standard-with-typescript",
-    "overrides": [
+    "extends": [
+        "standard-with-typescript",
+        "plugin:prettier/recommended"
     ],
+    "plugins": [
+        "unused-imports",
+        "prefer-arrow"
+    ],
+    "overrides": [],
     "parserOptions": {
         "ecmaVersion": "latest",
         "sourceType": "module"
     },
     "rules": {
+        "prettier/prettier": [
+            "warn",
+            {
+                "endOfLine": "auto"
+            }
+        ],
+        "unused-imports/no-unused-imports": "error",
+        "prefer-arrow/prefer-arrow-functions": [
+            "error",
+            {
+                "disallowPrototype": true,
+                "singleReturnOnly": false,
+                "classPropertiesAllowed": false
+            }
+        ],
+        "prefer-arrow-callback": [
+            "error",
+            {
+                "allowNamedFunctions": true
+            }
+        ],
+        "func-style": [
+            "error",
+            "expression",
+            {
+                "allowArrowFunctions": true
+            }
+        ]
     }
 }
