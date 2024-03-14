@@ -1,11 +1,11 @@
 import { Router } from 'express'
 
-import { UserController } from '../../controllers/UserController'
+import { UserController } from '../controllers/UserController'
 
 export const authRouter = (): Router => {
   const router = Router()
 
-  router.get('/', UserController.findAll)
+  router.get('/all', UserController.findAll)
 
   router.post('/register', UserController.registerUser)
 
