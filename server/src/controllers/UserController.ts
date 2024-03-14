@@ -1,22 +1,52 @@
-import colors from 'colors'
+import { hashSync } from 'bcrypt'
+import type { Request, Response } from 'express'
 
 import { User } from '../db'
-import type { IUser } from '../types/IUser'
-
-User.sync({ force: true })
+import type { IUser, LoginInputData, RegisterInputData } from '../types/IUser'
 
 export const UserController = {
-  findAll: async () => {
-    const users = await User.findAll()
-    console.log(colors.bgYellow.black(JSON.stringify(users, null, 2)))
-  },
-  // TODO вынести этот тип отсюда и из authRouter в IUser.ts
-  saveUser: async (user: Pick<IUser, 'email' | 'password' | 'firstName' | 'lastName' | 'middleName'>) => {
+  // TODO эти данные клиент сможет получать только будучи авторизованными
+  findAll: async (req: Request, res: Response): Promise<void> => {
     try {
-      const newUser = await User.create(user)
-      console.log('Новый пользователь успешно добавлен:', newUser.toJSON())
+      const users = await User.findAll()
+      res.json({ users })
+    } catch (err) {
+      res.status(400).json({ message: (err as Error).message })
+    }
+  },
+
+  registerUser: async (
+    req: Request<Empty, MessageJSON, RegisterInputData>,
+    res: Response<MessageJSON>,
+  ): Promise<void> => {
+    const { password } = req.body
+    const hashedPassword = hashSync(password, 7)
+    console.log(hashedPassword)
+    try {
+      const [newUser, created]: [unknown, boolean] = await User.findOrCreate({
+        where: {
+          email: req.body.email,
+        },
+        defaults: {
+          ...req.body,
+          password: hashedPassword,
+        },
+      })
+      if (!created) {
+        throw new Error('Пользователь с таким email уже существует')
+      }
+      res.status(201).json({ message: `Пользователь с логином ${(newUser as IUser).email} создан` })
     } catch (error) {
-      console.error('Ошибка при создании пользователя:', error)
+      res.status(400).json({ message: (error as Error).message })
+    }
+  },
+
+  // TODO обработать функцию логина
+  loginUser: async (req: Request<Empty, Empty, LoginInputData>, res: Response) => {
+    try {
+      res.json({ message: 'ok' })
+    } catch (err) {
+      res.json({ message: (err as Error).message })
     }
   },
 }
