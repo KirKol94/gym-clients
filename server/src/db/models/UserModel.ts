@@ -30,11 +30,7 @@ export const UserModel = (sequelize: Sequelize) =>
       allowNull: false,
     },
 
-    middleName: {
-      type: DataTypes.STRING,
-    },
+    middleName: DataTypes.STRING,
 
-    avatarImg: {
-      type: DataTypes.STRING,
-    },
+    avatarImg: DataTypes.STRING,
   })
