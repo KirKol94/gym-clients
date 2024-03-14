@@ -14,7 +14,7 @@ const generateAccessToken = (id: number, email: string) => {
     id,
     email,
   }
-  return sign(payload, process.env.SECRET_KEY)
+  return sign(payload, process.env.SECRET_KEY, { expiresIn: '24h' })
 }
 
 export const UserController = {
