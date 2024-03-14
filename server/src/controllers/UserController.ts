@@ -49,7 +49,16 @@ export const UserController = {
   },
 
   // TODO обработать функцию логина
-  loginUser: async (req: Request<Empty, Empty, LoginInputData>, res: Response) => {
+  loginUser: async (
+    req: Request<Empty, MessageJSON | Result<ValidationError>, LoginInputData>,
+    res: Response<MessageJSON | Result<ValidationError>>,
+  ) => {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      res.status(400).json(errors)
+      return
+    }
+
     try {
       res.json({ message: 'ok' })
     } catch (err) {
