@@ -7,8 +7,6 @@ const sequelize = new Sequelize('sqlite:database.db')
 
 const User = UserModel(sequelize)
 
-User.sync({ force: true })
-
 const createUser = async (user: Pick<IUser, 'email' | 'password' | 'firstName' | 'lastName' | 'middleName'>) => {
   try {
     const newUser = await User.create(user)
@@ -19,10 +17,12 @@ const createUser = async (user: Pick<IUser, 'email' | 'password' | 'firstName' |
 }
 
 const newUser: Pick<IUser, 'email' | 'password' | 'firstName' | 'lastName' | 'middleName'> = {
-  email: 'kirkol94@ya.ru',
+  email: 'admin@ya.ru',
   password: 'qwerty123456',
-  firstName: 'kirill',
-  lastName: 'kolchanov',
-  middleName: 'olegovich',
+  firstName: 'admin',
+  lastName: 'admin',
+  middleName: 'admin',
 }
 createUser(newUser)
+
+User.sync()
