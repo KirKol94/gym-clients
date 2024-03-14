@@ -1,5 +1,4 @@
 import colors from 'colors'
-import type { Model } from 'sequelize'
 
 import { User } from '../db'
 import type { IUser } from '../types/IUser'
@@ -12,13 +11,21 @@ export const UserController = {
     console.log(colors.bgYellow.black(JSON.stringify(users, null, 2)))
   },
   // TODO вынести этот тип отсюда и из authRouter в IUser.ts
-  saveUser: async (user: Pick<IUser, 'email' | 'password' | 'firstName' | 'lastName' | 'middleName'>) => {
+  saveUser: async (
+    user: Pick<IUser, 'email' | 'password' | 'firstName' | 'lastName' | 'middleName'>,
+  ): Promise<void> => {
     try {
-      const [newUser, created]: [Model, boolean] = await User.findOrCreate(user)
+      const [newUser, created] = await User.findOrCreate({
+        where: {
+          email: user.email,
+        },
+        defaults: user,
+      })
       if (created) {
+        console.log('Новый пользователь успешно добавлен:', newUser.toJSON())
+      } else {
         throw new Error('Пользователь уже зарегистрирован')
       }
-      console.log('Новый пользователь успешно добавлен:', newUser.toJSON())
     } catch (error) {
       console.error('Ошибка при создании пользователя:', error)
     }
