@@ -1,5 +1,7 @@
 import { hashSync } from 'bcrypt'
 import type { Request, Response } from 'express'
+import type { Result, ValidationError } from 'express-validator'
+import { validationResult } from 'express-validator'
 
 import { User } from '../db'
 import type { IUser, LoginInputData, RegisterInputData } from '../types/IUser'
@@ -17,8 +19,14 @@ export const UserController = {
 
   registerUser: async (
     req: Request<Empty, MessageJSON, RegisterInputData>,
-    res: Response<MessageJSON>,
+    res: Response<MessageJSON | Result<ValidationError>>,
   ): Promise<void> => {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      res.status(400).json(errors)
+      return
+    }
+
     const { password } = req.body
     const hashedPassword = hashSync(password, 7)
     try {
