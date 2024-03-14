@@ -1,28 +1,7 @@
 import { Sequelize } from 'sequelize'
 
 import { UserModel } from './models/UserModel'
-import type { IUser } from '../types/IUser'
 
-const sequelize = new Sequelize('sqlite:database.db')
+export const sequelize = new Sequelize('sqlite:database.db')
 
-const User = UserModel(sequelize)
-
-const createUser = async (user: Pick<IUser, 'email' | 'password' | 'firstName' | 'lastName' | 'middleName'>) => {
-  try {
-    const newUser = await User.create(user)
-    console.log('Новый пользователь успешно добавлен:', newUser.toJSON())
-  } catch (error) {
-    console.error('Ошибка при создании пользователя:', error)
-  }
-}
-
-const newUser: Pick<IUser, 'email' | 'password' | 'firstName' | 'lastName' | 'middleName'> = {
-  email: 'admin@ya.ru',
-  password: 'qwerty123456',
-  firstName: 'admin',
-  lastName: 'admin',
-  middleName: 'admin',
-}
-createUser(newUser)
-
-User.sync()
+export const User = UserModel(sequelize)
