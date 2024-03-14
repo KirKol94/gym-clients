@@ -6,6 +6,8 @@ import { validationResult } from 'express-validator'
 import { User } from '../db'
 import type { IUser, LoginInputData, RegisterInputData } from '../types/IUser'
 
+type ResMsgs = MessageJSON | Result<ValidationError>
+
 export const UserController = {
   // TODO эти данные клиент сможет получать только будучи авторизованными
   findAll: async (req: Request, res: Response): Promise<void> => {
@@ -17,10 +19,7 @@ export const UserController = {
     }
   },
 
-  registerUser: async (
-    req: Request<Empty, MessageJSON, RegisterInputData>,
-    res: Response<MessageJSON | Result<ValidationError>>,
-  ): Promise<void> => {
+  registerUser: async (req: Request<Empty, ResMsgs, RegisterInputData>, res: Response<ResMsgs>): Promise<void> => {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
       res.status(400).json(errors)
@@ -49,10 +48,7 @@ export const UserController = {
   },
 
   // TODO обработать функцию логина
-  loginUser: async (
-    req: Request<Empty, MessageJSON | Result<ValidationError>, LoginInputData>,
-    res: Response<MessageJSON | Result<ValidationError>>,
-  ) => {
+  loginUser: async (req: Request<Empty, ResMsgs, LoginInputData>, res: Response<ResMsgs>) => {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
       res.status(400).json(errors)
