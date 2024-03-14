@@ -2,7 +2,7 @@ import cors from 'cors'
 import express, { json } from 'express'
 
 import { logRequestBody } from './middlewares/logRequestBody'
-import { authRouter } from './routes/auth/authRouter'
+import { authRouter } from './routes/usersRouter'
 
 export const app = express()
 

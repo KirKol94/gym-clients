@@ -5,3 +5,4 @@ import { UserModel } from './models/UserModel'
 export const sequelize = new Sequelize('sqlite:database.db')
 
 export const User = UserModel(sequelize)
+User.sync({ force: true })
