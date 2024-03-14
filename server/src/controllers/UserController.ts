@@ -1,9 +1,11 @@
+import { hashSync } from 'bcrypt'
 import type { Request, Response } from 'express'
 
 import { User } from '../db'
 import type { IUser, LoginInputData, RegisterInputData } from '../types/IUser'
-// TODO эти данные клиент сможет получать только будучи авторизованными
+
 export const UserController = {
+  // TODO эти данные клиент сможет получать только будучи авторизованными
   findAll: async (req: Request, res: Response): Promise<void> => {
     try {
       const users = await User.findAll()
@@ -17,12 +19,18 @@ export const UserController = {
     req: Request<Empty, MessageJSON, RegisterInputData>,
     res: Response<MessageJSON>,
   ): Promise<void> => {
+    const { password } = req.body
+    const hashedPassword = hashSync(password, 7)
+    console.log(hashedPassword)
     try {
       const [newUser, created]: [unknown, boolean] = await User.findOrCreate({
         where: {
           email: req.body.email,
         },
-        defaults: req.body,
+        defaults: {
+          ...req.body,
+          password: hashedPassword,
+        },
       })
       if (!created) {
         throw new Error('Пользователь с таким email уже существует')
