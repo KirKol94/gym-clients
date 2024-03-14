@@ -88,16 +88,16 @@ export const AuthForm = ({ type = authType.login }: AuthFormProps) => {
 
       <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
         <Input
-          {...register('username', {
-            required: 'Это поле обязательное',
-            minLength: {
-              value: 5,
-              message: 'Не менее 5 символов',
+          {...register('email', {
+            required: 'Обязательное поле',
+            pattern: {
+              value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+              message: 'Введите валидный email',
             },
           })}
-          error={errors?.username?.message}
-          inputName="Имя пользователя"
-          placeholder="Имя пользователя"
+          error={errors?.email?.message}
+          inputName="Email"
+          placeholder="Email"
         />
 
         <Input
@@ -120,19 +120,6 @@ export const AuthForm = ({ type = authType.login }: AuthFormProps) => {
 
         {type === authType.register && (
           <>
-            <Input
-              {...register('email', {
-                required: 'Обязательное поле',
-                pattern: {
-                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                  message: 'Введите валидный email',
-                },
-              })}
-              error={errors?.email?.message}
-              inputName="Email"
-              placeholder="Email"
-            />
-
             <Input
               {...register('firstName', {
                 required: 'Обязательное поле',
