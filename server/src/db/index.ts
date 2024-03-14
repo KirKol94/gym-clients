@@ -1,15 +1,10 @@
 import { Sequelize } from 'sequelize'
-import { verbose } from 'sqlite3'
 
 import { UserModel } from './models/UserModel'
 
-verbose()
+const sequelize = new Sequelize('sqlite:database.db')
 
-const sequelize = new Sequelize({
-  dialect: 'sqlite',
-  storage: './database.db',
-})
+const user = UserModel(sequelize)
 
-export const User = UserModel(sequelize)
-
-sequelize.sync()
+user.sync()
+sequelize.sync({ force: true })

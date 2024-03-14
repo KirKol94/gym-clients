@@ -3,6 +3,7 @@ import express, { json } from 'express'
 
 import { logRequestBody } from './middlewares/logRequestBody'
 import { authRouter } from './routes/auth/authRouter'
+import './db'
 
 export const app = express()
 

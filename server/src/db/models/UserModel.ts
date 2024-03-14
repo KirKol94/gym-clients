@@ -1,13 +1,40 @@
-import { type Sequelize, DataTypes as type } from 'sequelize'
+import type { Sequelize } from 'sequelize'
+import { DataTypes } from 'sequelize'
 
-export const UserModel = (sequelize: Sequelize) => {
-  return sequelize.define('user', {
-    id: type.INTEGER,
-    email: type.STRING,
-    firstName: type.STRING,
-    lastName: type.STRING,
-    middleName: type.STRING,
-    password: type.STRING,
-    userName: type.STRING,
+export const UserModel = (sequelize: Sequelize) =>
+  sequelize.define('user', {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+
+    firstName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+
+    middleName: {
+      type: DataTypes.STRING,
+    },
+
+    avatarImg: {
+      type: DataTypes.STRING,
+    },
   })
-}
