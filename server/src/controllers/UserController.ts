@@ -21,7 +21,6 @@ export const UserController = {
   ): Promise<void> => {
     const { password } = req.body
     const hashedPassword = hashSync(password, 7)
-    console.log(hashedPassword)
     try {
       const [newUser, created]: [unknown, boolean] = await User.findOrCreate({
         where: {
