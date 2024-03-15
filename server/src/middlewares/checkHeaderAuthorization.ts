@@ -1,5 +1,3 @@
-import { log } from 'console'
-
 import type { NextFunction, Request, Response } from 'express'
 import { verify } from 'jsonwebtoken'
 
