@@ -10,13 +10,12 @@ import { generateAccessToken } from '../utils/generateAccessToken'
 type ResMsgs = MessageJSON | Result<ValidationError>
 
 export const UserController = {
-  // TODO эти данные клиент сможет получать только будучи авторизованными
   findAll: async (req: Request, res: Response): Promise<void> => {
     try {
       const users = await User.findAll()
       res.json(users)
     } catch (err) {
-      res.status(400).json({ message: (err as Error).message })
+      res.status(400).json({ error: (err as Error).message })
     }
   },
 
@@ -40,12 +39,13 @@ export const UserController = {
           password: hashedPassword,
         },
       })
+
       if (!created) {
         throw new Error('Пользователь с таким email уже существует')
       }
       res.status(201).json({ message: `Пользователь с логином ${newUser.email} создан` })
     } catch (error) {
-      res.status(400).json({ message: (error as Error).message })
+      res.status(400).json({ error: (error as Error).message })
     }
   },
 
@@ -69,13 +69,13 @@ export const UserController = {
       const token = foundedUser?.id && generateAccessToken({ id: foundedUser.id, email: foundedUser.email })
 
       if (!validatedPassword) {
-        res.status(400).json({ message: 'Email или пароль не верно' })
+        res.status(400).json({ error: 'Email или пароль не верно' })
         return
       }
 
-      res.json({ message: token ? token : 'ошибка авторизации' })
+      res.json({ token: token ? token : 'ошибка авторизации' })
     } catch (err) {
-      res.json({ message: (err as Error).message })
+      res.json({ error: (err as Error).message })
     }
   },
 }
