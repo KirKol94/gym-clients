@@ -27,7 +27,6 @@ export const UserController = {
         },
       })
 
-      console.log(profileData?.dataValues)
       res.json(profileData?.dataValues)
     } catch (err) {
       res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({ error: (err as Error).message })
