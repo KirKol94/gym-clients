@@ -1,5 +1,4 @@
 import { Router } from 'express'
-import { check } from 'express-validator'
 
 import { UserController } from '../controllers/UserController'
 import { checkHeaderAuthorization } from '../middlewares/checkHeaderAuthorization'
