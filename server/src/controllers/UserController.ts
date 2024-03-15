@@ -2,6 +2,7 @@ import { compareSync, hashSync } from 'bcrypt'
 import type { Request, Response } from 'express'
 import type { Result, ValidationError } from 'express-validator'
 
+import { HttpStatusCodes } from '../const/HttpStatusCodes'
 import { User } from '../db'
 import type { LoginInputData, RegisterInputData } from '../types/IUser'
 import { generateAccessToken } from '../utils/generateAccessToken'
@@ -14,7 +15,7 @@ export const UserController = {
       const users = await User.findAll()
       res.json(users)
     } catch (err) {
-      res.status(400).json({ error: (err as Error).message })
+      res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({ error: (err as Error).message })
     }
   },
 
@@ -36,9 +37,9 @@ export const UserController = {
       if (!created) {
         throw new Error('Пользователь с таким email уже существует')
       }
-      res.status(201).json({ message: `Пользователь с логином ${newUser.email} создан` })
+      res.status(HttpStatusCodes.CREATED).json({ message: `Пользователь с логином ${newUser.email} создан` })
     } catch (error) {
-      res.status(400).json({ error: (error as Error).message })
+      res.status(HttpStatusCodes.CONFLICT).json({ error: (error as Error).message })
     }
   },
 
@@ -57,7 +58,7 @@ export const UserController = {
       const token = foundedUser?.id && generateAccessToken({ id: foundedUser.id, email: foundedUser.email })
 
       if (!validatedPassword) {
-        res.status(400).json({ error: 'Email или пароль не верно' })
+        res.status(HttpStatusCodes.UNAUTHORIZED).json({ error: 'Email или пароль не верно' })
         return
       }
 
