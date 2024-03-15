@@ -37,7 +37,12 @@ export const AuthForm = ({ type = authType.login }: AuthFormProps) => {
     reset,
     register,
     formState: { errors, isValid },
-  } = useForm<FormData>({ mode: 'onChange' })
+  } = useForm<FormData>({
+    mode: 'onChange',
+    defaultValues: {
+      middleName: null,
+    },
+  })
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
     type === authType.login && handleLogin(data)
@@ -51,16 +56,16 @@ export const AuthForm = ({ type = authType.login }: AuthFormProps) => {
 
   const handleLogin = async (data: FormData) => {
     const authData = {
-      username: data.username,
+      email: data.email,
       password: data.password,
     }
     await sendAuthData(authData)
   }
 
   useEffect(() => {
-    if (authStatus === 'fulfilled' && resAuthData?.Token) {
+    if (authStatus === 'fulfilled' && resAuthData?.token) {
       dispatch(userActions.setIsAuth())
-      localStorage.setItem(ACCESS_TOKEN_LOCAL_STORAGE_KEY, resAuthData?.Token)
+      localStorage.setItem(ACCESS_TOKEN_LOCAL_STORAGE_KEY, resAuthData?.token)
     }
   }, [authStatus, dispatch, resAuthData])
 
@@ -142,7 +147,7 @@ export const AuthForm = ({ type = authType.login }: AuthFormProps) => {
             />
 
             <Input
-              {...register('middleName', {
+              {...register('lastName', {
                 required: 'Обязательное поле',
                 minLength: {
                   value: 2,
@@ -163,7 +168,7 @@ export const AuthForm = ({ type = authType.login }: AuthFormProps) => {
             />
 
             <Input
-              {...register('lastName', {
+              {...register('middleName', {
                 minLength: {
                   value: 6,
                   message: 'Не менее 6 символов',

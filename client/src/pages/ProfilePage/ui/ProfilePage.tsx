@@ -1,6 +1,7 @@
 import type { ChangeEvent } from 'react'
 import { useEffect, useRef, useState } from 'react'
 
+import type { User } from '@/entities/User'
 import { useGetProfileData, userActions, useSendAvatar, useUpdateProfileData } from '@/entities/User'
 import Avatar from '@/shared/assets/icons/avatar.svg?react'
 import Edit from '@/shared/assets/icons/edit.svg?react'
@@ -19,10 +20,10 @@ export const ProfilePage = () => {
   const [updateProfileData] = useUpdateProfileData()
   const inputFileRef = useRef<HTMLInputElement>(null)
   const [isEdit, setIsEdit] = useState(false)
-  const [profileData, setProfileData] = useState({
+  const [profileData, setProfileData] = useState<Pick<User, 'firstName' | 'lastName' | 'middleName' | 'email'>>({
     firstName: '',
-    middleName: '',
     lastName: '',
+    middleName: '',
     email: '',
   })
 
@@ -146,10 +147,10 @@ export const ProfilePage = () => {
             <Trash />
           </RoundButton>
 
-          {profile?.avatar ? (
+          {profile?.avatarImg ? (
             <img
               className={cls.avatar__img}
-              src={import.meta.env.DEV ? profile.avatar.replace('backend', 'localhost') : profile.avatar}
+              src={import.meta.env.DEV ? profile.avatarImg.replace('backend', 'localhost') : profile.avatarImg}
               alt="User Avatar"
             />
           ) : (
@@ -167,22 +168,25 @@ export const ProfilePage = () => {
           onChange={handleChange}
           disabled={!isEdit}
         />
+
         <Input
           inputName="Фамилия"
-          name="middleName"
-          placeholder={profile?.middleName}
-          value={isEdit ? profileData.middleName : ''}
-          onChange={handleChange}
-          disabled={!isEdit}
-        />
-        <Input
-          inputName="Отчество"
           name="lastName"
           placeholder={profile?.lastName}
           value={isEdit ? profileData.lastName : ''}
           onChange={handleChange}
           disabled={!isEdit}
         />
+
+        <Input
+          inputName="Отчество"
+          name="middleName"
+          placeholder={profile?.middleName || ''}
+          value={isEdit && profile?.middleName ? profile?.middleName : ''}
+          onChange={handleChange}
+          disabled={!isEdit}
+        />
+
         <Input
           inputName="Email"
           name="email"

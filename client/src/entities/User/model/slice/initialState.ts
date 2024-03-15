@@ -12,18 +12,7 @@ export const initialState: InitialState = {
     firstName: '',
     middleName: '',
     lastName: '',
-    username: '',
     email: '',
-    avatar: '',
-    accountNonExpired: false,
-    accountNonLocked: false,
-    credentialsNonExpired: false,
-    roles: [
-      {
-        id: 0,
-        roleName: '',
-      },
-    ],
-    enabled: false,
+    avatarImg: '',
   },
 }

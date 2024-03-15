@@ -17,7 +17,6 @@ export const authRouter = (): Router => {
         .contains(' '),
       check('firstName', 'имя должно быть не менее 2 и не более 20 символов').isLength({ min: 2, max: 20 }),
       check('lastName', 'фамилия должна быть не менее 2 и не более 24 символов').isLength({ min: 2, max: 24 }),
-      check('middleName', 'отчество должно быть не менее 6 и не более 24 символов').isLength({ min: 2, max: 24 }),
     ],
     validateInput,
     UserController.registerUser,

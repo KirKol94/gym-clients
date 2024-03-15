@@ -6,7 +6,7 @@ const profileApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({
     getProfileData: build.query<IProfileData, void>({
       query: () => ({
-        url: 'user/profile',
+        url: 'profile',
       }),
     }),
     updateProfileData: build.mutation<
