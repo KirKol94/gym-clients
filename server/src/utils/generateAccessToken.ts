@@ -1,5 +1,7 @@
 import { sign } from 'jsonwebtoken'
 
+import { getSecretKey } from '../const'
+
 export const generateAccessToken = (payload: Record<string, string>) => {
-  return sign(payload, SECRET_KEY, { expiresIn: '24h' })
+  return sign(payload, getSecretKey(), { expiresIn: '24h' })
 }
