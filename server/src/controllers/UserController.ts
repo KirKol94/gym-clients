@@ -25,6 +25,7 @@ export const UserController = {
           id: dataFromToken.id,
           email: dataFromToken.email,
         },
+        attributes: { exclude: ['password'] },
       })
 
       res.json(profileData?.dataValues)
@@ -35,7 +36,9 @@ export const UserController = {
 
   findAll: async (req: Request, res: Response): Promise<void> => {
     try {
-      const users = await User.findAll()
+      const users = await User.findAll({
+        attributes: { exclude: ['password'] },
+      })
       res.json(users)
     } catch (err) {
       res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({ error: (err as Error).message })

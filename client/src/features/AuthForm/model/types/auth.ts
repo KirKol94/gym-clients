@@ -4,8 +4,8 @@ export const authType = {
 } as const
 
 export interface ReqAuthData {
-  username: string
+  email: string
   password: string
 }
 
-export type ResAuthData = { Token: string }
+export type ResAuthData = { token: string }
