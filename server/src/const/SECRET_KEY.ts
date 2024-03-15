@@ -1,0 +1,1 @@
+export const SECRET_KEY = 'ACCESS_TOKEN_SECRET_KEY'
