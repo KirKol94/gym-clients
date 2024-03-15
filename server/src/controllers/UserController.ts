@@ -2,20 +2,12 @@ import { compareSync, hashSync } from 'bcrypt'
 import type { Request, Response } from 'express'
 import type { Result, ValidationError } from 'express-validator'
 import { validationResult } from 'express-validator'
-import { sign } from 'jsonwebtoken'
 
 import { User } from '../db'
 import type { IUser, LoginInputData, RegisterInputData } from '../types/IUser'
+import { generateAccessToken } from '../utils/generateAccessToken'
 
 type ResMsgs = MessageJSON | Result<ValidationError>
-
-const generateAccessToken = (id: number, email: string) => {
-  const payload = {
-    id,
-    email,
-  }
-  return sign(payload, process.env.SECRET_KEY, { expiresIn: '24h' })
-}
 
 export const UserController = {
   // TODO эти данные клиент сможет получать только будучи авторизованными
@@ -56,7 +48,6 @@ export const UserController = {
     }
   },
 
-  // TODO обработать функцию логина
   loginUser: async (req: Request<Empty, ResMsgs, LoginInputData>, res: Response<ResMsgs>) => {
     const errors = validationResult(req)
     const { email, password } = req.body
@@ -75,7 +66,7 @@ export const UserController = {
       if (!validatedPassword) {
         res.status(400).json({ message: 'Email или пароль не верно' })
       }
-      const token = generateAccessToken((foundedUser as IUser).id, (foundedUser as IUser).email)
+      const token = generateAccessToken({ id: (foundedUser as IUser).id, email: (foundedUser as IUser).email })
       res.json({ message: token })
     } catch (err) {
       res.json({ message: (err as Error).message })
