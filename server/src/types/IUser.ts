@@ -6,6 +6,8 @@ export type IUser = {
   lastName: string
   middleName?: string | null
   avatarImg?: string | null
+  createdAt?: string
+  updatedAt?: string
 }
 
 // из типа IUser достаём следующие поля для определения в типе

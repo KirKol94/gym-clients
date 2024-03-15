@@ -4,12 +4,36 @@ import type { Result, ValidationError } from 'express-validator'
 
 import { HttpStatusCodes } from '../const/HttpStatusCodes'
 import { User } from '../db'
-import type { LoginInputData, RegisterInputData } from '../types/IUser'
+import type { IUser, LoginInputData, RegisterInputData } from '../types/IUser'
+import { decodeToken } from '../utils/decodeToken'
 import { generateAccessToken } from '../utils/generateAccessToken'
 
 type ResMsgs = MessageJSON | Result<ValidationError>
 
 export const UserController = {
+  getProfile: async (req: Request, res: Response<IUser | ResMsgs>): Promise<void> => {
+    try {
+      const decodedToken = decodeToken(req)
+      if (typeof decodeToken === 'string') {
+        res.status(HttpStatusCodes.UNAUTHORIZED).json({ error: 'авторизуйтесь' })
+        throw new Error('Невалидный токен')
+      }
+
+      const dataFromToken = decodedToken as { id: number; email: string }
+      const profileData = await User.findOne({
+        where: {
+          id: dataFromToken.id,
+          email: dataFromToken.email,
+        },
+      })
+
+      console.log(profileData?.dataValues)
+      res.json(profileData?.dataValues)
+    } catch (err) {
+      res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({ error: (err as Error).message })
+    }
+  },
+
   findAll: async (req: Request, res: Response): Promise<void> => {
     try {
       const users = await User.findAll()
