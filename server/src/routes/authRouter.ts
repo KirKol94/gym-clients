@@ -2,6 +2,7 @@ import { Router } from 'express'
 import { check } from 'express-validator'
 
 import { UserController } from '../controllers/UserController'
+import { validateInput } from '../middlewares/validateInput'
 
 export const authRouter = (): Router => {
   const router = Router()
@@ -18,6 +19,7 @@ export const authRouter = (): Router => {
       check('lastName', 'фамилия должна быть не менее 2 и не более 24 символов').isLength({ min: 2, max: 24 }),
       check('middleName', 'отчество должно быть не менее 6 и не более 24 символов').isLength({ min: 2, max: 24 }),
     ],
+    validateInput,
     UserController.registerUser,
   )
 
@@ -30,6 +32,7 @@ export const authRouter = (): Router => {
         .not()
         .contains(' '),
     ],
+    validateInput,
     UserController.loginUser,
   )
 
