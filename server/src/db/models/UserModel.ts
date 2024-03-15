@@ -1,8 +1,12 @@
-import type { Sequelize } from 'sequelize'
+import type { Model, Sequelize } from 'sequelize'
 import { DataTypes } from 'sequelize'
 
+import type { IUser } from '../../types/IUser'
+
+export interface UserInstance extends Model<IUser>, IUser {}
+
 export const UserModel = (sequelize: Sequelize) =>
-  sequelize.define('user', {
+  sequelize.define<UserInstance>('user', {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
