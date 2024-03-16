@@ -35,13 +35,33 @@ export const UserController = {
 
   updateProfile: async (
     req: Request<Empty, ResMsgs, Pick<IUser, 'firstName' | 'lastName' | 'middleName' | 'email'>>,
-    res: Response<ResMsgs>,
+    res: Response<ResMsgs | IUser>,
   ): Promise<void> => {
     const newData = req.body
 
     try {
-      console.log(newData)
-      res.status(HttpStatusCodes.BAD_REQUEST).json({ message: 'updated' })
+      const tokenData = JWT.decode(req)
+
+      if (typeof tokenData === 'string') {
+        throw new Error('Требуется авторизация')
+      }
+
+      await User.update(newData, {
+        where: {
+          id: tokenData.id,
+          email: tokenData.email,
+        },
+      })
+
+      const updatedProfile = (await User.findOne({
+        where: {
+          id: tokenData.id,
+          email: tokenData.email,
+        },
+        attributes: { exclude: ['id', 'password', 'createdAt', 'updatedAt'] },
+      })) as IUser
+
+      res.status(HttpStatusCodes.OK).json(updatedProfile)
     } catch (error) {
       console.log((error as Error).message)
       res.status(HttpStatusCodes.BAD_REQUEST).json({ error: (error as Error).message })

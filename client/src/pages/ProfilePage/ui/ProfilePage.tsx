@@ -45,8 +45,7 @@ export const ProfilePage = () => {
 
     try {
       if (profile) {
-        const updatedData = profileData
-        await updateProfileData(updatedData)
+        await updateProfileData(profileData)
         refetch()
       } else {
         throw new Error('Отсутствуют данные профиля')
@@ -182,7 +181,7 @@ export const ProfilePage = () => {
           inputName="Отчество"
           name="middleName"
           placeholder={profile?.middleName || ''}
-          value={isEdit && profile?.middleName ? profile?.middleName : ''}
+          value={isEdit && profileData?.middleName ? profileData?.middleName : ''}
           onChange={handleChange}
           disabled={!isEdit}
         />
