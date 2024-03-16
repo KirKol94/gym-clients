@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from 'express'
 
 import { HttpStatusCodes } from '../const/HttpStatusCodes'
-import { decodeToken } from '../utils/decodeToken'
+import { JWT } from '../utils/JWT'
 
 export const checkHeaderAuthorization = (req: Request, res: Response, next: NextFunction) => {
   // пропускаем метод опшенс
@@ -10,7 +10,7 @@ export const checkHeaderAuthorization = (req: Request, res: Response, next: Next
   }
 
   try {
-    const decodedData = decodeToken(req)
+    const decodedData = JWT.decode(req)
     /**
      * возвращается либо строка либо JwtPayload
      * строка нас не интересует (значит токен плохой)

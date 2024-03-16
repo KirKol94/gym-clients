@@ -5,16 +5,15 @@ import type { Result, ValidationError } from 'express-validator'
 import { HttpStatusCodes } from '../const/HttpStatusCodes'
 import { User } from '../db'
 import type { IUser, LoginInputData, RegisterInputData } from '../types/IUser'
-import { decodeToken } from '../utils/decodeToken'
-import { generateAccessToken } from '../utils/generateAccessToken'
+import { JWT } from '../utils/JWT'
 
 type ResMsgs = MessageJSON | Result<ValidationError>
 
 export const UserController = {
   getProfile: async (req: Request, res: Response<IUser | ResMsgs>): Promise<void> => {
     try {
-      const decodedToken = decodeToken(req)
-      if (typeof decodeToken === 'string') {
+      const decodedToken = JWT.decode(req)
+      if (typeof decodedToken === 'string') {
         res.status(HttpStatusCodes.UNAUTHORIZED).json({ error: 'авторизуйтесь' })
         throw new Error('Невалидный токен')
       }
@@ -81,7 +80,7 @@ export const UserController = {
 
       const validatedPassword = foundedUser && compareSync(password, foundedUser.password)
 
-      const token = foundedUser?.id && generateAccessToken({ id: foundedUser.id, email: foundedUser.email })
+      const token = foundedUser?.id && JWT.generate({ id: foundedUser.id, email: foundedUser.email })
 
       if (!validatedPassword) {
         res.status(HttpStatusCodes.UNAUTHORIZED).json({ error: 'Email или пароль не верно' })
