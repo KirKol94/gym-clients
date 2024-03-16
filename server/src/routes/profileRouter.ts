@@ -10,5 +10,7 @@ export const profilesRouter = (): Router => {
 
   router.get('/', UserController.getProfile)
 
+  router.put('/update', UserController.updateProfile)
+
   return router
 }
