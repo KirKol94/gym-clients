@@ -25,7 +25,7 @@ export const UserController = {
           id: dataFromToken.id,
           email: dataFromToken.email,
         },
-        attributes: { exclude: ['password'] },
+        attributes: { exclude: ['password', 'createdAt', 'updatedAt'] },
       })
 
       res.json(profileData?.dataValues)
@@ -37,7 +37,7 @@ export const UserController = {
   findAll: async (req: Request, res: Response): Promise<void> => {
     try {
       const users = await User.findAll({
-        attributes: { exclude: ['password'] },
+        attributes: { exclude: ['password', 'createdAt', 'updatedAt'] },
       })
       res.json(users)
     } catch (err) {
