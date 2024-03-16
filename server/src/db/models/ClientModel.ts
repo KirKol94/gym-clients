@@ -13,11 +13,7 @@ ClientModel.init(
       primaryKey: true,
     },
 
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-    },
+    email: DataTypes.STRING,
 
     firstName: {
       type: DataTypes.STRING,
@@ -31,18 +27,16 @@ ClientModel.init(
 
     middleName: DataTypes.STRING,
 
-    birthday: {
+    birthday: DataTypes.STRING,
+
+    personalTraningCount: DataTypes.INTEGER,
+
+    mobilePhone: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
-    personalTraningCount: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    mobilePhone: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
+
     sex: {
       type: DataTypes.INTEGER,
       allowNull: false,
