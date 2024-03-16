@@ -9,16 +9,18 @@ const profileApi = rtkApi.injectEndpoints({
         url: 'profile',
       }),
     }),
+
     updateProfileData: build.mutation<
       IProfileData,
-      Pick<IProfileData, 'id' | 'firstName' | 'middleName' | 'lastName' | 'email'>
+      Pick<IProfileData, 'firstName' | 'middleName' | 'lastName' | 'email'>
     >({
       query: (body) => ({
-        url: 'user/update',
+        url: 'profile/update',
         method: 'put',
         body,
       }),
     }),
+
     sendAvatar: build.mutation({
       query: (body) => ({
         url: 'user/update',

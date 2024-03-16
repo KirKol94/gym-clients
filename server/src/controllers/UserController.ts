@@ -33,6 +33,21 @@ export const UserController = {
     }
   },
 
+  updateProfile: async (
+    req: Request<Empty, ResMsgs, Pick<IUser, 'firstName' | 'lastName' | 'middleName' | 'email'>>,
+    res: Response<ResMsgs>,
+  ): Promise<void> => {
+    const newData = req.body
+
+    try {
+      console.log(newData)
+      res.status(HttpStatusCodes.BAD_REQUEST).json({ message: 'updated' })
+    } catch (error) {
+      console.log((error as Error).message)
+      res.status(HttpStatusCodes.BAD_REQUEST).json({ error: (error as Error).message })
+    }
+  },
+
   findAll: async (req: Request, res: Response): Promise<void> => {
     try {
       const users = await User.findAll({

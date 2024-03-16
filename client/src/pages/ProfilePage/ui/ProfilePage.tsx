@@ -36,7 +36,7 @@ export const ProfilePage = () => {
     }))
   }
 
-  const handleEdit = () => {
+  const activateEditMode = () => {
     setIsEdit(true)
   }
 
@@ -45,7 +45,7 @@ export const ProfilePage = () => {
 
     try {
       if (profile) {
-        const updatedData = { id: profile.id, ...profileData }
+        const updatedData = profileData
         await updateProfileData(updatedData)
         refetch()
       } else {
@@ -195,7 +195,7 @@ export const ProfilePage = () => {
           onChange={handleChange}
           disabled={!isEdit}
         />
-        <Button size={buttonSize.m} className={cls.button} onClick={isEdit ? handleSubmit : handleEdit}>
+        <Button size={buttonSize.m} className={cls.button} onClick={isEdit ? handleSubmit : activateEditMode}>
           {isEdit ? 'Сохранить' : 'Редактировать'}
         </Button>
       </div>
