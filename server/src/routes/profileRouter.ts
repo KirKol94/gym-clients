@@ -1,4 +1,4 @@
-import { existsSync, mkdir, writeFile } from 'fs'
+import { existsSync, mkdir, unlink, writeFile } from 'fs'
 import { resolve } from 'path'
 import { promisify } from 'util'
 
@@ -29,7 +29,7 @@ export const profilesRouter = (): Router => {
       res.sendFile(user?.avatarImgPath)
     } catch (error) {
       console.log(error)
-      res.send(error.message)
+      res.send((error as Error).message)
     }
   })
 
@@ -52,10 +52,12 @@ export const profilesRouter = (): Router => {
 
       await writeFileAsync(imagePath, decodedImage)
 
+      const baseUrl = process.env.BASE_URL || 'http://localhost:'
+      const port = process.env.PORT || 3001
       await User.update(
         {
           avatarImgPath: imagePath,
-          avatarImg: process.env.BASE_URL + process.env.PORT + '/profile/img/' + req.body.id,
+          avatarImg: baseUrl + port + '/profile/img/' + req.body.id,
         },
         {
           where: {
@@ -71,9 +73,22 @@ export const profilesRouter = (): Router => {
     }
   })
 
-  router.delete('/img/:id', [checkHeaderAuthorization], async (req, res) => {
+  router.delete('/img/:id', [checkHeaderAuthorization], async (req: Request, res: Response) => {
     try {
       const id = req.params.id
+
+      const profile = await User.findOne({
+        where: {
+          id,
+        },
+      })
+
+      if (!profile?.avatarImgPath) {
+        throw new Error('изображение не найдено')
+      }
+
+      const unlinkAsync = promisify(unlink)
+      unlinkAsync(profile?.avatarImgPath)
 
       await User.update(
         { avatarImg: null, avatarImgPath: null },
@@ -87,7 +102,7 @@ export const profilesRouter = (): Router => {
       res.status(HttpStatusCodes.OK).send({ message: 'изображение удалено' })
     } catch (error) {
       console.log(error)
-      res.send(error.message)
+      res.send((error as Error).message)
     }
   })
 

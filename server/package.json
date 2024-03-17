@@ -9,7 +9,7 @@
     "dev": "concurrently \"tsc -w\" \"nodemon --inspect ./dist/index.js\"",
     "prettier": "npx prettier --write ./src",
     "eslint": "eslint . --ext ts --report-unused-disable-directives --max-warnings 0 --fix",
-    "lint": "concurrently \"npm run eslint\" \"npm run prettier\""
+    "lint": "tsc && npm run eslint && npm run prettier"
   },
   "keywords": [],
   "author": "",
