@@ -36,5 +36,7 @@ export const UserModel = (sequelize: Sequelize) =>
 
     middleName: DataTypes.STRING,
 
+    avatarImgPath: DataTypes.STRING,
+
     avatarImg: DataTypes.STRING,
   })
