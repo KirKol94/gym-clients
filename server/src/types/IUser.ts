@@ -6,6 +6,7 @@ export type IUser = {
   lastName: string
   middleName?: string | null
   avatarImg?: string | null
+  avatarImgPath?: string | null
   createdAt?: string
   updatedAt?: string
 }

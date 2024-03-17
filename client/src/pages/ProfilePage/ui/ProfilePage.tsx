@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 
 import type { User } from '@/entities/User'
 import { useGetProfileData, userActions, useSendAvatar, useUpdateProfileData } from '@/entities/User'
+import { useRemoveAvatar } from '@/entities/User/model/api/profileApi'
 import Avatar from '@/shared/assets/icons/avatar.svg?react'
 import Edit from '@/shared/assets/icons/edit.svg?react'
 import Trash from '@/shared/assets/icons/trash.svg?react'
@@ -16,6 +17,7 @@ import cls from './ProfilePage.module.scss'
 export const ProfilePage = () => {
   const dispatch = useAppDispatch()
   const { data: profile, isSuccess: isProfileSuccess, refetch } = useGetProfileData()
+  const [removeAvatar] = useRemoveAvatar()
   const [sendAvatar] = useSendAvatar()
   const [updateProfileData] = useUpdateProfileData()
   const inputFileRef = useRef<HTMLInputElement>(null)
@@ -36,7 +38,7 @@ export const ProfilePage = () => {
     }))
   }
 
-  const handleEdit = () => {
+  const activateEditMode = () => {
     setIsEdit(true)
   }
 
@@ -45,8 +47,7 @@ export const ProfilePage = () => {
 
     try {
       if (profile) {
-        const updatedData = { id: profile.id, ...profileData }
-        await updateProfileData(updatedData)
+        await updateProfileData(profileData)
         refetch()
       } else {
         throw new Error('Отсутствуют данные профиля')
@@ -101,6 +102,11 @@ export const ProfilePage = () => {
     }
   }
 
+  const removeAvatarHandler = async () => {
+    await removeAvatar(profile?.id)
+    refetch()
+  }
+
   const handleChangeFileInput = async () => {
     handleUploadIng()
   }
@@ -143,16 +149,17 @@ export const ProfilePage = () => {
           >
             <Edit />
           </RoundButton>
-          <RoundButton className={cls.avatar__trash} size={roundButtonSize.medium} theme={roundButtonTheme.secondary}>
+          <RoundButton
+            className={cls.avatar__trash}
+            size={roundButtonSize.medium}
+            theme={roundButtonTheme.secondary}
+            onClick={removeAvatarHandler}
+          >
             <Trash />
           </RoundButton>
 
           {profile?.avatarImg ? (
-            <img
-              className={cls.avatar__img}
-              src={import.meta.env.DEV ? profile.avatarImg.replace('backend', 'localhost') : profile.avatarImg}
-              alt="User Avatar"
-            />
+            <img className={cls.avatar__img} src={profile.avatarImg} alt="User Avatar" />
           ) : (
             <div className={cls.avatar__fake}>
               <Avatar />
@@ -182,7 +189,7 @@ export const ProfilePage = () => {
           inputName="Отчество"
           name="middleName"
           placeholder={profile?.middleName || ''}
-          value={isEdit && profile?.middleName ? profile?.middleName : ''}
+          value={isEdit && profileData?.middleName ? profileData?.middleName : ''}
           onChange={handleChange}
           disabled={!isEdit}
         />
@@ -195,7 +202,7 @@ export const ProfilePage = () => {
           onChange={handleChange}
           disabled={!isEdit}
         />
-        <Button size={buttonSize.m} className={cls.button} onClick={isEdit ? handleSubmit : handleEdit}>
+        <Button size={buttonSize.m} className={cls.button} onClick={isEdit ? handleSubmit : activateEditMode}>
           {isEdit ? 'Сохранить' : 'Редактировать'}
         </Button>
       </div>

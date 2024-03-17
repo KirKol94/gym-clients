@@ -6,6 +6,5 @@
   "printWidth": 120,
   "tabWidth": 2,
   "endOfLine": "lf",
-  "arrowParens": "always",
   "parser": "typescript"
 }
