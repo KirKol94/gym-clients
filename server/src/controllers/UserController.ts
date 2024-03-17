@@ -22,7 +22,6 @@ export const UserController = {
       const profileData = await User.findOne({
         where: {
           id: dataFromToken.id,
-          email: dataFromToken.email,
         },
         attributes: { exclude: ['password', 'createdAt', 'updatedAt'] },
       })
