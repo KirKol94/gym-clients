@@ -4,69 +4,12 @@ import type { Result, ValidationError } from 'express-validator'
 
 import { HttpStatusCodes } from '../const/HttpStatusCodes'
 import { User } from '../db'
-import type { IUser, LoginInputData, RegisterInputData } from '../types/IUser'
+import type { LoginInputData, RegisterInputData } from '../types/IUser'
 import { JWT } from '../utils/JWT'
 
 type ResMsgs = MessageJSON | Result<ValidationError>
 
 export const UserController = {
-  getProfile: async (req: Request, res: Response<IUser | ResMsgs>): Promise<void> => {
-    try {
-      const decodedToken = JWT.decode(req)
-      if (typeof decodedToken === 'string') {
-        res.status(HttpStatusCodes.UNAUTHORIZED).json({ error: 'авторизуйтесь' })
-        throw new Error('Невалидный токен')
-      }
-
-      const dataFromToken = decodedToken as { id: number; email: string }
-      const profileData = await User.findOne({
-        where: {
-          id: dataFromToken.id,
-        },
-        attributes: { exclude: ['password', 'createdAt', 'updatedAt', 'avatarImgPath'] },
-      })
-
-      res.json(profileData?.dataValues)
-    } catch (err) {
-      res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({ error: (err as Error).message })
-    }
-  },
-
-  updateProfile: async (
-    req: Request<Empty, ResMsgs, Pick<IUser, 'firstName' | 'lastName' | 'middleName' | 'email'>>,
-    res: Response<ResMsgs | IUser>,
-  ): Promise<void> => {
-    const newData = req.body
-
-    try {
-      const tokenData = JWT.decode(req)
-
-      if (typeof tokenData === 'string') {
-        throw new Error('Требуется авторизация')
-      }
-
-      await User.update(newData, {
-        where: {
-          id: tokenData.id,
-          email: tokenData.email,
-        },
-      })
-
-      const updatedProfile = (await User.findOne({
-        where: {
-          id: tokenData.id,
-          email: tokenData.email,
-        },
-        attributes: { exclude: ['id', 'password', 'createdAt', 'updatedAt'] },
-      })) as IUser
-
-      res.status(HttpStatusCodes.OK).json(updatedProfile)
-    } catch (error) {
-      console.log((error as Error).message)
-      res.status(HttpStatusCodes.BAD_REQUEST).json({ error: (error as Error).message })
-    }
-  },
-
   findAll: async (req: Request, res: Response): Promise<void> => {
     try {
       const users = await User.findAll({
