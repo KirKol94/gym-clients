@@ -104,6 +104,7 @@ export const ProfilePage = () => {
 
   const removeAvatarHandler = async () => {
     await removeAvatar(profile?.id)
+    refetch()
   }
 
   const handleChangeFileInput = async () => {
