@@ -23,7 +23,7 @@ export const UserController = {
         where: {
           id: dataFromToken.id,
         },
-        attributes: { exclude: ['password', 'createdAt', 'updatedAt'] },
+        attributes: { exclude: ['password', 'createdAt', 'updatedAt', 'avatarImgPath'] },
       })
 
       res.json(profileData?.dataValues)
