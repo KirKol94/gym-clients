@@ -23,12 +23,19 @@ const profileApi = rtkApi.injectEndpoints({
 
     sendAvatar: build.mutation({
       query: (body) => ({
-        url: 'user/update',
+        url: '/profile/img',
         method: 'put',
         body,
         headers: {
           'Content-Type': 'application/json',
         },
+      }),
+    }),
+
+    removeAvatar: build.mutation({
+      query: (id) => ({
+        url: `/profile/img/${id}`,
+        method: 'delete',
       }),
     }),
   }),
@@ -37,3 +44,4 @@ const profileApi = rtkApi.injectEndpoints({
 export const useUpdateProfileData = profileApi.useUpdateProfileDataMutation
 export const useGetProfileData = profileApi.useGetProfileDataQuery
 export const useSendAvatar = profileApi.useSendAvatarMutation
+export const useRemoveAvatar = profileApi.useRemoveAvatarMutation

@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 
 import type { User } from '@/entities/User'
 import { useGetProfileData, userActions, useSendAvatar, useUpdateProfileData } from '@/entities/User'
+import { useRemoveAvatar } from '@/entities/User/model/api/profileApi'
 import Avatar from '@/shared/assets/icons/avatar.svg?react'
 import Edit from '@/shared/assets/icons/edit.svg?react'
 import Trash from '@/shared/assets/icons/trash.svg?react'
@@ -16,6 +17,7 @@ import cls from './ProfilePage.module.scss'
 export const ProfilePage = () => {
   const dispatch = useAppDispatch()
   const { data: profile, isSuccess: isProfileSuccess, refetch } = useGetProfileData()
+  const [removeAvatar] = useRemoveAvatar()
   const [sendAvatar] = useSendAvatar()
   const [updateProfileData] = useUpdateProfileData()
   const inputFileRef = useRef<HTMLInputElement>(null)
@@ -100,6 +102,10 @@ export const ProfilePage = () => {
     }
   }
 
+  const removeAvatarHandler = async () => {
+    await removeAvatar(profile?.id)
+  }
+
   const handleChangeFileInput = async () => {
     handleUploadIng()
   }
@@ -142,16 +148,17 @@ export const ProfilePage = () => {
           >
             <Edit />
           </RoundButton>
-          <RoundButton className={cls.avatar__trash} size={roundButtonSize.medium} theme={roundButtonTheme.secondary}>
+          <RoundButton
+            className={cls.avatar__trash}
+            size={roundButtonSize.medium}
+            theme={roundButtonTheme.secondary}
+            onClick={removeAvatarHandler}
+          >
             <Trash />
           </RoundButton>
 
           {profile?.avatarImg ? (
-            <img
-              className={cls.avatar__img}
-              src={import.meta.env.DEV ? profile.avatarImg.replace('backend', 'localhost') : profile.avatarImg}
-              alt="User Avatar"
-            />
+            <img className={cls.avatar__img} src={profile.avatarImg} alt="User Avatar" />
           ) : (
             <div className={cls.avatar__fake}>
               <Avatar />
