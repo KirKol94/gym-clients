@@ -9,7 +9,7 @@ import { usersRouter } from './routes/usersRouter'
 export const app = express()
 
 app.use(cors())
-app.use(json())
+app.use(json({ limit: '3mb' }))
 app.use(logRequestBody)
 
 app.use('/auth', authRouter())
