@@ -71,7 +71,7 @@ export const ProfileController = {
     try {
       const imageData = req.body.avatarFileData
       const decodedImage = Buffer.from(imageData, 'base64')
-      const imageName = `image_userId_${req.body.id}.jpeg`
+      const imageName = `${req.body.id}_${req.body.avatarFileName}`
       const imagePath = resolve(__dirname, '..', '..', 'images', imageName)
 
       const imagesDir = resolve(__dirname, '..', '..', 'images')
@@ -86,7 +86,7 @@ export const ProfileController = {
       await User.update(
         {
           avatarImgPath: imagePath,
-          avatarImg: baseUrl + port + '/profile/img/' + req.body.id,
+          avatarImg: baseUrl + port + `/profile/img/${imageName}`,
         },
         {
           where: {
@@ -137,11 +137,12 @@ export const ProfileController = {
 
   getProfileImg: async (req: Request, res: Response) => {
     try {
-      const id = req.params.id
+      const { id } = req.params
+      const imgName = id
 
       const user = await User.findOne({
         where: {
-          id,
+          avatarImgPath: `${resolve(__dirname, '..', '..', 'images', imgName)}`,
         },
         attributes: { include: ['avatarImgPath'] },
       })
