@@ -1,11 +1,11 @@
 export type IClient = {
-  id?: number
+  id: number
   email?: string | null
   firstName: string
   lastName: string
-  middleName?: string | null
+  middleName: string | null
   birthday: string | null
   mobilePhone: string
-  personalTraningCount: number | null
+  personalTrainingCount: number | null
   sex: 0 | 1
 }

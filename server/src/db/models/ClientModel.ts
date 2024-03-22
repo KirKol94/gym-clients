@@ -10,7 +10,7 @@ export class ClientModel extends Model<IClient> {
   declare lastName: string
   declare middleName: string
   declare birthday: string
-  declare personalTraningCount: number
+  declare personalTrainingCount: number
   declare mobilePhone: string
   declare sex: number
 }
@@ -23,32 +23,38 @@ ClientModel.init(
       primaryKey: true,
     },
 
-    email: DataTypes.STRING,
-
-    firstName: {
+    email: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
+      unique: true,
     },
 
-    lastName: {
+    firstName: DataTypes.STRING,
+
+    lastName: DataTypes.STRING,
+
+    middleName: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
 
-    middleName: DataTypes.STRING,
+    birthday: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
 
-    birthday: DataTypes.STRING,
-
-    personalTraningCount: DataTypes.INTEGER,
+    personalTrainingCount: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
 
     mobilePhone: {
       type: DataTypes.STRING,
-      allowNull: false,
       unique: true,
     },
 
     sex: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.BOOLEAN,
       allowNull: false,
     },
   },
