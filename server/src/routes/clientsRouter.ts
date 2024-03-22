@@ -8,7 +8,11 @@ export const clientsRouter = (): Router => {
 
   router.use(checkHeaderAuthorization)
 
-  router.get('/clients', ClientController.findAll)
+  router.post('/', ClientController.create)
+
+  router.get('/', ClientController.findAll)
+
+  router.get('/:id', ClientController.findById)
 
   return router
 }

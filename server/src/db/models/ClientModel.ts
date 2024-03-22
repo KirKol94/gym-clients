@@ -26,7 +26,6 @@ ClientModel.init(
     email: {
       type: DataTypes.STRING,
       allowNull: true,
-      unique: true,
     },
 
     firstName: DataTypes.STRING,
@@ -54,8 +53,9 @@ ClientModel.init(
     },
 
     sex: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.INTEGER,
       allowNull: false,
+      defaultValue: 1,
     },
   },
   { sequelize, modelName: 'client' },

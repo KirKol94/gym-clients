@@ -2,6 +2,7 @@ import type { Request, Response } from 'express'
 
 import { HttpStatusCodes } from '../const/HttpStatusCodes'
 import { ClientModel as Client } from '../db/models/ClientModel'
+import type { IClient } from '../types/IClient'
 
 export const ClientController = {
   findAll: async (req: Request, res: Response): Promise<void> => {
@@ -12,21 +13,23 @@ export const ClientController = {
       res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({ error: (err as Error).message })
     }
   },
-  createClient: async (req: Request, res: Response): Promise<void> => {
-    try {
-      const [newClient, created] = await Client.findOrCreate({
-        where: {
-          mobilePhone: req.body.mobilePhone,
-        },
-        defaults: {
-          ...req.body,
-        },
-      })
 
-      if (!created) {
-        throw new Error('Клиент с таким номером телефона уже существует')
+  findById: async (req: Request<{ id: number }>, res: Response) => {
+    try {
+      const client = await Client.findByPk(req.params.id)
+      if (!client) {
+        throw new Error('Клиент не найден')
       }
-      res.status(HttpStatusCodes.CREATED).json({ message: `Клиент с номером телефона ${newClient.mobilePhone} создан` })
+      res.send(client)
+    } catch (error) {
+      res.send((error as Error).message)
+    }
+  },
+
+  create: async (req: Request<Empty, Empty, IClient>, res: Response) => {
+    try {
+      const client = await Client.create(req.body)
+      res.status(HttpStatusCodes.CREATED).send(client)
     } catch (err) {
       res.status(HttpStatusCodes.CONFLICT).json({ error: (err as Error).message })
     }
