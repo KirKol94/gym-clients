@@ -16,7 +16,14 @@ export const ClientController = {
 
   findById: async (req: Request<{ id: number }>, res: Response) => {
     try {
-      const client = await Client.findByPk(req.params.id)
+      const client = await Client.findOne({
+        where: {
+          id: req.params.id,
+        },
+        attributes: {
+          exclude: ['createdAt', 'updatedAt'],
+        },
+      })
       if (!client) {
         throw new Error('Клиент не найден')
       }
@@ -32,6 +39,16 @@ export const ClientController = {
       res.status(HttpStatusCodes.CREATED).send(client)
     } catch (err) {
       res.status(HttpStatusCodes.CONFLICT).json({ error: (err as Error).message })
+    }
+  },
+
+  update: async (req: Request<{ id: number }, Empty, IClient>, res: Response) => {
+    try {
+      await Client.update(req.body, { where: { id: req.params.id } })
+      const client = await Client.findByPk(req.params.id)
+      res.send(client)
+    } catch (error) {
+      res.send(error)
     }
   },
 }

@@ -14,5 +14,7 @@ export const clientsRouter = (): Router => {
 
   router.get('/:id', ClientController.findById)
 
+  router.put('/:id', ClientController.update)
+
   return router
 }
