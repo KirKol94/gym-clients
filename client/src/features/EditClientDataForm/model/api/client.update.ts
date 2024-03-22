@@ -4,8 +4,8 @@ import { rtkApi } from '@/shared/api/rtkApi'
 const clientUpdateApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({
     updateClientData: build.mutation<IClient, IClient>({
-      query: (body) => ({
-        url: 'client/update',
+      query: ({ id, ...body }) => ({
+        url: `clients/${id}`,
         method: 'put',
         body,
       }),

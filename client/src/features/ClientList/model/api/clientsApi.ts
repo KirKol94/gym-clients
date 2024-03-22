@@ -5,9 +5,9 @@ const clientsApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({
     getClients: build.query<IClient[], string | void>({
       query: (name) => {
-        const queryParams = !name ? '/all' : `?name=${name}`
+        const queryParams = !name ? '' : `?name=${name}`
         return {
-          url: `client/find${queryParams}`,
+          url: `clients/${queryParams}`,
         }
       },
     }),
