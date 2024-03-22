@@ -2,12 +2,8 @@ import { memo, useEffect, useMemo, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import cx from 'classix'
 
-import Agent from '@/shared/assets/icons/agent.svg?react'
 import Avatar from '@/shared/assets/icons/avatar.svg?react'
 import BackArrow from '@/shared/assets/icons/back.svg?react'
-import Contract from '@/shared/assets/icons/contract.svg?react'
-import Deals from '@/shared/assets/icons/deals.svg?react'
-import Group from '@/shared/assets/icons/group.svg?react'
 import Logo from '@/shared/assets/icons/logo.svg?react'
 import LogoMini from '@/shared/assets/icons/logoMini.svg?react'
 import Setting from '@/shared/assets/icons/settingsWhite.svg?react'
@@ -40,26 +36,6 @@ export const Sidebar = memo(() => {
         title: 'Клиенты',
         Icon: <StrongMan />,
         to: ROUTER_PATH.CLIENTS,
-      },
-      {
-        title: 'Группы компаний',
-        Icon: <Group />,
-        to: ROUTER_PATH.GROUP,
-      },
-      {
-        title: 'Контрагенты',
-        Icon: <Agent />,
-        to: ROUTER_PATH.AGENT,
-      },
-      {
-        title: 'Контракты',
-        Icon: <Contract />,
-        to: ROUTER_PATH.CONTRACT,
-      },
-      {
-        title: 'Сделки',
-        Icon: <Deals />,
-        to: ROUTER_PATH.DEALS,
       },
       {
         title: 'Настройки',
