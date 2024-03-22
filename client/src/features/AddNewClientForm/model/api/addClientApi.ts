@@ -8,7 +8,7 @@ const newClientApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({
     sendClient: build.mutation<ResClientData, ReqClientData>({
       query: (body) => ({
-        url: 'client',
+        url: 'clients',
         method: 'post',
         body,
       }),
