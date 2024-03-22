@@ -6,7 +6,7 @@ const clientApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({
     getClientData: build.query<IClient, string | undefined>({
       query: (id) => ({
-        url: `client/find/${id}`,
+        url: `clients/${id}`,
       }),
     }),
   }),

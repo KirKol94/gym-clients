@@ -3,6 +3,7 @@ import express, { json } from 'express'
 
 import { logRequestBody } from './middlewares/logRequestBody'
 import { authRouter } from './routes/authRouter'
+import { clientsRouter } from './routes/clientsRouter'
 import { profilesRouter } from './routes/profileRouter'
 import { usersRouter } from './routes/usersRouter'
 
@@ -15,3 +16,4 @@ app.use(logRequestBody)
 app.use('/auth', authRouter())
 app.use('/users', usersRouter())
 app.use('/profile', profilesRouter())
+app.use('/clients', clientsRouter())

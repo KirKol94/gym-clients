@@ -43,6 +43,8 @@ export const EditClientDataForm = memo(({ className, client, refetch }: EditClie
     refetch()
   }
 
+  console.log(errors)
+
   return (
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)} className={editClientDataFormClass}>
