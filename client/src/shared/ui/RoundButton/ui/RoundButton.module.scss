@@ -49,12 +49,6 @@
 
   transition: background-color var(--transition-delay-fast) ease;
 
-  svg {
-    path {
-      stroke: var(--color-primary-90);
-    }
-  }
-
   &:hover {
     background-color: rgba(#3f8cff, 0.1);
   }
@@ -68,10 +62,4 @@
   background-color: var(--color-primary-90);
 
   @include direction(90, 180, -90, 0);
-
-  svg {
-    path {
-      stroke: var(--color-white);
-    }
-  }
 }

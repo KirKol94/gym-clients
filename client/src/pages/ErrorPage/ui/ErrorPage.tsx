@@ -1,21 +1,17 @@
-import { memo, useEffect } from 'react'
-import cx from 'classix'
+import { memo } from 'react'
+
+import { Title } from '@/shared/ui/Title'
 
 import cls from './ErrorPage.module.scss'
 
-export interface ErrorPageProps {
-  className?: string
-}
+export interface ErrorPageProps {}
 
-export const ErrorPage = memo(({ className }: ErrorPageProps) => {
-  const errorPageClass = cx(cls.errorPage, className)
-  useEffect(() => {
-    localStorage.clear()
-  }, [])
-
+export const ErrorPage = memo(() => {
   return (
-    <div className={errorPageClass}>
-      <h1>Что-то пошло не так</h1>
+    <div className={cls.ErrorPage}>
+      <Title size="xxl" level={1}>
+        Что-то пошло не так
+      </Title>
       <a href="/">Перезагрузите страницу</a>
     </div>
   )

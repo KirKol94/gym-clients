@@ -32,7 +32,12 @@ export const ClientList = () => {
 
   return (
     <div className={clientListClass}>
-      <Input inputName="Поиск" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} />
+      <Input
+        className={clx.search}
+        inputName="Поиск"
+        value={searchValue}
+        onChange={(e) => setSearchValue(e.target.value)}
+      />
 
       <ul className={clientListClass}>
         {clients && clients.map((client) => <Client key={client.id} client={client} />)}

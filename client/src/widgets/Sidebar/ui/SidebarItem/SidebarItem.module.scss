@@ -23,12 +23,13 @@
   }
 
   &_active {
-    background: var(--color-light-blue);
+    background: var(--color-primary-20);
     transition: all var(--transition-delay-fast);
   }
 
   > p {
     font-size: 12px;
+    color: var(--color-default);
     transition: font-size var(--transition-delay-fast) 100ms;
   }
 
@@ -49,11 +50,8 @@
 }
 
 .text {
-  color: var(--color-light-gray);
-
   &_active {
     font-weight: 500;
-    color: var(--color-light-gray);
   }
 }
 

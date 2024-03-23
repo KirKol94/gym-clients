@@ -15,24 +15,24 @@
 }
 
 .button {
+  color: var(--color-default-invert);
+  transition: var(--transition-delay-fast);
+
   &:disabled {
     cursor: not-allowed;
-    background-color: var(--color-light-gray);
+    background-color: var(--color-primary-20);
   }
 }
 
 .primary {
-  color: var(--color-white);
   background: var(--color-primary-90);
-  transition:
-    box-shadow var(--transition-delay-fast) ease,
-    opacity var(--transition-delay-fast) ease;
+  transition: all var(--transition-delay-fast);
 
   svg {
     width: 20px;
 
     path {
-      stroke: var(--color-white);
+      stroke: var(--color-default-invert);
     }
   }
 
@@ -58,7 +58,7 @@
 }
 
 .secondaryWhite {
-  @include color(var(--color-white));
+  @include color(var(--color-default-invert));
 }
 
 .secondaryBlue {
@@ -70,7 +70,7 @@
 .secondaryBlue {
   display: flex;
   align-items: center;
-  border: 1px solid var(--color-neutral-100);
+  border: 1px solid var(--color-default);
   transition:
     box-shadow var(--transition-delay-fast) ease,
     opacity var(--transition-delay-fast) ease;
@@ -79,7 +79,7 @@
     width: 20px;
 
     path {
-      stroke: var(--color-neutral-100);
+      stroke: var(--color-default);
     }
   }
 

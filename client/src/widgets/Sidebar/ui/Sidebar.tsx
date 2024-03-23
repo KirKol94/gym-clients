@@ -18,8 +18,12 @@ import classes from './Sidebar.module.scss'
 
 export const Sidebar = memo(() => {
   const { pathname } = useLocation()
-  const [isOpen, setIsOpen] = useState(true)
-
+  const [isOpen, setIsOpen] = useState(() => {
+    // При старте компонента получаем значение из localStorage
+    const storedValue = localStorage.getItem('sidebarIsOpen')
+    // Если в localStorage есть значение, возвращаем его, иначе возвращаем true
+    return storedValue ? JSON.parse(storedValue) : true
+  })
   const sidebarItems = useMemo(
     () => [
       {
@@ -47,7 +51,11 @@ export const Sidebar = memo(() => {
   )
 
   const onSidebarVisibleToggle = () => {
-    setIsOpen((prev) => !prev)
+    setIsOpen((prev: boolean) => {
+      const newValue = !prev
+      localStorage.setItem('sidebarIsOpen', JSON.stringify(newValue))
+      return newValue
+    })
   }
 
   useEffect(() => {
