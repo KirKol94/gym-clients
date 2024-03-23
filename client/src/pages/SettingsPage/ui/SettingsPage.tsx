@@ -1,4 +1,4 @@
-import { SwitchButton } from '@/shared/ui/SwitchButton/ui/SwitchButton'
+import { Checkbox } from '@/shared/ui/Checkbox'
 import { Title, titleSize } from '@/shared/ui/Title'
 
 export const SettingsPage = () => {
@@ -7,7 +7,7 @@ export const SettingsPage = () => {
       <Title level={1} size={titleSize.xxl}>
         Settings
       </Title>
-      <SwitchButton />
+      <Checkbox />
     </div>
   )
 }

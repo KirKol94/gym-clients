@@ -15,7 +15,8 @@
 }
 
 .button {
-  transition: 0.3s !important;
+  transition: var(--transition-delay-fast);
+
   &:disabled {
     cursor: not-allowed;
     background-color: var(--color-light-gray);
