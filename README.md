@@ -17,6 +17,15 @@
 ![](https://img.shields.io/badge/prettier-1A2C34?style=for-the-badge&logo=prettier&logoColor=F7BA3E)
 ![](https://img.shields.io/badge/stylelint-000?style=for-the-badge&logo=stylelint&logoColor=white)
 
+## [Back-end](https://github.com/KirKol94/crm/tree/master/server)
+![](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
+![](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=black)
+![](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![](https://img.shields.io/badge/json%20web%20tokens-323330?style=for-the-badge&logo=json-web-tokens&logoColor=pink)
+![](https://img.shields.io/badge/eslint-3A33D1?style=for-the-badge&logo=eslint&logoColor=white)
+![](https://img.shields.io/badge/prettier-1A2C34?style=for-the-badge&logo=prettier&logoColor=F7BA3E)
+![](https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white)
+![](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)
 
 ## Запуск проекта
 
@@ -28,4 +37,5 @@
 ```cd ./client```
 ```npm run dev```
 
-> P .S . В качестве БД используется sqlite3, которую никак дополнительно устанавливать и запускать не надо
+> [!NOTE]
+> В качестве БД используется sqlite3, которую никак дополнительно устанавливать и запускать не надо
