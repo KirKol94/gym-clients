@@ -1,6 +1,5 @@
 .box {
   position: relative;
-  margin-left: 10px;
 }
 
 .box label {
@@ -20,7 +19,7 @@
     width: 20px;
     height: 20px;
     content: '';
-    background-color: var(--color-white);
+    background-color: var(--color-default-invert);
     border-radius: 50px;
     transition: var(--transition-delay-fast);
     transform: translateY(-50%);

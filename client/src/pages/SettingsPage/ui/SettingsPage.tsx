@@ -5,7 +5,7 @@ export const SettingsPage = () => {
   return (
     <div>
       <Title level={1} size={titleSize.xxl}>
-        Settings
+        Настройки
       </Title>
       <Checkbox />
     </div>

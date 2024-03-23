@@ -2,7 +2,7 @@ import type { Dispatch, PropsWithChildren, SetStateAction } from 'react'
 import { createContext, useEffect, useState } from 'react'
 
 interface ThemeContextType {
-  theme: string | 'dark'
+  theme: string
   setTheme: Dispatch<SetStateAction<string>>
 }
 

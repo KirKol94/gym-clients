@@ -1,15 +1,17 @@
-import { memo, useEffect } from 'react'
+import { memo } from 'react'
+
+import { Title } from '@/shared/ui/Title'
+
+import cls from './ErrorPage.module.scss'
 
 export interface ErrorPageProps {}
 
 export const ErrorPage = memo(() => {
-  useEffect(() => {
-    localStorage.clear()
-  }, [])
-
   return (
-    <div>
-      <h1>Что-то пошло не так</h1>
+    <div className={cls.ErrorPage}>
+      <Title size="xxl" level={1}>
+        Что-то пошло не так
+      </Title>
       <a href="/">Перезагрузите страницу</a>
     </div>
   )

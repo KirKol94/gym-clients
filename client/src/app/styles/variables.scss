@@ -1,28 +1,33 @@
 :root {
+  // font
   --font-family: rubik;
-  --color-white: #fff;
-  --color-default: #fff;
-  --color-dark: #000;
-  --color-black: #121212;
-  --color-light-bg: #f4f9fd;
-  --color-dark-bg: #1d2124;
-  --color-light-border: #f0f0f0;
-  --color-counter-bg: #ebf3ff;
-  --color-counter-yellow-bg: #ffbd21;
-  --color-neutral-white: #fff;
-  --color-neutral-100: #000;
-  --color-neutral-80: #444;
-  --color-neutral-60: #888;
+
+  // colors
+  --color-default: #000;
+  --color-default-invert: #fff;
+  --bg: #ccc;
+  --bg-dark: #fff;
   --color-neutral-40: #bfbfbf;
-  --color-gray2: #939393;
-  --color-light-gray: #7d8592;
-  --color-light-white: #fff;
-  --color-primary-100: #4db02a;
+  --color-neutral-60: #888;
+  --color-neutral-80: #444;
+  --color-primary-20: #3f8cff26;
   --color-primary-90: #3f8cff;
-  --color-light-blue: #3f8cff26;
+
+  // transition-delay
   --transition-delay-extra-fast: 100ms;
   --transition-delay-fast: 300ms;
   --transition-delay-middle: 600ms;
+
+  // container
   --width-container: 1430px;
   --padding-container: 15px;
+}
+
+[id='dark'] {
+  --color-default: #fff;
+  --color-default-invert: #121212;
+  --bg: #1d2124;
+  --bg-dark: #181c1f;
+  --color-neutral-60: #444;
+  --color-neutral-80: #fff;
 }
