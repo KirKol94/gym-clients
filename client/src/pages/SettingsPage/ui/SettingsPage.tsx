@@ -1,4 +1,4 @@
-import { Checkbox } from '@/shared/ui/Checkbox'
+import { ThemeSwitcher } from '@/features/ThemeSwitcher'
 import { Title, titleSize } from '@/shared/ui/Title'
 
 export const SettingsPage = () => {
@@ -7,7 +7,7 @@ export const SettingsPage = () => {
       <Title level={1} size={titleSize.xxl}>
         Настройки
       </Title>
-      <Checkbox />
+      <ThemeSwitcher />
     </div>
   )
 }
