@@ -1,4 +1,5 @@
 import type { Request, Response } from 'express'
+import { Op } from 'sequelize'
 
 import { HttpStatusCodes } from '../const/HttpStatusCodes'
 import { ClientModel as Client } from '../db/models/ClientModel'
@@ -7,7 +8,23 @@ import type { IClient } from '../types/IClient'
 export const ClientController = {
   findAll: async (req: Request, res: Response): Promise<void> => {
     try {
-      const clients = await Client.findAll()
+      let clients
+      const { name } = req.query
+
+      if (name) {
+        clients = await Client.findAll({
+          where: {
+            [Op.or]: [
+              { firstName: { [Op.like]: `%${name}%` } },
+              { middleName: { [Op.like]: `%${name}%` } },
+              { lastName: { [Op.like]: `%${name}%` } },
+            ],
+          },
+        })
+      } else {
+        clients = await Client.findAll()
+      }
+
       res.json(clients)
     } catch (err) {
       res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({ error: (err as Error).message })
