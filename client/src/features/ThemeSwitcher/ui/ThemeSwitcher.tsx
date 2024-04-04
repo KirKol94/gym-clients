@@ -26,7 +26,7 @@ export const ThemeSwitcher = memo(({ className }: ThemeSwitcherProps) => {
   return (
     <div className={themeSwitcherClass}>
       <Switcher id={switcherId} checked={theme === 'dark'} onChange={switchTheme} />
-      <Text size={textSize.medium}>Включить {theme === 'dark' ? 'светлую' : 'тёмную'} тема</Text>
+      <Text size={textSize.medium}>Темная тема</Text>
     </div>
   )
 })

@@ -14,7 +14,14 @@ export const ThemeContext = createContext<ThemeContextType>({
 interface PropsThemeProvider extends PropsWithChildren {}
 
 export const ThemeProvider = ({ children }: PropsThemeProvider) => {
-  const themeValue = localStorage.getItem('theme') || 'light'
+  const checkSystemTheme = () => {
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark'
+    }
+    return 'light'
+  }
+
+  const themeValue = localStorage.getItem('theme') || checkSystemTheme()
 
   const [theme, setTheme] = useState(themeValue)
 
